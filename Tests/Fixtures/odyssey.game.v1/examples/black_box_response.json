@@ -1,0 +1,913 @@
+{
+ "counterfactuals_evaluated": true,
+ "edges": [
+  {
+   "relation": "triggered",
+   "source": "trigger:science_return:science.opportunities_completed:240",
+   "target": "shortfall:science_return"
+  },
+  {
+   "relation": "triggered",
+   "source": "trigger:data_return:comms.data_downlinked_mb:240",
+   "target": "shortfall:data_return"
+  },
+  {
+   "relation": "triggered",
+   "source": "trigger:power_continuity:power.unmet_kw:226",
+   "target": "shortfall:power_continuity"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:env.solar_availability",
+   "target": "trigger:power_continuity:power.unmet_kw:226"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:power.generation_ratio",
+   "target": "trigger:power_continuity:power.unmet_kw:226"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:power.battery_soc",
+   "target": "trigger:power_continuity:power.unmet_kw:226"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:environment:solar_availability",
+   "target": "effect:env.solar_availability"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:environment:solar_availability",
+   "target": "effect:power.generation_ratio"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:environment:solar_availability",
+   "target": "effect:power.battery_soc"
+  },
+  {
+   "relation": "triggered",
+   "source": "trigger:life_support_stability:life_support.co2_ppm:236",
+   "target": "shortfall:life_support_stability"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:power.dust_factor",
+   "target": "trigger:life_support_stability:life_support.co2_ppm:236"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:power.generation_ratio",
+   "target": "trigger:life_support_stability:life_support.co2_ppm:236"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:power.battery_soc",
+   "target": "trigger:life_support_stability:life_support.co2_ppm:236"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:power.supply_ratio.co2_scrubber",
+   "target": "trigger:life_support_stability:life_support.co2_ppm:236"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:env.solar_availability",
+   "target": "trigger:life_support_stability:life_support.co2_ppm:236"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:environment:dust_accumulation",
+   "target": "effect:power.dust_factor"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:environment:dust_accumulation",
+   "target": "effect:power.generation_ratio"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:environment:dust_accumulation",
+   "target": "effect:power.battery_soc"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:environment:dust_accumulation",
+   "target": "effect:power.supply_ratio.co2_scrubber"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:environment:dust_accumulation",
+   "target": "effect:env.solar_availability"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:environment:solar_availability",
+   "target": "effect:power.dust_factor"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:environment:solar_availability",
+   "target": "effect:power.supply_ratio.co2_scrubber"
+  },
+  {
+   "relation": "triggered",
+   "source": "trigger:reserves_at_end:life_support.water_days:240",
+   "target": "shortfall:reserves_at_end"
+  },
+  {
+   "relation": "triggered",
+   "source": "trigger:reserves_at_end:power.battery_soc:240",
+   "target": "shortfall:reserves_at_end"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:component.water_processor.health",
+   "target": "trigger:reserves_at_end:life_support.water_days:240"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:component.water_processor.health",
+   "target": "trigger:reserves_at_end:power.battery_soc:240"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:life_support.water_recovery_efficiency",
+   "target": "trigger:reserves_at_end:life_support.water_days:240"
+  },
+  {
+   "relation": "contributed",
+   "source": "effect:life_support.water_recovery_efficiency",
+   "target": "trigger:reserves_at_end:power.battery_soc:240"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:event:water_processor_pump_fault",
+   "target": "effect:component.water_processor.health"
+  },
+  {
+   "relation": "contributed",
+   "source": "cause:event:water_processor_pump_fault",
+   "target": "effect:life_support.water_recovery_efficiency"
+  },
+  {
+   "relation": "triggered",
+   "source": "trigger:science_quality:science.points:240",
+   "target": "shortfall:science_quality"
+  },
+  {
+   "relation": "triggered",
+   "source": "trigger:full_survey:science.opportunities_completed:240",
+   "target": "shortfall:full_survey"
+  },
+  {
+   "relation": "led_to",
+   "source": "shortfall:science_return",
+   "target": "outcome"
+  },
+  {
+   "relation": "led_to",
+   "source": "shortfall:data_return",
+   "target": "outcome"
+  },
+  {
+   "relation": "led_to",
+   "source": "shortfall:power_continuity",
+   "target": "outcome"
+  },
+  {
+   "relation": "led_to",
+   "source": "shortfall:life_support_stability",
+   "target": "outcome"
+  },
+  {
+   "relation": "led_to",
+   "source": "shortfall:reserves_at_end",
+   "target": "outcome"
+  },
+  {
+   "relation": "led_to",
+   "source": "shortfall:science_quality",
+   "target": "outcome"
+  },
+  {
+   "relation": "led_to",
+   "source": "shortfall:full_survey",
+   "target": "outcome"
+  }
+ ],
+ "final_sim_hours": 240.0,
+ "final_tick": 240,
+ "mission_id": "luna_01.the_last_light",
+ "mission_status": "failed",
+ "nodes": [
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "cause:environment:dust_accumulation",
+   "label": "Natural regolith dust accumulation on the array",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": null,
+   "sim_time_hours": null,
+   "system_ref": null,
+   "type": "cause"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "cause:environment:solar_availability",
+   "label": "Natural environment profile (Solar availability)",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": null,
+   "sim_time_hours": null,
+   "system_ref": null,
+   "type": "cause"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "cause:event:water_processor_pump_fault",
+   "label": "Event water_processor_pump_fault",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": null,
+   "sim_time_hours": null,
+   "system_ref": null,
+   "type": "cause"
+  },
+  {
+   "anchor": "luna.asteria.habitat",
+   "decision": null,
+   "id": "effect:component.water_processor.health",
+   "label": "water_processor health",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": null,
+   "sim_time_hours": null,
+   "system_ref": "luna.asteria.habitat.water_processor",
+   "type": "effect"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "effect:env.solar_availability",
+   "label": "Solar availability",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": null,
+   "sim_time_hours": null,
+   "system_ref": "env.solar_availability",
+   "type": "effect"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "effect:life_support.water_recovery_efficiency",
+   "label": "Water recovery efficiency",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": null,
+   "sim_time_hours": null,
+   "system_ref": "life_support.water_recovery_efficiency",
+   "type": "effect"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "effect:power.battery_soc",
+   "label": "Battery state of charge",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": null,
+   "sim_time_hours": null,
+   "system_ref": "power.battery_soc",
+   "type": "effect"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "effect:power.dust_factor",
+   "label": "Array dust transmission",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": null,
+   "sim_time_hours": null,
+   "system_ref": "power.dust_factor",
+   "type": "effect"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "effect:power.generation_ratio",
+   "label": "Generation vs rated",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": null,
+   "sim_time_hours": null,
+   "system_ref": "power.generation_ratio",
+   "type": "effect"
+  },
+  {
+   "anchor": "luna.asteria.habitat",
+   "decision": null,
+   "id": "effect:power.supply_ratio.co2_scrubber",
+   "label": "Power supply to CO2 removal",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": null,
+   "sim_time_hours": null,
+   "system_ref": "luna.asteria.habitat.co2_scrubber",
+   "type": "effect"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:1:phase:base_setup",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 1,
+   "sim_time_hours": 1.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:2:milestone:landing_complete",
+   "label": "milestone.milestone",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 2,
+   "sim_time_hours": 2.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:11:phase:initial_resource_management",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 11,
+   "sim_time_hours": 11.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:14:milestone:regolith_survey_window",
+   "label": "milestone.science_opportunity",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 14,
+   "sim_time_hours": 14.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:47:phase:reduced_solar_availability",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 47,
+   "sim_time_hours": 47.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:71:phase:power_management",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 71,
+   "sim_time_hours": 71.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:74:milestone:science_missed:regolith_survey",
+   "label": "milestone.science_opportunity",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 74,
+   "sim_time_hours": 74.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:95:phase:scientific_opportunity",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 95,
+   "sim_time_hours": 95.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:96:milestone:ice_core_window",
+   "label": "milestone.science_opportunity",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 96,
+   "sim_time_hours": 96.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:119:phase:environmental_emergency",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 119,
+   "sim_time_hours": 119.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:136:milestone:science_missed:ice_core_sampling",
+   "label": "milestone.science_opportunity",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 136,
+   "sim_time_hours": 136.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:139:phase:communication_loss",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 139,
+   "sim_time_hours": 139.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:159:phase:resource_cascade",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 159,
+   "sim_time_hours": 159.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:162:failure:water_processor_pump_fault",
+   "label": "failure.system_fault",
+   "objective_ref": null,
+   "severity": "warning",
+   "sim_tick": 162,
+   "sim_time_hours": 162.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:179:phase:rover_decision",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 179,
+   "sim_time_hours": 179.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:180:milestone:far_crater_window",
+   "label": "milestone.science_opportunity",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 180,
+   "sim_time_hours": 180.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:199:phase:final_low_power",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 199,
+   "sim_time_hours": 199.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:210:milestone:last_light",
+   "label": "milestone.milestone",
+   "objective_ref": null,
+   "severity": "caution",
+   "sim_tick": 210,
+   "sim_time_hours": 210.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:220:milestone:science_missed:far_crater_traverse",
+   "label": "milestone.science_opportunity",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 220,
+   "sim_time_hours": 220.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:225:milestone:power_continuity",
+   "label": "milestone.objective",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 225,
+   "sim_time_hours": 225.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "shortfall:power_continuity",
+   "label": "blocked outcome tier 'success'",
+   "objective_ref": "power_continuity",
+   "severity": null,
+   "sim_tick": 225,
+   "sim_time_hours": 225.0,
+   "system_ref": null,
+   "type": "shortfall"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "trigger:power_continuity:power.unmet_kw:226",
+   "label": "Unmet demand (load shed) > 0.05 kW",
+   "objective_ref": "power_continuity",
+   "severity": null,
+   "sim_tick": 226,
+   "sim_time_hours": 226.0,
+   "system_ref": "power.unmet_kw",
+   "type": "trigger"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:235:milestone:life_support_stability",
+   "label": "milestone.objective",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 235,
+   "sim_time_hours": 235.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "shortfall:life_support_stability",
+   "label": "blocked outcome tier 'success'",
+   "objective_ref": "life_support_stability",
+   "severity": null,
+   "sim_tick": 235,
+   "sim_time_hours": 235.0,
+   "system_ref": null,
+   "type": "shortfall"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "trigger:life_support_stability:life_support.co2_ppm:236",
+   "label": "Cabin CO2 concentration > 10500 ppm",
+   "objective_ref": "life_support_stability",
+   "severity": null,
+   "sim_tick": 236,
+   "sim_time_hours": 236.0,
+   "system_ref": "life_support.co2_ppm",
+   "type": "trigger"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:milestone:crew_health",
+   "label": "milestone.objective",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:milestone:crew_survival",
+   "label": "milestone.objective",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:milestone:data_return",
+   "label": "milestone.objective",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:milestone:full_survey",
+   "label": "milestone.objective",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:milestone:radiation_safety",
+   "label": "milestone.objective",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:milestone:reserves_at_end",
+   "label": "milestone.objective",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:milestone:science_quality",
+   "label": "milestone.objective",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:milestone:science_return",
+   "label": "milestone.objective",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:outcome:mission_failed",
+   "label": "outcome.outcome",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:phase:mission_conclusion",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:239:phase:post_mission_analysis",
+   "label": "phase.phase_change",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "outcome",
+   "label": "outcome.mission_failed",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "outcome"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "shortfall:data_return",
+   "label": "blocked outcome tier 'partial'",
+   "objective_ref": "data_return",
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "shortfall"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "shortfall:full_survey",
+   "label": "did not change the outcome tier",
+   "objective_ref": "full_survey",
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "shortfall"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "shortfall:reserves_at_end",
+   "label": "blocked outcome tier 'exceptional'",
+   "objective_ref": "reserves_at_end",
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "shortfall"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "shortfall:science_quality",
+   "label": "blocked outcome tier 'exceptional'",
+   "objective_ref": "science_quality",
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "shortfall"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "shortfall:science_return",
+   "label": "blocked outcome tier 'partial'",
+   "objective_ref": "science_return",
+   "severity": null,
+   "sim_tick": 239,
+   "sim_time_hours": 239.0,
+   "system_ref": null,
+   "type": "shortfall"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "trigger:data_return:comms.data_downlinked_mb:240",
+   "label": "Science data downlinked >= 800 MB",
+   "objective_ref": "data_return",
+   "severity": null,
+   "sim_tick": 240,
+   "sim_time_hours": 240.0,
+   "system_ref": "comms.data_downlinked_mb",
+   "type": "trigger"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "trigger:full_survey:science.opportunities_completed:240",
+   "label": "Science activities completed >= 3 count",
+   "objective_ref": "full_survey",
+   "severity": null,
+   "sim_tick": 240,
+   "sim_time_hours": 240.0,
+   "system_ref": "science.opportunities_completed",
+   "type": "trigger"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "trigger:reserves_at_end:life_support.water_days:240",
+   "label": "Water reserve (days of gross crew use, no recycling) >= 3 days",
+   "objective_ref": "reserves_at_end",
+   "severity": null,
+   "sim_tick": 240,
+   "sim_time_hours": 240.0,
+   "system_ref": "life_support.water_days",
+   "type": "trigger"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "trigger:reserves_at_end:power.battery_soc:240",
+   "label": "Battery state of charge >= 0.15 fraction",
+   "objective_ref": "reserves_at_end",
+   "severity": null,
+   "sim_tick": 240,
+   "sim_time_hours": 240.0,
+   "system_ref": "power.battery_soc",
+   "type": "trigger"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "trigger:science_quality:science.points:240",
+   "label": "Science return >= 100 points",
+   "objective_ref": "science_quality",
+   "severity": null,
+   "sim_tick": 240,
+   "sim_time_hours": 240.0,
+   "system_ref": "science.points",
+   "type": "trigger"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "trigger:science_return:science.opportunities_completed:240",
+   "label": "Science activities completed >= 2 count",
+   "objective_ref": "science_return",
+   "severity": null,
+   "sim_tick": 240,
+   "sim_time_hours": 240.0,
+   "system_ref": "science.opportunities_completed",
+   "type": "trigger"
+  }
+ ],
+ "outcome": {
+  "code": "mission_failed",
+  "sim_tick": 239,
+  "tier": "mission_failed"
+ },
+ "protocol": "odyssey.game.v1",
+ "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+ "simulation_status": "concluded",
+ "state_version": 41,
+ "statement": "Decisions are named as root causes only when a counterfactual replay without them makes the failing quantity better. Decisions on a causal path whose removal changes nothing are listed separately and never blamed.",
+ "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaabe"
+}

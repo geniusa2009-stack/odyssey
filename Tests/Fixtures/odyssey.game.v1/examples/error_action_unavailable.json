@@ -1,0 +1,15 @@
+{
+ "error": {
+  "code": "DECISION_UNAVAILABLE",
+  "details": {
+   "player_location": "earth.command.engineering",
+   "required_location": "earth.command.training",
+   "target": "earth.command.training.simulator"
+  },
+  "message": "not at location",
+  "reason": "not_at_location",
+  "recoverable": true,
+  "request_id": "00000000000000000000000000000000",
+  "state_version": 4
+ }
+}

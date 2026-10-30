@@ -1,0 +1,28 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "5.8",
+	"Category": "",
+	"Description": "ODYSSEY — Phase 6 vertical slice foundation (Earth Command). UNREAL_EDITOR_VERIFICATION_REQUIRED.",
+	"Modules": [
+		{ "Name": "OdysseyCore", "Type": "Runtime", "LoadingPhase": "Default" },
+		{ "Name": "OdysseyBackend", "Type": "Runtime", "LoadingPhase": "Default" },
+		{ "Name": "OdysseyRealtime", "Type": "Runtime", "LoadingPhase": "Default" },
+		{ "Name": "OdysseyWorld", "Type": "Runtime", "LoadingPhase": "Default" },
+		{ "Name": "OdysseyInteraction", "Type": "Runtime", "LoadingPhase": "Default" },
+		{ "Name": "OdysseyPlayer", "Type": "Runtime", "LoadingPhase": "Default" },
+		{ "Name": "OdysseyUI", "Type": "Runtime", "LoadingPhase": "Default" },
+		{ "Name": "OdysseyDebug", "Type": "Runtime", "LoadingPhase": "Default" }
+	],
+	"Plugins": [
+		{ "Name": "OdysseyAPI", "Enabled": true },
+		{ "Name": "EnhancedInput", "Enabled": true },
+		{ "Name": "StateTree", "Enabled": true },
+		{ "Name": "GameplayStateTree", "Enabled": true },
+		{ "Name": "SmartObjects", "Enabled": true },
+		{ "Name": "GameplayAbilities", "Enabled": true },
+		{ "Name": "ModelingToolsEditorMode", "Enabled": true, "TargetAllowList": [ "Editor" ] },
+		{ "Name": "PythonScriptPlugin", "Enabled": true, "TargetAllowList": [ "Editor" ] },
+		{ "Name": "EditorScriptingUtilities", "Enabled": true, "TargetAllowList": [ "Editor" ] }
+	],
+	"TargetPlatforms": [ "Mac", "Windows" ]
+}

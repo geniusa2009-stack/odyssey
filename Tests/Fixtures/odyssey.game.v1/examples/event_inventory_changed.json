@@ -1,0 +1,33 @@
+{
+ "event_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam:22",
+ "payload": {
+  "container": "earth.command.engineering.spares_locker",
+  "items": [
+   {
+    "condition": "nominal",
+    "item": "spare.breaker_module",
+    "mass_kg": 4.0,
+    "quantity": 1
+   },
+   {
+    "condition": "nominal",
+    "item": "tool.diagnostic_scanner",
+    "mass_kg": 1.5,
+    "quantity": 1
+   }
+  ],
+  "mass_kg": 5.5,
+  "mass_limit_kg": 120.0
+ },
+ "prev_state_version": 7,
+ "protocol": "odyssey.game.v1",
+ "scope": "world",
+ "seq": 22,
+ "server_time": "2026-10-27T06:00:00+00:00",
+ "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+ "sim_tick": 5,
+ "sim_time_hours": 1.25,
+ "state_version": 8,
+ "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaaaq",
+ "type": "inventory.changed"
+}

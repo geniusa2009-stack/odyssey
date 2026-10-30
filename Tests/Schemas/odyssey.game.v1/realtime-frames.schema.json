@@ -1,0 +1,189 @@
+{
+ "components": {
+  "schemas": {
+   "GameControlFrame": {
+    "additionalProperties": false,
+    "properties": {
+     "last_seq": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Last Seq"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Reason"
+     },
+     "replayed": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Replayed"
+     },
+     "restore_path": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Restore Path"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     },
+     "state_version": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "State Version"
+     },
+     "type": {
+      "enum": [
+       "CONNECTED",
+       "RESUMED",
+       "RESYNC_REQUIRED",
+       "PONG"
+      ],
+      "title": "Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "session_id"
+    ],
+    "title": "GameControlFrame",
+    "type": "object"
+   },
+   "GameEventEnvelope": {
+    "additionalProperties": false,
+    "description": "A realtime event. ``seq`` is per session, gap-free and strictly increasing.",
+    "properties": {
+     "event_id": {
+      "title": "Event Id",
+      "type": "string"
+     },
+     "payload": {
+      "additionalProperties": true,
+      "title": "Payload",
+      "type": "object"
+     },
+     "prev_state_version": {
+      "title": "Prev State Version",
+      "type": "integer"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "scope": {
+      "enum": [
+       "world",
+       "mission",
+       "crew",
+       "campaign",
+       "session"
+      ],
+      "title": "Scope",
+      "type": "string"
+     },
+     "seq": {
+      "title": "Seq",
+      "type": "integer"
+     },
+     "server_time": {
+      "title": "Server Time",
+      "type": "string"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     },
+     "sim_tick": {
+      "title": "Sim Tick",
+      "type": "integer"
+     },
+     "sim_time_hours": {
+      "title": "Sim Time Hours",
+      "type": "number"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "timeline_id": {
+      "title": "Timeline Id",
+      "type": "string"
+     },
+     "type": {
+      "title": "Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "event_id",
+     "seq",
+     "session_id",
+     "timeline_id",
+     "state_version",
+     "prev_state_version",
+     "type",
+     "scope",
+     "sim_tick",
+     "sim_time_hours",
+     "server_time",
+     "payload"
+    ],
+    "title": "GameEventEnvelope",
+    "type": "object"
+   }
+  }
+ },
+ "x-odyssey-generated-from": {
+  "backend_commit": "4f7be839a21b054b83d34151c56510fa45ba18a4",
+  "models": [
+   "app.game.contracts.protocol:GameControlFrame",
+   "app.game.contracts.protocol:GameEventEnvelope"
+  ],
+  "tool": "Tools/Contract/export_realtime_schema.py"
+ }
+}
