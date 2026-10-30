@@ -18,7 +18,11 @@ Content/Systems/SemanticIds/DT_SemanticIds_EarthCommand.json   (Unreal DataTable
 UOdysseySemanticRegistry (GameInstanceSubsystem) ──▶ odyssey::SemanticRegistry (the natively tested class)
 ```
 
-`generate_registry.py --check` fails when the JSON no longer matches the backend content. Hidden
+`RequiredInSlice` and `Binding` are not hand-maintained: an id is required exactly when the
+verification map definition (`Content/Systems/Greybox/L_EarthCommand_Slice.layout.json`) binds an
+actor to it, and `Binding` is that actor's label. `generate_registry.py --check` fails when the
+JSON no longer matches the backend content **or** the map definition; a map binding for an id the
+backend does not define is an error. Hidden
 content (incidents) is never exported: incident ids reach the client only through events, after
 they have happened.
 
@@ -34,10 +38,13 @@ they have happened.
 | `Binding` | recommended greybox actor name (informational) |
 | `RequiredInSlice` | the slice map must contain an actor bound to it |
 
-Required in the slice (18): the four locations `observation_deck`, `mission_control`, `engineering`,
-`hangar`; objects `power_bus_b`, `station_battery`, `thermal_plant`, `air_handling`,
-`water_systems`, `mission_control.consoles`, `observation_deck.lunar_telescope`, `hangar.luna01`;
-containers `engineering.spares_locker`, `player_kit`; crew `maya`, `omar`, `sofia`, `jay`.
+Required in the slice (22): the six locations `observation_deck`, `mission_control`,
+`engineering`, `hangar`, `training`, `laboratory`; objects `power_bus_b`, `station_battery`,
+`thermal_plant`, `air_handling`, `water_systems`, `mission_control.consoles`,
+`observation_deck.lunar_telescope`, `hangar.luna01`, `training.simulator`,
+`laboratory.sample_analyzer`; containers `engineering.spares_locker`, `player_kit`; crew `maya`,
+`omar`, `sofia`, `jay`. Every semantic target of both power-incident strategies is among them
+(test `PowerIncidentStrategiesAreFullyMapped`).
 
 ## Binding actors to ids
 

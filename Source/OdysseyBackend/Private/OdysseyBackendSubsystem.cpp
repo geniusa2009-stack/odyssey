@@ -1,6 +1,6 @@
 // UNREAL_EDITOR_VERIFICATION_REQUIRED: not yet compiled or run inside Unreal Engine 5.8.
 // The protocol behaviour it executes (odyssey::SessionMachine) is verified natively: fixture tests
-// (Tools/ProtocolCore, 22 cases) and the live harness against the real backend (run_live.sh).
+// (Tools/ProtocolCore, 26 cases) and the live harness against the real backend (run_live.sh).
 #include "OdysseyBackendSubsystem.h"
 
 #include "Engine/GameInstance.h"

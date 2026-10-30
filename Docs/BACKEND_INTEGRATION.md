@@ -102,8 +102,9 @@ Restore is the single reconnect path, as the backend handoff specifies.
 
 The backend rate-limits each client to `ODYSSEY_RATE_LIMIT_PER_MINUTE` (default **120/min**, shared
 by all default-bucket endpoints; Future Lens/Black Box use the 20/min expensive bucket). Measured
-in the live harness, which plays far faster than a human (19 commands in ~50 s, ACCELERATED clock):
-82–100 requests/min across three runs, zero 429s. Contributors: clock sync ≤ 48/min (ACCELERATED), one snapshot per
+in the live harness, which plays far faster than a human: 82–100 requests/min with 19 commands,
+and **119 requests/min** with 25 commands in 54 s (the seven-area run) — zero 429s, but no
+headroom at automated speed. A person issues a handful of commands per minute. Contributors: clock sync ≤ 48/min (ACCELERATED), one snapshot per
 applied command, resource refresh ≤ 12/min (skipped when a snapshot already arrived),
 object refreshes after `interactions.changed` (≤ 6, else one snapshot).
 
@@ -120,10 +121,12 @@ object refreshes after `interactions.changed` (≤ 6, else one snapshot).
    validated with the same closed-schema validator.
 3. **`payload.snapshot_required`** is honoured generically (any event type), as the realtime
    protocol document specifies, not only for `mission.transitioned` / `timeline.changed`.
-4. **Load-shedding strategy needs rooms outside the specified greybox.** The backend accepts two
-   incident strategies; "shed training/laboratory loads first" requires `earth.command.training`
-   and `earth.command.laboratory`, which are not among the five Phase 6 areas. "Repair at once"
-   works within them (at a station-stability cost). See [EARTH_COMMAND_GREYBOX.md](EARTH_COMMAND_GREYBOX.md).
+4. **Load-shedding strategy needs Training and Laboratory.** The backend accepts two incident
+   strategies; "shed training/laboratory loads first" requires `earth.command.training` and
+   `earth.command.laboratory`. Resolved: both rooms were approved into the verification map
+   (seven areas). Shed = `system.set_mode mode=off` → `system.state_changed {status: offline,
+   power: off, mode: off}`; restore = `mode=nominal` → `{operational, powered, nominal}` —
+   recorded from the live backend; the mirror applies both from the event alone.
 5. Request rate stays under the default limit (above), but there is little headroom if the client
    added more periodic reads.
 

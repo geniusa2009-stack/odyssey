@@ -1,0 +1,110 @@
+{
+ "comment": "Both backend-accepted strategies for the Earth Command power incident, transcribed from the backend's own tests (no correct answer; the backend computes the consequence). The tests check every target exists in the registry, is required in the slice and is bound in the map definition, and that the backend offers each object action.",
+ "source": {
+  "backend_commit": "4f7be839a21b054b83d34151c56510fa45ba18a4",
+  "tests": [
+   "tests/test_game_api.py::test_strategies_have_different_costs_through_the_api",
+   "tests/game_api.py::to_incident",
+   "tests/game_api.py::resolve_incident"
+  ]
+ },
+ "incident": "earth.command.power_incident",
+ "strategies": [
+  {
+   "id": "repair_at_once",
+   "steps": [
+    {
+     "action": "world.zone_entered",
+     "target": "earth.command.engineering"
+    },
+    {
+     "action": "system.inspect",
+     "target": "earth.command.engineering.power_bus_b"
+    },
+    {
+     "action": "repair.perform",
+     "target": "earth.command.engineering.power_bus_b"
+    },
+    {
+     "action": "mission.clock_set",
+     "params": {
+      "mode": "ACCELERATED"
+     }
+    }
+   ]
+  },
+  {
+   "id": "shed_loads_first",
+   "steps": [
+    {
+     "action": "world.zone_entered",
+     "target": "earth.command.engineering"
+    },
+    {
+     "action": "system.inspect",
+     "target": "earth.command.engineering.power_bus_b"
+    },
+    {
+     "action": "world.zone_entered",
+     "target": "earth.command.training"
+    },
+    {
+     "action": "system.set_mode",
+     "target": "earth.command.training.simulator",
+     "params": {
+      "mode": "off"
+     }
+    },
+    {
+     "action": "world.zone_entered",
+     "target": "earth.command.laboratory"
+    },
+    {
+     "action": "system.set_mode",
+     "target": "earth.command.laboratory.sample_analyzer",
+     "params": {
+      "mode": "off"
+     }
+    },
+    {
+     "action": "world.zone_entered",
+     "target": "earth.command.engineering"
+    },
+    {
+     "action": "repair.perform",
+     "target": "earth.command.engineering.power_bus_b"
+    },
+    {
+     "action": "mission.clock_set",
+     "params": {
+      "mode": "ACCELERATED"
+     }
+    }
+   ],
+   "restore_after_resolution": [
+    {
+     "action": "world.zone_entered",
+     "target": "earth.command.training"
+    },
+    {
+     "action": "system.set_mode",
+     "target": "earth.command.training.simulator",
+     "params": {
+      "mode": "nominal"
+     }
+    },
+    {
+     "action": "world.zone_entered",
+     "target": "earth.command.laboratory"
+    },
+    {
+     "action": "system.set_mode",
+     "target": "earth.command.laboratory.sample_analyzer",
+     "params": {
+      "mode": "nominal"
+     }
+    }
+   ]
+  }
+ ]
+}

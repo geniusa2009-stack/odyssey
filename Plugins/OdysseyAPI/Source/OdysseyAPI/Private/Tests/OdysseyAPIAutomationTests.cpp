@@ -1,6 +1,6 @@
 // UNREAL_EDITOR_VERIFICATION_REQUIRED: not yet run inside Unreal Engine 5.8.
 // Runs every shared protocol test case (ProtocolTestCases.h — the same bodies the native runner
-// executes, 22 cases / 606 checks passing natively) as Unreal automation tests "Odyssey.Protocol.*":
+// executes, 26 cases / 959 checks passing natively) as Unreal automation tests "Odyssey.Protocol.*":
 //   UnrealEditor-Cmd <path>/Odyssey.uproject -ExecCmds="Automation RunTests Odyssey; Quit" \
 //     -unattended -nullrhi -nosplash -log -ReportExportPath=<dir>
 // Fixtures are read from <project>/Tests/Fixtures/odyssey.game.v1 (vendored backend output).

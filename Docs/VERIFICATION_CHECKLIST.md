@@ -39,11 +39,16 @@ export PROJ="$GAME/Odyssey.uproject"
 cd "$GAME"
 python3 Tools/Contract/sync_fixtures.py --check
 make -C Tools/ProtocolCore test        # needs clang++ (Xcode CLT provides it)
+python3 Tools/Editor/dry_run_greybox.py
 ```
 
 - [ ] `fixtures intact (28 files, backend 4f7be839a21b)`.
-- [ ] `22/22 cases passed, 606 checks`. (On macOS, `make test-asan` needs g++; skip it. Optionally
-      add `-fsanitize=address` to the clang line, since Apple clang ships ASan.)
+- [ ] `26/26 cases passed, 959 checks` (includes `VerificationMapScope`, `RegistryMatchesMapDefinition`,
+      `PowerIncidentStrategiesAreFullyMapped`, `ShedRoomsReactAndRestore`).
+- [ ] `greybox dry run ok: 7 areas, 120 actors, 22 semantic ids bound, light groups wired`
+      (stubbed `unreal` module: checks the script's use of the map definition, not the UE API).
+- On macOS, `make test-asan` needs g++; skip it. Optionally add `-fsanitize=address` to the clang
+  line, since Apple clang ships ASan.
 
 ## 2. Backend running locally
 
@@ -58,7 +63,10 @@ curl -s http://127.0.0.1:8000/api/game/v1/features | python3 -m json.tool | head
 
 - [ ] ready answers 200; features show `"protocol": "odyssey.game.v1"`.
 - [ ] Optional: `ODYSSEY_BACKEND=~/dev/odyssey "$GAME/Tools/ProtocolCore/run_live.sh"` on the Mac
-      (uses port 8765; independent of the server above) → `LIVE HARNESS PASSED: 51/51`.
+      (uses port 8765; independent of the server above) → `LIVE HARNESS PASSED: 60/60` (plays the
+      load-shedding strategy and the restore; at harness speed it runs close to the backend's
+      120 requests/min default limit — if a 429 appears, record it and rerun with
+      `ODYSSEY_RATE_LIMIT_PER_MINUTE=600` exported for the harness backend).
 
 ## 3. Project generation
 
@@ -106,7 +114,10 @@ AI/script editor operations name their exact target first (§33).
 1. **Registry** (target: `/Game/Systems/SemanticIds/DT_SemanticIds_EarthCommand` only):
    *Tools → Execute Python Script…* → `Tools/Editor/import_semantic_registry.py`
    - [ ] Log `[Odyssey] /Game/Systems/SemanticIds/DT_SemanticIds_EarthCommand: 34 semantic ids imported`.
-   - [ ] Open the DataTable: 34 rows, row struct `OdysseySemanticIdRow`.
+   - [ ] Open the DataTable: 34 rows, row struct `OdysseySemanticIdRow`; 22 rows have
+         `RequiredInSlice = true`, including `earth.command.training`, `earth.command.laboratory`,
+         `earth.command.training.simulator` (Binding `Sys_TrainingSimulator`) and
+         `earth.command.laboratory.sample_analyzer` (Binding `Sys_SampleAnalyzer`).
 2. **Input** (target: `/Game/Systems/Input/` only, by hand): create `IA_Move` (Axis2D), `IA_Look`
    (Axis2D), `IA_Run`, `IA_Interact`, `IA_Cycle`, `IA_Back` (Digital), and `IMC_Default` with the
    mappings in [INTERACTION_SYSTEM.md](INTERACTION_SYSTEM.md#input-enhanced-input).
@@ -120,9 +131,16 @@ AI/script editor operations name their exact target first (§33).
    blocks named `MissionContext`, `CriticalWarning`, `InteractionPrompt`, `ObjectiveCue`,
    `ConnectionState`.
 5. **Greybox** (target: `/Game/Earth/EarthCommand/Maps/L_EarthCommand_Slice` only): run
-   `Tools/Editor/build_earth_command_greybox.py`.
-   - [ ] Log `[Odyssey] greybox written to …`. Record any Python exception verbatim.
-   - [ ] World Outliner shows only `EarthCommandGreybox/…` folders.
+   `Tools/Editor/build_earth_command_greybox.py`. It builds everything from
+   `Content/Systems/Greybox/L_EarthCommand_Slice.layout.json`; change the map there, not in the script.
+   - [ ] Log `[Odyssey] greybox written to … (7 areas)`. Record any Python exception verbatim.
+   - [ ] World Outliner shows only `EarthCommandGreybox/…` with exactly these area folders:
+         ObservationDeck, MainCorridor, MissionControl, Engineering, Training, Laboratory,
+         HangarEntrance (plus Crew, Lighting).
+   - [ ] `Sys_TrainingSimulator` and `Sys_SampleAnalyzer` are consoles with three controls each
+         (DIAGNOSTIC, LOAD OFF `mode=off`, LOAD NOMINAL `mode=nominal`). Their Presentation
+         component has two light groups: `room_load` (the room's two ceiling lights) and
+         `equipment` (the indicator light). `Sys_PowerBusB` has `bus_room` (4) and `warning` (1).
    - [ ] World Settings → GameMode Override = `BP_OdysseyGameMode`.
    - [ ] Walk the map in the editor viewport and check scale, door clearance, sightlines (see
          [EARTH_COMMAND_GREYBOX.md](EARTH_COMMAND_GREYBOX.md)). Record what you changed by hand.
@@ -138,7 +156,7 @@ Backend from step 2 running. Play In Editor (Selected Viewport).
 - [ ] The dev overlay (top left) shows `connection Ready   realtime open`, a `gs_…` session id, the
       timeline, state version 1, and location `earth.command.observation_deck`.
 - [ ] The player spawns at `Anchor_ObservationDeck`, facing the window: `player placed at earth.command.observation_deck`.
-- [ ] No `slice map has no actor for required semantic id …` warnings. Record any.
+- [ ] No `slice map has no actor for required semantic id …` warnings (22 required ids). Record any.
 
 ## 8. REST test
 
@@ -153,8 +171,10 @@ Backend from step 2 running. Play In Editor (Selected Viewport).
       the backend log (events arrive on the socket).
 - [ ] After 20 s idle: no disconnect (ping/pong).
 
-## 10. Semantic action test (the Phase 6 success path)
+## 10. Semantic action test — strategy `repair_at_once` (the Phase 6 success path)
 
+- [ ] Before entering Engineering, look into Training and the Laboratory: ceiling lights and
+      equipment indicators are at full intensity (backend: `powered` / `nominal` / `operational`).
 - [ ] Walk physically into Engineering. Backend `POST …/commands` (`world.zone_entered`, target
       `earth.command.engineering`) 200. Overlay location = `earth.command.engineering`, clock = `REALTIME`.
 - [ ] Backend log `POST …/sync` about every 5 s. Within about 30 s, `incident.started` arrives.
@@ -170,6 +190,32 @@ Backend from step 2 running. Play In Editor (Selected Viewport).
 - [ ] LUNA-01 progression becomes visible: `Sys_Luna01` access `inspection_ready`, and the
       authorization requirements are present (`GetAuthorization()`; print them from Blueprint or
       read the overlay/log).
+
+## 10b. Strategy `shed_loads_first`, then restore (new campaign)
+
+Both strategies cannot be played in one campaign. Run `Odyssey.Session.Forget`, restart PIE, and
+walk into Engineering again until the incident is active. Inspect power bus B (DIAGNOSTIC).
+
+- [ ] Walk into **Training**. Backend: `world.zone_entered` → `earth.command.training`, and the
+      overlay location changes. On the simulator console, press **LOAD OFF**. Backend:
+      `system.set_mode` with `params {"mode":"off"}` → applied; event `system.state_changed`
+      `{status: offline, power: off, mode: off}`.
+- [ ] **Training visibly reacts** within about 0.6 s: both ceiling lights blend to about 35 %
+      (dim, still lit) and the simulator indicator goes dark. The Laboratory and Engineering
+      lights are unchanged by this. Record a short description or a capture.
+- [ ] Walk into **Laboratory** and press **LOAD OFF** on the analyzer. Same checks for the
+      Laboratory, and Training stays dimmed.
+- [ ] `Odyssey.Net.VerifyMirror` → `mirror == server`.
+- [ ] Back to Engineering: BREAKER SERVICE → applied;
+      `Odyssey.Act mission.clock_set - mode=ACCELERATED`; the incident resolves.
+- [ ] **Restore:** in Training press **LOAD NOMINAL**, and in the Laboratory press
+      **LOAD NOMINAL**. Backend: `system.state_changed {status: operational, power: powered, mode: nominal}`.
+      **Each room returns exactly to its authored lighting** (ceiling lights 100 %, indicator on).
+- [ ] Restart the backend while a room is shed (step 13 procedure). After the reconnect the room
+      is still dimmed (state comes from the snapshot, not from memory). Restoring afterwards still
+      brings it back.
+- [ ] Record the backend's objective outcome for each strategy (`station_stability`): the
+      backend's own tests expect `failed` for repair-at-once and not `failed` for load-shedding.
 
 ## 11. Stale-state test
 
@@ -207,20 +253,20 @@ Backend from step 2 running. Play In Editor (Selected Viewport).
   -ReportExportPath="$GAME/Saved/AutomationReport" 2>&1 | tee "$GAME/Saved/automation.log"
 ```
 
-- [ ] `Odyssey.Protocol.*`: 22 tests. Record passed/failed and the first failure's message.
+- [ ] `Odyssey.Protocol.*`: 26 tests. Record passed/failed and the first failure's message.
 - [ ] `Odyssey.Semantic.RegistryImport` passes (the DataTable importer accepts the generated JSON).
 - [ ] Attach `Saved/AutomationReport/index.json`.
 
 ## 15. Earth Command greybox review
 
-- [ ] Walk the full flow Observation Deck → corridor → Mission Control → Engineering → Hangar
-      entrance at walk and at run speed: no snagging, doors clear, and the camera never clips
+- [ ] Walk the full flow Observation Deck → corridor → Mission Control → Engineering → Training →
+      Laboratory → Hangar entrance at walk and at run speed: no snagging, doors clear, and the camera never clips
       walls at the 340 cm boom (probe 14 cm).
 - [ ] Each zone triggers once per entry (backend log), and nothing fires in the corridor.
 - [ ] Crew placeholders stand in their rooms (StateTree `ST_CrewSlice` is not authored yet;
       record whether you created one).
-- [ ] Decision to record: keep the five areas only ("repair at once" strategy), or enable
-      `INCLUDE_LOAD_SHED_STUBS` / add Training + Laboratory for the load-shedding strategy.
+- [ ] The map contains exactly the seven verification areas: nothing beyond the vertical slice,
+      no detailed props, no final materials.
 
 ## 16. Performance (record, do not tune yet)
 
@@ -232,7 +278,8 @@ Backend from step 2 running. Play In Editor (Selected Viewport).
 ## What to bring back
 
 1. The build log excerpt for every error/warning (step 4), with file:line.
-2. A ✓/✗ per checkbox, and verbatim log lines for every ✗.
+2. A ✓/✗ per checkbox, and verbatim log lines for every ✗ — including how the Training and
+   Laboratory rooms looked when shed and when restored (step 10b).
 3. `Saved/automation.log` and `Saved/AutomationReport/index.json`.
 4. The editor-side changes you made by hand (step 6), so they can be reconciled with the scripts.
 5. Performance numbers (step 16).

@@ -17,6 +17,7 @@
 #include "OdysseyProtocol/MirrorDiff.h"
 #include "OdysseyProtocol/SemanticRegistry.h"
 #include "OdysseyProtocol/SessionMachine.h"
+#include "Tests/SliceLayout.h"
 
 #include <arpa/inet.h>
 #include <fcntl.h>
@@ -656,6 +657,40 @@ std::string Act(Shell& s, const std::string& action, const std::string& target,
 
 bool ReadyState(Shell& s) { return s.machine().state() == SessionState::Ready; }
 
+// Executes strategy steps from Tests/Data/earth_command_power_incident_strategies.json.
+bool RunSteps(Shell& s, const std::vector<json::Value>& steps)
+{
+	bool all = true;
+	for (const json::Value& st : steps)
+	{
+		std::vector<std::pair<std::string, ParamValue>> params;
+		for (const json::Value::Member& p : st["params"].members())
+		{
+			params.emplace_back(p.first, p.second.isInt() ? ParamValue::Int(p.second.asInt()) : ParamValue::Str(p.second.asString()));
+		}
+		all = Act(s, st["action"].asString(), st["target"].asString(), params) == "applied" && all;
+	}
+	return all;
+}
+
+// Light scales the map definition's rules give for lights following `object`, on the live mirror.
+std::vector<double> LiveScales(Shell& s, const odyssey::tests::SliceLayout& L, const std::string& object, const std::string& rule)
+{
+	std::vector<double> out;
+	for (const odyssey::tests::LayoutLight& l : L.lightsFollowing(object))
+	{
+		if (l.rule == rule) out.push_back(odyssey::presentation::EvaluateIn(L.rules.at(rule), s.machine().model(), object));
+	}
+	return out;
+}
+
+bool AllIn(const std::vector<double>& v, double lo, double hi)
+{
+	if (v.empty()) return false;
+	for (double x : v) if (x < lo || x > hi) return false;
+	return true;
+}
+
 std::string ReadText(const std::string& path)
 {
 	std::ifstream f(path);
@@ -679,6 +714,15 @@ int main(int argc, char** argv)
 	}
 	SemanticRegistry registry;
 	registry.Load(json::parse(ReadText(root + "/Content/Systems/SemanticIds/DT_SemanticIds_EarthCommand.json")).value);
+	const odyssey::tests::SliceLayout layout =
+		odyssey::tests::ParseSliceLayout(json::parse(ReadText(root + "/Content/Systems/Greybox/L_EarthCommand_Slice.layout.json")).value);
+	const json::Value strategies = json::parse(ReadText(root + "/Tests/Data/earth_command_power_incident_strategies.json")).value;
+	json::Value shedStrategy;
+	for (const json::Value& st : strategies["strategies"].items())
+	{
+		if (st["id"].asString() == "shed_loads_first") shedStrategy = st;
+	}
+	const std::string SIM = E + "training.simulator", ANA = E + "laboratory.sample_analyzer";
 	const double t0 = Now();
 
 	Shell s(port, "client-1");
@@ -718,14 +762,26 @@ int main(int argc, char** argv)
 	EXPECT(s.Saw(NoticeKind::CommandResolved, "stale", mark), "the server answered STALE_STATE first");
 	ExpectConverged(s, "mirror == server after stale reconciliation");
 
-	std::printf("[5] act on the physical system (Earth Command power incident)\n");
-	EXPECT(Act(s, "world.zone_entered", E + "training") == "applied", "enter training");
-	EXPECT(Act(s, "system.set_mode", E + "training.simulator", {{"mode", ParamValue::Str("off")}}) == "applied", "shed the simulator load");
-	EXPECT(s.machine().model().object(E + "training.simulator") && s.machine().model().object(E + "training.simulator")->power == "off",
-		"simulator power off in the mirror");
-	EXPECT(Act(s, "world.zone_entered", E + "engineering") == "applied", "back to engineering");
-	EXPECT(Act(s, "repair.perform", E + "engineering.power_bus_b") == "applied", "repair power bus B");
-	EXPECT(Act(s, "mission.clock_set", "", {{"mode", ParamValue::Str("ACCELERATED")}}) == "applied", "clock ACCELERATED");
+	std::printf("[5] strategy shed_loads_first (from the strategy file): shed training + laboratory loads, repair\n");
+	{
+		// steps after the diagnosis already performed in [2]/[4]
+		const std::vector<json::Value> all = shedStrategy["steps"].items();
+		EXPECT(all.size() == 9 && all[1]["action"].asString() == "system.inspect", "strategy file loaded");
+		const std::vector<json::Value> shedTraining(all.begin() + 2, all.begin() + 4);
+		const std::vector<json::Value> shedLab(all.begin() + 4, all.begin() + 6);
+		const std::vector<json::Value> rest(all.begin() + 6, all.end());
+		EXPECT(AllIn(LiveScales(s, layout, SIM, "room_load"), 1.0, 1.0) && AllIn(LiveScales(s, layout, ANA, "room_load"), 1.0, 1.0),
+			"training and laboratory lights at authored intensity before shedding");
+		EXPECT(RunSteps(s, shedTraining), "training simulator shed (system.set_mode off)");
+		EXPECT(AllIn(LiveScales(s, layout, SIM, "room_load"), 0.01, 0.49) && AllIn(LiveScales(s, layout, SIM, "equipment"), 0.0, 0.0),
+			"training room visibly reacts: ceiling lights dim, simulator indicator dark");
+		EXPECT(AllIn(LiveScales(s, layout, ANA, "room_load"), 1.0, 1.0), "laboratory untouched by the training shed");
+		EXPECT(RunSteps(s, shedLab), "sample analyzer shed (system.set_mode off)");
+		EXPECT(AllIn(LiveScales(s, layout, ANA, "room_load"), 0.01, 0.49) && AllIn(LiveScales(s, layout, ANA, "equipment"), 0.0, 0.0),
+			"laboratory visibly reacts: ceiling lights dim, analyzer indicator dark");
+		ExpectConverged(s, "mirror == server with both loads shed");
+		EXPECT(RunSteps(s, rest), "repair power bus B, clock ACCELERATED");
+	}
 
 	std::printf("[6] Future Lens (known-only) from the live session\n");
 	{
@@ -759,6 +815,17 @@ int main(int argc, char** argv)
 	EXPECT(s.PumpUntil([&] { const IncidentInfo* i = s.machine().model().incident(E + "power_incident"); return i && i->resolved; }, 60.0),
 		"incident resolved as trusted time passes");
 	ExpectConverged(s, "mirror == server after reconnect");
+
+	std::printf("[7b] restore the shed loads (strategy restore_after_resolution)\n");
+	EXPECT(RunSteps(s, shedStrategy["restore_after_resolution"].items()), "simulator and analyzer back to nominal");
+	for (const std::string& obj : {SIM, ANA})
+	{
+		const ObjectInfo* o = s.machine().model().object(obj);
+		EXPECT(o && o->power == "powered" && o->mode == "nominal" && o->status == "operational", "backend reports the load restored");
+		EXPECT(AllIn(LiveScales(s, layout, obj, "room_load"), 1.0, 1.0) && AllIn(LiveScales(s, layout, obj, "equipment"), 1.0, 1.0),
+			"room returns exactly to its authored lighting");
+	}
+	ExpectConverged(s, "mirror == server after restoring the loads");
 
 	std::printf("[8] backend process restart (same database)\n");
 	if (!stopCmd.empty() && !startCmd.empty())

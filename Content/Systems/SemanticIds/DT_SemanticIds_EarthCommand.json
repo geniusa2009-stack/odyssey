@@ -36,8 +36,8 @@
   "World": "earth_command",
   "DisplayName": "Science laboratory",
   "Location": "",
-  "Binding": "",
-  "RequiredInSlice": false
+  "Binding": "Anchor_Laboratory",
+  "RequiredInSlice": true
  },
  {
   "Name": "earth.command.training",
@@ -46,8 +46,8 @@
   "World": "earth_command",
   "DisplayName": "Training center",
   "Location": "",
-  "Binding": "",
-  "RequiredInSlice": false
+  "Binding": "Anchor_Training",
+  "RequiredInSlice": true
  },
  {
   "Name": "earth.command.crew_area",
@@ -176,8 +176,8 @@
   "World": "earth_command",
   "DisplayName": "Sample analyzer",
   "Location": "earth.command.laboratory",
-  "Binding": "",
-  "RequiredInSlice": false
+  "Binding": "Sys_SampleAnalyzer",
+  "RequiredInSlice": true
  },
  {
   "Name": "earth.command.training.simulator",
@@ -186,8 +186,8 @@
   "World": "earth_command",
   "DisplayName": "Training simulator",
   "Location": "earth.command.training",
-  "Binding": "",
-  "RequiredInSlice": false
+  "Binding": "Sys_TrainingSimulator",
+  "RequiredInSlice": true
  },
  {
   "Name": "earth.command.medical.dosimetry_station",

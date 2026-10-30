@@ -1,8 +1,10 @@
 // UNREAL_EDITOR_VERIFICATION_REQUIRED
-// The Engineering power console (§19): a physical world object. Approach → minimal context →
+// Physical console (§19) — the Engineering power console, and the load panels of the Training
+// simulator and the Laboratory sample analyzer (verification map). A physical world object. Approach → minimal context →
 // interact → the panel activates → its physical controls show what the BACKEND offers for each
 // slot (and why not) → the player presses one → the backend decides → the panel/world respond.
-// No "correct/wrong answer" vocabulary anywhere: only system states and consequences.
+// Controls (action + params) are data from the map definition; the defaults below are the
+// power bus B panel. No "correct/wrong answer" vocabulary anywhere: only system states and consequences.
 #pragma once
 
 #include "CoreMinimal.h"

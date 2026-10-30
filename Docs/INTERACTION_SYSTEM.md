@@ -14,9 +14,9 @@ physical object ── UOdysseyInteractableComponent ── FOdysseySemanticInte
 |---|---|
 | `UOdysseyInteractorComponent` (player) | every 0.1 s picks the interactable in range, inside a 35° view cone, with line of sight; focuses it. Local only. |
 | `UOdysseyInteractableComponent` | target id (or the owner's binding), presented actions, local requirements (range, line of sight), prompt state, `RequestAction` |
-| `AOdysseyPowerConsole` | the Engineering power console: physical panel with controls (DIAGNOSTIC → `system.inspect`, BREAKER SERVICE → `repair.perform`) bound to `earth.command.engineering.power_bus_b` |
+| `AOdysseyPowerConsole` | a physical console with data-defined controls (map definition): Engineering power bus B (DIAGNOSTIC → `system.inspect`, BREAKER SERVICE → `repair.perform`); Training simulator and Laboratory sample analyzer (DIAGNOSTIC, LOAD OFF → `system.set_mode mode=off`, LOAD NOMINAL → `mode=nominal`) |
 | `AOdysseySystemActor` | generic placeable system (battery, thermal plant, telescope, lockers, LUNA-01) |
-| `UOdysseyObjectPresentationComponent` | the world's reaction: light intensity per backend `power`/`status`, warning lights while an incident involves the object, Blueprint hook for art |
+| `UOdysseyObjectPresentationComponent` | the world's reaction: light groups (room ceiling lights, indicators, warning) whose intensity is `odyssey::presentation::Evaluate(rule, backend power/mode/status, incident)` — rules from the map definition (`room_load`, `equipment`, `bus_room`, `warning`); Blueprint hook for art |
 
 ## Who decides what
 
@@ -51,6 +51,10 @@ Assets live in `/Game/Systems/Input/` and are created in the editor (see CONTENT
 when the backend's semantic location differs. Refusals (e.g. restricted access) come back as
 `rejected` with the backend's reason; the player's physical position is never corrected by the
 backend.
+
+Parameterised actions (`system.set_mode` needs `mode`) are always performed through a console
+control that carries the parameter; the generic interactable only sends parameterless actions.
+A native test requires a physical control for every step of both incident strategies.
 
 ## Adding a new interactable
 

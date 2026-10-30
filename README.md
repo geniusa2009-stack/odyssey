@@ -30,7 +30,7 @@ Docs/                            architecture, integration, ids, interaction, re
 ## Quick start (no Unreal needed)
 
 ```bash
-make -C Tools/ProtocolCore test                                  # 22 cases against the real fixtures
+make -C Tools/ProtocolCore test                                  # 26 cases: real fixtures + the verification map definition
 ODYSSEY_BACKEND=../odyssey Tools/ProtocolCore/run_live.sh        # live backend, fault injection
 python3 Tools/Contract/sync_fixtures.py --backend ../odyssey --check
 ```

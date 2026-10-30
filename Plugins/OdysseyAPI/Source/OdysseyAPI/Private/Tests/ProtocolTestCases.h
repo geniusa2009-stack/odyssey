@@ -18,7 +18,9 @@
 #include "OdysseyProtocol/SemanticRegistry.h"
 #include "OdysseyProtocol/SessionMachine.h"
 #include "OdysseyProtocol/StateMirror.h"
+#include "OdysseyProtocol/PresentationRules.h"
 #include "Tests/SchemaCheck.h"
+#include "Tests/SliceLayout.h"
 
 #include <array>
 #include <set>
@@ -998,6 +1000,240 @@ inline void TestEveryRequestMatchesTheOpenApiDocument(Context& ctx)
 	}
 }
 
+// ======================================================================= verification map
+inline const char* kLayoutPath = "Content/Systems/Greybox/L_EarthCommand_Slice.layout.json";
+inline const char* kRegistryPath = "Content/Systems/SemanticIds/DT_SemanticIds_EarthCommand.json";
+inline const char* kStrategiesPath = "Tests/Data/earth_command_power_incident_strategies.json";
+
+// The verification map contains exactly the seven approved areas, each backend location once
+// with an anchor and a zone, and nothing outside the vertical slice.
+inline void TestVerificationMapScope(Context& ctx)
+{
+	const SliceLayout L = ParseSliceLayout(File(ctx, kLayoutPath));
+	OD_CHECK(ctx, L.ok);
+	const std::set<std::string> approved = {"observation_deck", "main_corridor", "mission_control", "engineering",
+		"hangar_entrance", "training", "laboratory"};
+	std::set<std::string> ids, allowed(L.allowedAreas.begin(), L.allowedAreas.end()), locations;
+	for (const LayoutArea& a : L.areas)
+	{
+		ids.insert(a.id);
+		if (!a.location.empty())
+		{
+			OD_CHECK(ctx, a.hasAnchor && a.hasZone);
+			OD_CHECK(ctx, locations.insert(a.location).second);  // one area per backend location
+		}
+	}
+	OD_CHECK(ctx, ids == approved);
+	OD_CHECK(ctx, allowed == approved);
+	OD_CHECK(ctx, ids.size() == L.areas.size());
+	// the corridor is Unreal-only space; every other area is a backend location
+	OD_CHECK(ctx, L.areaFor("earth.command.training") && L.areaFor("earth.command.laboratory"));
+	OD_CHECK(ctx, locations.size() == 6);
+	SemanticRegistry reg;
+	reg.Load(File(ctx, kRegistryPath));
+	for (const LayoutArea& a : L.areas)
+	{
+		if (!a.location.empty())
+		{
+			const SemanticEntry* e = reg.Find(a.location);
+			OD_CHECK(ctx, e && e->kind == SemanticKind::Location);
+		}
+		for (const auto& sys : a.systems)
+		{
+			// every system sits in the area of its backend location
+			const SemanticEntry* e = reg.Find(sys.first);
+			OD_CHECK(ctx, e != nullptr);
+			OD_CHECK(ctx, e && e->location == a.location);
+		}
+		for (const LayoutLight& l : a.lights)
+		{
+			OD_CHECK(ctx, l.follows.empty() || L.rules.count(l.rule) == 1);
+		}
+	}
+	for (const auto& c : L.crew)
+	{
+		const SemanticEntry* e = reg.Find(c.first);
+		OD_CHECK(ctx, e && e->kind == SemanticKind::Crew);
+	}
+}
+
+// The registry's RequiredInSlice/Binding are exactly the map definition's bindings.
+inline void TestRegistryMatchesMapDefinition(Context& ctx)
+{
+	const SliceLayout L = ParseSliceLayout(File(ctx, kLayoutPath));
+	SemanticRegistry reg;
+	std::string err;
+	OD_CHECK(ctx, reg.Load(File(ctx, kRegistryPath), &err));
+	const std::map<std::string, std::string> bound = L.bindings();
+	size_t required = 0;
+	for (const SemanticEntry* e : reg.All())
+	{
+		auto it = bound.find(e->id);
+		const bool inMap = it != bound.end();
+		OD_CHECK(ctx, e->requiredInSlice == inMap);
+		OD_CHECK(ctx, !inMap || e->binding == it->second);
+		required += e->requiredInSlice ? 1 : 0;
+	}
+	for (const auto& b : bound)
+	{
+		const bool known = reg.Find(b.first) != nullptr;
+		OD_CHECK(ctx, known);
+	}
+	OD_CHECK(ctx, required == 22 && bound.size() == 22);
+	for (const char* id : {"earth.command.training", "earth.command.laboratory", "earth.command.training.simulator",
+			 "earth.command.laboratory.sample_analyzer"})
+	{
+		const SemanticEntry* e = reg.Find(id);
+		OD_CHECK(ctx, e && e->requiredInSlice && !e->binding.empty());
+	}
+}
+
+// Every semantic target of BOTH backend-accepted power-incident strategies (and of restoring the
+// shed loads) exists in the registry, is required in the slice, is bound in the map definition,
+// is reachable (its location is a mapped area), and — per the backend's recorded bootstrap and
+// feature list — really offers the action the strategy uses.
+inline void TestPowerIncidentStrategiesAreFullyMapped(Context& ctx)
+{
+	const json::Value doc = File(ctx, kStrategiesPath);
+	const SliceLayout L = ParseSliceLayout(File(ctx, kLayoutPath));
+	SemanticRegistry reg;
+	reg.Load(File(ctx, kRegistryPath));
+	const std::map<std::string, std::string> bound = L.bindings();
+	const json::Value boot = Fixture(ctx, "bootstrap");
+	const json::Value features = Fixture(ctx, "features");
+	std::set<std::string> featureActions;
+	for (const json::Value& a : features["actions"].items()) featureActions.insert(a["type"].asString());
+	auto backendObject = [&](const std::string& id) -> const json::Value* {
+		for (const json::Value& o : boot["snapshot"]["world"]["objects"].items())
+			if (o["id"].asString() == id) return &o;
+		return nullptr;
+	};
+	std::set<std::string> strategyIds;
+	size_t targets = 0;
+	for (const json::Value& st : doc["strategies"].items())
+	{
+		strategyIds.insert(st["id"].asString());
+		std::vector<json::Value> steps = st["steps"].items();
+		for (const json::Value& r : st["restore_after_resolution"].items()) steps.push_back(r);
+		for (const json::Value& step : steps)
+		{
+			const std::string action = step["action"].asString();
+			OD_CHECK(ctx, featureActions.count(action) == 1);
+			const std::string target = step["target"].asString();
+			if (target.empty())
+			{
+				continue;  // mission.clock_set
+			}
+			++targets;
+			const SemanticEntry* e = reg.Find(target);
+			OD_CHECK(ctx, e != nullptr);
+			if (!e) continue;
+			OD_CHECK(ctx, e->requiredInSlice);
+			OD_CHECK(ctx, bound.count(target) == 1);
+			if (e->kind == SemanticKind::Location)
+			{
+				const LayoutArea* a = L.areaFor(target);
+				OD_CHECK(ctx, a && a->hasAnchor && a->hasZone);
+				OD_CHECK(ctx, action == "world.zone_entered");
+			}
+			else
+			{
+				OD_CHECK(ctx, L.areaFor(e->location) != nullptr);  // the player can get there
+				const json::Value* o = backendObject(target);
+				OD_CHECK(ctx, o != nullptr);
+				bool offered = false;
+				if (o)
+					for (const json::Value& i : (*o)["interactions"].items()) offered = offered || i["action"].asString() == action;
+				OD_CHECK(ctx, offered);
+				// the player can do it physically: a console control on this object with exactly
+				// this action and params (set_mode needs its mode; the generic interactable sends none)
+				std::map<std::string, std::string> params;
+				for (const json::Value::Member& p : step["params"].members()) params[p.first] = p.second.asString();
+				const bool physical = L.hasControl(target, action, params);
+				OD_CHECK(ctx, physical);
+			}
+		}
+	}
+	OD_CHECK(ctx, strategyIds == (std::set<std::string>{"repair_at_once", "shed_loads_first"}));
+	OD_CHECK(ctx, targets >= 14);
+}
+
+// A backend system.state_changed envelope (shape = the recorded incident envelope; payload values
+// recorded from the live backend 4f7be83 for set_mode off / nominal).
+inline json::Value StateChangedEvent(Context& ctx, const MirrorModel& m, const std::string& object,
+	const char* status, const char* power, const char* mode)
+{
+	json::Value e = Fixture(ctx, "event_incident_started");
+	e.set("type", json::Value::String("system.state_changed"));
+	e.set("scope", json::Value::String("world"));
+	e.set("seq", json::Value::Int(m.lastSeq + 1));
+	e.set("prev_state_version", json::Value::Int(m.stateVersion));
+	e.set("state_version", json::Value::Int(m.stateVersion + 1));
+	e.set("timeline_id", json::Value::String(m.timelineId));
+	json::Value changes = json::Value::Object();
+	changes.set("status", json::Value::String(status));
+	changes.set("power", json::Value::String(power));
+	changes.set("mode", json::Value::String(mode));
+	json::Value payload = json::Value::Object();
+	payload.set("object", json::Value::String(object));
+	payload.set("changes", changes);
+	e.set("payload", payload);
+	return e;
+}
+
+// When a load is shed its room visibly reacts (room lights dim, equipment indicator dark); when
+// restored everything returns to exactly the authored state — evaluated with the map
+// definition's real rules through the same function Unreal uses.
+inline void TestShedRoomsReactAndRestore(Context& ctx)
+{
+	const SliceLayout L = ParseSliceLayout(File(ctx, kLayoutPath));
+	StateMirror mirror;
+	OD_CHECK(ctx, mirror.LoadSnapshot(Fixture(ctx, "bootstrap")["snapshot"]));
+	auto scales = [&](const std::string& object, const std::string& rule) {
+		std::vector<double> out;
+		for (const LayoutLight& l : L.lightsFollowing(object))
+			if (l.rule == rule) out.push_back(presentation::EvaluateIn(L.rules.at(l.rule), mirror.model(), object));
+		return out;
+	};
+	for (const char* obj : {"earth.command.training.simulator", "earth.command.laboratory.sample_analyzer"})
+	{
+		OD_CHECK(ctx, scales(obj, "room_load").size() >= 2);
+		OD_CHECK(ctx, scales(obj, "equipment").size() == 1);
+		const ObjectInfo* o = mirror.model().object(obj);
+		OD_CHECK(ctx, o && o->power == "powered" && o->mode == "nominal" && o->status == "operational");
+		for (double v : scales(obj, "room_load")) OD_CHECK(ctx, v == 1.0);
+		for (double v : scales(obj, "equipment")) OD_CHECK(ctx, v == 1.0);
+		// shed
+		MirrorDelta d = mirror.ApplyEvent(StateChangedEvent(ctx, mirror.model(), obj, "offline", "off", "off"));
+		OD_CHECK(ctx, d.applied && !d.needsSnapshot);
+		for (double v : scales(obj, "room_load")) OD_CHECK(ctx, v > 0.0 && v < 0.5);  // visibly dimmer, still lit
+		for (double v : scales(obj, "equipment")) OD_CHECK(ctx, v == 0.0);
+		// restored
+		d = mirror.ApplyEvent(StateChangedEvent(ctx, mirror.model(), obj, "operational", "powered", "nominal"));
+		OD_CHECK(ctx, d.applied);
+		for (double v : scales(obj, "room_load")) OD_CHECK(ctx, v == 1.0);
+		for (double v : scales(obj, "equipment")) OD_CHECK(ctx, v == 1.0);
+	}
+	// shedding one room never touches the other room's lights
+	mirror.ApplyEvent(StateChangedEvent(ctx, mirror.model(), "earth.command.training.simulator", "offline", "off", "off"));
+	for (double v : scales("earth.command.laboratory.sample_analyzer", "room_load")) OD_CHECK(ctx, v == 1.0);
+	// Engineering during the recorded incident: bus damaged → room dims, warning on
+	StateMirror incident;
+	incident.LoadSnapshot(Fixture(ctx, "snapshot_incident"));
+	const std::string bus = "earth.command.engineering.power_bus_b";
+	OD_CHECK(ctx, L.lightsFollowing(bus).size() == 5);
+	for (const LayoutLight& l : L.lightsFollowing(bus))
+	{
+		const double v = presentation::EvaluateIn(L.rules.at(l.rule), incident.model(), bus);
+		OD_CHECK(ctx, l.rule == "warning" ? v == 1.0 : (v > 0.0 && v < 1.0));
+	}
+	for (const LayoutLight& l : L.lightsFollowing(bus))
+	{
+		const double v = presentation::EvaluateIn(L.rules.at(l.rule), mirror.model(), bus);  // before the incident
+		OD_CHECK(ctx, l.rule == "warning" ? v == 0.0 : v == 1.0);
+	}
+}
+
 struct Case
 {
 	const char* name;
@@ -1029,6 +1265,10 @@ inline const std::vector<Case>& AllCases()
 		{"FutureLensAndBlackBoxIngestion", &TestFutureLensAndBlackBoxIngestion},
 		{"BackoffBounds", &TestBackoffBounds},
 		{"EveryRequestMatchesTheOpenApiDocument", &TestEveryRequestMatchesTheOpenApiDocument},
+		{"VerificationMapScope", &TestVerificationMapScope},
+		{"RegistryMatchesMapDefinition", &TestRegistryMatchesMapDefinition},
+		{"PowerIncidentStrategiesAreFullyMapped", &TestPowerIncidentStrategiesAreFullyMapped},
+		{"ShedRoomsReactAndRestore", &TestShedRoomsReactAndRestore},
 	};
 	return cases;
 }

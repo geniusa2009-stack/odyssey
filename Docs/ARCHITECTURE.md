@@ -43,6 +43,7 @@ Plugins/OdysseyAPI/Source/OdysseyAPI/Public/OdysseyProtocol/   (header-only C++2
   SessionMachine.h   startup / commands / realtime / recovery state machine → Effects
   Analysis.h         Future Lens + Black Box models
   MirrorDiff.h       mirror vs authoritative snapshot (tests + debug "verify mirror")
+  PresentationRules.h  light intensity as a pure function of backend power/mode/status (+ incident)
   Backoff.h          bounded exponential backoff with deterministic jitter
 ```
 
@@ -101,6 +102,14 @@ OdysseyAPI (plugin: protocol core + its automation tests)
    fully describe (object interactions, the player's location → snapshot).
 6. `UOdysseyObjectPresentationComponent` reads the new object view: lights dim, the warning light
    comes on, the Blueprint hook drives materials/audio. The console re-renders its controls.
+
+## Verification map
+
+Seven areas — Observation Deck, Main Corridor, Mission Control, Engineering, Training,
+Laboratory, Hangar Entrance — defined as data in
+`Content/Systems/Greybox/L_EarthCommand_Slice.layout.json` (see
+[EARTH_COMMAND_GREYBOX.md](EARTH_COMMAND_GREYBOX.md)). Both backend-accepted power-incident
+strategies are physically playable in it.
 
 ## Non-goals in Phase 6
 

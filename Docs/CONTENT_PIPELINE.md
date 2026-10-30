@@ -21,11 +21,23 @@
 |---|---|---|
 | `/Game/Systems/SemanticIds/` | `DT_SemanticIds_EarthCommand` | `Tools/Editor/import_semantic_registry.py` (from the generated JSON) |
 | `/Game/Systems/Input/` | `IA_Move`, `IA_Look`, `IA_Run`, `IA_Interact`, `IA_Cycle`, `IA_Back`, `IMC_Default` | hand-made in the editor |
-| `/Game/Earth/EarthCommand/Maps/` | `L_EarthCommand_Slice` | `Tools/Editor/build_earth_command_greybox.py`, then hand-tuned |
+| `/Game/Earth/EarthCommand/Maps/` | `L_EarthCommand_Slice` (7 areas) | `Tools/Editor/build_earth_command_greybox.py` from `Content/Systems/Greybox/L_EarthCommand_Slice.layout.json`, then hand-tuned (bring layout changes back into the definition) |
 | `/Game/Characters/` | `BP_OdysseyPlayer` (Game Animation Sample character), `BP_Crew_Maya/Omar/Sofia/Jay` | editor |
 | `/Game/UI/` | `WBP_OdysseyHUD`, `WBP_PowerConsoleDisplay`, `WBP_FutureLensDebug`, `WBP_BlackBoxDebug` | editor |
 | `/Game/Dev/` | test maps, debug meshes (never cooked) | editor |
 | `/Game/Moon/`, `/Game/Vehicles/` | reserved — nothing in Phase 6 | — |
+
+## The map definition
+
+`Content/Systems/Greybox/L_EarthCommand_Slice.layout.json` is the reviewed, text-diffable source
+of the verification map: areas, doors, anchors, zones, system actors and console controls,
+lights and the backend object/rule each follows, crew placeholders. Change the map there; the
+greybox script, the registry generator and the native tests all read it. After editing:
+
+```
+../odyssey/.venv/bin/python Tools/SemanticIds/generate_registry.py --backend ../odyssey --write
+make -C Tools/ProtocolCore test && python3 Tools/Editor/dry_run_greybox.py
+```
 
 ## Regenerating backend-derived data
 
