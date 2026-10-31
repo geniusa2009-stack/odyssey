@@ -1,0 +1,38 @@
+Using bundled DotNet SDK version: 8.0.300
+Running UnrealBuildTool: dotnet "../../Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.dll" OdysseyEditor Mac Development -Project=/Users/dev/ODYSSEY-GAME/Odyssey.uproject -architecture=arm64 -WaitMutex
+Log file: /Users/dev/Library/Application Support/Epic/UnrealBuildTool/Log.txt
+Creating makefile for OdysseyEditor (no existing makefile)
+/Users/dev/ODYSSEY-GAME/Source/OdysseyWorld/OdysseyWorld.Build.cs(13,3): warning CS0618: 'ModuleRules.bLegacyPublicIncludePaths' is obsolete
+Parsing headers for OdysseyEditor
+  Running Internal UnrealHeaderTool /Users/dev/ODYSSEY-GAME/Odyssey.uproject /Users/dev/ODYSSEY-GAME/Intermediate/Build/Mac/OdysseyEditor/Development/OdysseyEditor.uhtmanifest -WarningsAsErrors -installed
+/Users/dev/ODYSSEY-GAME/Source/OdysseyDebug/Public/OdysseyDebugSubsystem.h(41): Error: UFUNCTION must not be inside preprocessor blocks, except for WITH_EDITORONLY_DATA
+Total of 1 written
+Reflection code generated for OdysseyEditor in 4.2 seconds
+Building OdysseyEditor...
+Determining max actions to execute in parallel (8 physical cores, 8 logical cores)
+[1/96] Compile [Apple] Module.OdysseyCore.cpp
+[2/96] Compile [Apple] Module.OdysseyRealtime.cpp
+In file included from /Users/dev/ODYSSEY-GAME/Intermediate/Build/Mac/arm64/UnrealEditor/Development/OdysseyRealtime/Module.OdysseyRealtime.cpp:4:
+/Users/dev/ODYSSEY-GAME/Source/OdysseyRealtime/Private/OdysseyEventRouter.cpp:118:28: error: no matching constructor for initialization of 'FOdysseySystemStateEvent'
+  118 |                 FOdysseySystemStateEvent E{Meta, ToFName(P["object"].asString())};
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/dev/ODYSSEY-GAME/Source/OdysseyRealtime/Public/OdysseyEventTypes.h:26:27: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 2 were provided
+/Users/dev/ODYSSEY-GAME/Source/OdysseyRealtime/Private/OdysseyEventRouter.cpp:150:10: warning: unused variable 'Unused' [-Wunused-variable]
+/Users/dev/ODYSSEY-GAME/Source/OdysseyRealtime/Private/OdysseyEventRouter.cpp:157:3: error: no matching constructor for initialization of 'FOdysseyAccessEvent'
+[3/96] Compile [Apple] Module.OdysseyBackend.cpp
+/Users/dev/ODYSSEY-GAME/Source/OdysseyRealtime/Private/OdysseyEventRouter.cpp:118:28: error: no matching constructor for initialization of 'FOdysseySystemStateEvent'
+In file included from /Users/dev/ODYSSEY-GAME/Intermediate/Build/Mac/arm64/UnrealEditor/Development/OdysseyBackend/Module.OdysseyBackend.cpp:2:
+/Users/dev/ODYSSEY-GAME/Source/OdysseyBackend/Private/OdysseyBackendSubsystem.cpp:301:7: error: no member named 'SetTimeout' in 'IHttpRequest'
+  301 |         Req->SetTimeout(static_cast<float>(H.timeoutSeconds));
+/Users/Shared/Epic Games/UE_5.8/Engine/Source/Runtime/Online/HTTP/Public/Interfaces/IHttpRequest.h:88:2: error: unknown type name 'FHttpFoo'
+/Users/dev/ODYSSEY-GAME/Source/OdysseyWorld/OdysseyWorld.Build.cs(11,95): error CS0103: The name 'SmartObjectsModuleX' does not exist in the current context
+[4/96] Compile [Apple] OdysseyDebugSubsystem.cpp
+/Users/dev/ODYSSEY-GAME/Source/OdysseyDebug/Private/OdysseyDebugSubsystem.cpp:12:10: fatal error: 'Debug/DebugDrawService.h' file not found
+[95/96] Link [Apple] UnrealEditor-OdysseyInteraction.dylib
+Undefined symbols for architecture arm64:
+  "UOdysseyInteractableComponent::GetSemanticIdOptions()", referenced from:
+      _Z_Construct_UFunction_UOdysseyInteractableComponent_GetSemanticIdOptions in Module.OdysseyInteraction.gen.cpp.o
+ld: symbol(s) not found for architecture arm64
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+Result: Failed (OtherCompilationError)
+Total execution time: 87.42 seconds

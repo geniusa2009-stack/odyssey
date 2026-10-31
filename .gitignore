@@ -45,3 +45,6 @@ __pycache__/
 # ---- OS
 .DS_Store
 Thumbs.db
+
+# ---- macOS verification runner output (Tools/Mac)
+Logs/
