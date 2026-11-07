@@ -1,0 +1,20 @@
+{
+ "event_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam:69",
+ "payload": {
+  "from_mission": "earth_command.station_readiness",
+  "snapshot_required": true,
+  "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaabe",
+  "to_mission": "luna_01.the_last_light"
+ },
+ "prev_state_version": 22,
+ "protocol": "odyssey.game.v1",
+ "scope": "campaign",
+ "seq": 69,
+ "server_time": "2026-10-27T06:00:00+00:00",
+ "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+ "sim_tick": 21,
+ "sim_time_hours": 5.25,
+ "state_version": 23,
+ "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaaaq",
+ "type": "mission.transitioned"
+}

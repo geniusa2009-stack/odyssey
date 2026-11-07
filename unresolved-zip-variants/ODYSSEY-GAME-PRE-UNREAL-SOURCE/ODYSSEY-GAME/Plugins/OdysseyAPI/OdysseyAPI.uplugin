@@ -1,0 +1,15 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.6.0",
+	"FriendlyName": "ODYSSEY API (odyssey.game.v1)",
+	"Description": "Engine-independent odyssey.game.v1 protocol core (header-only C++, natively tested) plus its Unreal automation tests. No gameplay, no transport. Unreal module: UNREAL_EDITOR_VERIFICATION_REQUIRED.",
+	"Category": "ODYSSEY",
+	"CreatedBy": "ODYSSEY",
+	"CanContainContent": false,
+	"IsBetaVersion": true,
+	"Installed": false,
+	"Modules": [
+		{ "Name": "OdysseyAPI", "Type": "Runtime", "LoadingPhase": "PreDefault" }
+	]
+}

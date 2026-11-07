@@ -1,0 +1,27 @@
+# Engineering profile weights — PROVISIONAL.
+# Final scoring weights are a product decision (docs/USER_DECISIONS_REQUIRED.md, "Engineering
+# profile weights"). Change this file (bump `version`) without touching code.
+version: "provisional-0.1"
+dimensions:
+  systems_thinking:
+    system_diversity: 0.4
+    cascade_containment: 0.4
+    lens_usage: 0.2
+  resource_efficiency:
+    reserve_margin: 0.5
+    load_management: 0.5
+  crew_safety:
+    crew_protection: 0.7
+    reserve_margin: 0.3
+  scientific_ambition:
+    science_return: 1.0
+  risk_preference:
+    risk_acceptance: 0.6
+    boost_usage: 0.4
+  crisis_response:
+    alert_response_speed: 0.7
+    cascade_containment: 0.3
+  long_term_planning:
+    anticipation: 0.5
+    proactive_ratio: 0.3
+    lens_usage: 0.2

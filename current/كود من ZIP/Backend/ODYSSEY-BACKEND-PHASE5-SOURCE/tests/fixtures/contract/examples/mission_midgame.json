@@ -1,0 +1,2200 @@
+{
+ "alerts": [],
+ "clock": {
+  "elapsed_hours": 100.0,
+  "max_ticks": 240,
+  "remaining_hours": 140.0,
+  "tick": 100,
+  "tick_hours": 1.0
+ },
+ "crew": {
+  "active_count": 4,
+  "in_shelter": 0,
+  "members": [
+   {
+    "dose_msv": 3.83,
+    "eva_remaining_ticks": 0,
+    "fatigue": 0.0,
+    "health": 1.0,
+    "health_band": "nominal",
+    "id": "crew_cdr",
+    "in_shelter": false,
+    "location": "habitat",
+    "on_eva": false,
+    "role": "commander",
+    "status": "healthy"
+   },
+   {
+    "dose_msv": 3.83,
+    "eva_remaining_ticks": 0,
+    "fatigue": 0.0,
+    "health": 1.0,
+    "health_band": "nominal",
+    "id": "crew_pwr",
+    "in_shelter": false,
+    "location": "habitat",
+    "on_eva": false,
+    "role": "power_engineer",
+    "status": "healthy"
+   },
+   {
+    "dose_msv": 3.83,
+    "eva_remaining_ticks": 0,
+    "fatigue": 0.0,
+    "health": 1.0,
+    "health_band": "nominal",
+    "id": "crew_ls",
+    "in_shelter": false,
+    "location": "habitat",
+    "on_eva": false,
+    "role": "life_support",
+    "status": "healthy"
+   },
+   {
+    "dose_msv": 3.83,
+    "eva_remaining_ticks": 0,
+    "fatigue": 0.0,
+    "health": 1.0,
+    "health_band": "nominal",
+    "id": "crew_sci",
+    "in_shelter": false,
+    "location": "habitat",
+    "on_eva": false,
+    "role": "science_officer",
+    "status": "healthy"
+   }
+  ],
+  "min_health": 1.0,
+  "on_eva": 0
+ },
+ "decisions": {
+  "available_count": 45,
+  "mission_active": true,
+  "options": [
+   {
+    "affected_systems": [
+     "power",
+     "habitat"
+    ],
+    "available": true,
+    "category": "habitat",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:habitat_core:eco",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "habitat"
+    ],
+    "available": true,
+    "category": "habitat",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": true,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:habitat_core:nominal",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:co2_scrubber:off",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:co2_scrubber:eco",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": true,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:co2_scrubber:nominal",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:co2_scrubber:boost",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:oxygen_generation:off",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:oxygen_generation:eco",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": true,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:oxygen_generation:nominal",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:oxygen_generation:boost",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "thermal"
+    ],
+    "available": true,
+    "category": "thermal",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:thermal_heater:off",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "thermal"
+    ],
+    "available": true,
+    "category": "thermal",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:thermal_heater:eco",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "thermal"
+    ],
+    "available": true,
+    "category": "thermal",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": true,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:thermal_heater:nominal",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:water_recovery:off",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:water_recovery:eco",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "life_support"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": true,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:water_recovery:nominal",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "communications"
+    ],
+    "available": true,
+    "category": "communications",
+    "decision_type": "set_subsystem_mode",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:comms:off",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "communications"
+    ],
+    "available": true,
+    "category": "communications",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:comms:eco",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "communications"
+    ],
+    "available": true,
+    "category": "communications",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": true,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:comms:nominal",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "science"
+    ],
+    "available": true,
+    "category": "science",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:science_payload:off",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "science"
+    ],
+    "available": true,
+    "category": "science",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:science_payload:eco",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "science"
+    ],
+    "available": true,
+    "category": "science",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": true,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:science_payload:nominal",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "science"
+    ],
+    "available": true,
+    "category": "science",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:science_payload:boost",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "rover"
+    ],
+    "available": true,
+    "category": "rover",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:rover_charger:off",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "rover"
+    ],
+    "available": true,
+    "category": "rover",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:rover_charger:eco",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "rover"
+    ],
+    "available": true,
+    "category": "rover",
+    "decision_type": "set_subsystem_mode",
+    "impact": "local",
+    "is_current_setting": true,
+    "label_key": "decision.set_subsystem_mode",
+    "option_id": "set_subsystem_mode:rover_charger:nominal",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "thermal",
+     "power"
+    ],
+    "available": true,
+    "category": "thermal",
+    "decision_type": "set_thermal_setpoint",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_thermal_setpoint",
+    "option_id": "set_thermal_setpoint",
+    "parameters": [
+     {
+      "current": 21.0,
+      "max": 26.0,
+      "min": 10.0,
+      "name": "target_c",
+      "type": "number",
+      "unit": "°C"
+     }
+    ],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "food",
+     "crew"
+    ],
+    "available": true,
+    "category": "life_support",
+    "decision_type": "set_ration_level",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.set_ration_level",
+    "option_id": "set_ration_level",
+    "parameters": [
+     {
+      "current": 1.0,
+      "max": 1.0,
+      "min": 0.5,
+      "name": "level",
+      "type": "number",
+      "unit": "fraction"
+     }
+    ],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "maintenance",
+     "solar_array"
+    ],
+    "available": true,
+    "category": "maintenance",
+    "decision_type": "schedule_maintenance",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.schedule_maintenance",
+    "option_id": "schedule_maintenance:solar_array",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "maintenance",
+     "battery"
+    ],
+    "available": true,
+    "category": "maintenance",
+    "decision_type": "schedule_maintenance",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.schedule_maintenance",
+    "option_id": "schedule_maintenance:battery",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "maintenance",
+     "oxygen_generator"
+    ],
+    "available": true,
+    "category": "maintenance",
+    "decision_type": "schedule_maintenance",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.schedule_maintenance",
+    "option_id": "schedule_maintenance:oxygen_generator",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "maintenance",
+     "co2_scrubber"
+    ],
+    "available": true,
+    "category": "maintenance",
+    "decision_type": "schedule_maintenance",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.schedule_maintenance",
+    "option_id": "schedule_maintenance:co2_scrubber",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "maintenance",
+     "water_processor"
+    ],
+    "available": true,
+    "category": "maintenance",
+    "decision_type": "schedule_maintenance",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.schedule_maintenance",
+    "option_id": "schedule_maintenance:water_processor",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "maintenance",
+     "heater"
+    ],
+    "available": true,
+    "category": "maintenance",
+    "decision_type": "schedule_maintenance",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.schedule_maintenance",
+    "option_id": "schedule_maintenance:heater",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "maintenance",
+     "radio"
+    ],
+    "available": true,
+    "category": "maintenance",
+    "decision_type": "schedule_maintenance",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.schedule_maintenance",
+    "option_id": "schedule_maintenance:radio",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "maintenance",
+     "rover"
+    ],
+    "available": true,
+    "category": "maintenance",
+    "decision_type": "schedule_maintenance",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.schedule_maintenance",
+    "option_id": "schedule_maintenance:rover",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "crew",
+     "radiation"
+    ],
+    "available": true,
+    "category": "crew",
+    "decision_type": "set_crew_location",
+    "impact": "major",
+    "is_current_setting": true,
+    "label_key": "decision.set_crew_location",
+    "option_id": "set_crew_location:habitat",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "crew",
+     "radiation"
+    ],
+    "available": true,
+    "category": "crew",
+    "decision_type": "set_crew_location",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.set_crew_location",
+    "option_id": "set_crew_location:shelter",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "science",
+     "power"
+    ],
+    "available": false,
+    "category": "science",
+    "decision_type": "start_science_activity",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.start_science_activity",
+    "option_id": "start_science_activity:regolith_survey",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": {
+     "message": "opportunity 'regolith_survey' is not open",
+     "reason": "opportunity_unavailable"
+    }
+   },
+   {
+    "affected_systems": [
+     "science",
+     "power"
+    ],
+    "available": false,
+    "category": "science",
+    "decision_type": "start_science_activity",
+    "impact": "major",
+    "is_current_setting": true,
+    "label_key": "decision.start_science_activity",
+    "option_id": "start_science_activity:ice_core_sampling",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": {
+     "message": "opportunity 'ice_core_sampling' is not open",
+     "reason": "opportunity_unavailable"
+    }
+   },
+   {
+    "affected_systems": [
+     "science",
+     "power"
+    ],
+    "available": true,
+    "category": "science",
+    "decision_type": "stop_science_activity",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.stop_science_activity",
+    "option_id": "stop_science_activity",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "rover",
+     "power",
+     "science"
+    ],
+    "available": false,
+    "category": "rover",
+    "decision_type": "rover_command",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.rover_command",
+    "option_id": "rover_command:recall",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": {
+     "message": "the rover is not on a traverse",
+     "reason": "rover_not_traversing"
+    }
+   },
+   {
+    "affected_systems": [
+     "rover",
+     "power",
+     "science"
+    ],
+    "available": true,
+    "category": "rover",
+    "decision_type": "rover_command",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.rover_command",
+    "option_id": "rover_command:transfer_energy",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "rover",
+     "power",
+     "science"
+    ],
+    "available": true,
+    "category": "rover",
+    "decision_type": "rover_command",
+    "impact": "major",
+    "is_current_setting": false,
+    "label_key": "decision.rover_command",
+    "option_id": "rover_command:stow",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "rover",
+     "power",
+     "science"
+    ],
+    "available": false,
+    "category": "rover",
+    "decision_type": "rover_command",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.rover_command",
+    "option_id": "rover_command:unstow",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": {
+     "message": "the rover is not stowed",
+     "reason": "rover_not_stowed"
+    }
+   },
+   {
+    "affected_systems": [
+     "power",
+     "crew",
+     "radiation"
+    ],
+    "available": true,
+    "category": "power",
+    "decision_type": "clean_solar_array",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.clean_solar_array",
+    "option_id": "clean_solar_array:crew_cdr",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "crew",
+     "radiation"
+    ],
+    "available": true,
+    "category": "power",
+    "decision_type": "clean_solar_array",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.clean_solar_array",
+    "option_id": "clean_solar_array:crew_pwr",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "crew",
+     "radiation"
+    ],
+    "available": true,
+    "category": "power",
+    "decision_type": "clean_solar_array",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.clean_solar_array",
+    "option_id": "clean_solar_array:crew_ls",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   },
+   {
+    "affected_systems": [
+     "power",
+     "crew",
+     "radiation"
+    ],
+    "available": true,
+    "category": "power",
+    "decision_type": "clean_solar_array",
+    "impact": "local",
+    "is_current_setting": false,
+    "label_key": "decision.clean_solar_array",
+    "option_id": "clean_solar_array:crew_sci",
+    "parameters": [],
+    "required_capability": null,
+    "unavailable": null
+   }
+  ],
+  "tick": 100,
+  "tools": [
+   {
+    "affected_systems": [],
+    "available": true,
+    "category": "analysis",
+    "decision_type": "tool",
+    "impact": "informational",
+    "is_current_setting": false,
+    "label_key": "decision.tool.future_lens",
+    "option_id": "tool:future_lens",
+    "parameters": [],
+    "required_capability": "future_lens",
+    "unavailable": null
+   },
+   {
+    "affected_systems": [],
+    "available": true,
+    "category": "analysis",
+    "decision_type": "tool",
+    "impact": "informational",
+    "is_current_setting": false,
+    "label_key": "decision.tool.orion",
+    "option_id": "tool:orion",
+    "parameters": [],
+    "required_capability": "orion",
+    "unavailable": null
+   }
+  ]
+ },
+ "hud": {
+  "alerts": {
+   "caution": 0,
+   "critical": 0,
+   "warning": 0
+  },
+  "battery_soc": 1.0,
+  "co2_ppm": 1650.0,
+  "crew_min_health": 1.0,
+  "data_downlinked_mb": 400.0,
+  "demand_kw": 4.9,
+  "dose_margin_msv": 11.17,
+  "food_days": 7.42,
+  "generation_kw": 5.64,
+  "habitat_temp_c": 21.0,
+  "link_up": true,
+  "max_dose_msv": 3.83,
+  "oxygen_days": 7.96,
+  "risk_index": 0.0,
+  "science_points": 20.0,
+  "tick": 100,
+  "unmet_kw": 0.0,
+  "water_days": 5.5
+ },
+ "objectives": {
+  "objectives": [
+   {
+    "blockers": [],
+    "category": "primary",
+    "completion_fraction": null,
+    "evaluated": "continuously",
+    "id": "crew_survival",
+    "kind": "avoid",
+    "margin": 1.0,
+    "margin_unit": "index",
+    "message_key": "objective.crew_survival",
+    "required": true,
+    "resolved_tick": null,
+    "rule": {
+     "all": null,
+     "any": null,
+     "current": 1.0,
+     "label": "Lowest crew health",
+     "met": false,
+     "metric": "crew.min_health",
+     "negate": null,
+     "op": "<=",
+     "target": 0.0,
+     "unit": "index"
+    },
+    "status": "pending"
+   },
+   {
+    "blockers": [],
+    "category": "primary",
+    "completion_fraction": 0.5,
+    "evaluated": "continuously",
+    "id": "science_return",
+    "kind": "achieve",
+    "margin": null,
+    "margin_unit": null,
+    "message_key": "objective.science_return",
+    "required": true,
+    "resolved_tick": null,
+    "rule": {
+     "all": null,
+     "any": null,
+     "current": 1.0,
+     "label": "Science activities completed",
+     "met": false,
+     "metric": "science.opportunities_completed",
+     "negate": null,
+     "op": ">=",
+     "target": 2.0,
+     "unit": "count"
+    },
+    "status": "pending"
+   },
+   {
+    "blockers": [],
+    "category": "primary",
+    "completion_fraction": 0.5,
+    "evaluated": "continuously",
+    "id": "data_return",
+    "kind": "achieve",
+    "margin": null,
+    "margin_unit": null,
+    "message_key": "objective.data_return",
+    "required": true,
+    "resolved_tick": null,
+    "rule": {
+     "all": null,
+     "any": null,
+     "current": 400.0,
+     "label": "Science data downlinked",
+     "met": false,
+     "metric": "comms.data_downlinked_mb",
+     "negate": null,
+     "op": ">=",
+     "target": 800.0,
+     "unit": "MB"
+    },
+    "status": "pending"
+   },
+   {
+    "blockers": [],
+    "category": "safety",
+    "completion_fraction": null,
+    "evaluated": "continuously",
+    "id": "radiation_safety",
+    "kind": "avoid",
+    "margin": 11.17,
+    "margin_unit": "mSv",
+    "message_key": "objective.radiation_safety",
+    "required": false,
+    "resolved_tick": null,
+    "rule": {
+     "all": null,
+     "any": null,
+     "current": 3.83,
+     "label": "Highest crew dose",
+     "met": false,
+     "metric": "crew.max_dose_msv",
+     "negate": null,
+     "op": ">=",
+     "target": 15.0,
+     "unit": "mSv"
+    },
+    "status": "pending"
+   },
+   {
+    "blockers": [],
+    "category": "safety",
+    "completion_fraction": null,
+    "evaluated": "continuously",
+    "id": "crew_health",
+    "kind": "avoid",
+    "margin": 0.5,
+    "margin_unit": "index",
+    "message_key": "objective.crew_health",
+    "required": false,
+    "resolved_tick": null,
+    "rule": {
+     "all": null,
+     "any": null,
+     "current": 1.0,
+     "label": "Lowest crew health",
+     "met": false,
+     "metric": "crew.min_health",
+     "negate": null,
+     "op": "<",
+     "target": 0.5,
+     "unit": "index"
+    },
+    "status": "pending"
+   },
+   {
+    "blockers": [],
+    "category": "stability",
+    "completion_fraction": null,
+    "evaluated": "continuously",
+    "id": "power_continuity",
+    "kind": "avoid",
+    "margin": 0.05,
+    "margin_unit": "kW",
+    "message_key": "objective.power_continuity",
+    "required": false,
+    "resolved_tick": null,
+    "rule": {
+     "all": null,
+     "any": null,
+     "current": 0.0,
+     "label": "Unmet demand (load shed)",
+     "met": false,
+     "metric": "power.unmet_kw",
+     "negate": null,
+     "op": ">",
+     "target": 0.05,
+     "unit": "kW"
+    },
+    "status": "pending"
+   },
+   {
+    "blockers": [],
+    "category": "stability",
+    "completion_fraction": null,
+    "evaluated": "continuously",
+    "id": "life_support_stability",
+    "kind": "avoid",
+    "margin": null,
+    "margin_unit": null,
+    "message_key": "objective.life_support_stability",
+    "required": false,
+    "resolved_tick": null,
+    "rule": {
+     "all": null,
+     "any": [
+      {
+       "all": null,
+       "any": null,
+       "current": 1650.0,
+       "label": "Cabin CO2 concentration",
+       "met": false,
+       "metric": "life_support.co2_ppm",
+       "negate": null,
+       "op": ">",
+       "target": 10500.0,
+       "unit": "ppm"
+      },
+      {
+       "all": null,
+       "any": null,
+       "current": 7.96,
+       "label": "Oxygen reserve (days of crew use)",
+       "met": false,
+       "metric": "life_support.oxygen_days",
+       "negate": null,
+       "op": "<",
+       "target": 1.0,
+       "unit": "days"
+      },
+      {
+       "all": null,
+       "any": null,
+       "current": 5.5,
+       "label": "Water reserve (days of gross crew use, no recycling)",
+       "met": false,
+       "metric": "life_support.water_days",
+       "negate": null,
+       "op": "<",
+       "target": 1.0,
+       "unit": "days"
+      },
+      {
+       "all": null,
+       "any": null,
+       "current": 21.0,
+       "label": "Habitat temperature",
+       "met": false,
+       "metric": "thermal.habitat_temp_c",
+       "negate": null,
+       "op": "<",
+       "target": 5.0,
+       "unit": "°C"
+      }
+     ],
+     "current": null,
+     "label": null,
+     "met": null,
+     "metric": null,
+     "negate": null,
+     "op": null,
+     "target": null,
+     "unit": null
+    },
+    "status": "pending"
+   },
+   {
+    "blockers": [],
+    "category": "efficiency",
+    "completion_fraction": null,
+    "evaluated": "at_mission_end",
+    "id": "reserves_at_end",
+    "kind": "achieve_at_end",
+    "margin": null,
+    "margin_unit": null,
+    "message_key": "objective.reserves_at_end",
+    "required": false,
+    "resolved_tick": null,
+    "rule": {
+     "all": [
+      {
+       "all": null,
+       "any": null,
+       "current": 7.96,
+       "label": "Oxygen reserve (days of crew use)",
+       "met": true,
+       "metric": "life_support.oxygen_days",
+       "negate": null,
+       "op": ">=",
+       "target": 3.0,
+       "unit": "days"
+      },
+      {
+       "all": null,
+       "any": null,
+       "current": 5.5,
+       "label": "Water reserve (days of gross crew use, no recycling)",
+       "met": true,
+       "metric": "life_support.water_days",
+       "negate": null,
+       "op": ">=",
+       "target": 3.0,
+       "unit": "days"
+      },
+      {
+       "all": null,
+       "any": null,
+       "current": 1.0,
+       "label": "Battery state of charge",
+       "met": true,
+       "metric": "power.battery_soc",
+       "negate": null,
+       "op": ">=",
+       "target": 0.15,
+       "unit": "fraction"
+      }
+     ],
+     "any": null,
+     "current": null,
+     "label": null,
+     "met": null,
+     "metric": null,
+     "negate": null,
+     "op": null,
+     "target": null,
+     "unit": null
+    },
+    "status": "pending"
+   },
+   {
+    "blockers": [],
+    "category": "science",
+    "completion_fraction": 0.2,
+    "evaluated": "continuously",
+    "id": "science_quality",
+    "kind": "achieve",
+    "margin": null,
+    "margin_unit": null,
+    "message_key": "objective.science_quality",
+    "required": false,
+    "resolved_tick": null,
+    "rule": {
+     "all": null,
+     "any": null,
+     "current": 20.0,
+     "label": "Science return",
+     "met": false,
+     "metric": "science.points",
+     "negate": null,
+     "op": ">=",
+     "target": 100.0,
+     "unit": "points"
+    },
+    "status": "pending"
+   },
+   {
+    "blockers": [],
+    "category": "discovery",
+    "completion_fraction": 0.333,
+    "evaluated": "continuously",
+    "id": "full_survey",
+    "kind": "achieve",
+    "margin": null,
+    "margin_unit": null,
+    "message_key": "objective.full_survey",
+    "required": false,
+    "resolved_tick": null,
+    "rule": {
+     "all": null,
+     "any": null,
+     "current": 1.0,
+     "label": "Science activities completed",
+     "met": false,
+     "metric": "science.opportunities_completed",
+     "negate": null,
+     "op": ">=",
+     "target": 3.0,
+     "unit": "count"
+    },
+    "status": "pending"
+   }
+  ],
+  "pillars": [
+   {
+    "achieved": 0,
+    "category": "primary",
+    "failed": 0,
+    "pending": 3,
+    "total": 3
+   },
+   {
+    "achieved": 0,
+    "category": "safety",
+    "failed": 0,
+    "pending": 2,
+    "total": 2
+   },
+   {
+    "achieved": 0,
+    "category": "stability",
+    "failed": 0,
+    "pending": 2,
+    "total": 2
+   },
+   {
+    "achieved": 0,
+    "category": "efficiency",
+    "failed": 0,
+    "pending": 1,
+    "total": 1
+   },
+   {
+    "achieved": 0,
+    "category": "science",
+    "failed": 0,
+    "pending": 1,
+    "total": 1
+   },
+   {
+    "achieved": 0,
+    "category": "discovery",
+    "failed": 0,
+    "pending": 1,
+    "total": 1
+   }
+  ],
+  "tier_statement": "still_possible is logic over the outcome rules and the objective statuses now: a tier is no longer possible once an objective it requires has failed. It is not a probability.",
+  "tiers": [
+   {
+    "blocked_by": [],
+    "still_possible": true,
+    "tier": "exceptional"
+   },
+   {
+    "blocked_by": [],
+    "still_possible": true,
+    "tier": "success"
+   },
+   {
+    "blocked_by": [],
+    "still_possible": true,
+    "tier": "partial"
+   }
+  ]
+ },
+ "outcome": null,
+ "phase": {
+  "entered_tick": 95,
+  "history": [
+   {
+    "phase": "landing",
+    "tick": 0
+   },
+   {
+    "phase": "base_setup",
+    "tick": 1
+   },
+   {
+    "phase": "initial_resource_management",
+    "tick": 11
+   },
+   {
+    "phase": "reduced_solar_availability",
+    "tick": 47
+   },
+   {
+    "phase": "power_management",
+    "tick": 71
+   },
+   {
+    "phase": "scientific_opportunity",
+    "tick": 95
+   }
+  ],
+  "id": "scientific_opportunity",
+  "index": 5,
+  "kind": "simulated",
+  "next_phase": null,
+  "next_phase_withheld": true,
+  "total": 13
+ },
+ "radiation": {
+  "acute_threshold_msv_h": 0.5,
+  "background_dose_rate_msv_h": 0.057,
+  "budget_state": "within_budget",
+  "crew": [
+   {
+    "crew_id": "crew_cdr",
+    "dose_msv": 3.83,
+    "location": "habitat",
+    "margin_msv": 11.17
+   },
+   {
+    "crew_id": "crew_pwr",
+    "dose_msv": 3.83,
+    "location": "habitat",
+    "margin_msv": 11.17
+   },
+   {
+    "crew_id": "crew_ls",
+    "dose_msv": 3.83,
+    "location": "habitat",
+    "margin_msv": 11.17
+   },
+   {
+    "crew_id": "crew_sci",
+    "dose_msv": 3.83,
+    "location": "habitat",
+    "margin_msv": 11.17
+   }
+  ],
+  "crew_in_shelter": 0,
+  "crew_on_eva": [],
+  "dose_limit_msv": 15.0,
+  "dose_margin_msv": 11.17,
+  "exposure_status": "background",
+  "max_dose_msv": 3.83,
+  "projected_dose_margin_msv": 6.38,
+  "projected_dose_msv": 8.62,
+  "projection_basis": "baseline_rate_current_locations",
+  "projection_statement": "Projected dose assumes the background dose rate for the rest of the mission at the crew's current locations. It does not anticipate space-weather events.",
+  "received_dose_rate_msv_h": 0.034,
+  "surface_dose_rate_msv_h": 0.057,
+  "warning_state": "none"
+ },
+ "read_model_version": 1,
+ "resources": [
+  {
+   "details": [
+    {
+     "id": "demand_kw",
+     "label": "Total electrical demand",
+     "unit": "kW",
+     "value": 4.9
+    },
+    {
+     "id": "unmet_kw",
+     "label": "Unmet demand (load shed)",
+     "unit": "kW",
+     "value": 0.0
+    },
+    {
+     "id": "generation_ratio",
+     "label": "Generation vs rated",
+     "unit": "fraction",
+     "value": 0.47
+    },
+    {
+     "id": "dust_factor",
+     "label": "Array dust transmission",
+     "unit": "fraction",
+     "value": 0.94
+    }
+   ],
+   "display_precision": 2,
+   "fill_fraction": null,
+   "id": "power",
+   "label": "Power",
+   "metric": "power.generation_kw",
+   "pressure": null,
+   "range": {
+    "max": 12.0,
+    "min": 0.0
+   },
+   "state": "nominal",
+   "thresholds": null,
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": -0.08,
+    "direction": "falling",
+    "from_tick": 96,
+    "per_hour": -0.021,
+    "window_hours": 4.0
+   },
+   "unit": "kW",
+   "value": 5.64,
+   "warning_state": "none"
+  },
+  {
+   "details": [
+    {
+     "id": "charge_kwh",
+     "label": "Battery charge",
+     "unit": "kWh",
+     "value": 232.8
+    }
+   ],
+   "display_precision": 3,
+   "fill_fraction": 1.0,
+   "id": "battery",
+   "label": "Battery",
+   "metric": "power.battery_soc",
+   "pressure": 0.0,
+   "range": {
+    "max": 1.0,
+    "min": 0.0
+   },
+   "state": "nominal",
+   "thresholds": {
+    "critical": 0.05,
+    "direction": "below",
+    "nominal": 0.4
+   },
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": 0.0,
+    "direction": "steady",
+    "from_tick": 96,
+    "per_hour": 0.0,
+    "window_hours": 4.0
+   },
+   "unit": "fraction",
+   "value": 1.0,
+   "warning_state": "none"
+  },
+  {
+   "details": [
+    {
+     "id": "oxygen_kg",
+     "label": "Oxygen reserve",
+     "unit": "kg",
+     "value": 26.03
+    },
+    {
+     "id": "generation_ratio",
+     "label": "O2 generation vs crew use",
+     "unit": "fraction",
+     "value": 1.125
+    }
+   ],
+   "display_precision": 2,
+   "fill_fraction": null,
+   "id": "oxygen",
+   "label": "Oxygen",
+   "metric": "life_support.oxygen_days",
+   "pressure": 0.0,
+   "range": null,
+   "state": "nominal",
+   "thresholds": {
+    "critical": 0.0,
+    "direction": "below",
+    "nominal": 3.0
+   },
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": 0.02,
+    "direction": "rising",
+    "from_tick": 96,
+    "per_hour": 0.005,
+    "window_hours": 4.0
+   },
+   "unit": "days",
+   "value": 7.96,
+   "warning_state": "none"
+  },
+  {
+   "details": [
+    {
+     "id": "co2_kg",
+     "label": "Cabin CO2 mass",
+     "unit": "kg",
+     "value": 0.3
+    }
+   ],
+   "display_precision": 0,
+   "fill_fraction": null,
+   "id": "co2",
+   "label": "CO2",
+   "metric": "life_support.co2_ppm",
+   "pressure": 0.0,
+   "range": null,
+   "state": "nominal",
+   "thresholds": {
+    "critical": 10500.0,
+    "direction": "above",
+    "nominal": 5300.0
+   },
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": 0.0,
+    "direction": "steady",
+    "from_tick": 96,
+    "per_hour": 0.0,
+    "window_hours": 4.0
+   },
+   "unit": "ppm",
+   "value": 1650.0,
+   "warning_state": "none"
+  },
+  {
+   "details": [
+    {
+     "id": "water_kg",
+     "label": "Water reserve",
+     "unit": "kg",
+     "value": 95.7
+    },
+    {
+     "id": "recovery_efficiency",
+     "label": "Water recovery efficiency",
+     "unit": "fraction",
+     "value": 0.886
+    }
+   ],
+   "display_precision": 2,
+   "fill_fraction": null,
+   "id": "water",
+   "label": "Water",
+   "metric": "life_support.water_days",
+   "pressure": 0.0,
+   "range": null,
+   "state": "nominal",
+   "thresholds": {
+    "critical": 0.0,
+    "direction": "below",
+    "nominal": 5.0
+   },
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": -0.06,
+    "direction": "falling",
+    "from_tick": 96,
+    "per_hour": -0.015,
+    "window_hours": 4.0
+   },
+   "unit": "days",
+   "value": 5.5,
+   "warning_state": "none"
+  },
+  {
+   "details": [
+    {
+     "id": "food_kg",
+     "label": "Food reserve",
+     "unit": "kg",
+     "value": 44.83
+    },
+    {
+     "id": "ration_level",
+     "label": "Food ration level",
+     "unit": "fraction",
+     "value": 1.0
+    }
+   ],
+   "display_precision": 2,
+   "fill_fraction": null,
+   "id": "food",
+   "label": "Food",
+   "metric": "food.food_days",
+   "pressure": 0.0,
+   "range": null,
+   "state": "nominal",
+   "thresholds": {
+    "critical": 0.0,
+    "direction": "below",
+    "nominal": 5.0
+   },
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": -0.17,
+    "direction": "falling",
+    "from_tick": 96,
+    "per_hour": -0.042,
+    "window_hours": 4.0
+   },
+   "unit": "days",
+   "value": 7.42,
+   "warning_state": "none"
+  },
+  {
+   "details": [
+    {
+     "id": "setpoint_c",
+     "label": "Thermostat setpoint",
+     "unit": "°C",
+     "value": 21.0
+    },
+    {
+     "id": "sink_temp_c",
+     "label": "External sink temperature",
+     "unit": "°C",
+     "value": -77.9
+    }
+   ],
+   "display_precision": 1,
+   "fill_fraction": null,
+   "id": "thermal",
+   "label": "Habitat temperature",
+   "metric": "thermal.habitat_temp_c",
+   "pressure": 0.0,
+   "range": null,
+   "state": "nominal",
+   "thresholds": {
+    "critical": 0.0,
+    "direction": "below",
+    "nominal": 15.0
+   },
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": 0.0,
+    "direction": "steady",
+    "from_tick": 96,
+    "per_hour": 0.0,
+    "window_hours": 4.0
+   },
+   "unit": "°C",
+   "value": 21.0,
+   "warning_state": "none"
+  },
+  {
+   "details": [
+    {
+     "id": "data_downlinked_mb",
+     "label": "Science data downlinked",
+     "unit": "MB",
+     "value": 400.0
+    },
+    {
+     "id": "earth_visible",
+     "label": "Earth link geometry available",
+     "unit": "bool",
+     "value": 1.0
+    }
+   ],
+   "display_precision": 0,
+   "fill_fraction": null,
+   "id": "communications",
+   "label": "Communications",
+   "metric": "comms.link_up",
+   "pressure": 0.0,
+   "range": null,
+   "state": "nominal",
+   "thresholds": {
+    "critical": 0.0,
+    "direction": "below",
+    "nominal": 1.0
+   },
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": 0.0,
+    "direction": "steady",
+    "from_tick": 96,
+    "per_hour": 0.0,
+    "window_hours": 4.0
+   },
+   "unit": "bool",
+   "value": 1.0,
+   "warning_state": "none"
+  },
+  {
+   "details": [
+    {
+     "id": "opportunities_completed",
+     "label": "Science activities completed",
+     "unit": "count",
+     "value": 1.0
+    },
+    {
+     "id": "data_pending_mb",
+     "label": "Science data awaiting downlink",
+     "unit": "MB",
+     "value": 0.0
+    }
+   ],
+   "display_precision": 1,
+   "fill_fraction": null,
+   "id": "science",
+   "label": "Science",
+   "metric": "science.points",
+   "pressure": null,
+   "range": null,
+   "state": "nominal",
+   "thresholds": null,
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": 0.0,
+    "direction": "steady",
+    "from_tick": 96,
+    "per_hour": 0.0,
+    "window_hours": 4.0
+   },
+   "unit": "points",
+   "value": 20.0,
+   "warning_state": "none"
+  },
+  {
+   "details": [
+    {
+     "id": "received_dose_rate_msv_h",
+     "label": "Highest dose rate received by a crew member (after shielding)",
+     "unit": "mSv/h",
+     "value": 0.034
+    },
+    {
+     "id": "surface_dose_rate_msv_h",
+     "label": "Surface radiation dose rate",
+     "unit": "mSv/h",
+     "value": 0.057
+    },
+    {
+     "id": "dose_margin_msv",
+     "label": "Dose remaining before the mission limit (highest crew dose)",
+     "unit": "mSv",
+     "value": 11.17
+    },
+    {
+     "id": "projected_dose_msv",
+     "label": "Projected end-of-mission dose if the crew stays in the habitat at background",
+     "unit": "mSv",
+     "value": 8.62
+    }
+   ],
+   "display_precision": 2,
+   "fill_fraction": null,
+   "id": "radiation",
+   "label": "Radiation",
+   "metric": "crew.max_dose_msv",
+   "pressure": 0.0,
+   "range": null,
+   "state": "nominal",
+   "thresholds": {
+    "critical": 15.0,
+    "direction": "above",
+    "nominal": 7.5
+   },
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": 0.14,
+    "direction": "rising",
+    "from_tick": 96,
+    "per_hour": 0.034,
+    "window_hours": 4.0
+   },
+   "unit": "mSv",
+   "value": 3.83,
+   "warning_state": "none"
+  },
+  {
+   "details": [],
+   "display_precision": 1,
+   "fill_fraction": 1.0,
+   "id": "rover",
+   "label": "Rover",
+   "metric": "rover.battery_kwh",
+   "pressure": null,
+   "range": {
+    "max": 40.0,
+    "min": 0.0
+   },
+   "state": "nominal",
+   "thresholds": null,
+   "trend": {
+    "basis": "recorded_snapshot",
+    "delta": 0.0,
+    "direction": "steady",
+    "from_tick": 96,
+    "per_hour": 0.0,
+    "window_hours": 4.0
+   },
+   "unit": "kWh",
+   "value": 40.0,
+   "warning_state": "none"
+  }
+ ],
+ "risk": {
+  "band": "nominal",
+  "drivers": [],
+  "index": 0.0
+ },
+ "science": {
+  "active_opportunity": "ice_core_sampling",
+  "data_downlinked_mb": 400.0,
+  "data_pending_mb": 0.0,
+  "opportunities": [
+   {
+    "closes_tick": 74,
+    "id": "regolith_survey",
+    "opened_tick": 14,
+    "progress_fraction": 1.0,
+    "requires_rover": false,
+    "status": "completed",
+    "work_ticks_required": 10
+   },
+   {
+    "closes_tick": 136,
+    "id": "ice_core_sampling",
+    "opened_tick": 96,
+    "progress_fraction": 0.0,
+    "requires_rover": false,
+    "status": "active",
+    "work_ticks_required": 16
+   }
+  ],
+  "opportunities_completed": 1,
+  "points": 20.0
+ },
+ "session_id": "d0d00000-0000-0000-0000-000000000003",
+ "state_hash": "f311085ff150063379ae889a204117b9358ee53c3a4a6d6248e3711278a8a35b",
+ "state_version": 5,
+ "status": "active",
+ "systems": {
+  "systems": [
+   {
+    "allocated_kw": 4.9,
+    "components": [
+     {
+      "condition": "nominal",
+      "fault_count": 0,
+      "health": 0.97,
+      "id": "battery",
+      "in_maintenance": false,
+      "maintenance_remaining_ticks": 0
+     },
+     {
+      "condition": "nominal",
+      "fault_count": 0,
+      "health": 0.97,
+      "id": "solar_array",
+      "in_maintenance": false,
+      "maintenance_remaining_ticks": 0
+     }
+    ],
+    "consumers": [],
+    "id": "power",
+    "label": "Power",
+    "load_kw": 4.9,
+    "state": "degraded",
+    "supply_ratio": 1.0,
+    "warning_state": "none"
+   },
+   {
+    "allocated_kw": 1.5,
+    "components": [],
+    "consumers": [
+     {
+      "allocated_kw": 1.5,
+      "available_modes": [
+       "eco",
+       "nominal"
+      ],
+      "demand_kw": 1.5,
+      "id": "habitat_core",
+      "label": "Habitat core (avionics, lighting, fans)",
+      "mode": "nominal",
+      "priority": 0,
+      "supply_ratio": 1.0
+     }
+    ],
+    "id": "habitat",
+    "label": "Habitat",
+    "load_kw": 1.5,
+    "state": "nominal",
+    "supply_ratio": 1.0,
+    "warning_state": "none"
+   },
+   {
+    "allocated_kw": 3.0,
+    "components": [
+     {
+      "condition": "nominal",
+      "fault_count": 0,
+      "health": 0.94,
+      "id": "co2_scrubber",
+      "in_maintenance": false,
+      "maintenance_remaining_ticks": 0
+     },
+     {
+      "condition": "nominal",
+      "fault_count": 0,
+      "health": 0.94,
+      "id": "oxygen_generator",
+      "in_maintenance": false,
+      "maintenance_remaining_ticks": 0
+     },
+     {
+      "condition": "nominal",
+      "fault_count": 0,
+      "health": 0.94,
+      "id": "water_processor",
+      "in_maintenance": false,
+      "maintenance_remaining_ticks": 0
+     }
+    ],
+    "consumers": [
+     {
+      "allocated_kw": 0.6,
+      "available_modes": [
+       "off",
+       "eco",
+       "nominal",
+       "boost"
+      ],
+      "demand_kw": 0.6,
+      "id": "co2_scrubber",
+      "label": "CO2 removal",
+      "mode": "nominal",
+      "priority": 1,
+      "supply_ratio": 1.0
+     },
+     {
+      "allocated_kw": 1.5,
+      "available_modes": [
+       "off",
+       "eco",
+       "nominal",
+       "boost"
+      ],
+      "demand_kw": 1.5,
+      "id": "oxygen_generation",
+      "label": "Oxygen generation",
+      "mode": "nominal",
+      "priority": 2,
+      "supply_ratio": 1.0
+     },
+     {
+      "allocated_kw": 0.9,
+      "available_modes": [
+       "off",
+       "eco",
+       "nominal"
+      ],
+      "demand_kw": 0.9,
+      "id": "water_recovery",
+      "label": "Water recovery",
+      "mode": "nominal",
+      "priority": 3,
+      "supply_ratio": 1.0
+     }
+    ],
+    "id": "life_support",
+    "label": "Life support",
+    "load_kw": 3.0,
+    "state": "degraded",
+    "supply_ratio": 1.0,
+    "warning_state": "none"
+   },
+   {
+    "allocated_kw": 0.0,
+    "components": [
+     {
+      "condition": "nominal",
+      "fault_count": 0,
+      "health": 0.97,
+      "id": "heater",
+      "in_maintenance": false,
+      "maintenance_remaining_ticks": 0
+     }
+    ],
+    "consumers": [
+     {
+      "allocated_kw": 0.0,
+      "available_modes": [
+       "off",
+       "eco",
+       "nominal"
+      ],
+      "demand_kw": 0.0,
+      "id": "thermal_heater",
+      "label": "Habitat heaters",
+      "mode": "nominal",
+      "priority": 2,
+      "supply_ratio": 1.0
+     }
+    ],
+    "id": "thermal",
+    "label": "Thermal control",
+    "load_kw": 0.0,
+    "state": "nominal",
+    "supply_ratio": 1.0,
+    "warning_state": "none"
+   },
+   {
+    "allocated_kw": 0.4,
+    "components": [
+     {
+      "condition": "nominal",
+      "fault_count": 0,
+      "health": 0.97,
+      "id": "radio",
+      "in_maintenance": false,
+      "maintenance_remaining_ticks": 0
+     }
+    ],
+    "consumers": [
+     {
+      "allocated_kw": 0.4,
+      "available_modes": [
+       "off",
+       "eco",
+       "nominal"
+      ],
+      "demand_kw": 0.4,
+      "id": "comms",
+      "label": "Communications",
+      "mode": "nominal",
+      "priority": 4,
+      "supply_ratio": 1.0
+     }
+    ],
+    "id": "communications",
+    "label": "Communications",
+    "load_kw": 0.4,
+    "state": "nominal",
+    "supply_ratio": 1.0,
+    "warning_state": "none"
+   },
+   {
+    "allocated_kw": 0.0,
+    "components": [],
+    "consumers": [
+     {
+      "allocated_kw": 0.0,
+      "available_modes": [
+       "off",
+       "eco",
+       "nominal",
+       "boost"
+      ],
+      "demand_kw": 0.0,
+      "id": "science_payload",
+      "label": "Science payload",
+      "mode": "nominal",
+      "priority": 5,
+      "supply_ratio": 1.0
+     }
+    ],
+    "id": "science",
+    "label": "Science",
+    "load_kw": 0.0,
+    "state": "nominal",
+    "supply_ratio": 1.0,
+    "warning_state": "none"
+   },
+   {
+    "allocated_kw": 0.0,
+    "components": [
+     {
+      "condition": "nominal",
+      "fault_count": 0,
+      "health": 0.94,
+      "id": "rover",
+      "in_maintenance": false,
+      "maintenance_remaining_ticks": 0
+     }
+    ],
+    "consumers": [
+     {
+      "allocated_kw": 0.0,
+      "available_modes": [
+       "off",
+       "eco",
+       "nominal"
+      ],
+      "demand_kw": 0.0,
+      "id": "rover_charger",
+      "label": "Rover charger",
+      "mode": "nominal",
+      "priority": 6,
+      "supply_ratio": 1.0
+     }
+    ],
+    "id": "rover",
+    "label": "Rover",
+    "load_kw": 0.0,
+    "state": "nominal",
+    "supply_ratio": 1.0,
+    "warning_state": "none"
+   }
+  ]
+ },
+ "timeline": {
+  "fork_sequence": null,
+  "fork_tick": null,
+  "head_sequence": 2,
+  "head_tick": 100,
+  "id": "d0d00000-0000-0000-0000-000000000004",
+  "is_active": true,
+  "label": "main",
+  "parent_timeline_id": null,
+  "state_version": 5,
+  "status": "active"
+ }
+}

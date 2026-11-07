@@ -1,0 +1,136 @@
+# Insights: understanding unlocked by what the player observes and does. No quizzes, no
+# "correct answers". Each insight says what was observed, why it happened, why it matters later
+# and what the game simplifies. A WHY? request traces `why_metric` in the live simulation.
+insights:
+  - id: power.generation_vs_demand
+    concept: Generation versus demand
+    title: Supply must meet demand every moment
+    observation: When bus B dropped, the station kept drawing the same power from less supply.
+    explanation: >-
+      Electrical power cannot be stored in the wires. Any gap between what loads demand and what
+      sources deliver is covered by the battery until it cannot be, then loads go dark.
+    matters_later: On the Moon, the Sun sets for days and there is no grid to fall back on.
+    simplification: One shared bus and one battery stand in for a real distribution network.
+    provenance: {classification: educational_abstraction}
+    related_objects: [earth.command.engineering.power_bus_b, earth.command.engineering.station_battery]
+    why_metric: power.unmet_kw
+  - id: power.load_shedding
+    concept: Priority load shedding
+    title: What goes dark first is a choice
+    observation: Lower-priority loads lost power before mission control and air handling did.
+    explanation: >-
+      Loads are ranked. When supply falls short, the lowest-priority loads are cut first so
+      critical ones keep running. Choosing what to switch off yourself beats letting it happen.
+    matters_later: Every outpost decides in advance which systems must never lose power.
+    simplification: Loads switch cleanly between discrete modes.
+    provenance: {classification: educational_abstraction}
+    unlock: {alert: load_shedding}
+    why_metric: power.demand_kw
+  - id: power.battery_reserve
+    concept: Battery reserve
+    title: The battery is time, not energy
+    observation: The reserve fell steadily while the station ran on battery alone.
+    explanation: >-
+      Stored energy divided by the shortfall gives the time you have. Cutting demand stretches
+      that time; deep discharge also wears the battery faster.
+    matters_later: Lunar night survival is a battery-reserve problem measured in days.
+    simplification: Constant efficiency; no temperature effects on capacity.
+    provenance: {classification: educational_abstraction}
+    unlock: {alert: battery_low}
+    related_objects: [earth.command.engineering.station_battery]
+    why_metric: power.battery_soc
+  - id: power.maintenance_tradeoff
+    concept: Maintenance trade-off
+    title: Repairs cost capability now to buy it back later
+    observation: Swapping the breaker took bus B fully offline before it came back healthy.
+    explanation: >-
+      Maintenance usually means taking a system out of service. Timing it when the rest of the
+      system can carry the load is part of the repair.
+    matters_later: Far from Earth, every repair competes with the systems keeping the crew alive.
+    simplification: Repairs take a fixed time and always succeed.
+    provenance: {classification: gameplay_parameter}
+    unlock: {sim: {metric: component.power_bus_b.in_maintenance, op: ">=", value: 0.5}}
+    related_objects: [earth.command.engineering.power_bus_b]
+    why_metric: component.power_bus_b.health
+  - id: power.polar_illumination
+    concept: Polar illumination
+    title: Near-constant light on the rim
+    observation: The crater rim stays lit while the floor stays dark.
+    explanation: >-
+      At the lunar poles the Sun skims the horizon, so high ground can be lit most of the time
+      while deep craters never see it.
+    matters_later: LUNA-01's power depends on how long its arrays keep seeing the Sun.
+    simplification: Illumination is modelled as a smooth availability curve.
+    provenance:
+      classification: unverified
+      evidence_refs: [lunar_polar_illumination]
+      note: The exact illumination fraction is not yet verified.
+  - id: radiation.lunar_surface_dose
+    concept: Surface radiation dose
+    title: The Moon has no magnetic shield
+    observation: The dosimetry readings show a background dose that never switches off.
+    explanation: >-
+      Without an atmosphere or a global magnetic field, the lunar surface receives galactic
+      cosmic rays continuously and solar particle events in bursts.
+    matters_later: Every crew dose adds up against a mission limit.
+    simplification: One dose rate stands in for a full particle spectrum.
+    provenance:
+      classification: verified_evidence
+      evidence_refs: [change4_lnd_dose_rate, donki_sep_events]
+    why_metric: env.radiation_dose_rate_msv_h
+  - id: radiation.shelter_mass
+    concept: Shielding mass
+    title: Shielding is mass you have to launch
+    observation: The radiation protection slot needs a heavy liner before launch.
+    explanation: >-
+      Hydrogen-rich material slows energetic particles. More shielding protects more but costs
+      mass that could have carried supplies.
+    matters_later: A storm shelter is the difference between a bad day and a lost crew.
+    simplification: A single shielding factor reduces the dose inside the shelter.
+    provenance: {classification: educational_abstraction}
+    related_objects: [earth.command.hangar.luna01.radiation_protection]
+  - id: logistics.mass_budget
+    concept: Mass budget
+    title: Every kilogram is chosen
+    observation: The cargo hold accepts only so much before the manifest is refused.
+    explanation: >-
+      Launch capacity is fixed. Water, spares and shielding all compete for the same budget, so a
+      manifest is a set of priorities.
+    matters_later: Mars missions carry everything for years; the budget only gets tighter.
+    simplification: Mass and volume limits only; no centre-of-gravity constraints.
+    provenance: {classification: gameplay_parameter}
+    related_objects: [earth.command.hangar.luna01.cargo_hold]
+  - id: life_support.oxygen_budget
+    concept: Oxygen budget
+    title: A crew breathes a predictable amount
+    observation: Oxygen days remaining fall steadily with four crew aboard.
+    explanation: >-
+      A person at rest consumes a little under a kilogram of oxygen per day; life support must
+      produce or store that much for every crew member, every day.
+    matters_later: Closing the oxygen loop is what makes long missions possible.
+    simplification: Constant consumption regardless of activity.
+    provenance: {classification: verified_evidence, evidence_refs: [bvad_o2_consumption]}
+    unlock: {location: luna.asteria.habitat}
+    why_metric: life_support.oxygen_days
+  - id: thermal.lunar_night
+    concept: Lunar night cold
+    title: Night on the Moon is brutally cold
+    observation: Habitat heaters work harder as the Sun sets.
+    explanation: >-
+      Surface temperatures at night drop far below anything on Earth, so heat leaks out of the
+      habitat and heaters must replace it from a shrinking power budget.
+    matters_later: Heating and power compete for the same battery all night.
+    simplification: One habitat temperature and a single heat-loss coefficient.
+    provenance: {classification: verified_evidence, evidence_refs: [diviner_surface_temperature]}
+    unlock: {sim_event: sunlight_decline}
+    why_metric: thermal.habitat_temp_c
+  - id: isru.cold_traps
+    concept: Cold traps
+    title: Ice hides where the Sun never reaches
+    observation: Crater 07's floor has never been sunlit.
+    explanation: >-
+      Permanently shadowed crater floors stay cold enough for water ice to persist for very long
+      times, making them targets for future resource extraction.
+    matters_later: Water from local ice could become air, drinking water and propellant.
+    simplification: Presence of ice is assumed for the story; no quantities are modelled.
+    provenance: {classification: story_assumption}

@@ -1,0 +1,17 @@
+ODYSSEY macOS environment check (2026-11-06 18:53:50)
+  OK    macOS                  macOS 26.5.1 (25F80)
+  OK    Apple Silicon          Apple M3, arm64 native
+  WARN  RAM                    8 GB (below 16 GB: expect slow editor builds; close other apps)
+  OK    Xcode                  Xcode 26.1.1 Build version 17B100
+  OK    Developer directory    /Applications/Xcode.app/Contents/Developer
+  OK    clang++                /usr/bin/clang++
+  OK    make                   /usr/bin/make
+  OK    python3                /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
+  OK    git                    /usr/bin/git
+  FAIL  Unreal Engine          5.8 not found (details below)
+  OK    Disk space             73 GB free
+  OK    git HEAD               f221a925c2c0cd5f8687f02d392390f268f3ab48 (feature/unreal-vertical-slice)
+  OK    git status             clean
+  OK    Project                /Users/ahmedibrahim/dev/ODYSSEY-GAME/Odyssey.uproject
+
+RESULT: FAIL — 1 required item(s) missing, 1 warning(s).

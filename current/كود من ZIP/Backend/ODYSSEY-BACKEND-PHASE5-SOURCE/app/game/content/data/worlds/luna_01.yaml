@@ -1,0 +1,435 @@
+# LUNA-01 — the ASTERIA outpost at the lunar south pole (campaign phase 2).
+#
+# Every physical action maps to a decision of the unchanged LUNA-01 v0.2.0 simulation scenario
+# (`luna-01`); this file adds only the semantic world around it (where things are, what the
+# player can interact with, game-side consequences). LUNA-01 balance is not touched.
+id: luna_01
+name: ASTERIA Outpost
+
+regions:
+  - {id: luna.asteria.outpost, name: ASTERIA outpost}
+  - {id: luna.asteria.surface, name: South-polar surface}
+
+locations:
+  - {id: luna.asteria.habitat, name: Habitat module, region: luna.asteria.outpost, kind: facility,
+     crew_sim_location: habitat}
+  - {id: luna.asteria.shelter, name: Radiation shelter, region: luna.asteria.outpost,
+     kind: facility, crew_sim_location: shelter}
+  - {id: luna.asteria.lander, name: ASTERIA lander, region: luna.asteria.outpost,
+     kind: vehicle_interior}
+  - {id: luna.asteria.solar_field, name: Solar field, region: luna.asteria.surface, kind: site}
+  - {id: luna.asteria.rover_depot, name: Rover depot, region: luna.asteria.surface, kind: site}
+  - {id: luna.asteria.comms_relay_site, name: Comms relay mast, region: luna.asteria.surface,
+     kind: site}
+  - {id: luna.asteria.regolith_site, name: Regolith survey site, region: luna.asteria.surface,
+     kind: site}
+  - {id: luna.asteria.ice_site, name: Shadowed ice margin, region: luna.asteria.surface,
+     kind: site}
+  - {id: luna.asteria.crater_07, name: Crater 07, region: luna.asteria.surface, kind: site}
+
+objects:
+  # ------------------------------------------------------------------ infrastructure
+  - id: luna.asteria.habitat.core
+    kind: infrastructure
+    name: Habitat core
+    location: luna.asteria.habitat
+    critical: true
+    infrastructure_type: infra.surface_habitat
+    tags: [habitat, load, critical]
+    binding: {consumer: habitat_core}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: [eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: habitat_core, mode: $mode}
+
+  - id: luna.asteria.shelter.module
+    kind: infrastructure
+    name: Storm shelter
+    location: luna.asteria.shelter
+    infrastructure_type: infra.radiation_shelter
+    tags: [radiation, shelter]
+    installed_modules: {shielding: module.radiation_shelter_liner}
+    interactions:
+      - action: system.inspect
+        effects:
+          insights: [radiation.shelter_mass]
+
+  - id: luna.asteria.solar_field.array
+    kind: infrastructure
+    name: Solar array
+    location: luna.asteria.solar_field
+    critical: true
+    infrastructure_type: infra.solar_power_field
+    tags: [power, generation, critical]
+    binding: {component: solar_array}
+    interactions:
+      - action: system.inspect
+      - action: repair.perform
+        requirements:
+          - id: diagnosed
+            reason: fault_not_diagnosed
+            when: {flag: "inspected:luna.asteria.solar_field.array"}
+        engine:
+          - decision: {type: schedule_maintenance, component: solar_array}
+      - action: system.set_mode
+        params: {crew: {enum: [maya, omar, sofia, jay]}}
+        requirements:
+          - id: diagnosed
+            reason: fault_not_diagnosed
+            when: {flag: "inspected:luna.asteria.solar_field.array"}
+        engine_by_param:
+          crew:
+            maya: [{decision: {type: clean_solar_array, crew_id: crew_pwr}}]
+            omar: [{decision: {type: clean_solar_array, crew_id: crew_sci}}]
+            sofia: [{decision: {type: clean_solar_array, crew_id: crew_ls}}]
+            jay: [{decision: {type: clean_solar_array, crew_id: crew_cdr}}]
+        effects:
+          set_flags: ["cleaned:luna.asteria.solar_field.array"]
+
+  - id: luna.asteria.habitat.battery
+    kind: system
+    name: Outpost battery
+    location: luna.asteria.habitat
+    tags: [power, storage]
+    binding: {component: battery}
+    interactions:
+      - action: system.inspect
+      - action: repair.perform
+        requirements:
+          - id: diagnosed
+            reason: fault_not_diagnosed
+            when: {flag: "inspected:luna.asteria.habitat.battery"}
+        engine:
+          - decision: {type: schedule_maintenance, component: battery}
+
+  - id: luna.asteria.comms_relay_site.relay
+    kind: infrastructure
+    name: Comms relay
+    location: luna.asteria.comms_relay_site
+    infrastructure_type: infra.surface_comms_relay
+    tags: [communications, load]
+    binding: {consumer: comms, component: radio}
+    interactions:
+      - action: system.inspect
+      - action: infrastructure.activate
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: comms, mode: nominal}
+      - action: infrastructure.deactivate
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: comms, mode: "off"}
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: comms, mode: $mode}
+      - action: repair.perform
+        requirements:
+          - id: diagnosed
+            reason: fault_not_diagnosed
+            when: {flag: "inspected:luna.asteria.comms_relay_site.relay"}
+        engine:
+          - decision: {type: schedule_maintenance, component: radio}
+
+  # ------------------------------------------------------------------ life support
+  - id: luna.asteria.habitat.co2_scrubber
+    kind: system
+    name: CO2 scrubber
+    location: luna.asteria.habitat
+    critical: true
+    tags: [life_support, load, critical]
+    binding: {consumer: co2_scrubber, component: co2_scrubber}
+    interactions: &ls_system
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal, boost]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: co2_scrubber, mode: $mode}
+      - action: repair.perform
+        requirements:
+          - id: diagnosed
+            reason: fault_not_diagnosed
+            when: {flag: "inspected:luna.asteria.habitat.co2_scrubber"}
+        engine:
+          - decision: {type: schedule_maintenance, component: co2_scrubber}
+
+  - id: luna.asteria.habitat.oxygen_generator
+    kind: system
+    name: Oxygen generator
+    location: luna.asteria.habitat
+    critical: true
+    tags: [life_support, load, critical]
+    binding: {consumer: oxygen_generation, component: oxygen_generator}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal, boost]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: oxygen_generation, mode: $mode}
+      - action: repair.perform
+        requirements:
+          - id: diagnosed
+            reason: fault_not_diagnosed
+            when: {flag: "inspected:luna.asteria.habitat.oxygen_generator"}
+        engine:
+          - decision: {type: schedule_maintenance, component: oxygen_generator}
+
+  - id: luna.asteria.habitat.heater
+    kind: system
+    name: Habitat heaters
+    location: luna.asteria.habitat
+    tags: [thermal, load]
+    binding: {consumer: thermal_heater, component: heater}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: thermal_heater, mode: $mode}
+      - action: repair.perform
+        requirements:
+          - id: diagnosed
+            reason: fault_not_diagnosed
+            when: {flag: "inspected:luna.asteria.habitat.heater"}
+        engine:
+          - decision: {type: schedule_maintenance, component: heater}
+
+  - id: luna.asteria.habitat.water_processor
+    kind: system
+    name: Water processor
+    location: luna.asteria.habitat
+    tags: [life_support, load]
+    binding: {consumer: water_recovery, component: water_processor}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: water_recovery, mode: $mode}
+      - action: repair.perform
+        requirements:
+          - id: diagnosed
+            reason: fault_not_diagnosed
+            when: {flag: "inspected:luna.asteria.habitat.water_processor"}
+        engine:
+          - decision: {type: schedule_maintenance, component: water_processor}
+
+  # ------------------------------------------------------------------ science
+  - id: luna.asteria.habitat.science_payload
+    kind: system
+    name: Science payload
+    location: luna.asteria.habitat
+    tags: [science, load]
+    binding: {consumer: science_payload}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal, boost]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: science_payload, mode: $mode}
+
+  - id: luna.asteria.regolith_site.survey
+    kind: science_site
+    name: Regolith survey instruments
+    location: luna.asteria.regolith_site
+    tags: [science]
+    binding: {opportunity: regolith_survey}
+    interactions:
+      - action: science.instrument_operate
+        params: {operation: {enum: [start, stop]}}
+        requirements:
+          - id: window_open
+            reason: instrument_not_ready
+            when: {sim_event: regolith_survey_window}
+        engine_by_param:
+          operation:
+            start: [{decision: {type: start_science_activity, opportunity_id: regolith_survey}}]
+            stop: [{decision: {type: stop_science_activity}}]
+      - action: science.sample_collect
+        once: true
+        requirements:
+          - id: window_open
+            reason: instrument_not_ready
+            when: {sim_event: regolith_survey_window}
+        effects:
+          add_items: [{item: sample.regolith_core}]
+          discoveries: [discovery.luna.agglutinate_regolith]
+
+  - id: luna.asteria.ice_site.drill
+    kind: science_site
+    name: Ice coring drill
+    location: luna.asteria.ice_site
+    tags: [science, isru]
+    binding: {opportunity: ice_core_sampling}
+    interactions:
+      - action: science.instrument_operate
+        params: {operation: {enum: [start, stop]}}
+        requirements:
+          - id: window_open
+            reason: instrument_not_ready
+            when: {sim_event: ice_core_window}
+        engine_by_param:
+          operation:
+            start: [{decision: {type: start_science_activity, opportunity_id: ice_core_sampling}}]
+            stop: [{decision: {type: stop_science_activity}}]
+
+  - id: luna.asteria.crater_07.rim
+    kind: poi
+    name: Crater 07 rim
+    location: luna.asteria.crater_07
+    tags: [terrain, science]
+    interactions:
+      - action: world.poi_discovered
+        once: true
+        effects:
+          discoveries: [discovery.luna.crater_07_cold_trap]
+
+  # ------------------------------------------------------------------ rover and lander
+  - id: luna.asteria.rover_depot.rover
+    kind: vehicle
+    name: Surface rover
+    location: luna.asteria.rover_depot
+    vehicle_class: vehicle.asteria_surface_rover
+    tags: [mobility, vehicle]
+    binding: {rover: true, consumer: rover_charger}
+    interactions:
+      - action: vehicle.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: rover_charger, mode: $mode}
+      - action: vehicle.dispatch
+        params: {order: {enum: [traverse_far_crater, recall, transfer_energy, stow, unstow]}}
+        requirements:
+          - id: inspected
+            reason: vehicle_not_inspected
+            when: {flag: "inspected:luna.asteria.rover_depot.rover"}
+        engine_by_param:
+          order:
+            traverse_far_crater:
+              - decision: {type: rover_command, action: traverse, opportunity_id: far_crater_traverse}
+            recall: [{decision: {type: rover_command, action: recall}}]
+            transfer_energy: [{decision: {type: rover_command, action: transfer_energy}}]
+            stow: [{decision: {type: rover_command, action: stow}}]
+            unstow: [{decision: {type: rover_command, action: unstow}}]
+
+  - id: luna.asteria.lander
+    kind: vehicle
+    name: ASTERIA lander
+    location: luna.asteria.lander
+    vehicle_class: vehicle.asteria_crew_lander
+    tags: [spacecraft]
+    installed_modules: {radiation_protection: module.radiation_shelter_liner}
+    interactions:
+      - action: vehicle.inspect
+
+  - id: luna.asteria.lander.cargo_hold
+    kind: container
+    name: Lander cargo hold
+    location: luna.asteria.lander
+    parent: luna.asteria.lander
+    tags: [cargo]
+    container:
+      mass_limit_kg: 300
+      volume_limit_l: 900
+      accepts: [cargo, spare, sample, tool, consumable, equipment]
+
+  - id: luna.asteria.player_kit
+    kind: container
+    name: Personal kit
+    location: luna.asteria.habitat
+    tags: [carried]
+    container:
+      mass_limit_kg: 25
+      volume_limit_l: 60
+      accepts: [spare, tool, sample, consumable]
+      initial:
+        - {item: tool.diagnostic_scanner, quantity: 1}
+
+incidents:
+  - id: luna.asteria.radiation_storm
+    mission: luna_01.the_last_light
+    message_key: incident.luna.asteria.radiation_storm
+    trigger: {sim_event: solar_particle_event}
+    involved_objects: [luna.asteria.shelter.module]
+    involved_crew: [sofia, jay]
+    pause_clock_on_start: true
+    start_effects:
+      crew_intents:
+        - {crew: sofia, intent: monitoring_crew_dose}
+        - {crew: jay, intent: coordinating_shelter}
+      insights: [radiation.lunar_surface_dose]
+    stages:
+      - id: resolved
+        terminal: true
+        when: {not: {alert: radiation_elevated}}
+        effects:
+          crew_intents:
+            - {crew: sofia, intent: null}
+            - {crew: jay, intent: null}
+      - id: active
+    facts:
+      - id: dose_budget_exceeded
+        when: {alert: dose_budget_exceeded}
+
+  - id: luna.asteria.water_processor_fault
+    mission: luna_01.the_last_light
+    message_key: incident.luna.asteria.water_processor_fault
+    trigger: {sim_event: water_processor_pump_fault}
+    involved_objects: [luna.asteria.habitat.water_processor]
+    involved_crew: [sofia, maya]
+    pause_clock_on_start: true
+    start_effects:
+      crew_intents: [{crew: sofia, intent: assessing_water_processor}]
+    stages:
+      - id: resolved
+        terminal: true
+        when:
+          all:
+            - {sim: {metric: component.water_processor.health, op: ">=", value: 0.8}}
+            - {sim: {metric: component.water_processor.in_maintenance, op: "<", value: 0.5}}
+        effects:
+          crew_intents: [{crew: sofia, intent: null}]
+      - id: investigating
+        when: {flag: "inspected:luna.asteria.habitat.water_processor"}
+      - id: active
+
+  - id: luna.asteria.relay_outage
+    mission: luna_01.the_last_light
+    message_key: incident.luna.asteria.relay_outage
+    trigger: {sim_event: relay_outage}
+    involved_objects: [luna.asteria.comms_relay_site.relay]
+    involved_crew: [jay]
+    start_effects:
+      crew_intents: [{crew: jay, intent: awaiting_relay_window}]
+    stages:
+      - id: resolved
+        terminal: true
+        when: {not: {alert: comms_link_down}}
+        effects:
+          crew_intents: [{crew: jay, intent: null}]
+      - id: active
+
+discoveries:
+  - id: discovery.luna.agglutinate_regolith
+    category: science
+    title: Glassy regolith grains
+    summary: >-
+      The regolith core holds glassy grains welded by micrometeorite impacts: abrasive dust that
+      every seal and joint at the outpost has to survive.
+    location: luna.asteria.regolith_site
+    provenance:
+      classification: educational_abstraction
+      note: Qualitative description; no simulation value depends on it.
+    capability_evidence: [evidence.science.surface_sample_collected]
+  - id: discovery.luna.crater_07_cold_trap
+    category: resource
+    title: A permanently shadowed floor
+    summary: >-
+      Crater 07's floor never sees the Sun. Places like this are where water ice can survive,
+      the resource future missions hope to use.
+    location: luna.asteria.crater_07
+    provenance:
+      classification: story_assumption
+      note: Crater 07 is fictional; the existence of polar cold traps is general knowledge.
+    insights: [isru.cold_traps]

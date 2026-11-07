@@ -1,0 +1,50 @@
+# ---- Unreal Engine (generated, machine-specific, or large caches)
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+Build/Receipts/
+*.xcworkspace/
+*.xcodeproj/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+.vs/
+.vscode/
+.idea/
+*.code-workspace
+Plugins/*/Binaries/
+Plugins/*/Intermediate/
+# packaged builds
+Packaged/
+Archive/
+
+# ---- secrets and local configuration (never committed)
+.env
+.env.*
+*.pem
+*.key
+Config/User*.ini
+Config/Local*.ini
+
+# ---- development automation (Unreal MCP / editor agents) temporary files
+.unreal-mcp/
+.mcp/
+*.mcp.tmp
+Saved/UnrealMCP/
+Saved/MCP/
+
+# ---- native protocol tooling
+Tools/ProtocolCore/build/
+__pycache__/
+*.pyc
+
+# ---- OS
+.DS_Store
+Thumbs.db
+
+# ---- macOS verification runner output (Tools/Mac)
+Logs/

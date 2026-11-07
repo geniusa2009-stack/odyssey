@@ -1,0 +1,53 @@
+{
+ "event_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam:8",
+ "payload": {
+  "authorization": {
+   "authorized": false,
+   "available": false,
+   "gate": "earth_command.luna01_launch_authorization",
+   "requirements": [
+    {
+     "id": "station_power_nominal",
+     "met": false,
+     "reason": "station_power_degraded"
+    },
+    {
+     "id": "spacecraft_inspected",
+     "met": false,
+     "reason": "spacecraft_inspection_incomplete"
+    },
+    {
+     "id": "radiation_protection_installed",
+     "met": false,
+     "reason": "radiation_protection_missing"
+    },
+    {
+     "id": "required_cargo_loaded",
+     "met": false,
+     "reason": "required_cargo_missing"
+    },
+    {
+     "id": "spacecraft_charged",
+     "met": false,
+     "reason": "spacecraft_charge_insufficient"
+    }
+   ],
+   "target": "earth.command.hangar.luna01"
+  },
+  "mission": "earth_command.station_readiness",
+  "outcome_tier": null,
+  "simulation_status": "active",
+  "status": "active"
+ },
+ "prev_state_version": 2,
+ "protocol": "odyssey.game.v1",
+ "scope": "mission",
+ "seq": 8,
+ "server_time": "2026-10-27T06:00:00+00:00",
+ "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+ "sim_tick": 5,
+ "sim_time_hours": 1.25,
+ "state_version": 3,
+ "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaaaq",
+ "type": "mission.updated"
+}

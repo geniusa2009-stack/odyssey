@@ -1,0 +1,70 @@
+{
+ "accepted": true,
+ "decision": {
+  "affected_systems": [
+   "science",
+   "power"
+  ],
+  "decision_id": "dec_hlv7xyiiwzpubrgsagyj",
+  "decision_type": "start_science_activity",
+  "inherited": false,
+  "option_id": "start_science_activity:regolith_survey",
+  "parameters": {},
+  "participant_id": null,
+  "phase": "initial_resource_management",
+  "sequence": 1,
+  "tick": 15,
+  "timeline_id": "d0d00000-0000-0000-0000-000000000004"
+ },
+ "events": [
+  {
+   "data": {
+    "affected_systems": [
+     "science",
+     "power"
+    ],
+    "decision_id": "dec_hlv7xyiiwzpubrgsagyj",
+    "inputs": {
+     "opportunity_id": "regolith_survey",
+     "type": "start_science_activity"
+    }
+   },
+   "id": "dec_hlv7xyiiwzpubrgsagyj/15:0:start_science_activity",
+   "key": "start_science_activity",
+   "kind": "decision_applied",
+   "message_key": "decision.start_science_activity",
+   "severity": null,
+   "tick": 15
+  }
+ ],
+ "events_truncated": false,
+ "hud": {
+  "alerts": {
+   "caution": 0,
+   "critical": 0,
+   "warning": 0
+  },
+  "battery_soc": 1.0,
+  "co2_ppm": 1650.0,
+  "crew_min_health": 1.0,
+  "data_downlinked_mb": 0.0,
+  "demand_kw": 4.9,
+  "dose_margin_msv": 14.49,
+  "food_days": 10.96,
+  "generation_kw": 10.08,
+  "habitat_temp_c": 21.0,
+  "link_up": true,
+  "max_dose_msv": 0.51,
+  "oxygen_days": 7.44,
+  "risk_index": 0.0,
+  "science_points": 0.0,
+  "tick": 15,
+  "unmet_kw": 0.0,
+  "water_days": 6.7
+ },
+ "prev_state_version": 2,
+ "session_id": "d0d00000-0000-0000-0000-000000000003",
+ "state_version": 3,
+ "tick": 15,
+ "timeline_id": "d0d00000-0000-0000-0000-000000000004"
+}

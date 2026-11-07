@@ -1,0 +1,28 @@
+{
+  "case": "cold_and_hungry_with_irrelevant_comms",
+  "decision_verdicts": [
+    "decision_worsened_target",
+    "no_effect"
+  ],
+  "failure_trace": {
+    "chains": [
+      "baseline:food.food_days -> metric:food.food_days -> metric:crew.min_health",
+      "decision -> metric:control.ration_level -> metric:crew.min_health",
+      "decision -> metric:control.thermal_setpoint -> metric:thermal.habitat_temp_c -> metric:crew.min_health",
+      "decision -> metric:control.thermal_setpoint -> metric:thermal.habitat_temp_c -> metric:life_support.water_recovery_efficiency -> metric:life_support.water_days -> metric:crew.min_health",
+      "environment:sink_temp_c -> metric:env.sink_temp_c -> metric:thermal.habitat_temp_c -> metric:crew.min_health",
+      "environment:sink_temp_c -> metric:env.sink_temp_c -> metric:thermal.habitat_temp_c -> metric:life_support.water_recovery_efficiency -> metric:life_support.water_days -> metric:crew.min_health",
+      "event:water_processor_pump_fault -> metric:component.water_processor.health -> metric:life_support.water_recovery_efficiency -> metric:life_support.water_days -> metric:crew.min_health"
+    ],
+    "roots": [
+      "baseline:food.food_days",
+      "decision",
+      "environment:sink_temp_c",
+      "event:water_processor_pump_fault"
+    ],
+    "target_metric": "crew.min_health",
+    "target_tick": 226
+  },
+  "final_tick": 226,
+  "outcome": "mission_failed_crew_loss"
+}

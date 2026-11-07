@@ -1,0 +1,16 @@
+{
+  "case": "extreme_solar_particle_event",
+  "decision_verdicts": [],
+  "failure_trace": {
+    "chains": [
+      "event:solar_particle_event -> metric:env.radiation_dose_rate_msv_h -> metric:crew.received_dose_rate_msv_h -> metric:crew.min_health"
+    ],
+    "roots": [
+      "event:solar_particle_event"
+    ],
+    "target_metric": "crew.min_health",
+    "target_tick": 126
+  },
+  "final_tick": 126,
+  "outcome": "mission_failed_crew_loss"
+}

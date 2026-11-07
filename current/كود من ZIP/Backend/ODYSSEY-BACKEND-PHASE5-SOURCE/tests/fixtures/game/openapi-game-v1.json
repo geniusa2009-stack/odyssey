@@ -1,0 +1,7138 @@
+{
+ "components": {
+  "schemas": {
+   "ActionInfo": {
+    "additionalProperties": false,
+    "properties": {
+     "content_defined": {
+      "title": "Content Defined",
+      "type": "boolean"
+     },
+     "mutates": {
+      "title": "Mutates",
+      "type": "boolean"
+     },
+     "params": {
+      "items": {
+       "$ref": "#/components/schemas/ActionParamInfo"
+      },
+      "title": "Params",
+      "type": "array"
+     },
+     "summary": {
+      "title": "Summary",
+      "type": "string"
+     },
+     "target": {
+      "title": "Target",
+      "type": "string"
+     },
+     "type": {
+      "title": "Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "target",
+     "summary",
+     "mutates",
+     "content_defined",
+     "params"
+    ],
+    "title": "ActionInfo",
+    "type": "object"
+   },
+   "ActionParamInfo": {
+    "additionalProperties": false,
+    "properties": {
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "required": {
+      "title": "Required",
+      "type": "boolean"
+     },
+     "values": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Values",
+      "type": "array"
+     }
+    },
+    "required": [
+     "name",
+     "kind",
+     "required"
+    ],
+    "title": "ActionParamInfo",
+    "type": "object"
+   },
+   "AlertBrief": {
+    "additionalProperties": false,
+    "properties": {
+     "category": {
+      "title": "Category",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "severity": {
+      "title": "Severity",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "severity",
+     "category"
+    ],
+    "title": "AlertBrief",
+    "type": "object"
+   },
+   "AuthorizationView": {
+    "additionalProperties": false,
+    "properties": {
+     "authorized": {
+      "title": "Authorized",
+      "type": "boolean"
+     },
+     "available": {
+      "title": "Available",
+      "type": "boolean"
+     },
+     "gate": {
+      "title": "Gate",
+      "type": "string"
+     },
+     "requirements": {
+      "items": {
+       "$ref": "#/components/schemas/RequirementView"
+      },
+      "title": "Requirements",
+      "type": "array"
+     },
+     "target": {
+      "title": "Target",
+      "type": "string"
+     }
+    },
+    "required": [
+     "gate",
+     "target",
+     "available",
+     "authorized",
+     "requirements"
+    ],
+    "title": "AuthorizationView",
+    "type": "object"
+   },
+   "BlackBoxOutcome": {
+    "additionalProperties": false,
+    "properties": {
+     "code": {
+      "title": "Code",
+      "type": "string"
+     },
+     "sim_tick": {
+      "title": "Sim Tick",
+      "type": "integer"
+     },
+     "tier": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Tier"
+     }
+    },
+    "required": [
+     "code",
+     "tier",
+     "sim_tick"
+    ],
+    "title": "BlackBoxOutcome",
+    "type": "object"
+   },
+   "CampaignView": {
+    "additionalProperties": false,
+    "properties": {
+     "active_mission": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Active Mission"
+     },
+     "capabilities": {
+      "items": {
+       "$ref": "#/components/schemas/CapabilityBrief"
+      },
+      "title": "Capabilities",
+      "type": "array"
+     },
+     "certifications": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Certifications",
+      "type": "array"
+     },
+     "content_version": {
+      "title": "Content Version",
+      "type": "string"
+     },
+     "discoveries": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Discoveries",
+      "type": "array"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "infrastructure": {
+      "items": {
+       "$ref": "#/components/schemas/InfrastructureRecordView"
+      },
+      "title": "Infrastructure",
+      "type": "array"
+     },
+     "insights": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Insights",
+      "type": "array"
+     },
+     "missions": {
+      "items": {
+       "$ref": "#/components/schemas/MissionProgressView"
+      },
+      "title": "Missions",
+      "type": "array"
+     },
+     "phases": {
+      "items": {
+       "$ref": "#/components/schemas/PhaseView"
+      },
+      "title": "Phases",
+      "type": "array"
+     }
+    },
+    "required": [
+     "id",
+     "content_version",
+     "active_mission",
+     "phases",
+     "missions",
+     "capabilities",
+     "certifications",
+     "discoveries",
+     "insights"
+    ],
+    "title": "CampaignView",
+    "type": "object"
+   },
+   "CapabilitiesView": {
+    "additionalProperties": false,
+    "properties": {
+     "capabilities": {
+      "items": {
+       "$ref": "#/components/schemas/CapabilityView"
+      },
+      "title": "Capabilities",
+      "type": "array"
+     },
+     "certifications": {
+      "items": {
+       "$ref": "#/components/schemas/CertificationView"
+      },
+      "title": "Certifications",
+      "type": "array"
+     }
+    },
+    "required": [
+     "capabilities",
+     "certifications"
+    ],
+    "title": "CapabilitiesView",
+    "type": "object"
+   },
+   "CapabilityBrief": {
+    "additionalProperties": false,
+    "properties": {
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "stage": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Stage"
+     }
+    },
+    "required": [
+     "id",
+     "stage"
+    ],
+    "title": "CapabilityBrief",
+    "type": "object"
+   },
+   "CapabilityView": {
+    "additionalProperties": false,
+    "properties": {
+     "certifications": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Certifications",
+      "type": "array"
+     },
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "domain": {
+      "title": "Domain",
+      "type": "string"
+     },
+     "gameplay_effects": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Gameplay Effects",
+      "type": "array"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "prerequisites": {
+      "items": {
+       "additionalProperties": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "boolean"
+         }
+        ]
+       },
+       "type": "object"
+      },
+      "title": "Prerequisites",
+      "type": "array"
+     },
+     "provenance": {
+      "$ref": "#/components/schemas/ProvenanceView"
+     },
+     "stage": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Stage"
+     },
+     "stages": {
+      "items": {
+       "$ref": "#/components/schemas/StageStatus"
+      },
+      "title": "Stages",
+      "type": "array"
+     },
+     "status": {
+      "enum": [
+       "locked",
+       "not_started",
+       "qualified",
+       "max"
+      ],
+      "title": "Status",
+      "type": "string"
+     },
+     "unlocks": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Unlocks",
+      "type": "array"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "description",
+     "domain",
+     "stage",
+     "status",
+     "prerequisites",
+     "stages",
+     "certifications",
+     "provenance",
+     "gameplay_effects",
+     "unlocks"
+    ],
+    "title": "CapabilityView",
+    "type": "object"
+   },
+   "CatalogItemView": {
+    "additionalProperties": false,
+    "properties": {
+     "category": {
+      "title": "Category",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "mass_kg": {
+      "title": "Mass Kg",
+      "type": "number"
+     },
+     "max_stack": {
+      "title": "Max Stack",
+      "type": "integer"
+     },
+     "module": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Module"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "provenance": {
+      "$ref": "#/components/schemas/ProvenanceView"
+     },
+     "stackable": {
+      "title": "Stackable",
+      "type": "boolean"
+     },
+     "tags": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+     },
+     "unique": {
+      "title": "Unique",
+      "type": "boolean"
+     },
+     "volume_l": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Volume L"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "category",
+     "mass_kg",
+     "volume_l",
+     "stackable",
+     "max_stack",
+     "unique",
+     "tags",
+     "provenance"
+    ],
+    "title": "CatalogItemView",
+    "type": "object"
+   },
+   "CatalogView": {
+    "additionalProperties": false,
+    "properties": {
+     "content_version": {
+      "title": "Content Version",
+      "type": "string"
+     },
+     "infrastructure_types": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "title": "Infrastructure Types",
+      "type": "array"
+     },
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/CatalogItemView"
+      },
+      "title": "Items",
+      "type": "array"
+     },
+     "vehicle_classes": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "title": "Vehicle Classes",
+      "type": "array"
+     }
+    },
+    "required": [
+     "content_version",
+     "items",
+     "vehicle_classes",
+     "infrastructure_types"
+    ],
+    "title": "CatalogView",
+    "type": "object"
+   },
+   "CausalEdge": {
+    "additionalProperties": false,
+    "properties": {
+     "relation": {
+      "enum": [
+       "caused",
+       "contributed",
+       "triggered",
+       "on_path_no_effect",
+       "led_to"
+      ],
+      "title": "Relation",
+      "type": "string"
+     },
+     "source": {
+      "title": "Source",
+      "type": "string"
+     },
+     "target": {
+      "title": "Target",
+      "type": "string"
+     }
+    },
+    "required": [
+     "source",
+     "target",
+     "relation"
+    ],
+    "title": "CausalEdge",
+    "type": "object"
+   },
+   "CausalNode": {
+    "additionalProperties": false,
+    "properties": {
+     "anchor": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "semantic world location, when meaningful",
+      "title": "Anchor"
+     },
+     "decision": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/DecisionRelation"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "objective_ref": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Objective Ref"
+     },
+     "severity": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Severity"
+     },
+     "sim_tick": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sim Tick"
+     },
+     "sim_time_hours": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sim Time Hours"
+     },
+     "system_ref": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "System Ref"
+     },
+     "type": {
+      "enum": [
+       "decision",
+       "trigger",
+       "effect",
+       "shortfall",
+       "cause",
+       "moment",
+       "outcome"
+      ],
+      "title": "Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "type",
+     "sim_tick",
+     "sim_time_hours",
+     "label"
+    ],
+    "title": "CausalNode",
+    "type": "object"
+   },
+   "CertificationView": {
+    "additionalProperties": false,
+    "properties": {
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "granted": {
+      "title": "Granted",
+      "type": "boolean"
+     },
+     "granted_on_completion_of": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Granted On Completion Of",
+      "type": "array"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "provenance": {
+      "$ref": "#/components/schemas/ProvenanceView"
+     },
+     "requires": {
+      "items": {
+       "additionalProperties": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "boolean"
+         }
+        ]
+       },
+       "type": "object"
+      },
+      "title": "Requires",
+      "type": "array"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "description",
+     "granted",
+     "requires",
+     "granted_on_completion_of",
+     "provenance"
+    ],
+    "title": "CertificationView",
+    "type": "object"
+   },
+   "CheckpointPage": {
+    "additionalProperties": false,
+    "properties": {
+     "checkpoints": {
+      "items": {
+       "$ref": "#/components/schemas/CheckpointView"
+      },
+      "title": "Checkpoints",
+      "type": "array"
+     }
+    },
+    "required": [
+     "checkpoints"
+    ],
+    "title": "CheckpointPage",
+    "type": "object"
+   },
+   "CheckpointView": {
+    "additionalProperties": false,
+    "properties": {
+     "created_at": {
+      "title": "Created At",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "location": {
+      "title": "Location",
+      "type": "string"
+     },
+     "mission_id": {
+      "title": "Mission Id",
+      "type": "string"
+     },
+     "sim_tick": {
+      "title": "Sim Tick",
+      "type": "integer"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "timeline_id": {
+      "title": "Timeline Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "kind",
+     "label",
+     "mission_id",
+     "timeline_id",
+     "state_version",
+     "sim_tick",
+     "location",
+     "created_at"
+    ],
+    "title": "CheckpointView",
+    "type": "object"
+   },
+   "ClockView": {
+    "additionalProperties": false,
+    "properties": {
+     "elapsed_hours": {
+      "title": "Elapsed Hours",
+      "type": "number"
+     },
+     "max_catchup_ticks": {
+      "title": "Max Catchup Ticks",
+      "type": "integer"
+     },
+     "max_ticks": {
+      "title": "Max Ticks",
+      "type": "integer"
+     },
+     "mode": {
+      "title": "Mode",
+      "type": "string"
+     },
+     "pause_reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Pause Reason"
+     },
+     "seconds_per_tick": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seconds Per Tick"
+     },
+     "sim_tick": {
+      "title": "Sim Tick",
+      "type": "integer"
+     },
+     "started": {
+      "title": "Started",
+      "type": "boolean"
+     },
+     "tick_hours": {
+      "title": "Tick Hours",
+      "type": "number"
+     },
+     "ticks_per_second": {
+      "title": "Ticks Per Second",
+      "type": "number"
+     }
+    },
+    "required": [
+     "mode",
+     "started",
+     "pause_reason",
+     "sim_tick",
+     "max_ticks",
+     "tick_hours",
+     "elapsed_hours",
+     "ticks_per_second",
+     "seconds_per_tick",
+     "max_catchup_ticks"
+    ],
+    "title": "ClockView",
+    "type": "object"
+   },
+   "CommandResult": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "title": "Action",
+      "type": "string"
+     },
+     "command_id": {
+      "title": "Command Id",
+      "type": "string"
+     },
+     "context": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Context"
+     },
+     "events": {
+      "items": {
+       "$ref": "#/components/schemas/GameEventEnvelope"
+      },
+      "title": "Events",
+      "type": "array"
+     },
+     "last_seq": {
+      "title": "Last Seq",
+      "type": "integer"
+     },
+     "mission_transition": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Mission Transition"
+     },
+     "prev_state_version": {
+      "title": "Prev State Version",
+      "type": "integer"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "result": {
+      "enum": [
+       "applied",
+       "no_change"
+      ],
+      "title": "Result",
+      "type": "string"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     },
+     "sim_tick": {
+      "title": "Sim Tick",
+      "type": "integer"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "target": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target"
+     },
+     "timeline_id": {
+      "title": "Timeline Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "command_id",
+     "action",
+     "target",
+     "result",
+     "session_id",
+     "timeline_id",
+     "state_version",
+     "prev_state_version",
+     "sim_tick",
+     "last_seq",
+     "events"
+    ],
+    "title": "CommandResult",
+    "type": "object"
+   },
+   "ContainerView": {
+    "additionalProperties": false,
+    "properties": {
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/ItemStackView"
+      },
+      "title": "Items",
+      "type": "array"
+     },
+     "location": {
+      "title": "Location",
+      "type": "string"
+     },
+     "mass_kg": {
+      "title": "Mass Kg",
+      "type": "number"
+     },
+     "mass_limit_kg": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Mass Limit Kg"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "role": {
+      "enum": [
+       "inventory",
+       "cargo",
+       "storage"
+      ],
+      "title": "Role",
+      "type": "string"
+     },
+     "vehicle": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Vehicle"
+     },
+     "volume_l": {
+      "title": "Volume L",
+      "type": "number"
+     },
+     "volume_limit_l": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Volume Limit L"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "location",
+     "role",
+     "mass_kg",
+     "mass_limit_kg",
+     "volume_l",
+     "volume_limit_l",
+     "items"
+    ],
+    "title": "ContainerView",
+    "type": "object"
+   },
+   "CreateGameSessionRequest": {
+    "additionalProperties": false,
+    "properties": {
+     "display_name": {
+      "default": "Commander",
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     }
+    },
+    "title": "CreateGameSessionRequest",
+    "type": "object"
+   },
+   "CreateGameSessionResponse": {
+    "additionalProperties": false,
+    "properties": {
+     "bootstrap": {
+      "$ref": "#/components/schemas/GameBootstrap"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "session_token": {
+      "description": "Shown once; send as 'Authorization: Bearer <token>'",
+      "title": "Session Token",
+      "type": "string"
+     }
+    },
+    "required": [
+     "session_token",
+     "bootstrap"
+    ],
+    "title": "CreateGameSessionResponse",
+    "type": "object"
+   },
+   "CrewView": {
+    "additionalProperties": false,
+    "properties": {
+     "health_band": {
+      "anyOf": [
+       {
+        "enum": [
+         "nominal",
+         "degraded",
+         "critical"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Health Band"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "intent": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Intent"
+     },
+     "involved_incidents": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Involved Incidents",
+      "type": "array"
+     },
+     "location": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Location"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "role": {
+      "title": "Role",
+      "type": "string"
+     },
+     "specialty": {
+      "title": "Specialty",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "role",
+     "specialty",
+     "intent",
+     "location",
+     "involved_incidents"
+    ],
+    "title": "CrewView",
+    "type": "object"
+   },
+   "CueView": {
+    "additionalProperties": false,
+    "description": "A fired contextual cue. Unreal decides when/how (or whether) it is performed.",
+    "properties": {
+     "cooldown_ticks": {
+      "default": 0,
+      "title": "Cooldown Ticks",
+      "type": "integer"
+     },
+     "cue": {
+      "title": "Cue",
+      "type": "string"
+     },
+     "eligible_again_tick": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "simulation tick from which the cue may fire again (None: never)",
+      "title": "Eligible Again Tick"
+     },
+     "line": {
+      "title": "Line",
+      "type": "string"
+     },
+     "message_key": {
+      "title": "Message Key",
+      "type": "string"
+     },
+     "once": {
+      "default": false,
+      "title": "Once",
+      "type": "boolean"
+     },
+     "priority": {
+      "title": "Priority",
+      "type": "integer"
+     },
+     "speaker": {
+      "title": "Speaker",
+      "type": "string"
+     },
+     "tick": {
+      "title": "Tick",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "cue",
+     "speaker",
+     "priority",
+     "tick",
+     "line",
+     "message_key"
+    ],
+    "title": "CueView",
+    "type": "object"
+   },
+   "DecisionRelation": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Action"
+     },
+     "command_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Command Id"
+     },
+     "counterfactual": {
+      "enum": [
+       "worsened",
+       "improved",
+       "no_effect",
+       "not_evaluated"
+      ],
+      "title": "Counterfactual",
+      "type": "string"
+     },
+     "target": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target"
+     }
+    },
+    "required": [
+     "command_id",
+     "action",
+     "target",
+     "counterfactual"
+    ],
+    "title": "DecisionRelation",
+    "type": "object"
+   },
+   "DisconnectSummary": {
+    "additionalProperties": false,
+    "properties": {
+     "event_types": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "title": "Event Types",
+      "type": "object"
+     },
+     "from_tick": {
+      "title": "From Tick",
+      "type": "integer"
+     },
+     "ticks_advanced": {
+      "title": "Ticks Advanced",
+      "type": "integer"
+     },
+     "to_tick": {
+      "title": "To Tick",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "ticks_advanced",
+     "from_tick",
+     "to_tick",
+     "event_types"
+    ],
+    "title": "DisconnectSummary",
+    "type": "object"
+   },
+   "DiscoveryView": {
+    "additionalProperties": false,
+    "properties": {
+     "capability_evidence": {
+      "description": "evidence it contributes (counts at mission completion)",
+      "items": {
+       "type": "string"
+      },
+      "title": "Capability Evidence",
+      "type": "array"
+     },
+     "category": {
+      "title": "Category",
+      "type": "string"
+     },
+     "committed": {
+      "title": "Committed",
+      "type": "boolean"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "insights": {
+      "description": "knowledge it unlocks",
+      "items": {
+       "type": "string"
+      },
+      "title": "Insights",
+      "type": "array"
+     },
+     "location": {
+      "title": "Location",
+      "type": "string"
+     },
+     "mission_id": {
+      "title": "Mission Id",
+      "type": "string"
+     },
+     "provenance": {
+      "$ref": "#/components/schemas/ProvenanceView"
+     },
+     "source": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "who made it (player / crew id) on this timeline",
+      "title": "Source"
+     },
+     "summary": {
+      "title": "Summary",
+      "type": "string"
+     },
+     "tick": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Tick"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "category",
+     "title",
+     "summary",
+     "location",
+     "mission_id",
+     "committed",
+     "provenance"
+    ],
+    "title": "DiscoveryView",
+    "type": "object"
+   },
+   "EventPage": {
+    "additionalProperties": false,
+    "properties": {
+     "after_seq": {
+      "title": "After Seq",
+      "type": "integer"
+     },
+     "events": {
+      "items": {
+       "$ref": "#/components/schemas/GameEventEnvelope"
+      },
+      "title": "Events",
+      "type": "array"
+     },
+     "has_more": {
+      "title": "Has More",
+      "type": "boolean"
+     },
+     "last_seq": {
+      "title": "Last Seq",
+      "type": "integer"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "resync_required": {
+      "title": "Resync Required",
+      "type": "boolean"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "session_id",
+     "after_seq",
+     "last_seq",
+     "resync_required",
+     "events",
+     "has_more"
+    ],
+    "title": "EventPage",
+    "type": "object"
+   },
+   "EvidenceStatus": {
+    "additionalProperties": false,
+    "properties": {
+     "demonstrated": {
+      "title": "Demonstrated",
+      "type": "boolean"
+     },
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "pending_in_mission": {
+      "title": "Pending In Mission",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "id",
+     "description",
+     "demonstrated",
+     "pending_in_mission"
+    ],
+    "title": "EvidenceStatus",
+    "type": "object"
+   },
+   "ExpansionMapView": {
+    "additionalProperties": false,
+    "properties": {
+     "edges": {
+      "items": {
+       "$ref": "#/components/schemas/MapEdge"
+      },
+      "title": "Edges",
+      "type": "array"
+     },
+     "nodes": {
+      "items": {
+       "$ref": "#/components/schemas/MapNode"
+      },
+      "title": "Nodes",
+      "type": "array"
+     }
+    },
+    "required": [
+     "nodes",
+     "edges"
+    ],
+    "title": "ExpansionMapView",
+    "type": "object"
+   },
+   "FutureLensRequestBody": {
+    "additionalProperties": false,
+    "properties": {
+     "candidates": {
+      "items": {
+       "$ref": "#/components/schemas/GameCandidate"
+      },
+      "maxItems": 3,
+      "minItems": 1,
+      "title": "Candidates",
+      "type": "array"
+     },
+     "horizon_ticks": {
+      "default": 12,
+      "maximum": 48.0,
+      "minimum": 1.0,
+      "title": "Horizon Ticks",
+      "type": "integer"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     }
+    },
+    "required": [
+     "candidates"
+    ],
+    "title": "FutureLensRequestBody",
+    "type": "object"
+   },
+   "GameBlackBoxView": {
+    "additionalProperties": false,
+    "properties": {
+     "counterfactuals_evaluated": {
+      "title": "Counterfactuals Evaluated",
+      "type": "boolean"
+     },
+     "edges": {
+      "items": {
+       "$ref": "#/components/schemas/CausalEdge"
+      },
+      "title": "Edges",
+      "type": "array"
+     },
+     "final_sim_hours": {
+      "title": "Final Sim Hours",
+      "type": "number"
+     },
+     "final_tick": {
+      "title": "Final Tick",
+      "type": "integer"
+     },
+     "mission_id": {
+      "title": "Mission Id",
+      "type": "string"
+     },
+     "mission_status": {
+      "description": "Game timeline status (active/completed/failed/rewound)",
+      "title": "Mission Status",
+      "type": "string"
+     },
+     "nodes": {
+      "items": {
+       "$ref": "#/components/schemas/CausalNode"
+      },
+      "title": "Nodes",
+      "type": "array"
+     },
+     "outcome": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/BlackBoxOutcome"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     },
+     "simulation_status": {
+      "description": "Status of the underlying simulation run (an authorization-completed mission such as Earth Command ends the game mission without concluding the simulation)",
+      "title": "Simulation Status",
+      "type": "string"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "statement": {
+      "title": "Statement",
+      "type": "string"
+     },
+     "timeline_id": {
+      "title": "Timeline Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "session_id",
+     "timeline_id",
+     "mission_id",
+     "state_version",
+     "mission_status",
+     "simulation_status",
+     "final_tick",
+     "final_sim_hours",
+     "outcome",
+     "counterfactuals_evaluated",
+     "nodes",
+     "edges",
+     "statement"
+    ],
+    "title": "GameBlackBoxView",
+    "type": "object"
+   },
+   "GameBootstrap": {
+    "additionalProperties": false,
+    "properties": {
+     "features": {
+      "$ref": "#/components/schemas/ServerFeatures"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "snapshot": {
+      "$ref": "#/components/schemas/GameSnapshot"
+     }
+    },
+    "required": [
+     "features",
+     "snapshot"
+    ],
+    "title": "GameBootstrap",
+    "type": "object"
+   },
+   "GameCandidate": {
+    "additionalProperties": false,
+    "description": "A semantic action to preview (same shape as a command's action/target/params).",
+    "properties": {
+     "action": {
+      "maxLength": 48,
+      "pattern": "^[a-z_]+\\.[a-z_]+$",
+      "title": "Action",
+      "type": "string"
+     },
+     "id": {
+      "pattern": "^[a-z0-9_\\-]{1,32}$",
+      "title": "Id",
+      "type": "string"
+     },
+     "params": {
+      "additionalProperties": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "maxProperties": 8,
+      "title": "Params",
+      "type": "object"
+     },
+     "target": {
+      "anyOf": [
+       {
+        "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target"
+     }
+    },
+    "required": [
+     "id",
+     "action"
+    ],
+    "title": "GameCandidate",
+    "type": "object"
+   },
+   "GameCommandRequest": {
+    "additionalProperties": false,
+    "description": "One semantic action. ``expected_state_version`` must equal the session's current\n``state_version`` (else ``STALE_STATE``); ``idempotency_key`` makes retries safe.",
+    "properties": {
+     "action": {
+      "maxLength": 48,
+      "pattern": "^[a-z_]+\\.[a-z_]+$",
+      "title": "Action",
+      "type": "string"
+     },
+     "actor": {
+      "default": "commander",
+      "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+      "title": "Actor",
+      "type": "string"
+     },
+     "anchor": {
+      "anyOf": [
+       {
+        "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Unreal world anchor the action happened at (logged only)",
+      "title": "Anchor"
+     },
+     "client_timestamp": {
+      "anyOf": [
+       {
+        "maxLength": 40,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Informational only",
+      "title": "Client Timestamp"
+     },
+     "command_id": {
+      "description": "Client-generated unique id (trace id)",
+      "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+      "title": "Command Id",
+      "type": "string"
+     },
+     "expected_state_version": {
+      "minimum": 1.0,
+      "title": "Expected State Version",
+      "type": "integer"
+     },
+     "idempotency_key": {
+      "pattern": "^[A-Za-z0-9_.:\\-]{8,128}$",
+      "title": "Idempotency Key",
+      "type": "string"
+     },
+     "params": {
+      "additionalProperties": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "maxProperties": 8,
+      "title": "Params",
+      "type": "object"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "session_id": {
+      "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+      "title": "Session Id",
+      "type": "string"
+     },
+     "target": {
+      "anyOf": [
+       {
+        "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target"
+     },
+     "timeline_id": {
+      "anyOf": [
+       {
+        "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional: rejected (STALE_STATE) if not the active one",
+      "title": "Timeline Id"
+     }
+    },
+    "required": [
+     "command_id",
+     "session_id",
+     "expected_state_version",
+     "idempotency_key",
+     "action"
+    ],
+    "title": "GameCommandRequest",
+    "type": "object"
+   },
+   "GameEngineeringProfileView": {
+    "additionalProperties": false,
+    "description": "The existing Engineering Profile (gameplay decisions, not personality), re-keyed to\ngame ids.",
+    "properties": {
+     "coverage": {
+      "additionalProperties": {
+       "anyOf": [
+        {
+         "type": "integer"
+        },
+        {
+         "type": "boolean"
+        }
+       ]
+      },
+      "title": "Coverage",
+      "type": "object"
+     },
+     "dimensions": {
+      "items": {
+       "$ref": "#/components/schemas/ProfileDimension"
+      },
+      "title": "Dimensions",
+      "type": "array"
+     },
+     "mission_id": {
+      "title": "Mission Id",
+      "type": "string"
+     },
+     "notes": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "provisional": {
+      "title": "Provisional",
+      "type": "boolean"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     },
+     "timeline_id": {
+      "title": "Timeline Id",
+      "type": "string"
+     },
+     "weights_version": {
+      "title": "Weights Version",
+      "type": "string"
+     }
+    },
+    "required": [
+     "session_id",
+     "timeline_id",
+     "mission_id",
+     "weights_version",
+     "provisional",
+     "dimensions",
+     "coverage",
+     "notes"
+    ],
+    "title": "GameEngineeringProfileView",
+    "type": "object"
+   },
+   "GameErrorBody": {
+    "additionalProperties": false,
+    "description": "The shared public error envelope (app/core/errors.py; identical to API v1).",
+    "properties": {
+     "code": {
+      "description": "One of the frozen public codes (STALE_STATE, …)",
+      "title": "Code",
+      "type": "string"
+     },
+     "details": {
+      "additionalProperties": true,
+      "title": "Details",
+      "type": "object"
+     },
+     "message": {
+      "title": "Message",
+      "type": "string"
+     },
+     "reason": {
+      "description": "Specific machine-readable cause (e.g. not_at_location)",
+      "title": "Reason",
+      "type": "string"
+     },
+     "recoverable": {
+      "title": "Recoverable",
+      "type": "boolean"
+     },
+     "request_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Request Id"
+     },
+     "state_version": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "State Version"
+     }
+    },
+    "required": [
+     "code",
+     "reason",
+     "message",
+     "recoverable"
+    ],
+    "title": "GameErrorBody",
+    "type": "object"
+   },
+   "GameErrorResponse": {
+    "additionalProperties": false,
+    "properties": {
+     "error": {
+      "$ref": "#/components/schemas/GameErrorBody"
+     }
+    },
+    "required": [
+     "error"
+    ],
+    "title": "GameErrorResponse",
+    "type": "object"
+   },
+   "GameEventEnvelope": {
+    "additionalProperties": false,
+    "description": "A realtime event. ``seq`` is per session, gap-free and strictly increasing.",
+    "properties": {
+     "event_id": {
+      "title": "Event Id",
+      "type": "string"
+     },
+     "payload": {
+      "additionalProperties": true,
+      "title": "Payload",
+      "type": "object"
+     },
+     "prev_state_version": {
+      "title": "Prev State Version",
+      "type": "integer"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "scope": {
+      "enum": [
+       "world",
+       "mission",
+       "crew",
+       "campaign",
+       "session"
+      ],
+      "title": "Scope",
+      "type": "string"
+     },
+     "seq": {
+      "title": "Seq",
+      "type": "integer"
+     },
+     "server_time": {
+      "title": "Server Time",
+      "type": "string"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     },
+     "sim_tick": {
+      "title": "Sim Tick",
+      "type": "integer"
+     },
+     "sim_time_hours": {
+      "title": "Sim Time Hours",
+      "type": "number"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "timeline_id": {
+      "title": "Timeline Id",
+      "type": "string"
+     },
+     "type": {
+      "title": "Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "event_id",
+     "seq",
+     "session_id",
+     "timeline_id",
+     "state_version",
+     "prev_state_version",
+     "type",
+     "scope",
+     "sim_tick",
+     "sim_time_hours",
+     "server_time",
+     "payload"
+    ],
+    "title": "GameEventEnvelope",
+    "type": "object"
+   },
+   "GameFutureLensView": {
+    "additionalProperties": false,
+    "properties": {
+     "base_sim_hours": {
+      "title": "Base Sim Hours",
+      "type": "number"
+     },
+     "base_tick": {
+      "title": "Base Tick",
+      "type": "integer"
+     },
+     "branches": {
+      "items": {
+       "$ref": "#/components/schemas/LensBranch"
+      },
+      "title": "Branches",
+      "type": "array"
+     },
+     "horizon": {
+      "$ref": "#/components/schemas/LensHorizon"
+     },
+     "knowledge_boundary": {
+      "$ref": "#/components/schemas/LensKnowledgeBoundary"
+     },
+     "mission_id": {
+      "title": "Mission Id",
+      "type": "string"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "timeline_id": {
+      "title": "Timeline Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "session_id",
+     "timeline_id",
+     "mission_id",
+     "state_version",
+     "base_tick",
+     "base_sim_hours",
+     "horizon",
+     "knowledge_boundary",
+     "branches"
+    ],
+    "title": "GameFutureLensView",
+    "type": "object"
+   },
+   "GameMissionDNAView": {
+    "additionalProperties": false,
+    "description": "The existing share-safe Mission DNA (mission behaviour/outcome), re-keyed to game ids.",
+    "properties": {
+     "code": {
+      "title": "Code",
+      "type": "string"
+     },
+     "concluded": {
+      "title": "Concluded",
+      "type": "boolean"
+     },
+     "dna_version": {
+      "title": "Dna Version",
+      "type": "integer"
+     },
+     "genes": {
+      "additionalProperties": true,
+      "title": "Genes",
+      "type": "object"
+     },
+     "mission_id": {
+      "title": "Mission Id",
+      "type": "string"
+     },
+     "outcome_code": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Outcome Code"
+     },
+     "outcome_tier": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Outcome Tier"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "scenario_id": {
+      "title": "Scenario Id",
+      "type": "string"
+     },
+     "scenario_version": {
+      "title": "Scenario Version",
+      "type": "string"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     },
+     "timeline_id": {
+      "title": "Timeline Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "session_id",
+     "timeline_id",
+     "mission_id",
+     "code",
+     "dna_version",
+     "scenario_id",
+     "scenario_version",
+     "outcome_code",
+     "outcome_tier",
+     "concluded",
+     "genes"
+    ],
+    "title": "GameMissionDNAView",
+    "type": "object"
+   },
+   "GameSnapshot": {
+    "additionalProperties": false,
+    "description": "The authoritative state a client needs to (re)build its world. Contains nothing hidden.",
+    "properties": {
+     "campaign": {
+      "$ref": "#/components/schemas/CampaignView"
+     },
+     "clock": {
+      "$ref": "#/components/schemas/ClockView"
+     },
+     "discoveries": {
+      "items": {
+       "$ref": "#/components/schemas/DiscoveryView"
+      },
+      "title": "Discoveries",
+      "type": "array"
+     },
+     "insights": {
+      "items": {
+       "$ref": "#/components/schemas/InsightView"
+      },
+      "title": "Insights",
+      "type": "array"
+     },
+     "mission": {
+      "$ref": "#/components/schemas/MissionView"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "resume": {
+      "$ref": "#/components/schemas/ResumeInfo"
+     },
+     "session": {
+      "$ref": "#/components/schemas/SessionRef"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "timeline": {
+      "$ref": "#/components/schemas/TimelineRef"
+     },
+     "world": {
+      "$ref": "#/components/schemas/WorldView"
+     }
+    },
+    "required": [
+     "session",
+     "timeline",
+     "state_version",
+     "campaign",
+     "mission",
+     "clock",
+     "world",
+     "discoveries",
+     "insights",
+     "resume"
+    ],
+    "title": "GameSnapshot",
+    "type": "object"
+   },
+   "GateView": {
+    "additionalProperties": false,
+    "properties": {
+     "category": {
+      "title": "Category",
+      "type": "string"
+     },
+     "critical": {
+      "title": "Critical",
+      "type": "boolean"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "met": {
+      "title": "Met",
+      "type": "boolean"
+     },
+     "missing_capabilities": {
+      "items": {
+       "$ref": "#/components/schemas/MissingCapabilityView"
+      },
+      "title": "Missing Capabilities",
+      "type": "array"
+     },
+     "missing_certifications": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Missing Certifications",
+      "type": "array"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "category",
+     "title",
+     "critical",
+     "met",
+     "missing_capabilities",
+     "missing_certifications"
+    ],
+    "title": "GateView",
+    "type": "object"
+   },
+   "IncidentView": {
+    "additionalProperties": false,
+    "properties": {
+     "facts": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Facts",
+      "type": "array"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "involved_crew": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Involved Crew",
+      "type": "array"
+     },
+     "involved_objects": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Involved Objects",
+      "type": "array"
+     },
+     "message_key": {
+      "title": "Message Key",
+      "type": "string"
+     },
+     "resolved_tick": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Resolved Tick"
+     },
+     "stage": {
+      "title": "Stage",
+      "type": "string"
+     },
+     "started_tick": {
+      "title": "Started Tick",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "id",
+     "message_key",
+     "stage",
+     "started_tick",
+     "resolved_tick",
+     "involved_objects",
+     "involved_crew",
+     "facts"
+    ],
+    "title": "IncidentView",
+    "type": "object"
+   },
+   "InfrastructureRecordView": {
+    "additionalProperties": false,
+    "description": "Persistent (campaign-global) infrastructure as last left at a completed mission.",
+    "properties": {
+     "mission_id": {
+      "title": "Mission Id",
+      "type": "string"
+     },
+     "modules": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "title": "Modules",
+      "type": "object"
+     },
+     "object": {
+      "title": "Object",
+      "type": "string"
+     },
+     "state": {
+      "title": "State",
+      "type": "string"
+     },
+     "type": {
+      "title": "Type",
+      "type": "string"
+     },
+     "world": {
+      "title": "World",
+      "type": "string"
+     }
+    },
+    "required": [
+     "object",
+     "type",
+     "world",
+     "state",
+     "mission_id"
+    ],
+    "title": "InfrastructureRecordView",
+    "type": "object"
+   },
+   "InsightView": {
+    "additionalProperties": false,
+    "properties": {
+     "concept": {
+      "title": "Concept",
+      "type": "string"
+     },
+     "explanation": {
+      "title": "Explanation",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "matters_later": {
+      "title": "Matters Later",
+      "type": "string"
+     },
+     "observation": {
+      "title": "Observation",
+      "type": "string"
+     },
+     "provenance": {
+      "$ref": "#/components/schemas/ProvenanceView"
+     },
+     "related_objects": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Related Objects",
+      "type": "array"
+     },
+     "simplification": {
+      "title": "Simplification",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "why_available": {
+      "title": "Why Available",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "id",
+     "concept",
+     "title",
+     "observation",
+     "explanation",
+     "matters_later",
+     "simplification",
+     "provenance",
+     "related_objects",
+     "why_available"
+    ],
+    "title": "InsightView",
+    "type": "object"
+   },
+   "InteractionView": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "title": "Action",
+      "type": "string"
+     },
+     "available": {
+      "title": "Available",
+      "type": "boolean"
+     },
+     "params": {
+      "additionalProperties": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      "title": "Params",
+      "type": "object"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     }
+    },
+    "required": [
+     "action",
+     "available"
+    ],
+    "title": "InteractionView",
+    "type": "object"
+   },
+   "ItemStackView": {
+    "additionalProperties": false,
+    "properties": {
+     "condition": {
+      "const": "nominal",
+      "default": "nominal",
+      "title": "Condition",
+      "type": "string"
+     },
+     "item": {
+      "title": "Item",
+      "type": "string"
+     },
+     "mass_kg": {
+      "title": "Mass Kg",
+      "type": "number"
+     },
+     "quantity": {
+      "title": "Quantity",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "item",
+     "quantity",
+     "mass_kg"
+    ],
+    "title": "ItemStackView",
+    "type": "object"
+   },
+   "LensBranch": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Action"
+     },
+     "affected_objects": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Affected Objects",
+      "type": "array"
+     },
+     "affects_simulation": {
+      "title": "Affects Simulation",
+      "type": "boolean"
+     },
+     "concludes_within_horizon": {
+      "default": false,
+      "title": "Concludes Within Horizon",
+      "type": "boolean"
+     },
+     "confidence": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/LensConfidence"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "is_baseline": {
+      "title": "Is Baseline",
+      "type": "boolean"
+     },
+     "objectives": {
+      "items": {
+       "$ref": "#/components/schemas/LensObjectiveDelta"
+      },
+      "title": "Objectives",
+      "type": "array"
+     },
+     "projected_outcome_tier": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Projected Outcome Tier"
+     },
+     "rejection": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/LensRejection"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "resources": {
+      "items": {
+       "$ref": "#/components/schemas/LensResourceDelta"
+      },
+      "title": "Resources",
+      "type": "array"
+     },
+     "risk": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/LensRisk"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "target": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target"
+     },
+     "valid": {
+      "title": "Valid",
+      "type": "boolean"
+     },
+     "warnings": {
+      "items": {
+       "$ref": "#/components/schemas/LensWarning"
+      },
+      "title": "Warnings",
+      "type": "array"
+     },
+     "world_hints": {
+      "items": {
+       "$ref": "#/components/schemas/WorldStateHint"
+      },
+      "title": "World Hints",
+      "type": "array"
+     }
+    },
+    "required": [
+     "id",
+     "is_baseline",
+     "valid",
+     "affects_simulation"
+    ],
+    "title": "LensBranch",
+    "type": "object"
+   },
+   "LensConfidence": {
+    "additionalProperties": false,
+    "properties": {
+     "level": {
+      "title": "Level",
+      "type": "string"
+     },
+     "score": {
+      "title": "Score",
+      "type": "number"
+     }
+    },
+    "required": [
+     "level",
+     "score"
+    ],
+    "title": "LensConfidence",
+    "type": "object"
+   },
+   "LensHorizon": {
+    "additionalProperties": false,
+    "properties": {
+     "clipped_to_mission_end": {
+      "title": "Clipped To Mission End",
+      "type": "boolean"
+     },
+     "hours": {
+      "title": "Hours",
+      "type": "number"
+     },
+     "projected_ticks": {
+      "title": "Projected Ticks",
+      "type": "integer"
+     },
+     "requested_ticks": {
+      "title": "Requested Ticks",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "requested_ticks",
+     "projected_ticks",
+     "hours",
+     "clipped_to_mission_end"
+    ],
+    "title": "LensHorizon",
+    "type": "object"
+   },
+   "LensKnowledgeBoundary": {
+    "additionalProperties": false,
+    "properties": {
+     "anticipates_unforeseeable_events": {
+      "title": "Anticipates Unforeseeable Events",
+      "type": "boolean"
+     },
+     "prediction_mode": {
+      "const": "known_only",
+      "title": "Prediction Mode",
+      "type": "string"
+     },
+     "statement": {
+      "title": "Statement",
+      "type": "string"
+     }
+    },
+    "required": [
+     "prediction_mode",
+     "anticipates_unforeseeable_events",
+     "statement"
+    ],
+    "title": "LensKnowledgeBoundary",
+    "type": "object"
+   },
+   "LensObjectiveDelta": {
+    "additionalProperties": false,
+    "properties": {
+     "objective": {
+      "title": "Objective",
+      "type": "string"
+     },
+     "projected_status": {
+      "title": "Projected Status",
+      "type": "string"
+     },
+     "status_now": {
+      "title": "Status Now",
+      "type": "string"
+     }
+    },
+    "required": [
+     "objective",
+     "status_now",
+     "projected_status"
+    ],
+    "title": "LensObjectiveDelta",
+    "type": "object"
+   },
+   "LensRejection": {
+    "additionalProperties": false,
+    "properties": {
+     "message": {
+      "title": "Message",
+      "type": "string"
+     },
+     "reason": {
+      "title": "Reason",
+      "type": "string"
+     }
+    },
+    "required": [
+     "reason",
+     "message"
+    ],
+    "title": "LensRejection",
+    "type": "object"
+   },
+   "LensResourceDelta": {
+    "additionalProperties": false,
+    "properties": {
+     "delta": {
+      "title": "Delta",
+      "type": "number"
+     },
+     "end": {
+      "title": "End",
+      "type": "number"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "metric": {
+      "title": "Metric",
+      "type": "string"
+     },
+     "start": {
+      "title": "Start",
+      "type": "number"
+     },
+     "unit": {
+      "title": "Unit",
+      "type": "string"
+     },
+     "vs_baseline": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Vs Baseline"
+     },
+     "warning_level": {
+      "enum": [
+       "none",
+       "caution",
+       "warning",
+       "critical"
+      ],
+      "title": "Warning Level",
+      "type": "string"
+     },
+     "worst": {
+      "title": "Worst",
+      "type": "number"
+     }
+    },
+    "required": [
+     "metric",
+     "label",
+     "unit",
+     "start",
+     "end",
+     "delta",
+     "worst",
+     "warning_level"
+    ],
+    "title": "LensResourceDelta",
+    "type": "object"
+   },
+   "LensRisk": {
+    "additionalProperties": false,
+    "properties": {
+     "end_index": {
+      "title": "End Index",
+      "type": "number"
+     },
+     "peak_index": {
+      "title": "Peak Index",
+      "type": "number"
+     }
+    },
+    "required": [
+     "end_index",
+     "peak_index"
+    ],
+    "title": "LensRisk",
+    "type": "object"
+   },
+   "LensWarning": {
+    "additionalProperties": false,
+    "properties": {
+     "alert": {
+      "title": "Alert",
+      "type": "string"
+     },
+     "hours_from_now": {
+      "title": "Hours From Now",
+      "type": "number"
+     },
+     "introduced_by_candidate": {
+      "title": "Introduced By Candidate",
+      "type": "boolean"
+     },
+     "metric": {
+      "title": "Metric",
+      "type": "string"
+     },
+     "severity": {
+      "title": "Severity",
+      "type": "string"
+     }
+    },
+    "required": [
+     "alert",
+     "severity",
+     "metric",
+     "hours_from_now",
+     "introduced_by_candidate"
+    ],
+    "title": "LensWarning",
+    "type": "object"
+   },
+   "LocationView": {
+    "additionalProperties": false,
+    "properties": {
+     "access": {
+      "enum": [
+       "open",
+       "locked"
+      ],
+      "title": "Access",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "region": {
+      "title": "Region",
+      "type": "string"
+     },
+     "visited": {
+      "title": "Visited",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "region",
+     "kind",
+     "access",
+     "visited"
+    ],
+    "title": "LocationView",
+    "type": "object"
+   },
+   "MapEdge": {
+    "additionalProperties": false,
+    "properties": {
+     "explanation": {
+      "title": "Explanation",
+      "type": "string"
+     },
+     "kind": {
+      "enum": [
+       "requires",
+       "unlocks",
+       "qualifies",
+       "certifies",
+       "gates",
+       "contains"
+      ],
+      "title": "Kind",
+      "type": "string"
+     },
+     "satisfied": {
+      "title": "Satisfied",
+      "type": "boolean"
+     },
+     "source": {
+      "title": "Source",
+      "type": "string"
+     },
+     "target": {
+      "title": "Target",
+      "type": "string"
+     }
+    },
+    "required": [
+     "source",
+     "target",
+     "kind",
+     "explanation",
+     "satisfied"
+    ],
+    "title": "MapEdge",
+    "type": "object"
+   },
+   "MapNode": {
+    "additionalProperties": false,
+    "properties": {
+     "evidence_refs": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "progress": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Progress"
+     },
+     "related_capability": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Related Capability"
+     },
+     "related_mission": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Related Mission"
+     },
+     "state": {
+      "title": "State",
+      "type": "string"
+     },
+     "type": {
+      "enum": [
+       "phase",
+       "mission",
+       "capability",
+       "certification",
+       "readiness_gate",
+       "infrastructure",
+       "discovery"
+      ],
+      "title": "Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "type",
+     "label",
+     "state"
+    ],
+    "title": "MapNode",
+    "type": "object"
+   },
+   "MissingCapabilityView": {
+    "additionalProperties": false,
+    "properties": {
+     "capability": {
+      "title": "Capability",
+      "type": "string"
+     },
+     "current_stage": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Current Stage"
+     },
+     "required_stage": {
+      "title": "Required Stage",
+      "type": "string"
+     }
+    },
+    "required": [
+     "capability",
+     "required_stage",
+     "current_stage"
+    ],
+    "title": "MissingCapabilityView",
+    "type": "object"
+   },
+   "MissionProgressView": {
+    "additionalProperties": false,
+    "properties": {
+     "attempts": {
+      "title": "Attempts",
+      "type": "integer"
+     },
+     "best_tier": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Best Tier"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "phase": {
+      "title": "Phase",
+      "type": "string"
+     },
+     "replayable": {
+      "title": "Replayable",
+      "type": "boolean"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "phase",
+     "status",
+     "attempts",
+     "best_tier",
+     "replayable"
+    ],
+    "title": "MissionProgressView",
+    "type": "object"
+   },
+   "MissionView": {
+    "additionalProperties": false,
+    "properties": {
+     "alerts": {
+      "items": {
+       "$ref": "#/components/schemas/AlertBrief"
+      },
+      "title": "Alerts",
+      "type": "array"
+     },
+     "authorization": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/AuthorizationView"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "completion": {
+      "enum": [
+       "authorization",
+       "simulation_concluded"
+      ],
+      "title": "Completion",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "objectives": {
+      "items": {
+       "$ref": "#/components/schemas/ObjectiveBrief"
+      },
+      "title": "Objectives",
+      "type": "array"
+     },
+     "outcome_tier": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Outcome Tier"
+     },
+     "phase": {
+      "title": "Phase",
+      "type": "string"
+     },
+     "resources": {
+      "items": {
+       "$ref": "#/components/schemas/ResourceBrief"
+      },
+      "title": "Resources",
+      "type": "array"
+     },
+     "simulation_status": {
+      "title": "Simulation Status",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "summary": {
+      "title": "Summary",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "phase",
+     "title",
+     "summary",
+     "status",
+     "simulation_status",
+     "completion",
+     "objectives",
+     "resources",
+     "alerts"
+    ],
+    "title": "MissionView",
+    "type": "object"
+   },
+   "ModuleSlotView": {
+    "additionalProperties": false,
+    "properties": {
+     "item": {
+      "title": "Item",
+      "type": "string"
+     },
+     "slot": {
+      "title": "Slot",
+      "type": "string"
+     },
+     "state": {
+      "title": "State",
+      "type": "string"
+     }
+    },
+    "required": [
+     "slot",
+     "item",
+     "state"
+    ],
+    "title": "ModuleSlotView",
+    "type": "object"
+   },
+   "ObjectView": {
+    "additionalProperties": false,
+    "properties": {
+     "access": {
+      "title": "Access",
+      "type": "string"
+     },
+     "charge_kwh": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Charge Kwh"
+     },
+     "critical": {
+      "title": "Critical",
+      "type": "boolean"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "infrastructure_state": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Infrastructure State"
+     },
+     "infrastructure_type": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Infrastructure Type"
+     },
+     "inspected": {
+      "title": "Inspected",
+      "type": "boolean"
+     },
+     "interactions": {
+      "items": {
+       "$ref": "#/components/schemas/InteractionView"
+      },
+      "title": "Interactions",
+      "type": "array"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "location": {
+      "title": "Location",
+      "type": "string"
+     },
+     "mode": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Mode"
+     },
+     "modules": {
+      "items": {
+       "$ref": "#/components/schemas/ModuleSlotView"
+      },
+      "title": "Modules",
+      "type": "array"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "parent": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Parent"
+     },
+     "power": {
+      "anyOf": [
+       {
+        "enum": [
+         "powered",
+         "partial",
+         "unpowered",
+         "off"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Power"
+     },
+     "status": {
+      "enum": [
+       "operational",
+       "degraded",
+       "damaged",
+       "maintenance",
+       "offline",
+       "nominal"
+      ],
+      "title": "Status",
+      "type": "string"
+     },
+     "tags": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+     },
+     "vehicle_class": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Vehicle Class"
+     }
+    },
+    "required": [
+     "id",
+     "kind",
+     "name",
+     "location",
+     "tags",
+     "critical",
+     "access",
+     "inspected",
+     "status"
+    ],
+    "title": "ObjectView",
+    "type": "object"
+   },
+   "ObjectiveBrief": {
+    "additionalProperties": false,
+    "properties": {
+     "category": {
+      "title": "Category",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "message_key": {
+      "title": "Message Key",
+      "type": "string"
+     },
+     "required": {
+      "title": "Required",
+      "type": "boolean"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "category",
+     "required",
+     "status",
+     "message_key"
+    ],
+    "title": "ObjectiveBrief",
+    "type": "object"
+   },
+   "PhaseView": {
+    "additionalProperties": false,
+    "properties": {
+     "authored": {
+      "title": "Authored",
+      "type": "boolean"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "missing": {
+      "additionalProperties": true,
+      "title": "Missing",
+      "type": "object"
+     },
+     "missions": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Missions",
+      "type": "array"
+     },
+     "order": {
+      "title": "Order",
+      "type": "integer"
+     },
+     "replayable": {
+      "title": "Replayable",
+      "type": "boolean"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "summary": {
+      "title": "Summary",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "order",
+     "title",
+     "summary",
+     "status",
+     "authored",
+     "replayable",
+     "missions"
+    ],
+    "title": "PhaseView",
+    "type": "object"
+   },
+   "ProfileDimension": {
+    "additionalProperties": false,
+    "properties": {
+     "contributions": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "title": "Contributions",
+      "type": "object"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "value": {
+      "title": "Value",
+      "type": "number"
+     }
+    },
+    "required": [
+     "id",
+     "value",
+     "contributions"
+    ],
+    "title": "ProfileDimension",
+    "type": "object"
+   },
+   "ProvenanceView": {
+    "additionalProperties": false,
+    "properties": {
+     "classification": {
+      "title": "Classification",
+      "type": "string"
+     },
+     "evidence_refs": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Note"
+     }
+    },
+    "required": [
+     "classification"
+    ],
+    "title": "ProvenanceView",
+    "type": "object"
+   },
+   "ReadinessView": {
+    "additionalProperties": false,
+    "properties": {
+     "critical_missing": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Critical Missing",
+      "type": "array"
+     },
+     "gates": {
+      "items": {
+       "$ref": "#/components/schemas/GateView"
+      },
+      "title": "Gates",
+      "type": "array"
+     },
+     "gates_met": {
+      "title": "Gates Met",
+      "type": "integer"
+     },
+     "gates_total": {
+      "title": "Gates Total",
+      "type": "integer"
+     },
+     "lock": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lock"
+     },
+     "locked": {
+      "title": "Locked",
+      "type": "boolean"
+     },
+     "percent": {
+      "description": "gates met / gates; never hides a missing critical gate",
+      "title": "Percent",
+      "type": "integer"
+     },
+     "profile": {
+      "title": "Profile",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "profile",
+     "title",
+     "locked",
+     "lock",
+     "gates_met",
+     "gates_total",
+     "percent",
+     "critical_missing",
+     "gates"
+    ],
+    "title": "ReadinessView",
+    "type": "object"
+   },
+   "RequirementView": {
+    "additionalProperties": false,
+    "properties": {
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "met": {
+      "title": "Met",
+      "type": "boolean"
+     },
+     "reason": {
+      "title": "Reason",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "met",
+     "reason"
+    ],
+    "title": "RequirementView",
+    "type": "object"
+   },
+   "ResourceBrief": {
+    "additionalProperties": false,
+    "properties": {
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "state": {
+      "title": "State",
+      "type": "string"
+     },
+     "unit": {
+      "title": "Unit",
+      "type": "string"
+     },
+     "value": {
+      "title": "Value",
+      "type": "number"
+     },
+     "warning_state": {
+      "title": "Warning State",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "label",
+     "value",
+     "unit",
+     "state",
+     "warning_state"
+    ],
+    "title": "ResourceBrief",
+    "type": "object"
+   },
+   "RestoreRequest": {
+    "additionalProperties": false,
+    "properties": {
+     "last_seq": {
+      "anyOf": [
+       {
+        "minimum": 0.0,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Last realtime seq the client applied",
+      "title": "Last Seq"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     }
+    },
+    "title": "RestoreRequest",
+    "type": "object"
+   },
+   "RestoreResult": {
+    "additionalProperties": false,
+    "properties": {
+     "events": {
+      "items": {
+       "$ref": "#/components/schemas/GameEventEnvelope"
+      },
+      "title": "Events",
+      "type": "array"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "resync_required": {
+      "title": "Resync Required",
+      "type": "boolean"
+     },
+     "snapshot": {
+      "$ref": "#/components/schemas/GameSnapshot"
+     },
+     "while_disconnected": {
+      "$ref": "#/components/schemas/DisconnectSummary"
+     }
+    },
+    "required": [
+     "snapshot",
+     "resync_required",
+     "events",
+     "while_disconnected"
+    ],
+    "title": "RestoreResult",
+    "type": "object"
+   },
+   "ResumeInfo": {
+    "additionalProperties": false,
+    "properties": {
+     "events_path": {
+      "title": "Events Path",
+      "type": "string"
+     },
+     "last_seq": {
+      "title": "Last Seq",
+      "type": "integer"
+     },
+     "restore_path": {
+      "title": "Restore Path",
+      "type": "string"
+     },
+     "retained_events": {
+      "title": "Retained Events",
+      "type": "integer"
+     },
+     "ws_path": {
+      "title": "Ws Path",
+      "type": "string"
+     }
+    },
+    "required": [
+     "last_seq",
+     "ws_path",
+     "events_path",
+     "restore_path",
+     "retained_events"
+    ],
+    "title": "ResumeInfo",
+    "type": "object"
+   },
+   "RewindPointView": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "title": "Action",
+      "type": "string"
+     },
+     "command_id": {
+      "title": "Command Id",
+      "type": "string"
+     },
+     "sim_tick": {
+      "title": "Sim Tick",
+      "type": "integer"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "target": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target"
+     }
+    },
+    "required": [
+     "command_id",
+     "action",
+     "target",
+     "sim_tick",
+     "state_version"
+    ],
+    "title": "RewindPointView",
+    "type": "object"
+   },
+   "RewindPoints": {
+    "additionalProperties": false,
+    "properties": {
+     "points": {
+      "items": {
+       "$ref": "#/components/schemas/RewindPointView"
+      },
+      "title": "Points",
+      "type": "array"
+     },
+     "timeline_id": {
+      "title": "Timeline Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "timeline_id",
+     "points"
+    ],
+    "title": "RewindPoints",
+    "type": "object"
+   },
+   "RewindRequest": {
+    "additionalProperties": false,
+    "properties": {
+     "command_id": {
+      "description": "Rewind to just before this command",
+      "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+      "title": "Command Id",
+      "type": "string"
+     },
+     "expected_state_version": {
+      "minimum": 1.0,
+      "title": "Expected State Version",
+      "type": "integer"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     }
+    },
+    "required": [
+     "command_id",
+     "expected_state_version"
+    ],
+    "title": "RewindRequest",
+    "type": "object"
+   },
+   "RewindResult": {
+    "additionalProperties": false,
+    "properties": {
+     "events": {
+      "items": {
+       "$ref": "#/components/schemas/GameEventEnvelope"
+      },
+      "title": "Events",
+      "type": "array"
+     },
+     "previous_timeline_id": {
+      "title": "Previous Timeline Id",
+      "type": "string"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     },
+     "sim_tick": {
+      "title": "Sim Tick",
+      "type": "integer"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "timeline": {
+      "$ref": "#/components/schemas/TimelineRef"
+     }
+    },
+    "required": [
+     "session_id",
+     "previous_timeline_id",
+     "timeline",
+     "state_version",
+     "sim_tick",
+     "events"
+    ],
+    "title": "RewindResult",
+    "type": "object"
+   },
+   "ServerFeatures": {
+    "additionalProperties": false,
+    "properties": {
+     "actions": {
+      "items": {
+       "$ref": "#/components/schemas/ActionInfo"
+      },
+      "title": "Actions",
+      "type": "array"
+     },
+     "auth": {
+      "title": "Auth",
+      "type": "string"
+     },
+     "clock_modes": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Clock Modes",
+      "type": "array"
+     },
+     "content_version": {
+      "title": "Content Version",
+      "type": "string"
+     },
+     "error_codes": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Error Codes",
+      "type": "array"
+     },
+     "event_types": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Event Types",
+      "type": "array"
+     },
+     "limits": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "title": "Limits",
+      "type": "object"
+     },
+     "protocol": {
+      "title": "Protocol",
+      "type": "string"
+     }
+    },
+    "required": [
+     "protocol",
+     "content_version",
+     "clock_modes",
+     "actions",
+     "event_types",
+     "error_codes",
+     "limits",
+     "auth"
+    ],
+    "title": "ServerFeatures",
+    "type": "object"
+   },
+   "SessionRef": {
+    "additionalProperties": false,
+    "properties": {
+     "content_id": {
+      "title": "Content Id",
+      "type": "string"
+     },
+     "content_version": {
+      "title": "Content Version",
+      "type": "string"
+     },
+     "created_at": {
+      "title": "Created At",
+      "type": "string"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "last_seq": {
+      "title": "Last Seq",
+      "type": "integer"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "status",
+     "content_id",
+     "content_version",
+     "state_version",
+     "last_seq",
+     "created_at"
+    ],
+    "title": "SessionRef",
+    "type": "object"
+   },
+   "SlotStatus": {
+    "additionalProperties": false,
+    "properties": {
+     "accepts": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Accepts",
+      "type": "array"
+     },
+     "installed": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Installed"
+     },
+     "mount": {
+      "title": "Mount",
+      "type": "string"
+     },
+     "payload": {
+      "title": "Payload",
+      "type": "boolean"
+     },
+     "required_for_mission": {
+      "title": "Required For Mission",
+      "type": "boolean"
+     },
+     "slot": {
+      "title": "Slot",
+      "type": "string"
+     }
+    },
+    "required": [
+     "slot",
+     "mount",
+     "accepts",
+     "required_for_mission",
+     "payload",
+     "installed"
+    ],
+    "title": "SlotStatus",
+    "type": "object"
+   },
+   "StageStatus": {
+    "additionalProperties": false,
+    "properties": {
+     "attainable": {
+      "title": "Attainable",
+      "type": "boolean"
+     },
+     "evidence": {
+      "items": {
+       "$ref": "#/components/schemas/EvidenceStatus"
+      },
+      "title": "Evidence",
+      "type": "array"
+     },
+     "reached": {
+      "title": "Reached",
+      "type": "boolean"
+     },
+     "stage": {
+      "title": "Stage",
+      "type": "string"
+     }
+    },
+    "required": [
+     "stage",
+     "reached",
+     "attainable",
+     "evidence"
+    ],
+    "title": "StageStatus",
+    "type": "object"
+   },
+   "StartMissionRequest": {
+    "additionalProperties": false,
+    "properties": {
+     "expected_state_version": {
+      "minimum": 1.0,
+      "title": "Expected State Version",
+      "type": "integer"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     }
+    },
+    "required": [
+     "expected_state_version"
+    ],
+    "title": "StartMissionRequest",
+    "type": "object"
+   },
+   "SyncRequest": {
+    "additionalProperties": false,
+    "properties": {
+     "expected_state_version": {
+      "anyOf": [
+       {
+        "minimum": 1.0,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Expected State Version"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     }
+    },
+    "title": "SyncRequest",
+    "type": "object"
+   },
+   "SyncResult": {
+    "additionalProperties": false,
+    "properties": {
+     "clock": {
+      "$ref": "#/components/schemas/ClockView"
+     },
+     "events": {
+      "items": {
+       "$ref": "#/components/schemas/GameEventEnvelope"
+      },
+      "title": "Events",
+      "type": "array"
+     },
+     "last_seq": {
+      "title": "Last Seq",
+      "type": "integer"
+     },
+     "protocol": {
+      "const": "odyssey.game.v1",
+      "default": "odyssey.game.v1",
+      "title": "Protocol",
+      "type": "string"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "string"
+     },
+     "sim_tick": {
+      "title": "Sim Tick",
+      "type": "integer"
+     },
+     "state_version": {
+      "title": "State Version",
+      "type": "integer"
+     },
+     "ticks_advanced": {
+      "title": "Ticks Advanced",
+      "type": "integer"
+     },
+     "timeline_id": {
+      "title": "Timeline Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "session_id",
+     "timeline_id",
+     "state_version",
+     "sim_tick",
+     "ticks_advanced",
+     "clock",
+     "last_seq",
+     "events"
+    ],
+    "title": "SyncResult",
+    "type": "object"
+   },
+   "TimelineRef": {
+    "additionalProperties": false,
+    "properties": {
+     "attempt": {
+      "title": "Attempt",
+      "type": "integer"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "mission_id": {
+      "title": "Mission Id",
+      "type": "string"
+     },
+     "parent_timeline_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Parent Timeline Id"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "mission_id",
+     "attempt",
+     "status"
+    ],
+    "title": "TimelineRef",
+    "type": "object"
+   },
+   "VehicleView": {
+    "additionalProperties": false,
+    "properties": {
+     "blockers": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Blockers",
+      "type": "array"
+     },
+     "cargo": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Cargo",
+      "type": "array"
+     },
+     "class_name": {
+      "title": "Class Name",
+      "type": "string"
+     },
+     "crew_capacity": {
+      "title": "Crew Capacity",
+      "type": "integer"
+     },
+     "environment_rating": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Environment Rating",
+      "type": "array"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "life_support_crew_days": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Life Support Crew Days"
+     },
+     "mission_rating": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Mission Rating",
+      "type": "array"
+     },
+     "mission_role": {
+      "title": "Mission Role",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "payload_limit_kg": {
+      "title": "Payload Limit Kg",
+      "type": "number"
+     },
+     "payload_mass_kg": {
+      "title": "Payload Mass Kg",
+      "type": "number"
+     },
+     "power_budget_kw": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Power Budget Kw"
+     },
+     "provenance": {
+      "$ref": "#/components/schemas/ProvenanceView"
+     },
+     "qualification": {
+      "items": {
+       "additionalProperties": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "boolean"
+         }
+        ]
+       },
+       "type": "object"
+      },
+      "title": "Qualification",
+      "type": "array"
+     },
+     "ready": {
+      "title": "Ready",
+      "type": "boolean"
+     },
+     "slots": {
+      "items": {
+       "$ref": "#/components/schemas/SlotStatus"
+      },
+      "title": "Slots",
+      "type": "array"
+     },
+     "vehicle_class": {
+      "title": "Vehicle Class",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "vehicle_class",
+     "class_name",
+     "mission_role",
+     "crew_capacity",
+     "environment_rating",
+     "mission_rating",
+     "payload_mass_kg",
+     "payload_limit_kg",
+     "power_budget_kw",
+     "life_support_crew_days",
+     "slots",
+     "cargo",
+     "qualification",
+     "ready",
+     "blockers",
+     "provenance"
+    ],
+    "title": "VehicleView",
+    "type": "object"
+   },
+   "WhyInput": {
+    "additionalProperties": false,
+    "properties": {
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "mechanism": {
+      "title": "Mechanism",
+      "type": "string"
+     },
+     "metric": {
+      "title": "Metric",
+      "type": "string"
+     },
+     "unit": {
+      "title": "Unit",
+      "type": "string"
+     },
+     "value": {
+      "title": "Value",
+      "type": "number"
+     }
+    },
+    "required": [
+     "metric",
+     "label",
+     "value",
+     "unit",
+     "mechanism"
+    ],
+    "title": "WhyInput",
+    "type": "object"
+   },
+   "WhyView": {
+    "additionalProperties": false,
+    "properties": {
+     "active_alerts": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Active Alerts",
+      "type": "array"
+     },
+     "available": {
+      "title": "Available",
+      "type": "boolean"
+     },
+     "concept": {
+      "title": "Concept",
+      "type": "string"
+     },
+     "explanation": {
+      "title": "Explanation",
+      "type": "string"
+     },
+     "inputs": {
+      "items": {
+       "$ref": "#/components/schemas/WhyInput"
+      },
+      "title": "Inputs",
+      "type": "array"
+     },
+     "insight": {
+      "title": "Insight",
+      "type": "string"
+     },
+     "label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Label"
+     },
+     "metric": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Metric"
+     },
+     "note": {
+      "title": "Note",
+      "type": "string"
+     },
+     "observation": {
+      "title": "Observation",
+      "type": "string"
+     },
+     "provenance": {
+      "$ref": "#/components/schemas/ProvenanceView"
+     },
+     "related_objects": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Related Objects",
+      "type": "array"
+     },
+     "unit": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Unit"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Value"
+     }
+    },
+    "required": [
+     "insight",
+     "concept",
+     "observation",
+     "explanation",
+     "metric",
+     "provenance",
+     "available",
+     "note"
+    ],
+    "title": "WhyView",
+    "type": "object"
+   },
+   "WorldStateHint": {
+    "additionalProperties": false,
+    "description": "A semantic world fact the candidate changes *immediately* (applying the action, before\nany time passes): enough for Unreal to show e.g. a powered-down lab, never art direction.",
+    "properties": {
+     "after": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "After"
+     },
+     "field": {
+      "enum": [
+       "status",
+       "power",
+       "mode",
+       "infrastructure_state",
+       "access"
+      ],
+      "title": "Field",
+      "type": "string"
+     },
+     "now": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Now"
+     },
+     "object": {
+      "title": "Object",
+      "type": "string"
+     }
+    },
+    "required": [
+     "object",
+     "field",
+     "now",
+     "after"
+    ],
+    "title": "WorldStateHint",
+    "type": "object"
+   },
+   "WorldView": {
+    "additionalProperties": false,
+    "properties": {
+     "containers": {
+      "items": {
+       "$ref": "#/components/schemas/ContainerView"
+      },
+      "title": "Containers",
+      "type": "array"
+     },
+     "crew": {
+      "items": {
+       "$ref": "#/components/schemas/CrewView"
+      },
+      "title": "Crew",
+      "type": "array"
+     },
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "incidents": {
+      "items": {
+       "$ref": "#/components/schemas/IncidentView"
+      },
+      "title": "Incidents",
+      "type": "array"
+     },
+     "locations": {
+      "items": {
+       "$ref": "#/components/schemas/LocationView"
+      },
+      "title": "Locations",
+      "type": "array"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "objects": {
+      "items": {
+       "$ref": "#/components/schemas/ObjectView"
+      },
+      "title": "Objects",
+      "type": "array"
+     },
+     "player_location": {
+      "title": "Player Location",
+      "type": "string"
+     },
+     "recent_cues": {
+      "items": {
+       "$ref": "#/components/schemas/CueView"
+      },
+      "title": "Recent Cues",
+      "type": "array"
+     }
+    },
+    "required": [
+     "id",
+     "name",
+     "player_location",
+     "locations",
+     "objects",
+     "containers",
+     "incidents",
+     "crew",
+     "recent_cues"
+    ],
+    "title": "WorldView",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "GameSessionToken": {
+    "description": "The session token returned once by POST /sessions (gst_…).",
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Authoritative mission/campaign backend for the ODYSSEY Unreal Engine client\n(protocol **odyssey.game.v1**). Unreal owns movement, physics, animation and presentation; the\nclient sends *semantic* actions and the backend decides results. See\ndocs/UNREAL_BACKEND_CONTRACT.md and docs/UNREAL_HANDOFF.md.\n",
+  "title": "ODYSSEY Game API",
+  "version": "odyssey.game.v1"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/catalog": {
+   "get": {
+    "description": "Static content catalog: items, vehicle classes, infrastructure types (no auth).",
+    "operationId": "catalog_catalog_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CatalogView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "summary": "Catalog",
+    "tags": [
+     "game-server"
+    ]
+   }
+  },
+  "/features": {
+   "get": {
+    "description": "Protocol version, semantic actions, event types, error codes and limits (no auth).",
+    "operationId": "features_features_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ServerFeatures"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "summary": "Features",
+    "tags": [
+     "game-server"
+    ]
+   }
+  },
+  "/sessions": {
+   "post": {
+    "description": "Start a new campaign. The ``session_token`` is returned once; keep it.",
+    "operationId": "create_session_sessions_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CreateGameSessionRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CreateGameSessionResponse"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "summary": "Create Session",
+    "tags": [
+     "game-session"
+    ]
+   }
+  },
+  "/sessions/{session_id}/black-box": {
+   "get": {
+    "description": "Causal node/edge graph of what happened on a timeline (past only).",
+    "operationId": "black_box_sessions__session_id__black_box_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "description": "Default: the active timeline",
+      "in": "query",
+      "name": "timeline_id",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "pattern": "^gt_[a-z2-7]{20,32}$",
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Default: the active timeline",
+       "title": "Timeline Id"
+      }
+     },
+     {
+      "in": "query",
+      "name": "counterfactuals",
+      "required": false,
+      "schema": {
+       "default": true,
+       "title": "Counterfactuals",
+       "type": "boolean"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameBlackBoxView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Black Box",
+    "tags": [
+     "game-analysis"
+    ]
+   }
+  },
+  "/sessions/{session_id}/bootstrap": {
+   "get": {
+    "operationId": "bootstrap_sessions__session_id__bootstrap_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameBootstrap"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Bootstrap",
+    "tags": [
+     "game-session"
+    ]
+   }
+  },
+  "/sessions/{session_id}/capabilities": {
+   "get": {
+    "operationId": "capabilities_sessions__session_id__capabilities_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CapabilitiesView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Capabilities",
+    "tags": [
+     "game-progression"
+    ]
+   }
+  },
+  "/sessions/{session_id}/checkpoints": {
+   "get": {
+    "operationId": "checkpoints_sessions__session_id__checkpoints_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "query",
+      "name": "limit",
+      "required": false,
+      "schema": {
+       "default": 50,
+       "maximum": 200,
+       "minimum": 1,
+       "title": "Limit",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CheckpointPage"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Checkpoints",
+    "tags": [
+     "game-session"
+    ]
+   }
+  },
+  "/sessions/{session_id}/commands": {
+   "post": {
+    "description": "Request one semantic action. The backend validates legality and decides the result.",
+    "operationId": "command_sessions__session_id__commands_post",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "description": "Optional; when sent it must equal the body's idempotency_key",
+      "in": "header",
+      "name": "Idempotency-Key",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Optional; when sent it must equal the body's idempotency_key",
+       "title": "Idempotency-Key"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GameCommandRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CommandResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Command",
+    "tags": [
+     "game-command"
+    ]
+   }
+  },
+  "/sessions/{session_id}/engineering-profile": {
+   "get": {
+    "operationId": "engineering_profile_sessions__session_id__engineering_profile_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "description": "Default: the active timeline",
+      "in": "query",
+      "name": "timeline_id",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "pattern": "^gt_[a-z2-7]{20,32}$",
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Default: the active timeline",
+       "title": "Timeline Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameEngineeringProfileView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Engineering Profile",
+    "tags": [
+     "game-analysis"
+    ]
+   }
+  },
+  "/sessions/{session_id}/events": {
+   "get": {
+    "operationId": "events_sessions__session_id__events_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "query",
+      "name": "after_seq",
+      "required": false,
+      "schema": {
+       "default": 0,
+       "maximum": 2147483647,
+       "minimum": 0,
+       "title": "After Seq",
+       "type": "integer"
+      }
+     },
+     {
+      "in": "query",
+      "name": "limit",
+      "required": false,
+      "schema": {
+       "default": 200,
+       "maximum": 500,
+       "minimum": 1,
+       "title": "Limit",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EventPage"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Events",
+    "tags": [
+     "game-session"
+    ]
+   }
+  },
+  "/sessions/{session_id}/expansion-map": {
+   "get": {
+    "operationId": "expansion_map_sessions__session_id__expansion_map_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ExpansionMapView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Expansion Map",
+    "tags": [
+     "game-progression"
+    ]
+   }
+  },
+  "/sessions/{session_id}/future-lens": {
+   "post": {
+    "description": "Project up to three semantic candidate actions (known-only knowledge policy).",
+    "operationId": "future_lens_sessions__session_id__future_lens_post",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/FutureLensRequestBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameFutureLensView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Future Lens",
+    "tags": [
+     "game-analysis"
+    ]
+   }
+  },
+  "/sessions/{session_id}/insights/{insight_id}/why": {
+   "get": {
+    "description": "WHY? for an unlocked insight: the live causal inputs of its metric (no forecasts).",
+    "operationId": "why_sessions__session_id__insights__insight_id__why_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "path",
+      "name": "insight_id",
+      "required": true,
+      "schema": {
+       "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+       "title": "Insight Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/WhyView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Why",
+    "tags": [
+     "game-progression"
+    ]
+   }
+  },
+  "/sessions/{session_id}/mission-dna": {
+   "get": {
+    "operationId": "mission_dna_sessions__session_id__mission_dna_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "description": "Default: the active timeline",
+      "in": "query",
+      "name": "timeline_id",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "pattern": "^gt_[a-z2-7]{20,32}$",
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "description": "Default: the active timeline",
+       "title": "Timeline Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameMissionDNAView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Mission Dna",
+    "tags": [
+     "game-analysis"
+    ]
+   }
+  },
+  "/sessions/{session_id}/missions/{mission_id}/start": {
+   "post": {
+    "description": "Start (or replay) an available mission. Locked missions answer DECISION_UNAVAILABLE with\nthe missing prerequisites (``MARS_MISSION_LOCKED`` lists the missing capability ids).",
+    "operationId": "start_mission_sessions__session_id__missions__mission_id__start_post",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "path",
+      "name": "mission_id",
+      "required": true,
+      "schema": {
+       "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+       "title": "Mission Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/StartMissionRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameSnapshot"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Start Mission",
+    "tags": [
+     "game-command"
+    ]
+   }
+  },
+  "/sessions/{session_id}/objects/{object_id}": {
+   "get": {
+    "operationId": "object_detail_sessions__session_id__objects__object_id__get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "path",
+      "name": "object_id",
+      "required": true,
+      "schema": {
+       "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+       "title": "Object Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ObjectView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Object Detail",
+    "tags": [
+     "game-world"
+    ]
+   }
+  },
+  "/sessions/{session_id}/phases/{phase_id}/start": {
+   "post": {
+    "description": "Start the next mission of a campaign phase. Prerequisites are checked first: a locked\nphase answers DECISION_UNAVAILABLE with ``phase_locked`` and what is missing; a phase gated by\na readiness profile answers ``mars_mission_locked`` (``details.lock_code`` =\n``MARS_MISSION_LOCKED``) with the missing gate and capability ids.",
+    "operationId": "start_phase_sessions__session_id__phases__phase_id__start_post",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "path",
+      "name": "phase_id",
+      "required": true,
+      "schema": {
+       "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+       "title": "Phase Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/StartMissionRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameSnapshot"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Start Phase",
+    "tags": [
+     "game-command"
+    ]
+   }
+  },
+  "/sessions/{session_id}/readiness/{profile_id}": {
+   "get": {
+    "operationId": "readiness_sessions__session_id__readiness__profile_id__get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "path",
+      "name": "profile_id",
+      "required": true,
+      "schema": {
+       "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+       "title": "Profile Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ReadinessView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Readiness",
+    "tags": [
+     "game-progression"
+    ]
+   }
+  },
+  "/sessions/{session_id}/restore": {
+   "post": {
+    "description": "The single restore/reconnect path: settles the clock, returns the snapshot, what happened\nwhile disconnected and the retained events after ``last_seq`` (or ``resync_required``).",
+    "operationId": "restore_sessions__session_id__restore_post",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RestoreRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RestoreResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Restore",
+    "tags": [
+     "game-session"
+    ]
+   }
+  },
+  "/sessions/{session_id}/rewind": {
+   "post": {
+    "description": "Fork the active mission timeline to just before a recorded command (campaign progress\nis never rewound).",
+    "operationId": "rewind_sessions__session_id__rewind_post",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RewindRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RewindResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Rewind",
+    "tags": [
+     "game-command"
+    ]
+   }
+  },
+  "/sessions/{session_id}/rewind-points": {
+   "get": {
+    "operationId": "rewind_points_sessions__session_id__rewind_points_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RewindPoints"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Rewind Points",
+    "tags": [
+     "game-command"
+    ]
+   }
+  },
+  "/sessions/{session_id}/snapshot": {
+   "get": {
+    "description": "Authoritative state as stored (does not advance the clock; use /sync or /restore).",
+    "operationId": "snapshot_sessions__session_id__snapshot_get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameSnapshot"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Snapshot",
+    "tags": [
+     "game-session"
+    ]
+   }
+  },
+  "/sessions/{session_id}/sync": {
+   "post": {
+    "description": "Settle the server clock now (advance the simulation by the elapsed trusted time).",
+    "operationId": "sync_sessions__session_id__sync_post",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/SyncRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SyncResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Sync",
+    "tags": [
+     "game-session"
+    ]
+   }
+  },
+  "/sessions/{session_id}/vehicles/{vehicle_id}": {
+   "get": {
+    "description": "Shipyard/loadout view: slots, payload mass vs limit, qualification and blockers.",
+    "operationId": "vehicle_sessions__session_id__vehicles__vehicle_id__get",
+    "parameters": [
+     {
+      "description": "Game session id (gs_…)",
+      "in": "path",
+      "name": "session_id",
+      "required": true,
+      "schema": {
+       "description": "Game session id (gs_…)",
+       "pattern": "^gs_[a-z2-7]{20,32}$",
+       "title": "Session Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "path",
+      "name": "vehicle_id",
+      "required": true,
+      "schema": {
+       "pattern": "^[A-Za-z0-9_.:\\-]{1,128}$",
+       "title": "Vehicle Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/VehicleView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "403": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "PERMISSION_DENIED (missing/invalid session token)"
+     },
+     "404": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "SESSION_NOT_FOUND / NOT_FOUND"
+     },
+     "409": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "STALE_STATE / DECISION_UNAVAILABLE / MISSION_COMPLETE"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "VALIDATION_ERROR / INVALID_REQUEST / IDEMPOTENCY_KEY_REUSED"
+     },
+     "429": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GameErrorResponse"
+        }
+       }
+      },
+      "description": "RATE_LIMITED"
+     }
+    },
+    "security": [
+     {
+      "GameSessionToken": []
+     }
+    ],
+    "summary": "Vehicle",
+    "tags": [
+     "game-world"
+    ]
+   }
+  }
+ }
+}

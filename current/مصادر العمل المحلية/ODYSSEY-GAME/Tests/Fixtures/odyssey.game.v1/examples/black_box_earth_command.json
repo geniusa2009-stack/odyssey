@@ -1,0 +1,41 @@
+{
+ "counterfactuals_evaluated": true,
+ "edges": [],
+ "final_sim_hours": 5.25,
+ "final_tick": 21,
+ "mission_id": "earth_command.station_readiness",
+ "mission_status": "completed",
+ "nodes": [
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:1:milestone:calibration_window",
+   "label": "milestone.science_opportunity",
+   "objective_ref": null,
+   "severity": null,
+   "sim_tick": 1,
+   "sim_time_hours": 0.25,
+   "system_ref": null,
+   "type": "moment"
+  },
+  {
+   "anchor": null,
+   "decision": null,
+   "id": "moment:4:failure:bus_b_breaker_fault",
+   "label": "failure.system_fault",
+   "objective_ref": null,
+   "severity": "warning",
+   "sim_tick": 4,
+   "sim_time_hours": 1.0,
+   "system_ref": null,
+   "type": "moment"
+  }
+ ],
+ "outcome": null,
+ "protocol": "odyssey.game.v1",
+ "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+ "simulation_status": "active",
+ "state_version": 23,
+ "statement": "Decisions are named as root causes only when a counterfactual replay without them makes the failing quantity better. Decisions on a causal path whose removal changes nothing are listed separately and never blamed.",
+ "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaaaq"
+}

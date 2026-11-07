@@ -1,0 +1,239 @@
+{
+ "critical_missing": [
+  "gate.transport.crewed_transit",
+  "gate.habitation.long_duration",
+  "gate.life_support.closed_loop",
+  "gate.power.surface_power",
+  "gate.radiation.protection",
+  "gate.communications.deep_space",
+  "gate.autonomy.fault_management",
+  "gate.logistics.mass_budget",
+  "gate.edl.crewed_landing",
+  "gate.return.capability"
+ ],
+ "gates": [
+  {
+   "category": "transport",
+   "critical": true,
+   "id": "gate.transport.crewed_transit",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "transportation.crew_launch_readiness",
+     "current_stage": "PROTOTYPE_TESTED",
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Crewed deep-space transit"
+  },
+  {
+   "category": "long_duration_habitation",
+   "critical": true,
+   "id": "gate.habitation.long_duration",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "habitation.long_duration",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Long-duration habitation"
+  },
+  {
+   "category": "life_support",
+   "critical": true,
+   "id": "gate.life_support.closed_loop",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "life_support.closed_loop",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Regenerative life support"
+  },
+  {
+   "category": "power",
+   "critical": true,
+   "id": "gate.power.surface_power",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "power.load_management",
+     "current_stage": "PROTOTYPE_TESTED",
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Surface power"
+  },
+  {
+   "category": "radiation_protection",
+   "critical": true,
+   "id": "gate.radiation.protection",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "habitation.radiation_sheltering",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Radiation protection"
+  },
+  {
+   "category": "communications",
+   "critical": true,
+   "id": "gate.communications.deep_space",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "communications.surface_relay",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Deep-space communications"
+  },
+  {
+   "category": "autonomy",
+   "critical": true,
+   "id": "gate.autonomy.fault_management",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "autonomy.fault_management",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Autonomous fault management"
+  },
+  {
+   "category": "robotics",
+   "critical": false,
+   "id": "gate.robotics.teleoperation",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "robotics.teleoperation",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Robotic precursors"
+  },
+  {
+   "category": "logistics",
+   "critical": true,
+   "id": "gate.logistics.mass_budget",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "logistics.mass_budgeting",
+     "current_stage": "DISCOVERED",
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Logistics"
+  },
+  {
+   "category": "surface_systems",
+   "critical": false,
+   "id": "gate.surface.systems",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "mobility.surface_rover",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    },
+    {
+     "capability": "infrastructure.surface_construction",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    },
+    {
+     "capability": "science.surface_sampling",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Surface systems"
+  },
+  {
+   "category": "entry_descent_landing",
+   "critical": true,
+   "id": "gate.edl.crewed_landing",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "transportation.entry_descent_landing",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Entry, descent and landing"
+  },
+  {
+   "category": "return_capability",
+   "critical": true,
+   "id": "gate.return.capability",
+   "met": false,
+   "missing_capabilities": [
+    {
+     "capability": "transportation.planetary_return",
+     "current_stage": null,
+     "required_stage": "MARS_CERTIFIED"
+    }
+   ],
+   "missing_certifications": [],
+   "title": "Return capability"
+  }
+ ],
+ "gates_met": 0,
+ "gates_total": 12,
+ "lock": {
+  "code": "MARS_MISSION_LOCKED",
+  "missing_capabilities": [
+   "autonomy.fault_management",
+   "communications.surface_relay",
+   "habitation.long_duration",
+   "habitation.radiation_sheltering",
+   "life_support.closed_loop",
+   "logistics.mass_budgeting",
+   "power.load_management",
+   "transportation.crew_launch_readiness",
+   "transportation.entry_descent_landing",
+   "transportation.planetary_return"
+  ],
+  "missing_gates": [
+   "gate.transport.crewed_transit",
+   "gate.habitation.long_duration",
+   "gate.life_support.closed_loop",
+   "gate.power.surface_power",
+   "gate.radiation.protection",
+   "gate.communications.deep_space",
+   "gate.autonomy.fault_management",
+   "gate.logistics.mass_budget",
+   "gate.edl.crewed_landing",
+   "gate.return.capability"
+  ]
+ },
+ "locked": true,
+ "percent": 0,
+ "profile": "mars_01_human_mission",
+ "title": "MARS-01 human mission"
+}

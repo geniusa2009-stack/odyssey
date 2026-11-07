@@ -1,0 +1,1453 @@
+{
+ "events": [
+  {
+   "event_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam:67",
+   "payload": {
+    "active_mission": null,
+    "missions": {
+     "earth_command.station_readiness": "completed",
+     "luna_01.the_last_light": "available"
+    },
+    "phases": {
+     "EARTH_COMMAND": "completed",
+     "LUNA_01": "available"
+    }
+   },
+   "prev_state_version": 22,
+   "protocol": "odyssey.game.v1",
+   "scope": "campaign",
+   "seq": 67,
+   "server_time": "2026-10-27T06:00:00+00:00",
+   "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+   "sim_tick": 21,
+   "sim_time_hours": 5.25,
+   "state_version": 23,
+   "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaaaq",
+   "type": "campaign.updated"
+  },
+  {
+   "event_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam:68",
+   "payload": {
+    "mission": "earth_command.station_readiness",
+    "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaaaq"
+   },
+   "prev_state_version": 22,
+   "protocol": "odyssey.game.v1",
+   "scope": "mission",
+   "seq": 68,
+   "server_time": "2026-10-27T06:00:00+00:00",
+   "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+   "sim_tick": 21,
+   "sim_time_hours": 5.25,
+   "state_version": 23,
+   "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaaaq",
+   "type": "black_box.ready"
+  },
+  {
+   "event_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam:69",
+   "payload": {
+    "from_mission": "earth_command.station_readiness",
+    "snapshot_required": true,
+    "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaabe",
+    "to_mission": "luna_01.the_last_light"
+   },
+   "prev_state_version": 22,
+   "protocol": "odyssey.game.v1",
+   "scope": "campaign",
+   "seq": 69,
+   "server_time": "2026-10-27T06:00:00+00:00",
+   "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+   "sim_tick": 21,
+   "sim_time_hours": 5.25,
+   "state_version": 23,
+   "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaaaq",
+   "type": "mission.transitioned"
+  }
+ ],
+ "protocol": "odyssey.game.v1",
+ "reason": null,
+ "resync_required": false,
+ "snapshot": {
+  "campaign": {
+   "active_mission": "luna_01.the_last_light",
+   "capabilities": [
+    {
+     "id": "power.load_management",
+     "stage": "PROTOTYPE_TESTED"
+    },
+    {
+     "id": "logistics.mass_budgeting",
+     "stage": "DISCOVERED"
+    },
+    {
+     "id": "transportation.crew_launch_readiness",
+     "stage": "PROTOTYPE_TESTED"
+    },
+    {
+     "id": "habitation.radiation_sheltering",
+     "stage": null
+    },
+    {
+     "id": "mobility.surface_rover",
+     "stage": null
+    },
+    {
+     "id": "robotics.teleoperation",
+     "stage": null
+    },
+    {
+     "id": "communications.surface_relay",
+     "stage": null
+    },
+    {
+     "id": "infrastructure.surface_construction",
+     "stage": null
+    },
+    {
+     "id": "life_support.closed_loop",
+     "stage": null
+    },
+    {
+     "id": "science.surface_sampling",
+     "stage": null
+    },
+    {
+     "id": "isru.oxygen_extraction",
+     "stage": null
+    },
+    {
+     "id": "autonomy.fault_management",
+     "stage": null
+    },
+    {
+     "id": "transportation.entry_descent_landing",
+     "stage": null
+    },
+    {
+     "id": "transportation.planetary_return",
+     "stage": null
+    },
+    {
+     "id": "habitation.long_duration",
+     "stage": null
+    }
+   ],
+   "certifications": [
+    "cert.earth_command.station_operations"
+   ],
+   "content_version": "1.0.0",
+   "discoveries": [],
+   "id": "odyssey.campaign",
+   "infrastructure": [],
+   "insights": [
+    "power.generation_vs_demand",
+    "power.maintenance_tradeoff",
+    "radiation.shelter_mass",
+    "logistics.mass_budget",
+    "life_support.oxygen_budget"
+   ],
+   "missions": [
+    {
+     "attempts": 1,
+     "best_tier": null,
+     "id": "earth_command.station_readiness",
+     "phase": "EARTH_COMMAND",
+     "replayable": false,
+     "status": "completed"
+    },
+    {
+     "attempts": 1,
+     "best_tier": null,
+     "id": "luna_01.the_last_light",
+     "phase": "LUNA_01",
+     "replayable": true,
+     "status": "active"
+    }
+   ],
+   "phases": [
+    {
+     "authored": true,
+     "id": "EARTH_COMMAND",
+     "missing": {},
+     "missions": [
+      "earth_command.station_readiness"
+     ],
+     "order": 1,
+     "replayable": false,
+     "status": "completed",
+     "summary": "Ground operations at the ODYSSEY station; prepare and authorize LUNA-01.",
+     "title": "Earth Command"
+    },
+    {
+     "authored": true,
+     "id": "LUNA_01",
+     "missing": {},
+     "missions": [
+      "luna_01.the_last_light"
+     ],
+     "order": 2,
+     "replayable": true,
+     "status": "active",
+     "summary": "Keep the ASTERIA outpost alive through the onset of the lunar night.",
+     "title": "LUNA-01: The Last Light"
+    },
+    {
+     "authored": false,
+     "id": "LUNAR_SURVIVAL",
+     "missing": {
+      "capabilities": [
+       {
+        "capability": "power.load_management",
+        "stage": "LUNAR_DEMONSTRATED"
+       }
+      ],
+      "phases": [
+       "LUNA_01"
+      ]
+     },
+     "missions": [],
+     "order": 3,
+     "replayable": false,
+     "status": "locked",
+     "summary": "Sustained operations through repeated lunar nights.",
+     "title": "Lunar Survival"
+    },
+    {
+     "authored": false,
+     "id": "LUNAR_EXPLORATION",
+     "missing": {
+      "capabilities": [
+       {
+        "capability": "mobility.surface_rover",
+        "stage": "LUNAR_DEMONSTRATED"
+       }
+      ],
+      "phases": [
+       "LUNAR_SURVIVAL"
+      ]
+     },
+     "missions": [],
+     "order": 4,
+     "replayable": false,
+     "status": "locked",
+     "summary": "Long-range surface mobility and science beyond the outpost.",
+     "title": "Lunar Exploration"
+    },
+    {
+     "authored": false,
+     "id": "LUNAR_NETWORK",
+     "missing": {
+      "capabilities": [
+       {
+        "capability": "communications.surface_relay",
+        "stage": "LUNAR_DEMONSTRATED"
+       },
+       {
+        "capability": "infrastructure.surface_construction",
+        "stage": "LUNAR_DEMONSTRATED"
+       }
+      ],
+      "phases": [
+       "LUNAR_EXPLORATION"
+      ]
+     },
+     "missions": [],
+     "order": 5,
+     "replayable": false,
+     "status": "locked",
+     "summary": "A connected network of lunar infrastructure.",
+     "title": "Lunar Network"
+    },
+    {
+     "authored": false,
+     "id": "DEEP_SPACE_READINESS",
+     "missing": {
+      "phases": [
+       "LUNAR_NETWORK"
+      ]
+     },
+     "missions": [],
+     "order": 6,
+     "replayable": false,
+     "status": "locked",
+     "summary": "Qualify systems for long-duration missions far from Earth.",
+     "title": "Deep Space Readiness"
+    },
+    {
+     "authored": false,
+     "id": "PATH_TO_MARS",
+     "missing": {
+      "phases": [
+       "DEEP_SPACE_READINESS"
+      ]
+     },
+     "missions": [],
+     "order": 7,
+     "replayable": false,
+     "status": "locked",
+     "summary": "Assemble and certify the systems a human Mars mission requires.",
+     "title": "Path to Mars"
+    },
+    {
+     "authored": false,
+     "id": "MARS_01",
+     "missing": {
+      "phases": [
+       "PATH_TO_MARS"
+      ],
+      "readiness": {
+       "lock_code": "MARS_MISSION_LOCKED",
+       "missing_capabilities": [
+        "autonomy.fault_management",
+        "communications.surface_relay",
+        "habitation.long_duration",
+        "habitation.radiation_sheltering",
+        "life_support.closed_loop",
+        "logistics.mass_budgeting",
+        "power.load_management",
+        "transportation.crew_launch_readiness",
+        "transportation.entry_descent_landing",
+        "transportation.planetary_return"
+       ],
+       "missing_gates": [
+        "gate.transport.crewed_transit",
+        "gate.habitation.long_duration",
+        "gate.life_support.closed_loop",
+        "gate.power.surface_power",
+        "gate.radiation.protection",
+        "gate.communications.deep_space",
+        "gate.autonomy.fault_management",
+        "gate.logistics.mass_budget",
+        "gate.edl.crewed_landing",
+        "gate.return.capability"
+       ],
+       "profile": "mars_01_human_mission"
+      }
+     },
+     "missions": [],
+     "order": 8,
+     "replayable": false,
+     "status": "locked",
+     "summary": "The first human mission to Mars (content deferred).",
+     "title": "MARS-01"
+    }
+   ]
+  },
+  "clock": {
+   "elapsed_hours": 0.0,
+   "max_catchup_ticks": 24,
+   "max_ticks": 240,
+   "mode": "PAUSED",
+   "pause_reason": "not_started",
+   "seconds_per_tick": null,
+   "sim_tick": 0,
+   "started": false,
+   "tick_hours": 1.0,
+   "ticks_per_second": 0.0
+  },
+  "discoveries": [],
+  "insights": [
+   {
+    "concept": "Oxygen budget",
+    "explanation": "A person at rest consumes a little under a kilogram of oxygen per day; life support must produce or store that much for every crew member, every day.",
+    "id": "life_support.oxygen_budget",
+    "matters_later": "Closing the oxygen loop is what makes long missions possible.",
+    "observation": "Oxygen days remaining fall steadily with four crew aboard.",
+    "provenance": {
+     "classification": "verified_evidence",
+     "evidence_refs": [
+      "bvad_o2_consumption"
+     ],
+     "note": null
+    },
+    "related_objects": [],
+    "simplification": "Constant consumption regardless of activity.",
+    "title": "A crew breathes a predictable amount",
+    "why_available": true
+   }
+  ],
+  "mission": {
+   "alerts": [],
+   "authorization": null,
+   "completion": "simulation_concluded",
+   "id": "luna_01.the_last_light",
+   "objectives": [
+    {
+     "category": "primary",
+     "id": "crew_survival",
+     "message_key": "objective.crew_survival",
+     "required": true,
+     "status": "pending"
+    },
+    {
+     "category": "primary",
+     "id": "science_return",
+     "message_key": "objective.science_return",
+     "required": true,
+     "status": "pending"
+    },
+    {
+     "category": "primary",
+     "id": "data_return",
+     "message_key": "objective.data_return",
+     "required": true,
+     "status": "pending"
+    },
+    {
+     "category": "safety",
+     "id": "radiation_safety",
+     "message_key": "objective.radiation_safety",
+     "required": false,
+     "status": "pending"
+    },
+    {
+     "category": "safety",
+     "id": "crew_health",
+     "message_key": "objective.crew_health",
+     "required": false,
+     "status": "pending"
+    },
+    {
+     "category": "stability",
+     "id": "power_continuity",
+     "message_key": "objective.power_continuity",
+     "required": false,
+     "status": "pending"
+    },
+    {
+     "category": "stability",
+     "id": "life_support_stability",
+     "message_key": "objective.life_support_stability",
+     "required": false,
+     "status": "pending"
+    },
+    {
+     "category": "efficiency",
+     "id": "reserves_at_end",
+     "message_key": "objective.reserves_at_end",
+     "required": false,
+     "status": "pending"
+    },
+    {
+     "category": "science",
+     "id": "science_quality",
+     "message_key": "objective.science_quality",
+     "required": false,
+     "status": "pending"
+    },
+    {
+     "category": "discovery",
+     "id": "full_survey",
+     "message_key": "objective.full_survey",
+     "required": false,
+     "status": "pending"
+    }
+   ],
+   "outcome_tier": null,
+   "phase": "LUNA_01",
+   "resources": [
+    {
+     "id": "power",
+     "label": "Power",
+     "state": "nominal",
+     "unit": "kW",
+     "value": 0.0,
+     "warning_state": "none"
+    },
+    {
+     "id": "battery",
+     "label": "Battery",
+     "state": "nominal",
+     "unit": "fraction",
+     "value": 0.9,
+     "warning_state": "none"
+    },
+    {
+     "id": "oxygen",
+     "label": "Oxygen",
+     "state": "nominal",
+     "unit": "days",
+     "value": 7.33,
+     "warning_state": "none"
+    },
+    {
+     "id": "co2",
+     "label": "CO2",
+     "state": "nominal",
+     "unit": "ppm",
+     "value": 1925.0,
+     "warning_state": "none"
+    },
+    {
+     "id": "water",
+     "label": "Water",
+     "state": "nominal",
+     "unit": "days",
+     "value": 6.9,
+     "warning_state": "none"
+    },
+    {
+     "id": "food",
+     "label": "Food",
+     "state": "nominal",
+     "unit": "days",
+     "value": 11.59,
+     "warning_state": "none"
+    },
+    {
+     "id": "thermal",
+     "label": "Habitat temperature",
+     "state": "nominal",
+     "unit": "°C",
+     "value": 21.0,
+     "warning_state": "none"
+    },
+    {
+     "id": "communications",
+     "label": "Communications",
+     "state": "nominal",
+     "unit": "bool",
+     "value": 1.0,
+     "warning_state": "none"
+    },
+    {
+     "id": "science",
+     "label": "Science",
+     "state": "nominal",
+     "unit": "points",
+     "value": 0.0,
+     "warning_state": "none"
+    },
+    {
+     "id": "radiation",
+     "label": "Radiation",
+     "state": "nominal",
+     "unit": "mSv",
+     "value": 0.0,
+     "warning_state": "none"
+    },
+    {
+     "id": "rover",
+     "label": "Rover",
+     "state": "nominal",
+     "unit": "kWh",
+     "value": 36.0,
+     "warning_state": "none"
+    }
+   ],
+   "simulation_status": "active",
+   "status": "active",
+   "summary": "Keep the ASTERIA crew safe and the science alive as the Sun sets on the lunar south pole.",
+   "title": "The Last Light"
+  },
+  "protocol": "odyssey.game.v1",
+  "resume": {
+   "events_path": "/api/game/v1/sessions/gs_aaaaaaaaaaaaaaaaaaaaaaaaam/events",
+   "last_seq": 69,
+   "restore_path": "/api/game/v1/sessions/gs_aaaaaaaaaaaaaaaaaaaaaaaaam/restore",
+   "retained_events": 2000,
+   "ws_path": "/api/game/v1/ws/sessions/gs_aaaaaaaaaaaaaaaaaaaaaaaaam"
+  },
+  "session": {
+   "content_id": "odyssey.campaign",
+   "content_version": "1.0.0",
+   "created_at": "2026-10-27T06:00:00+00:00",
+   "id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+   "last_seq": 69,
+   "state_version": 23,
+   "status": "active"
+  },
+  "state_version": 23,
+  "timeline": {
+   "attempt": 1,
+   "id": "gt_aaaaaaaaaaaaaaaaaaaaaaaabe",
+   "mission_id": "luna_01.the_last_light",
+   "parent_timeline_id": null,
+   "status": "active"
+  },
+  "world": {
+   "containers": [
+    {
+     "id": "luna.asteria.lander.cargo_hold",
+     "items": [
+      {
+       "condition": "nominal",
+       "item": "cargo.water_tank",
+       "mass_kg": 112.0,
+       "quantity": 2
+      },
+      {
+       "condition": "nominal",
+       "item": "spare.habitat_spares_kit",
+       "mass_kg": 25.0,
+       "quantity": 1
+      }
+     ],
+     "location": "luna.asteria.lander",
+     "mass_kg": 137.0,
+     "mass_limit_kg": 300.0,
+     "name": "Lander cargo hold",
+     "role": "cargo",
+     "vehicle": "luna.asteria.lander",
+     "volume_l": 200.0,
+     "volume_limit_l": 900.0
+    },
+    {
+     "id": "luna.asteria.player_kit",
+     "items": [
+      {
+       "condition": "nominal",
+       "item": "tool.diagnostic_scanner",
+       "mass_kg": 1.5,
+       "quantity": 1
+      }
+     ],
+     "location": "luna.asteria.habitat",
+     "mass_kg": 1.5,
+     "mass_limit_kg": 25.0,
+     "name": "Personal kit",
+     "role": "inventory",
+     "vehicle": null,
+     "volume_l": 3.0,
+     "volume_limit_l": 60.0
+    }
+   ],
+   "crew": [
+    {
+     "health_band": "nominal",
+     "id": "maya",
+     "intent": null,
+     "involved_incidents": [],
+     "location": null,
+     "name": "Maya",
+     "role": "Systems Engineer",
+     "specialty": "power"
+    },
+    {
+     "health_band": "nominal",
+     "id": "omar",
+     "intent": null,
+     "involved_incidents": [],
+     "location": null,
+     "name": "Omar",
+     "role": "Planetary Scientist",
+     "specialty": "science"
+    },
+    {
+     "health_band": "nominal",
+     "id": "sofia",
+     "intent": null,
+     "involved_incidents": [],
+     "location": null,
+     "name": "Sofia",
+     "role": "Life Support Specialist",
+     "specialty": "life_support"
+    },
+    {
+     "health_band": "nominal",
+     "id": "jay",
+     "intent": null,
+     "involved_incidents": [],
+     "location": null,
+     "name": "Jay",
+     "role": "Mission Operations",
+     "specialty": "operations"
+    }
+   ],
+   "id": "luna_01",
+   "incidents": [],
+   "locations": [
+    {
+     "access": "open",
+     "id": "luna.asteria.habitat",
+     "kind": "facility",
+     "name": "Habitat module",
+     "region": "luna.asteria.outpost",
+     "visited": true
+    },
+    {
+     "access": "open",
+     "id": "luna.asteria.shelter",
+     "kind": "facility",
+     "name": "Radiation shelter",
+     "region": "luna.asteria.outpost",
+     "visited": false
+    },
+    {
+     "access": "open",
+     "id": "luna.asteria.lander",
+     "kind": "vehicle_interior",
+     "name": "ASTERIA lander",
+     "region": "luna.asteria.outpost",
+     "visited": false
+    },
+    {
+     "access": "open",
+     "id": "luna.asteria.solar_field",
+     "kind": "site",
+     "name": "Solar field",
+     "region": "luna.asteria.surface",
+     "visited": false
+    },
+    {
+     "access": "open",
+     "id": "luna.asteria.rover_depot",
+     "kind": "site",
+     "name": "Rover depot",
+     "region": "luna.asteria.surface",
+     "visited": false
+    },
+    {
+     "access": "open",
+     "id": "luna.asteria.comms_relay_site",
+     "kind": "site",
+     "name": "Comms relay mast",
+     "region": "luna.asteria.surface",
+     "visited": false
+    },
+    {
+     "access": "open",
+     "id": "luna.asteria.regolith_site",
+     "kind": "site",
+     "name": "Regolith survey site",
+     "region": "luna.asteria.surface",
+     "visited": false
+    },
+    {
+     "access": "open",
+     "id": "luna.asteria.ice_site",
+     "kind": "site",
+     "name": "Shadowed ice margin",
+     "region": "luna.asteria.surface",
+     "visited": false
+    },
+    {
+     "access": "open",
+     "id": "luna.asteria.crater_07",
+     "kind": "site",
+     "name": "Crater 07",
+     "region": "luna.asteria.surface",
+     "visited": false
+    }
+   ],
+   "name": "ASTERIA Outpost",
+   "objects": [
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": true,
+     "id": "luna.asteria.habitat.core",
+     "infrastructure_state": "operational",
+     "infrastructure_type": "infra.surface_habitat",
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "system.inspect",
+       "available": true,
+       "params": {},
+       "reason": null
+      },
+      {
+       "action": "system.set_mode",
+       "available": true,
+       "params": {
+        "mode": [
+         "eco",
+         "nominal"
+        ]
+       },
+       "reason": null
+      }
+     ],
+     "kind": "infrastructure",
+     "location": "luna.asteria.habitat",
+     "mode": "nominal",
+     "modules": [],
+     "name": "Habitat core",
+     "parent": null,
+     "power": "powered",
+     "status": "operational",
+     "tags": [
+      "habitat",
+      "load",
+      "critical"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.shelter.module",
+     "infrastructure_state": "operational",
+     "infrastructure_type": "infra.radiation_shelter",
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "system.inspect",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      }
+     ],
+     "kind": "infrastructure",
+     "location": "luna.asteria.shelter",
+     "mode": null,
+     "modules": [
+      {
+       "item": "module.radiation_shelter_liner",
+       "slot": "shielding",
+       "state": "operational"
+      }
+     ],
+     "name": "Storm shelter",
+     "parent": null,
+     "power": null,
+     "status": "nominal",
+     "tags": [
+      "radiation",
+      "shelter"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": true,
+     "id": "luna.asteria.solar_field.array",
+     "infrastructure_state": "operational",
+     "infrastructure_type": "infra.solar_power_field",
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "system.inspect",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      },
+      {
+       "action": "repair.perform",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      },
+      {
+       "action": "system.set_mode",
+       "available": false,
+       "params": {
+        "crew": [
+         "maya",
+         "omar",
+         "sofia",
+         "jay"
+        ]
+       },
+       "reason": "not_at_location"
+      }
+     ],
+     "kind": "infrastructure",
+     "location": "luna.asteria.solar_field",
+     "mode": null,
+     "modules": [],
+     "name": "Solar array",
+     "parent": null,
+     "power": null,
+     "status": "operational",
+     "tags": [
+      "power",
+      "generation",
+      "critical"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.habitat.battery",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "system.inspect",
+       "available": true,
+       "params": {},
+       "reason": null
+      },
+      {
+       "action": "repair.perform",
+       "available": false,
+       "params": {},
+       "reason": "fault_not_diagnosed"
+      }
+     ],
+     "kind": "system",
+     "location": "luna.asteria.habitat",
+     "mode": null,
+     "modules": [],
+     "name": "Outpost battery",
+     "parent": null,
+     "power": null,
+     "status": "operational",
+     "tags": [
+      "power",
+      "storage"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.comms_relay_site.relay",
+     "infrastructure_state": "operational",
+     "infrastructure_type": "infra.surface_comms_relay",
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "system.inspect",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      },
+      {
+       "action": "infrastructure.activate",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      },
+      {
+       "action": "infrastructure.deactivate",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      },
+      {
+       "action": "system.set_mode",
+       "available": false,
+       "params": {
+        "mode": [
+         "off",
+         "eco",
+         "nominal"
+        ]
+       },
+       "reason": "not_at_location"
+      },
+      {
+       "action": "repair.perform",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      }
+     ],
+     "kind": "infrastructure",
+     "location": "luna.asteria.comms_relay_site",
+     "mode": "nominal",
+     "modules": [],
+     "name": "Comms relay",
+     "parent": null,
+     "power": "powered",
+     "status": "operational",
+     "tags": [
+      "communications",
+      "load"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": true,
+     "id": "luna.asteria.habitat.co2_scrubber",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "system.inspect",
+       "available": true,
+       "params": {},
+       "reason": null
+      },
+      {
+       "action": "system.set_mode",
+       "available": true,
+       "params": {
+        "mode": [
+         "off",
+         "eco",
+         "nominal",
+         "boost"
+        ]
+       },
+       "reason": null
+      },
+      {
+       "action": "repair.perform",
+       "available": false,
+       "params": {},
+       "reason": "fault_not_diagnosed"
+      }
+     ],
+     "kind": "system",
+     "location": "luna.asteria.habitat",
+     "mode": "nominal",
+     "modules": [],
+     "name": "CO2 scrubber",
+     "parent": null,
+     "power": "powered",
+     "status": "operational",
+     "tags": [
+      "life_support",
+      "load",
+      "critical"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": true,
+     "id": "luna.asteria.habitat.oxygen_generator",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "system.inspect",
+       "available": true,
+       "params": {},
+       "reason": null
+      },
+      {
+       "action": "system.set_mode",
+       "available": true,
+       "params": {
+        "mode": [
+         "off",
+         "eco",
+         "nominal",
+         "boost"
+        ]
+       },
+       "reason": null
+      },
+      {
+       "action": "repair.perform",
+       "available": false,
+       "params": {},
+       "reason": "fault_not_diagnosed"
+      }
+     ],
+     "kind": "system",
+     "location": "luna.asteria.habitat",
+     "mode": "nominal",
+     "modules": [],
+     "name": "Oxygen generator",
+     "parent": null,
+     "power": "powered",
+     "status": "operational",
+     "tags": [
+      "life_support",
+      "load",
+      "critical"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.habitat.heater",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "system.inspect",
+       "available": true,
+       "params": {},
+       "reason": null
+      },
+      {
+       "action": "system.set_mode",
+       "available": true,
+       "params": {
+        "mode": [
+         "off",
+         "eco",
+         "nominal"
+        ]
+       },
+       "reason": null
+      },
+      {
+       "action": "repair.perform",
+       "available": false,
+       "params": {},
+       "reason": "fault_not_diagnosed"
+      }
+     ],
+     "kind": "system",
+     "location": "luna.asteria.habitat",
+     "mode": "nominal",
+     "modules": [],
+     "name": "Habitat heaters",
+     "parent": null,
+     "power": "powered",
+     "status": "operational",
+     "tags": [
+      "thermal",
+      "load"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.habitat.water_processor",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "system.inspect",
+       "available": true,
+       "params": {},
+       "reason": null
+      },
+      {
+       "action": "system.set_mode",
+       "available": true,
+       "params": {
+        "mode": [
+         "off",
+         "eco",
+         "nominal"
+        ]
+       },
+       "reason": null
+      },
+      {
+       "action": "repair.perform",
+       "available": false,
+       "params": {},
+       "reason": "fault_not_diagnosed"
+      }
+     ],
+     "kind": "system",
+     "location": "luna.asteria.habitat",
+     "mode": "nominal",
+     "modules": [],
+     "name": "Water processor",
+     "parent": null,
+     "power": "powered",
+     "status": "operational",
+     "tags": [
+      "life_support",
+      "load"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.habitat.science_payload",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "system.inspect",
+       "available": true,
+       "params": {},
+       "reason": null
+      },
+      {
+       "action": "system.set_mode",
+       "available": true,
+       "params": {
+        "mode": [
+         "off",
+         "eco",
+         "nominal",
+         "boost"
+        ]
+       },
+       "reason": null
+      }
+     ],
+     "kind": "system",
+     "location": "luna.asteria.habitat",
+     "mode": "nominal",
+     "modules": [],
+     "name": "Science payload",
+     "parent": null,
+     "power": "powered",
+     "status": "operational",
+     "tags": [
+      "science",
+      "load"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.regolith_site.survey",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "science.instrument_operate",
+       "available": false,
+       "params": {
+        "operation": [
+         "start",
+         "stop"
+        ]
+       },
+       "reason": "not_at_location"
+      },
+      {
+       "action": "science.sample_collect",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      }
+     ],
+     "kind": "science_site",
+     "location": "luna.asteria.regolith_site",
+     "mode": null,
+     "modules": [],
+     "name": "Regolith survey instruments",
+     "parent": null,
+     "power": null,
+     "status": "nominal",
+     "tags": [
+      "science"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.ice_site.drill",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "science.instrument_operate",
+       "available": false,
+       "params": {
+        "operation": [
+         "start",
+         "stop"
+        ]
+       },
+       "reason": "not_at_location"
+      }
+     ],
+     "kind": "science_site",
+     "location": "luna.asteria.ice_site",
+     "mode": null,
+     "modules": [],
+     "name": "Ice coring drill",
+     "parent": null,
+     "power": null,
+     "status": "nominal",
+     "tags": [
+      "science",
+      "isru"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.crater_07.rim",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "world.poi_discovered",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      }
+     ],
+     "kind": "poi",
+     "location": "luna.asteria.crater_07",
+     "mode": null,
+     "modules": [],
+     "name": "Crater 07 rim",
+     "parent": null,
+     "power": null,
+     "status": "nominal",
+     "tags": [
+      "terrain",
+      "science"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": 36.0,
+     "critical": false,
+     "id": "luna.asteria.rover_depot.rover",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "vehicle.inspect",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      },
+      {
+       "action": "system.set_mode",
+       "available": false,
+       "params": {
+        "mode": [
+         "off",
+         "eco",
+         "nominal"
+        ]
+       },
+       "reason": "not_at_location"
+      },
+      {
+       "action": "vehicle.dispatch",
+       "available": false,
+       "params": {
+        "order": [
+         "traverse_far_crater",
+         "recall",
+         "transfer_energy",
+         "stow",
+         "unstow"
+        ]
+       },
+       "reason": "not_at_location"
+      }
+     ],
+     "kind": "vehicle",
+     "location": "luna.asteria.rover_depot",
+     "mode": "nominal",
+     "modules": [],
+     "name": "Surface rover",
+     "parent": null,
+     "power": "powered",
+     "status": "operational",
+     "tags": [
+      "mobility",
+      "vehicle"
+     ],
+     "vehicle_class": "vehicle.asteria_surface_rover"
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.lander",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [
+      {
+       "action": "vehicle.inspect",
+       "available": false,
+       "params": {},
+       "reason": "not_at_location"
+      }
+     ],
+     "kind": "vehicle",
+     "location": "luna.asteria.lander",
+     "mode": null,
+     "modules": [
+      {
+       "item": "module.radiation_shelter_liner",
+       "slot": "radiation_protection",
+       "state": "installed"
+      }
+     ],
+     "name": "ASTERIA lander",
+     "parent": null,
+     "power": null,
+     "status": "nominal",
+     "tags": [
+      "spacecraft"
+     ],
+     "vehicle_class": "vehicle.asteria_crew_lander"
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.lander.cargo_hold",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [],
+     "kind": "container",
+     "location": "luna.asteria.lander",
+     "mode": null,
+     "modules": [],
+     "name": "Lander cargo hold",
+     "parent": "luna.asteria.lander",
+     "power": null,
+     "status": "nominal",
+     "tags": [
+      "cargo"
+     ],
+     "vehicle_class": null
+    },
+    {
+     "access": "open",
+     "charge_kwh": null,
+     "critical": false,
+     "id": "luna.asteria.player_kit",
+     "infrastructure_state": null,
+     "infrastructure_type": null,
+     "inspected": false,
+     "interactions": [],
+     "kind": "container",
+     "location": "luna.asteria.habitat",
+     "mode": null,
+     "modules": [],
+     "name": "Personal kit",
+     "parent": null,
+     "power": null,
+     "status": "nominal",
+     "tags": [
+      "carried"
+     ],
+     "vehicle_class": null
+    }
+   ],
+   "player_location": "luna.asteria.habitat",
+   "recent_cues": []
+  }
+ },
+ "while_disconnected": {
+  "event_types": {
+   "black_box.ready": 1,
+   "campaign.updated": 1,
+   "mission.transitioned": 1
+  },
+  "from_tick": 0,
+  "ticks_advanced": 0,
+  "to_tick": 0
+ }
+}

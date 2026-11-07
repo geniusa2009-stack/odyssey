@@ -1,0 +1,616 @@
+{
+ "base_tick": 123,
+ "branches": [
+  {
+   "assumptions": [
+    "No further decisions are made after the candidate decisions.",
+    "Projection covers 24 ticks (24 h) from tick 123.",
+    "Random faults are sampled with 4 independent derived seeds; end values are medians across samples.",
+    "The simulation is a simplified educational model (see SIMULATION_MODEL.md).",
+    "Unforeseeable events (for example space weather, communication outages and equipment faults) are not anticipated."
+   ],
+   "concludes_within_horizon": false,
+   "confidence": {
+    "horizon_factor": 0.75,
+    "knowledge_factor": 0.85,
+    "level": "medium",
+    "model_factor": 0.8,
+    "provisional": true,
+    "samples": 4,
+    "score": 0.51,
+    "spread_factor": 1.0
+   },
+   "decisions": [],
+   "explanations": [
+    {
+     "counterfactual": null,
+     "steps": [
+      "No upstream degradation found: driven by this subsystem's own dynamics (e.g. normal consumption)",
+      "Projected end-of-mission dose if the crew stays in the habitat at background (tick 124)",
+      "Mission dose limit minus the projected end-of-mission dose (tick 126)"
+     ],
+     "target_metric": "crew.projected_dose_msv"
+    },
+    {
+     "counterfactual": null,
+     "steps": [
+      "No upstream degradation found: driven by this subsystem's own dynamics (e.g. normal consumption)",
+      "Projected end-of-mission dose if the crew stays in the habitat at background (tick 124)",
+      "Mission dose limit minus the projected end-of-mission dose (tick 127)"
+     ],
+     "target_metric": "crew.projected_dose_msv"
+    }
+   ],
+   "is_baseline": true,
+   "label": "baseline",
+   "objectives": [
+    {
+     "achieved_fraction": 0.0,
+     "category": "primary",
+     "failed_fraction": 0.0,
+     "objective": "crew_survival",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 1.0,
+     "category": "primary",
+     "failed_fraction": 0.0,
+     "objective": "science_return",
+     "projected_status": "achieved",
+     "status_now": "achieved"
+    },
+    {
+     "achieved_fraction": 1.0,
+     "category": "primary",
+     "failed_fraction": 0.0,
+     "objective": "data_return",
+     "projected_status": "achieved",
+     "status_now": "achieved"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "safety",
+     "failed_fraction": 1.0,
+     "objective": "radiation_safety",
+     "projected_status": "failed",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "safety",
+     "failed_fraction": 0.0,
+     "objective": "crew_health",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "stability",
+     "failed_fraction": 0.0,
+     "objective": "power_continuity",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "stability",
+     "failed_fraction": 0.0,
+     "objective": "life_support_stability",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "efficiency",
+     "failed_fraction": 0.0,
+     "objective": "reserves_at_end",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "science",
+     "failed_fraction": 0.0,
+     "objective": "science_quality",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "discovery",
+     "failed_fraction": 0.0,
+     "objective": "full_survey",
+     "projected_status": "pending",
+     "status_now": "pending"
+    }
+   ],
+   "projected_outcome": null,
+   "projected_phase": null,
+   "projected_phase_withheld": true,
+   "rejection": null,
+   "resources": [
+    {
+     "delta": 0.005,
+     "end": 0.974,
+     "end_max": 0.974,
+     "end_min": 0.974,
+     "label": "Battery state of charge",
+     "metric": "power.battery_soc",
+     "start": 0.97,
+     "unit": "fraction",
+     "vs_baseline": null,
+     "worst": 0.97,
+     "worst_tick": 123
+    },
+    {
+     "delta": 0.0,
+     "end": 21.0,
+     "end_max": 21.0,
+     "end_min": 21.0,
+     "label": "Habitat temperature",
+     "metric": "thermal.habitat_temp_c",
+     "start": 21.0,
+     "unit": "°C",
+     "vs_baseline": null,
+     "worst": 21.0,
+     "worst_tick": 123
+    },
+    {
+     "delta": 0.11,
+     "end": 8.18,
+     "end_max": 8.18,
+     "end_min": 8.18,
+     "label": "Oxygen reserve (days of crew use)",
+     "metric": "life_support.oxygen_days",
+     "start": 8.07,
+     "unit": "days",
+     "vs_baseline": null,
+     "worst": 8.07,
+     "worst_tick": 123
+    },
+    {
+     "delta": 0.0,
+     "end": 1650.0,
+     "end_max": 1650.0,
+     "end_min": 1650.0,
+     "label": "Cabin CO2 concentration",
+     "metric": "life_support.co2_ppm",
+     "start": 1650.0,
+     "unit": "ppm",
+     "vs_baseline": null,
+     "worst": 1650.0,
+     "worst_tick": 123
+    },
+    {
+     "delta": -0.36,
+     "end": 4.79,
+     "end_max": 4.79,
+     "end_min": 4.79,
+     "label": "Water reserve (days of gross crew use, no recycling)",
+     "metric": "life_support.water_days",
+     "start": 5.16,
+     "unit": "days",
+     "vs_baseline": null,
+     "worst": 4.79,
+     "worst_tick": 147
+    },
+    {
+     "delta": -1.0,
+     "end": 5.46,
+     "end_max": 5.46,
+     "end_min": 5.46,
+     "label": "Food reserve (days at full ration)",
+     "metric": "food.food_days",
+     "start": 6.46,
+     "unit": "days",
+     "vs_baseline": null,
+     "worst": 5.46,
+     "worst_tick": 147
+    },
+    {
+     "delta": -0.088,
+     "end": 0.895,
+     "end_max": 0.895,
+     "end_min": 0.895,
+     "label": "Lowest crew health",
+     "metric": "crew.min_health",
+     "start": 0.983,
+     "unit": "index",
+     "vs_baseline": null,
+     "worst": 0.861,
+     "worst_tick": 130
+    },
+    {
+     "delta": 10.16,
+     "end": 16.11,
+     "end_max": 16.11,
+     "end_min": 16.11,
+     "label": "Highest crew dose",
+     "metric": "crew.max_dose_msv",
+     "start": 5.95,
+     "unit": "mSv",
+     "vs_baseline": null,
+     "worst": 16.11,
+     "worst_tick": 147
+    },
+    {
+     "delta": 0.0,
+     "end": 84.0,
+     "end_max": 84.0,
+     "end_min": 84.0,
+     "label": "Science return",
+     "metric": "science.points",
+     "start": 84.0,
+     "unit": "points",
+     "vs_baseline": null,
+     "worst": 84.0,
+     "worst_tick": 123
+    },
+    {
+     "delta": 0.0,
+     "end": 1360.0,
+     "end_max": 1360.0,
+     "end_min": 1360.0,
+     "label": "Science data downlinked",
+     "metric": "comms.data_downlinked_mb",
+     "start": 1360.0,
+     "unit": "MB",
+     "vs_baseline": null,
+     "worst": 1360.0,
+     "worst_tick": 123
+    },
+    {
+     "delta": 0.612,
+     "end": 0.612,
+     "end_max": 0.612,
+     "end_min": 0.612,
+     "label": "Composite mission risk indicator",
+     "metric": "risk.mission",
+     "start": 0.0,
+     "unit": "index",
+     "vs_baseline": null,
+     "worst": 0.616,
+     "worst_tick": 130
+    },
+    {
+     "delta": -9.34,
+     "end": -4.29,
+     "end_max": -4.29,
+     "end_min": -4.29,
+     "label": "Mission dose limit minus the projected end-of-mission dose",
+     "metric": "crew.projected_dose_margin_msv",
+     "start": 5.05,
+     "unit": "mSv",
+     "vs_baseline": null,
+     "worst": -4.29,
+     "worst_tick": 144
+    }
+   ],
+   "risk": {
+    "critical_warning_fraction": 1.0,
+    "end_index": 0.612,
+    "peak_index": 0.616,
+    "peak_tick": 130
+   },
+   "valid": true,
+   "warnings": [
+    {
+     "alert_id": "dose_budget_low",
+     "first_tick": 125,
+     "hours_from_now": 2.0,
+     "introduced_by_candidate": false,
+     "metric": "crew.projected_dose_margin_msv",
+     "sample_fraction": 1.0,
+     "severity": "warning"
+    },
+    {
+     "alert_id": "dose_budget_exceeded",
+     "first_tick": 126,
+     "hours_from_now": 3.0,
+     "introduced_by_candidate": false,
+     "metric": "crew.projected_dose_margin_msv",
+     "sample_fraction": 1.0,
+     "severity": "critical"
+    }
+   ]
+  },
+  {
+   "assumptions": [
+    "No further decisions are made after the candidate decisions.",
+    "Projection covers 24 ticks (24 h) from tick 123.",
+    "Random faults are sampled with 4 independent derived seeds; end values are medians across samples.",
+    "The simulation is a simplified educational model (see SIMULATION_MODEL.md).",
+    "Unforeseeable events (for example space weather, communication outages and equipment faults) are not anticipated."
+   ],
+   "concludes_within_horizon": false,
+   "confidence": {
+    "horizon_factor": 0.75,
+    "knowledge_factor": 0.85,
+    "level": "medium",
+    "model_factor": 0.8,
+    "provisional": true,
+    "samples": 4,
+    "score": 0.51,
+    "spread_factor": 1.0
+   },
+   "decisions": [
+    {
+     "option_id": "set_crew_location:shelter",
+     "parameters": {}
+    }
+   ],
+   "explanations": [],
+   "is_baseline": false,
+   "label": "shelter",
+   "objectives": [
+    {
+     "achieved_fraction": 0.0,
+     "category": "primary",
+     "failed_fraction": 0.0,
+     "objective": "crew_survival",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 1.0,
+     "category": "primary",
+     "failed_fraction": 0.0,
+     "objective": "science_return",
+     "projected_status": "achieved",
+     "status_now": "achieved"
+    },
+    {
+     "achieved_fraction": 1.0,
+     "category": "primary",
+     "failed_fraction": 0.0,
+     "objective": "data_return",
+     "projected_status": "achieved",
+     "status_now": "achieved"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "safety",
+     "failed_fraction": 0.0,
+     "objective": "radiation_safety",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "safety",
+     "failed_fraction": 0.0,
+     "objective": "crew_health",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "stability",
+     "failed_fraction": 0.0,
+     "objective": "power_continuity",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "stability",
+     "failed_fraction": 0.0,
+     "objective": "life_support_stability",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "efficiency",
+     "failed_fraction": 0.0,
+     "objective": "reserves_at_end",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "science",
+     "failed_fraction": 0.0,
+     "objective": "science_quality",
+     "projected_status": "pending",
+     "status_now": "pending"
+    },
+    {
+     "achieved_fraction": 0.0,
+     "category": "discovery",
+     "failed_fraction": 0.0,
+     "objective": "full_survey",
+     "projected_status": "pending",
+     "status_now": "pending"
+    }
+   ],
+   "projected_outcome": null,
+   "projected_phase": null,
+   "projected_phase_withheld": true,
+   "rejection": null,
+   "resources": [
+    {
+     "delta": 0.005,
+     "end": 0.974,
+     "end_max": 0.974,
+     "end_min": 0.974,
+     "label": "Battery state of charge",
+     "metric": "power.battery_soc",
+     "start": 0.97,
+     "unit": "fraction",
+     "vs_baseline": 0.0,
+     "worst": 0.97,
+     "worst_tick": 123
+    },
+    {
+     "delta": 0.0,
+     "end": 21.0,
+     "end_max": 21.0,
+     "end_min": 21.0,
+     "label": "Habitat temperature",
+     "metric": "thermal.habitat_temp_c",
+     "start": 21.0,
+     "unit": "°C",
+     "vs_baseline": 0.0,
+     "worst": 21.0,
+     "worst_tick": 123
+    },
+    {
+     "delta": 0.11,
+     "end": 8.18,
+     "end_max": 8.18,
+     "end_min": 8.18,
+     "label": "Oxygen reserve (days of crew use)",
+     "metric": "life_support.oxygen_days",
+     "start": 8.07,
+     "unit": "days",
+     "vs_baseline": 0.0,
+     "worst": 8.07,
+     "worst_tick": 123
+    },
+    {
+     "delta": 0.0,
+     "end": 1650.0,
+     "end_max": 1650.0,
+     "end_min": 1650.0,
+     "label": "Cabin CO2 concentration",
+     "metric": "life_support.co2_ppm",
+     "start": 1650.0,
+     "unit": "ppm",
+     "vs_baseline": 0.0,
+     "worst": 1650.0,
+     "worst_tick": 123
+    },
+    {
+     "delta": -0.36,
+     "end": 4.79,
+     "end_max": 4.79,
+     "end_min": 4.79,
+     "label": "Water reserve (days of gross crew use, no recycling)",
+     "metric": "life_support.water_days",
+     "start": 5.16,
+     "unit": "days",
+     "vs_baseline": 0.0,
+     "worst": 4.79,
+     "worst_tick": 147
+    },
+    {
+     "delta": -1.0,
+     "end": 5.46,
+     "end_max": 5.46,
+     "end_min": 5.46,
+     "label": "Food reserve (days at full ration)",
+     "metric": "food.food_days",
+     "start": 6.46,
+     "unit": "days",
+     "vs_baseline": 0.0,
+     "worst": 5.46,
+     "worst_tick": 147
+    },
+    {
+     "delta": 0.017,
+     "end": 1.0,
+     "end_max": 1.0,
+     "end_min": 1.0,
+     "label": "Lowest crew health",
+     "metric": "crew.min_health",
+     "start": 0.983,
+     "unit": "index",
+     "vs_baseline": 0.105,
+     "worst": 0.983,
+     "worst_tick": 123
+    },
+    {
+     "delta": 2.54,
+     "end": 8.49,
+     "end_max": 8.49,
+     "end_min": 8.49,
+     "label": "Highest crew dose",
+     "metric": "crew.max_dose_msv",
+     "start": 5.95,
+     "unit": "mSv",
+     "vs_baseline": -7.62,
+     "worst": 8.49,
+     "worst_tick": 147
+    },
+    {
+     "delta": 0.0,
+     "end": 84.0,
+     "end_max": 84.0,
+     "end_min": 84.0,
+     "label": "Science return",
+     "metric": "science.points",
+     "start": 84.0,
+     "unit": "points",
+     "vs_baseline": 0.0,
+     "worst": 84.0,
+     "worst_tick": 123
+    },
+    {
+     "delta": 0.0,
+     "end": 1360.0,
+     "end_max": 1360.0,
+     "end_min": 1360.0,
+     "label": "Science data downlinked",
+     "metric": "comms.data_downlinked_mb",
+     "start": 1360.0,
+     "unit": "MB",
+     "vs_baseline": 0.0,
+     "worst": 1360.0,
+     "worst_tick": 123
+    },
+    {
+     "delta": 0.22,
+     "end": 0.22,
+     "end_max": 0.22,
+     "end_min": 0.22,
+     "label": "Composite mission risk indicator",
+     "metric": "risk.mission",
+     "start": 0.0,
+     "unit": "index",
+     "vs_baseline": -0.392,
+     "worst": 0.253,
+     "worst_tick": 130
+    },
+    {
+     "delta": -1.72,
+     "end": 3.33,
+     "end_max": 3.33,
+     "end_min": 3.33,
+     "label": "Mission dose limit minus the projected end-of-mission dose",
+     "metric": "crew.projected_dose_margin_msv",
+     "start": 5.05,
+     "unit": "mSv",
+     "vs_baseline": 7.62,
+     "worst": 2.89,
+     "worst_tick": 130
+    }
+   ],
+   "risk": {
+    "critical_warning_fraction": 0.0,
+    "end_index": 0.22,
+    "peak_index": 0.253,
+    "peak_tick": 130
+   },
+   "valid": true,
+   "warnings": []
+  }
+ ],
+ "horizon": {
+  "clipped_to_mission_end": false,
+  "hours": 24.0,
+  "projected_ticks": 24,
+  "requested_ticks": 24
+ },
+ "knowledge_boundary": {
+  "anticipates_unforeseeable_events": false,
+  "prediction_mode": "known_only",
+  "statement": "Projections use only what is known now: the current state, the mission plan, and random faults sampled with seeds derived for the projection (never the mission's own random sequence). Unforeseeable events are never anticipated, whether or not any remain.",
+  "uses_mission_random_sequence": false
+ },
+ "request_hash": "34b212a5d9d2e51e5ca13a9acd8d808566101140ed11ea8e07539388249fd4a8",
+ "session_id": "d0d00000-0000-0000-0000-000000000003",
+ "state_version": 6,
+ "timeline_id": "d0d00000-0000-0000-0000-000000000004"
+}

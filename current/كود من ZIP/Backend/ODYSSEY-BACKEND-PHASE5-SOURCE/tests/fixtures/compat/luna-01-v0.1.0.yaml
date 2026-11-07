@@ -1,0 +1,395 @@
+# LUNA-01 — THE LAST LIGHT
+#
+# Technical scenario definition. Contains NO story dialogue: every event/alert/phase carries a
+# stable `message_key` that the (future) frontend maps to copy.
+#
+# ALL NUMBERS ARE PROVISIONAL. Values marked [evidence] are anchored to cited sources
+# (see app/science/data/evidence.yaml); everything else is an educational balancing value
+# awaiting the "Scenario balancing" decision in docs/USER_DECISIONS_REQUIRED.md.
+
+id: luna-01
+version: "0.1.0"
+mission_id: luna-01
+title: "LUNA-01 — The Last Light"
+description: >-
+  A four-person lunar outpost near the south pole as the Sun sinks toward the horizon.
+  Solar power declines into lunar night; the crew must trade science return against power,
+  thermal, life-support and radiation margins.
+provisional: true
+
+time:
+  tick_hours: 1.0
+  max_ticks: 240            # 10 Earth days of simulated time (PROVISIONAL mission length)
+
+crew:
+  - {id: crew_cdr, role: commander}
+  - {id: crew_pwr, role: power_engineer}
+  - {id: crew_ls, role: life_support}
+  - {id: crew_sci, role: science_officer}
+
+power:
+  solar_rated_kw: 15.0
+  dust_deposition_per_tick: 0.0006
+  dust_floor: 0.5
+  battery:
+    capacity_kwh: 160.0
+    initial_soc: 0.9
+    max_charge_kw: 8.0
+    max_discharge_kw: 12.0
+    charge_efficiency: 0.95
+    discharge_efficiency: 0.95
+    deep_discharge_soc: 0.15
+  heater_consumer: thermal_heater
+  rover_charger_consumer: rover_charger
+  science_consumer: science_payload
+  comms_consumer: comms
+  consumers:
+    - {id: habitat_core, label: "Habitat core (avionics, lighting, fans)", system: habitat,
+       priority: 0, nominal_kw: 1.5, mode_factors: {eco: 0.8, nominal: 1.0}}
+    - {id: co2_scrubber, label: "CO2 removal", system: life_support, priority: 1,
+       nominal_kw: 0.6, component: co2_scrubber,
+       mode_factors: {off: 0.0, eco: 0.6, nominal: 1.0, boost: 1.4}}
+    - {id: oxygen_generation, label: "Oxygen generation", system: life_support, priority: 2,
+       nominal_kw: 1.5, component: oxygen_generator,
+       mode_factors: {off: 0.0, eco: 0.6, nominal: 1.0, boost: 1.4}}
+    - {id: thermal_heater, label: "Habitat heaters", system: thermal, priority: 2,
+       nominal_kw: 2.0, component: heater,
+       mode_factors: {off: 0.0, eco: 0.6, nominal: 1.0}}
+    - {id: water_recovery, label: "Water recovery", system: life_support, priority: 3,
+       nominal_kw: 0.9, component: water_processor,
+       mode_factors: {off: 0.0, eco: 0.6, nominal: 1.0}}
+    - {id: comms, label: "Communications", system: communications, priority: 4,
+       nominal_kw: 0.4, component: radio,
+       mode_factors: {off: 0.0, eco: 0.6, nominal: 1.0}}
+    - {id: science_payload, label: "Science payload", system: science, priority: 5,
+       nominal_kw: 1.2, mode_factors: {off: 0.0, eco: 0.6, nominal: 1.0, boost: 1.4}}
+    - {id: rover_charger, label: "Rover charger", system: rover, priority: 6,
+       nominal_kw: 2.0, mode_factors: {off: 0.0, eco: 0.5, nominal: 1.0}}
+
+thermal:
+  initial_temp_c: 21.0
+  initial_setpoint_c: 21.0
+  setpoint_min_c: 10.0
+  setpoint_max_c: 26.0
+  conductance_kw_per_k: 0.015
+  capacitance_kwh_per_k: 5.0
+  internal_heat_fraction: 0.8
+  heater_max_kw: 6.0
+  heater_gain_kw_per_k: 0.5
+  overheat_relaxation_k_per_hour: 1.0
+
+life_support:
+  initial_oxygen_kg: 40.0
+  oxygen_capacity_kg: 60.0
+  initial_co2_kg: 0.35
+  initial_water_kg: 120.0
+  o2_consumption_kg_per_crew_day: 0.818       # [evidence] bvad_o2_consumption
+  co2_production_kg_per_crew_day: 1.04        # [evidence] bvad_co2_production
+  water_use_kg_per_crew_day: 4.35             # [evidence] bvad_water_total
+  o2_generation_capacity_kg_per_hour: 0.16
+  water_per_kg_o2: 1.125                      # [evidence] electrolysis_stoichiometry
+  co2_removal_capacity_kg_per_hour: 0.22
+  co2_ppm_per_kg: 5500.0                      # 100 m3 cabin at 101.3 kPa, 22 °C (ideal gas)
+  co2_floor_kg: 0.3
+  water_recovery_nominal: 0.93                # [evidence] iss_water_recovery (pre-BPA level)
+  water_recovery_min_temp_c: 10.0
+  water_recovery_zero_temp_c: 0.0
+  oxygen_generator_consumer: oxygen_generation
+  co2_scrubber_consumer: co2_scrubber
+  water_recovery_consumer: water_recovery
+
+food:
+  initial_food_kg: 70.0
+  consumption_kg_per_crew_day: 1.51           # [evidence] bvad_food_mass
+  ration_min: 0.5
+
+comms:
+  downlink_mb_per_hour: 120.0
+
+science:
+  opportunities:
+    - {id: regolith_survey, window_ticks: 60, work_ticks_required: 10, points_per_tick: 2.0,
+       data_mb_per_tick: 40.0}
+    - {id: ice_core_sampling, window_ticks: 40, work_ticks_required: 16, points_per_tick: 4.0,
+       data_mb_per_tick: 60.0}
+    - {id: far_crater_traverse, window_ticks: 40, work_ticks_required: 6, points_per_tick: 6.0,
+       data_mb_per_tick: 80.0, requires_rover: true}
+
+radiation:
+  habitat_shielding_factor: 0.6
+  shelter_shielding_factor: 0.15
+  eva_shielding_factor: 1.0
+  health_threshold_msv_per_hour: 0.5
+  health_penalty_per_msv: 0.02
+
+rover:
+  battery_capacity_kwh: 40.0
+  initial_battery_kwh: 36.0
+  traverse_kw: 1.5
+  charger_kw: 2.0
+  transfer_efficiency: 0.85
+  transfer_kw: 3.0
+  outbound_ticks: 6
+  component: rover
+  loss_probability_per_tick: 0.02
+  teleop_requires_link: true
+
+crew_health:
+  recovery_per_tick: 0.002
+  hypoxia_penalty_per_tick: 0.08
+  co2_warning_ppm: 5300.0
+  co2_critical_ppm: 10500.0
+  co2_penalty_per_tick: 0.01
+  cold_threshold_c: 15.0
+  cold_penalty_per_k_tick: 0.001
+  dehydration_penalty_per_tick: 0.02
+  starvation_penalty_per_tick: 0.005
+  ration_penalty_per_tick: 0.002
+  eva_fatigue_per_tick: 0.05
+  fatigue_recovery_per_tick: 0.01
+
+degradation:
+  battery_component: battery
+  solar_component: solar_array
+  heater_component: heater
+  comms_component: radio
+  deep_discharge_wear_multiplier: 5.0
+  components:
+    - {id: solar_array, wear_per_tick: 0.0001, boost_wear_multiplier: 1.0,
+       fault_probability_per_tick: 0.005, fault_damage: 0.1, maintenance_ticks: 4,
+       maintenance_restore: 0.3, performance_floor: 0.3}
+    - {id: battery, wear_per_tick: 0.0001, boost_wear_multiplier: 1.0,
+       fault_probability_per_tick: 0.005, fault_damage: 0.1, maintenance_ticks: 4,
+       maintenance_restore: 0.2, performance_floor: 0.4}
+    - {id: oxygen_generator, wear_per_tick: 0.0002, boost_wear_multiplier: 3.0,
+       fault_probability_per_tick: 0.01, fault_damage: 0.15, maintenance_ticks: 4,
+       maintenance_restore: 0.3, performance_floor: 0.3}
+    - {id: co2_scrubber, wear_per_tick: 0.0002, boost_wear_multiplier: 3.0,
+       fault_probability_per_tick: 0.01, fault_damage: 0.15, maintenance_ticks: 3,
+       maintenance_restore: 0.3, performance_floor: 0.3}
+    - {id: water_processor, wear_per_tick: 0.0002, boost_wear_multiplier: 3.0,
+       fault_probability_per_tick: 0.01, fault_damage: 0.15, maintenance_ticks: 4,
+       maintenance_restore: 0.3, performance_floor: 0.2}
+    - {id: heater, wear_per_tick: 0.0001, boost_wear_multiplier: 1.0,
+       fault_probability_per_tick: 0.005, fault_damage: 0.15, maintenance_ticks: 3,
+       maintenance_restore: 0.3, performance_floor: 0.3}
+    - {id: radio, wear_per_tick: 0.0001, boost_wear_multiplier: 1.0,
+       fault_probability_per_tick: 0.005, fault_damage: 0.15, maintenance_ticks: 3,
+       maintenance_restore: 0.3, performance_floor: 0.3}
+    - {id: rover, wear_per_tick: 0.0002, boost_wear_multiplier: 1.0,
+       fault_probability_per_tick: 0.01, fault_damage: 0.15, maintenance_ticks: 4,
+       maintenance_restore: 0.3, performance_floor: 0.4}
+
+environment:
+  evidence: [diviner_surface_temperature, change4_lnd_dose_rate, lunar_polar_illumination]
+  solar_availability:
+    - {tick: 0, value: 0.85}
+    - {tick: 40, value: 0.85}
+    - {tick: 72, value: 0.55}
+    - {tick: 140, value: 0.45}
+    - {tick: 175, value: 0.3}
+    - {tick: 200, value: 0.12}
+    - {tick: 210, value: 0.0}
+    - {tick: 240, value: 0.0}
+  sink_temp_c:
+    - {tick: 0, value: -45.0}
+    - {tick: 72, value: -70.0}
+    - {tick: 140, value: -90.0}
+    - {tick: 200, value: -140.0}
+    - {tick: 212, value: -175.0}
+    - {tick: 240, value: -185.0}
+  radiation_dose_rate_msv_h:
+    - {tick: 0, value: 0.057}                 # [evidence] change4_lnd_dose_rate (1369 µSv/day)
+  earth_visible:
+    - {tick: 0, value: 1.0}
+
+alerts:
+  - {id: battery_low, metric: power.battery_soc, op: "<", threshold: 0.3, clear_threshold: 0.35,
+     severity: warning, category: resource}
+  - {id: battery_critical, metric: power.battery_soc, op: "<", threshold: 0.1,
+     clear_threshold: 0.15, severity: critical, category: resource}
+  - {id: load_shedding, metric: power.unmet_kw, op: ">", threshold: 0.05, clear_threshold: 0.01,
+     severity: warning, category: system}
+  - {id: oxygen_low, metric: life_support.oxygen_days, op: "<", threshold: 3.0,
+     clear_threshold: 3.5, severity: warning, category: resource}
+  - {id: oxygen_critical, metric: life_support.oxygen_days, op: "<", threshold: 1.0,
+     clear_threshold: 1.5, severity: critical, category: resource}
+  - {id: co2_high, metric: life_support.co2_ppm, op: ">", threshold: 5300.0,
+     clear_threshold: 5000.0, severity: warning, category: resource}
+  - {id: co2_critical, metric: life_support.co2_ppm, op: ">", threshold: 10500.0,
+     clear_threshold: 9500.0, severity: critical, category: resource}
+  - {id: water_low, metric: life_support.water_days, op: "<", threshold: 3.0,
+     clear_threshold: 3.5, severity: warning, category: resource}
+  - {id: water_critical, metric: life_support.water_days, op: "<", threshold: 1.0,
+     clear_threshold: 1.5, severity: critical, category: resource}
+  - {id: food_low, metric: food.food_days, op: "<", threshold: 3.0, clear_threshold: 3.5,
+     severity: warning, category: resource}
+  - {id: habitat_cold, metric: thermal.habitat_temp_c, op: "<", threshold: 15.0,
+     clear_threshold: 16.0, severity: warning, category: system}
+  - {id: habitat_freezing, metric: thermal.habitat_temp_c, op: "<", threshold: 5.0,
+     clear_threshold: 6.0, severity: critical, category: system}
+  - {id: radiation_elevated, metric: env.radiation_dose_rate_msv_h, op: ">", threshold: 0.5,
+     clear_threshold: 0.3, severity: warning, category: environment}
+  - {id: comms_link_down, metric: comms.link_up, op: "<", threshold: 0.5, clear_threshold: 1.0,
+     severity: caution, category: system}
+  - {id: crew_health_low, metric: crew.min_health, op: "<", threshold: 0.5,
+     clear_threshold: 0.6, severity: warning, category: crew}
+  - {id: crew_health_critical, metric: crew.min_health, op: "<", threshold: 0.2,
+     clear_threshold: 0.3, severity: critical, category: crew}
+
+events:
+  - id: landing_complete
+    kind: milestone
+    message_key: event.landing_complete
+    trigger: {type: scheduled, at_tick: 2}
+    effects: [{type: milestone}]
+  - id: regolith_survey_window
+    kind: science_opportunity
+    message_key: event.regolith_survey_window
+    trigger: {type: scheduled, at_tick: 14}
+    effects: [{type: open_opportunity, opportunity: regolith_survey}]
+  - id: sunlight_decline
+    kind: environmental
+    severity: caution
+    message_key: event.sunlight_decline
+    trigger: {type: scheduled, at_tick: 48}
+    effects: [{type: milestone}]
+    evidence: [lunar_polar_illumination]
+  - id: ice_core_window
+    kind: science_opportunity
+    message_key: event.ice_core_window
+    trigger: {type: scheduled, at_tick: 96}
+    effects: [{type: open_opportunity, opportunity: ice_core_sampling}]
+  - id: minor_flare
+    kind: space_weather
+    severity: caution
+    message_key: event.minor_flare
+    trigger: {type: random, probability_per_tick: 0.003, from_tick: 20, to_tick: 200}
+    effects:
+      - {type: modifier, target: env.radiation_dose_rate_msv_h, op: multiply, value: 5.0,
+         duration_ticks: 3}
+    max_fires: 2
+    foreseeable: false
+  - id: solar_particle_event
+    kind: space_weather
+    severity: critical
+    message_key: event.solar_particle_event
+    trigger: {type: scheduled, at_tick: 122}
+    effects:
+      - {type: modifier, target: env.radiation_dose_rate_msv_h, op: multiply, value: 40.0,
+         duration_ticks: 8}
+    foreseeable: false
+    evidence: [donki_sep_events]
+  - id: relay_outage
+    kind: communication
+    severity: warning
+    message_key: event.relay_outage
+    trigger: {type: scheduled, at_tick: 140}
+    effects:
+      - {type: modifier, target: env.earth_visible, op: set, value: 0.0, duration_ticks: 18}
+    foreseeable: false
+  - id: water_processor_pump_fault
+    kind: system_fault
+    severity: warning
+    message_key: event.water_processor_pump_fault
+    trigger: {type: scheduled, at_tick: 162}
+    effects: [{type: damage_component, component: water_processor, amount: 0.35}]
+    foreseeable: false
+  - id: freeze_damage_water_processor
+    kind: system_fault
+    severity: critical
+    message_key: event.freeze_damage_water_processor
+    trigger:
+      type: state
+      condition: {metric: thermal.habitat_temp_c, op: "<", value: 3.0}
+    effects: [{type: damage_component, component: water_processor, amount: 0.25}]
+  - id: far_crater_window
+    kind: science_opportunity
+    message_key: event.far_crater_window
+    trigger: {type: scheduled, at_tick: 180}
+    effects: [{type: open_opportunity, opportunity: far_crater_traverse}]
+  - id: rover_departure
+    kind: decision_triggered
+    message_key: event.rover_departure
+    trigger: {type: decision, decision_type: rover_command, match: {action: traverse}}
+    effects: [{type: milestone}]
+    max_fires: 5
+  - id: last_light
+    kind: milestone
+    severity: caution
+    message_key: event.last_light
+    trigger: {type: scheduled, at_tick: 210}
+    effects: [{type: milestone}]
+
+phases:
+  - {id: landing, advance_when: {metric: time.tick, op: ">=", value: 2}}
+  - {id: base_setup, advance_when: {metric: time.tick, op: ">=", value: 12}}
+  - {id: initial_resource_management, advance_when: {metric: time.tick, op: ">=", value: 48}}
+  - {id: reduced_solar_availability, advance_when: {metric: time.tick, op: ">=", value: 72}}
+  - {id: power_management, advance_when: {metric: time.tick, op: ">=", value: 96}}
+  - {id: scientific_opportunity, advance_when: {metric: time.tick, op: ">=", value: 120}}
+  - {id: environmental_emergency, advance_when: {metric: time.tick, op: ">=", value: 140}}
+  - {id: communication_loss, advance_when: {metric: time.tick, op: ">=", value: 160}}
+  - {id: resource_cascade, advance_when: {metric: time.tick, op: ">=", value: 180}}
+  - {id: rover_decision, advance_when: {metric: time.tick, op: ">=", value: 200}}
+  - {id: final_low_power}
+  - {id: mission_conclusion, kind: conclusion}
+  - {id: post_mission_analysis, kind: analysis}
+
+objectives:
+  - id: crew_survival
+    required: true
+    fail_when: {metric: crew.min_health, op: "<=", value: 0.0}
+  - id: science_return
+    required: false
+    achieve_when: {metric: science.points, op: ">=", value: 60.0}
+  - id: data_return
+    required: false
+    achieve_when: {metric: comms.data_downlinked_mb, op: ">=", value: 1200.0}
+  - id: radiation_safety
+    required: false
+    fail_when: {metric: crew.max_dose_msv, op: ">=", value: 15.0}
+  - id: reserves_at_end
+    required: false
+    evaluate: at_end
+    achieve_when:
+      all:
+        - {metric: life_support.oxygen_days, op: ">=", value: 1.0}
+        - {metric: life_support.water_days, op: ">=", value: 1.0}
+        - {metric: power.battery_soc, op: ">=", value: 0.05}
+
+outcomes:
+  - {id: crew_loss, code: mission_failed_crew_loss,
+     when: {metric: crew.min_health, op: "<=", value: 0.0}}
+  - {id: complete, code: mission_complete, at_end: true, requires_required_objectives: true,
+     min_optional_objectives_fraction: 0.5}
+  - {id: partial, code: mission_complete_partial, at_end: true,
+     requires_required_objectives: true}
+  - {id: fallback, code: mission_failed, at_end: true}
+
+analysis:
+  cascade_parent_threshold: 0.5
+  cascade_child_threshold: 0.3
+  risk_terms:
+    - {metric: life_support.oxygen_days, weight: 0.9}
+    - {metric: life_support.co2_ppm, weight: 0.8}
+    - {metric: life_support.water_days, weight: 0.6}
+    - {metric: food.food_days, weight: 0.4}
+    - {metric: thermal.habitat_temp_c, weight: 0.6}
+    - {metric: power.battery_soc, weight: 0.5}
+    - {metric: crew.min_health, weight: 0.9}
+
+decisions:
+  eva_ticks: 3
+  dust_after_cleaning: 0.98
+
+evidence:
+  life_support.o2_consumption_kg_per_crew_day: [bvad_o2_consumption]
+  life_support.co2_production_kg_per_crew_day: [bvad_co2_production]
+  life_support.water_use_kg_per_crew_day: [bvad_water_total]
+  life_support.water_per_kg_o2: [electrolysis_stoichiometry]
+  life_support.water_recovery_nominal: [iss_water_recovery]
+  food.consumption_kg_per_crew_day: [bvad_food_mass]
+  environment.radiation_dose_rate_msv_h: [change4_lnd_dose_rate]
+  environment.sink_temp_c: [diviner_surface_temperature]
+  environment.solar_availability: [lunar_polar_illumination]

@@ -1,0 +1,1501 @@
+{
+ "campaign": {
+  "active_mission": "earth_command.station_readiness",
+  "capabilities": [
+   {
+    "id": "power.load_management",
+    "stage": null
+   },
+   {
+    "id": "logistics.mass_budgeting",
+    "stage": null
+   },
+   {
+    "id": "transportation.crew_launch_readiness",
+    "stage": null
+   },
+   {
+    "id": "habitation.radiation_sheltering",
+    "stage": null
+   },
+   {
+    "id": "mobility.surface_rover",
+    "stage": null
+   },
+   {
+    "id": "robotics.teleoperation",
+    "stage": null
+   },
+   {
+    "id": "communications.surface_relay",
+    "stage": null
+   },
+   {
+    "id": "infrastructure.surface_construction",
+    "stage": null
+   },
+   {
+    "id": "life_support.closed_loop",
+    "stage": null
+   },
+   {
+    "id": "science.surface_sampling",
+    "stage": null
+   },
+   {
+    "id": "isru.oxygen_extraction",
+    "stage": null
+   },
+   {
+    "id": "autonomy.fault_management",
+    "stage": null
+   },
+   {
+    "id": "transportation.entry_descent_landing",
+    "stage": null
+   },
+   {
+    "id": "transportation.planetary_return",
+    "stage": null
+   },
+   {
+    "id": "habitation.long_duration",
+    "stage": null
+   }
+  ],
+  "certifications": [],
+  "content_version": "1.0.0",
+  "discoveries": [],
+  "id": "odyssey.campaign",
+  "infrastructure": [],
+  "insights": [
+   "power.generation_vs_demand"
+  ],
+  "missions": [
+   {
+    "attempts": 1,
+    "best_tier": null,
+    "id": "earth_command.station_readiness",
+    "phase": "EARTH_COMMAND",
+    "replayable": false,
+    "status": "active"
+   },
+   {
+    "attempts": 0,
+    "best_tier": null,
+    "id": "luna_01.the_last_light",
+    "phase": "LUNA_01",
+    "replayable": true,
+    "status": "locked"
+   }
+  ],
+  "phases": [
+   {
+    "authored": true,
+    "id": "EARTH_COMMAND",
+    "missing": {},
+    "missions": [
+     "earth_command.station_readiness"
+    ],
+    "order": 1,
+    "replayable": false,
+    "status": "active",
+    "summary": "Ground operations at the ODYSSEY station; prepare and authorize LUNA-01.",
+    "title": "Earth Command"
+   },
+   {
+    "authored": true,
+    "id": "LUNA_01",
+    "missing": {
+     "missions": [
+      "earth_command.station_readiness"
+     ]
+    },
+    "missions": [
+     "luna_01.the_last_light"
+    ],
+    "order": 2,
+    "replayable": true,
+    "status": "locked",
+    "summary": "Keep the ASTERIA outpost alive through the onset of the lunar night.",
+    "title": "LUNA-01: The Last Light"
+   },
+   {
+    "authored": false,
+    "id": "LUNAR_SURVIVAL",
+    "missing": {
+     "capabilities": [
+      {
+       "capability": "power.load_management",
+       "stage": "LUNAR_DEMONSTRATED"
+      }
+     ],
+     "phases": [
+      "LUNA_01"
+     ]
+    },
+    "missions": [],
+    "order": 3,
+    "replayable": false,
+    "status": "locked",
+    "summary": "Sustained operations through repeated lunar nights.",
+    "title": "Lunar Survival"
+   },
+   {
+    "authored": false,
+    "id": "LUNAR_EXPLORATION",
+    "missing": {
+     "capabilities": [
+      {
+       "capability": "mobility.surface_rover",
+       "stage": "LUNAR_DEMONSTRATED"
+      }
+     ],
+     "phases": [
+      "LUNAR_SURVIVAL"
+     ]
+    },
+    "missions": [],
+    "order": 4,
+    "replayable": false,
+    "status": "locked",
+    "summary": "Long-range surface mobility and science beyond the outpost.",
+    "title": "Lunar Exploration"
+   },
+   {
+    "authored": false,
+    "id": "LUNAR_NETWORK",
+    "missing": {
+     "capabilities": [
+      {
+       "capability": "communications.surface_relay",
+       "stage": "LUNAR_DEMONSTRATED"
+      },
+      {
+       "capability": "infrastructure.surface_construction",
+       "stage": "LUNAR_DEMONSTRATED"
+      }
+     ],
+     "phases": [
+      "LUNAR_EXPLORATION"
+     ]
+    },
+    "missions": [],
+    "order": 5,
+    "replayable": false,
+    "status": "locked",
+    "summary": "A connected network of lunar infrastructure.",
+    "title": "Lunar Network"
+   },
+   {
+    "authored": false,
+    "id": "DEEP_SPACE_READINESS",
+    "missing": {
+     "phases": [
+      "LUNAR_NETWORK"
+     ]
+    },
+    "missions": [],
+    "order": 6,
+    "replayable": false,
+    "status": "locked",
+    "summary": "Qualify systems for long-duration missions far from Earth.",
+    "title": "Deep Space Readiness"
+   },
+   {
+    "authored": false,
+    "id": "PATH_TO_MARS",
+    "missing": {
+     "phases": [
+      "DEEP_SPACE_READINESS"
+     ]
+    },
+    "missions": [],
+    "order": 7,
+    "replayable": false,
+    "status": "locked",
+    "summary": "Assemble and certify the systems a human Mars mission requires.",
+    "title": "Path to Mars"
+   },
+   {
+    "authored": false,
+    "id": "MARS_01",
+    "missing": {
+     "phases": [
+      "PATH_TO_MARS"
+     ],
+     "readiness": {
+      "lock_code": "MARS_MISSION_LOCKED",
+      "missing_capabilities": [
+       "autonomy.fault_management",
+       "communications.surface_relay",
+       "habitation.long_duration",
+       "habitation.radiation_sheltering",
+       "life_support.closed_loop",
+       "logistics.mass_budgeting",
+       "power.load_management",
+       "transportation.crew_launch_readiness",
+       "transportation.entry_descent_landing",
+       "transportation.planetary_return"
+      ],
+      "missing_gates": [
+       "gate.transport.crewed_transit",
+       "gate.habitation.long_duration",
+       "gate.life_support.closed_loop",
+       "gate.power.surface_power",
+       "gate.radiation.protection",
+       "gate.communications.deep_space",
+       "gate.autonomy.fault_management",
+       "gate.logistics.mass_budget",
+       "gate.edl.crewed_landing",
+       "gate.return.capability"
+      ],
+      "profile": "mars_01_human_mission"
+     }
+    },
+    "missions": [],
+    "order": 8,
+    "replayable": false,
+    "status": "locked",
+    "summary": "The first human mission to Mars (content deferred).",
+    "title": "MARS-01"
+   }
+  ]
+ },
+ "clock": {
+  "elapsed_hours": 1.25,
+  "max_catchup_ticks": 24,
+  "max_ticks": 96,
+  "mode": "DECISION_PAUSED",
+  "pause_reason": "incident",
+  "seconds_per_tick": null,
+  "sim_tick": 5,
+  "started": true,
+  "tick_hours": 0.25,
+  "ticks_per_second": 0.0
+ },
+ "discoveries": [],
+ "insights": [
+  {
+   "concept": "Generation versus demand",
+   "explanation": "Electrical power cannot be stored in the wires. Any gap between what loads demand and what sources deliver is covered by the battery until it cannot be, then loads go dark.",
+   "id": "power.generation_vs_demand",
+   "matters_later": "On the Moon, the Sun sets for days and there is no grid to fall back on.",
+   "observation": "When bus B dropped, the station kept drawing the same power from less supply.",
+   "provenance": {
+    "classification": "educational_abstraction",
+    "evidence_refs": [],
+    "note": null
+   },
+   "related_objects": [
+    "earth.command.engineering.power_bus_b",
+    "earth.command.engineering.station_battery"
+   ],
+   "simplification": "One shared bus and one battery stand in for a real distribution network.",
+   "title": "Supply must meet demand every moment",
+   "why_available": true
+  }
+ ],
+ "mission": {
+  "alerts": [
+   {
+    "category": "system",
+    "id": "feed_degraded",
+    "severity": "caution"
+   }
+  ],
+  "authorization": {
+   "authorized": false,
+   "available": false,
+   "gate": "earth_command.luna01_launch_authorization",
+   "requirements": [
+    {
+     "id": "station_power_nominal",
+     "met": false,
+     "reason": "station_power_degraded"
+    },
+    {
+     "id": "spacecraft_inspected",
+     "met": false,
+     "reason": "spacecraft_inspection_incomplete"
+    },
+    {
+     "id": "radiation_protection_installed",
+     "met": false,
+     "reason": "radiation_protection_missing"
+    },
+    {
+     "id": "required_cargo_loaded",
+     "met": false,
+     "reason": "required_cargo_missing"
+    },
+    {
+     "id": "spacecraft_charged",
+     "met": false,
+     "reason": "spacecraft_charge_insufficient"
+    }
+   ],
+   "target": "earth.command.hangar.luna01"
+  },
+  "completion": "authorization",
+  "id": "earth_command.station_readiness",
+  "objectives": [
+   {
+    "category": "primary",
+    "id": "critical_load_continuity",
+    "message_key": "objective.critical_load_continuity",
+    "required": true,
+    "status": "pending"
+   },
+   {
+    "category": "safety",
+    "id": "reserve_protected",
+    "message_key": "objective.reserve_protected",
+    "required": false,
+    "status": "pending"
+   },
+   {
+    "category": "stability",
+    "id": "station_stability",
+    "message_key": "objective.station_stability",
+    "required": false,
+    "status": "pending"
+   },
+   {
+    "category": "efficiency",
+    "id": "spacecraft_charged",
+    "message_key": "objective.spacecraft_charged",
+    "required": false,
+    "status": "pending"
+   },
+   {
+    "category": "science",
+    "id": "calibration_complete",
+    "message_key": "objective.calibration_complete",
+    "required": false,
+    "status": "pending"
+   }
+  ],
+  "outcome_tier": null,
+  "phase": "EARTH_COMMAND",
+  "resources": [
+   {
+    "id": "power",
+    "label": "Power",
+    "state": "nominal",
+    "unit": "kW",
+    "value": 3.92,
+    "warning_state": "caution"
+   },
+   {
+    "id": "battery",
+    "label": "Battery",
+    "state": "nominal",
+    "unit": "fraction",
+    "value": 0.829,
+    "warning_state": "none"
+   },
+   {
+    "id": "oxygen",
+    "label": "Oxygen",
+    "state": "nominal",
+    "unit": "days",
+    "value": 1528.14,
+    "warning_state": "none"
+   },
+   {
+    "id": "co2",
+    "label": "CO2",
+    "state": "nominal",
+    "unit": "ppm",
+    "value": 513.0,
+    "warning_state": "none"
+   },
+   {
+    "id": "water",
+    "label": "Water",
+    "state": "nominal",
+    "unit": "days",
+    "value": 114.9,
+    "warning_state": "none"
+   },
+   {
+    "id": "food",
+    "label": "Food",
+    "state": "nominal",
+    "unit": "days",
+    "value": 82.73,
+    "warning_state": "none"
+   },
+   {
+    "id": "thermal",
+    "label": "Habitat temperature",
+    "state": "nominal",
+    "unit": "°C",
+    "value": 21.0,
+    "warning_state": "none"
+   },
+   {
+    "id": "communications",
+    "label": "Communications",
+    "state": "nominal",
+    "unit": "bool",
+    "value": 1.0,
+    "warning_state": "none"
+   },
+   {
+    "id": "science",
+    "label": "Science",
+    "state": "nominal",
+    "unit": "points",
+    "value": 0.0,
+    "warning_state": "none"
+   },
+   {
+    "id": "radiation",
+    "label": "Radiation",
+    "state": "nominal",
+    "unit": "mSv",
+    "value": 0.0,
+    "warning_state": "none"
+   },
+   {
+    "id": "rover",
+    "label": "Rover",
+    "state": "nominal",
+    "unit": "kWh",
+    "value": 36.8,
+    "warning_state": "none"
+   }
+  ],
+  "simulation_status": "active",
+  "status": "active",
+  "summary": "Get the ODYSSEY ground station and the LUNA-01 spacecraft ready for launch authorization.",
+  "title": "Station Readiness"
+ },
+ "protocol": "odyssey.game.v1",
+ "resume": {
+  "events_path": "/api/game/v1/sessions/gs_aaaaaaaaaaaaaaaaaaaaaaaaam/events",
+  "last_seq": 12,
+  "restore_path": "/api/game/v1/sessions/gs_aaaaaaaaaaaaaaaaaaaaaaaaam/restore",
+  "retained_events": 2000,
+  "ws_path": "/api/game/v1/ws/sessions/gs_aaaaaaaaaaaaaaaaaaaaaaaaam"
+ },
+ "session": {
+  "content_id": "odyssey.campaign",
+  "content_version": "1.0.0",
+  "created_at": "2026-10-27T06:00:00+00:00",
+  "id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+  "last_seq": 12,
+  "state_version": 3,
+  "status": "active"
+ },
+ "state_version": 3,
+ "timeline": {
+  "attempt": 1,
+  "id": "gt_aaaaaaaaaaaaaaaaaaaaaaaaaq",
+  "mission_id": "earth_command.station_readiness",
+  "parent_timeline_id": null,
+  "status": "active"
+ },
+ "world": {
+  "containers": [
+   {
+    "id": "earth.command.engineering.spares_locker",
+    "items": [
+     {
+      "condition": "nominal",
+      "item": "spare.breaker_module",
+      "mass_kg": 8.0,
+      "quantity": 2
+     },
+     {
+      "condition": "nominal",
+      "item": "tool.diagnostic_scanner",
+      "mass_kg": 1.5,
+      "quantity": 1
+     }
+    ],
+    "location": "earth.command.engineering",
+    "mass_kg": 9.5,
+    "mass_limit_kg": 120.0,
+    "name": "Engineering spares locker",
+    "role": "storage",
+    "vehicle": null,
+    "volume_l": 15.0,
+    "volume_limit_l": 400.0
+   },
+   {
+    "id": "earth.command.hangar.luna01.cargo_hold",
+    "items": [],
+    "location": "earth.command.hangar",
+    "mass_kg": 0.0,
+    "mass_limit_kg": 300.0,
+    "name": "LUNA-01 cargo hold",
+    "role": "cargo",
+    "vehicle": "earth.command.hangar.luna01",
+    "volume_l": 0.0,
+    "volume_limit_l": 900.0
+   },
+   {
+    "id": "earth.command.hangar.storage",
+    "items": [
+     {
+      "condition": "nominal",
+      "item": "cargo.food_pack",
+      "mass_kg": 72.0,
+      "quantity": 6
+     },
+     {
+      "condition": "nominal",
+      "item": "cargo.water_tank",
+      "mass_kg": 224.0,
+      "quantity": 4
+     },
+     {
+      "condition": "nominal",
+      "item": "equipment.science_drill_kit",
+      "mass_kg": 40.0,
+      "quantity": 1
+     },
+     {
+      "condition": "nominal",
+      "item": "module.isru_oxygen_pilot",
+      "mass_kg": 120.0,
+      "quantity": 1
+     },
+     {
+      "condition": "nominal",
+      "item": "module.radiation_shelter_liner",
+      "mass_kg": 80.0,
+      "quantity": 1
+     },
+     {
+      "condition": "nominal",
+      "item": "spare.habitat_spares_kit",
+      "mass_kg": 50.0,
+      "quantity": 2
+     }
+    ],
+    "location": "earth.command.hangar",
+    "mass_kg": 586.0,
+    "mass_limit_kg": 2000.0,
+    "name": "Hangar storage",
+    "role": "storage",
+    "vehicle": null,
+    "volume_l": 1170.0,
+    "volume_limit_l": 6000.0
+   },
+   {
+    "id": "earth.command.player_kit",
+    "items": [
+     {
+      "condition": "nominal",
+      "item": "tool.diagnostic_scanner",
+      "mass_kg": 1.5,
+      "quantity": 1
+     }
+    ],
+    "location": "earth.command.observation_deck",
+    "mass_kg": 1.5,
+    "mass_limit_kg": 25.0,
+    "name": "Personal kit",
+    "role": "inventory",
+    "vehicle": null,
+    "volume_l": 3.0,
+    "volume_limit_l": 60.0
+   }
+  ],
+  "crew": [
+   {
+    "health_band": "nominal",
+    "id": "maya",
+    "intent": "assessing_power_bus_b",
+    "involved_incidents": [
+     "earth.command.power_incident"
+    ],
+    "location": null,
+    "name": "Maya",
+    "role": "Systems Engineer",
+    "specialty": "power"
+   },
+   {
+    "health_band": "nominal",
+    "id": "omar",
+    "intent": null,
+    "involved_incidents": [],
+    "location": null,
+    "name": "Omar",
+    "role": "Planetary Scientist",
+    "specialty": "science"
+   },
+   {
+    "health_band": "nominal",
+    "id": "sofia",
+    "intent": null,
+    "involved_incidents": [],
+    "location": null,
+    "name": "Sofia",
+    "role": "Life Support Specialist",
+    "specialty": "life_support"
+   },
+   {
+    "health_band": "nominal",
+    "id": "jay",
+    "intent": "monitoring_critical_loads",
+    "involved_incidents": [
+     "earth.command.power_incident"
+    ],
+    "location": null,
+    "name": "Jay",
+    "role": "Mission Operations",
+    "specialty": "operations"
+   }
+  ],
+  "id": "earth_command",
+  "incidents": [
+   {
+    "facts": [],
+    "id": "earth.command.power_incident",
+    "involved_crew": [
+     "maya",
+     "jay"
+    ],
+    "involved_objects": [
+     "earth.command.engineering.power_bus_b",
+     "earth.command.engineering.station_battery",
+     "earth.command.mission_control.consoles",
+     "earth.command.engineering.air_handling",
+     "earth.command.hangar.ground_support"
+    ],
+    "message_key": "incident.earth.command.power_incident",
+    "resolved_tick": null,
+    "stage": "active",
+    "started_tick": 5
+   }
+  ],
+  "locations": [
+   {
+    "access": "open",
+    "id": "earth.command.observation_deck",
+    "kind": "zone",
+    "name": "Observation deck",
+    "region": "earth.command.operations",
+    "visited": true
+   },
+   {
+    "access": "open",
+    "id": "earth.command.mission_control",
+    "kind": "facility",
+    "name": "Mission control",
+    "region": "earth.command.operations",
+    "visited": false
+   },
+   {
+    "access": "open",
+    "id": "earth.command.engineering",
+    "kind": "facility",
+    "name": "Engineering bay",
+    "region": "earth.command.engineering_wing",
+    "visited": true
+   },
+   {
+    "access": "open",
+    "id": "earth.command.laboratory",
+    "kind": "facility",
+    "name": "Science laboratory",
+    "region": "earth.command.engineering_wing",
+    "visited": false
+   },
+   {
+    "access": "open",
+    "id": "earth.command.training",
+    "kind": "facility",
+    "name": "Training center",
+    "region": "earth.command.crew_wing",
+    "visited": false
+   },
+   {
+    "access": "open",
+    "id": "earth.command.crew_area",
+    "kind": "zone",
+    "name": "Crew quarters",
+    "region": "earth.command.crew_wing",
+    "visited": false
+   },
+   {
+    "access": "open",
+    "id": "earth.command.medical",
+    "kind": "facility",
+    "name": "Medical bay",
+    "region": "earth.command.crew_wing",
+    "visited": false
+   },
+   {
+    "access": "open",
+    "id": "earth.command.hangar",
+    "kind": "facility",
+    "name": "Spacecraft hangar",
+    "region": "earth.command.hangar_wing",
+    "visited": false
+   },
+   {
+    "access": "locked",
+    "id": "earth.command.airlock",
+    "kind": "zone",
+    "name": "Launch access airlock",
+    "region": "earth.command.hangar_wing",
+    "visited": false
+   }
+  ],
+  "name": "ODYSSEY Earth Command",
+  "objects": [
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.engineering.power_bus_b",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": true,
+      "params": {},
+      "reason": null
+     },
+     {
+      "action": "repair.perform",
+      "available": false,
+      "params": {},
+      "reason": "fault_not_diagnosed"
+     }
+    ],
+    "kind": "system",
+    "location": "earth.command.engineering",
+    "mode": null,
+    "modules": [],
+    "name": "Power bus B",
+    "parent": null,
+    "power": null,
+    "status": "damaged",
+    "tags": [
+     "power",
+     "distribution"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.engineering.station_battery",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": true,
+      "params": {},
+      "reason": null
+     }
+    ],
+    "kind": "system",
+    "location": "earth.command.engineering",
+    "mode": null,
+    "modules": [],
+    "name": "Station battery bank",
+    "parent": null,
+    "power": null,
+    "status": "operational",
+    "tags": [
+     "power",
+     "storage"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.engineering.thermal_plant",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": true,
+      "params": {},
+      "reason": null
+     },
+     {
+      "action": "system.set_mode",
+      "available": true,
+      "params": {
+       "mode": [
+        "off",
+        "eco",
+        "nominal"
+       ]
+      },
+      "reason": null
+     }
+    ],
+    "kind": "system",
+    "location": "earth.command.engineering",
+    "mode": "nominal",
+    "modules": [],
+    "name": "Station heating plant",
+    "parent": null,
+    "power": "powered",
+    "status": "operational",
+    "tags": [
+     "thermal",
+     "load"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": true,
+    "id": "earth.command.engineering.air_handling",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": true,
+      "params": {},
+      "reason": null
+     },
+     {
+      "action": "system.set_mode",
+      "available": true,
+      "params": {
+       "mode": [
+        "eco",
+        "nominal"
+       ]
+      },
+      "reason": null
+     }
+    ],
+    "kind": "system",
+    "location": "earth.command.engineering",
+    "mode": "nominal",
+    "modules": [],
+    "name": "Air handling",
+    "parent": null,
+    "power": "powered",
+    "status": "operational",
+    "tags": [
+     "life_support",
+     "load",
+     "critical"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.engineering.water_systems",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": true,
+      "params": {},
+      "reason": null
+     },
+     {
+      "action": "system.set_mode",
+      "available": true,
+      "params": {
+       "mode": [
+        "off",
+        "eco",
+        "nominal"
+       ]
+      },
+      "reason": null
+     }
+    ],
+    "kind": "system",
+    "location": "earth.command.engineering",
+    "mode": "nominal",
+    "modules": [],
+    "name": "Water systems",
+    "parent": null,
+    "power": "powered",
+    "status": "operational",
+    "tags": [
+     "life_support",
+     "load"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.engineering.spares_locker",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [],
+    "kind": "container",
+    "location": "earth.command.engineering",
+    "mode": null,
+    "modules": [],
+    "name": "Engineering spares locker",
+    "parent": null,
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "storage"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": true,
+    "id": "earth.command.mission_control.consoles",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     },
+     {
+      "action": "system.set_mode",
+      "available": false,
+      "params": {
+       "mode": [
+        "eco",
+        "nominal"
+       ]
+      },
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "system",
+    "location": "earth.command.mission_control",
+    "mode": "nominal",
+    "modules": [],
+    "name": "Mission control consoles",
+    "parent": null,
+    "power": "powered",
+    "status": "operational",
+    "tags": [
+     "communications",
+     "load",
+     "critical"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.observation_deck.lunar_telescope",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "world.poi_discovered",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "poi",
+    "location": "earth.command.observation_deck",
+    "mode": null,
+    "modules": [],
+    "name": "Lunar telescope",
+    "parent": null,
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "science",
+     "observation"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.laboratory.sample_analyzer",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     },
+     {
+      "action": "system.set_mode",
+      "available": false,
+      "params": {
+       "mode": [
+        "off",
+        "eco",
+        "nominal",
+        "boost"
+       ]
+      },
+      "reason": "not_at_location"
+     },
+     {
+      "action": "science.instrument_operate",
+      "available": false,
+      "params": {
+       "operation": [
+        "start_calibration",
+        "stop"
+       ]
+      },
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "interactable",
+    "location": "earth.command.laboratory",
+    "mode": "nominal",
+    "modules": [],
+    "name": "Sample analyzer",
+    "parent": null,
+    "power": "powered",
+    "status": "operational",
+    "tags": [
+     "science",
+     "load"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.training.simulator",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     },
+     {
+      "action": "system.set_mode",
+      "available": false,
+      "params": {
+       "mode": [
+        "off",
+        "eco",
+        "nominal"
+       ]
+      },
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "interactable",
+    "location": "earth.command.training",
+    "mode": "nominal",
+    "modules": [],
+    "name": "Training simulator",
+    "parent": null,
+    "power": "powered",
+    "status": "operational",
+    "tags": [
+     "training",
+     "load"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.medical.dosimetry_station",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "interactable",
+    "location": "earth.command.medical",
+    "mode": null,
+    "modules": [],
+    "name": "Dosimetry station",
+    "parent": null,
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "radiation",
+     "crew_health"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.hangar.ground_support",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     },
+     {
+      "action": "system.set_mode",
+      "available": false,
+      "params": {
+       "mode": [
+        "off",
+        "eco",
+        "nominal"
+       ]
+      },
+      "reason": "not_at_location"
+     },
+     {
+      "action": "power.reroute",
+      "available": false,
+      "params": {
+       "direction": [
+        "to_station",
+        "stop"
+       ]
+      },
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "system",
+    "location": "earth.command.hangar",
+    "mode": "nominal",
+    "modules": [],
+    "name": "Hangar ground support",
+    "parent": null,
+    "power": "powered",
+    "status": "operational",
+    "tags": [
+     "power",
+     "load",
+     "spacecraft"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "restricted",
+    "charge_kwh": 36.8,
+    "critical": true,
+    "id": "earth.command.hangar.luna01",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "vehicle.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "vehicle",
+    "location": "earth.command.hangar",
+    "mode": null,
+    "modules": [],
+    "name": "LUNA-01 spacecraft",
+    "parent": null,
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "spacecraft",
+     "mission"
+    ],
+    "vehicle_class": "vehicle.asteria_crew_lander"
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.hangar.luna01.power",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "subsystem",
+    "location": "earth.command.hangar",
+    "mode": null,
+    "modules": [],
+    "name": "LUNA-01 power system",
+    "parent": "earth.command.hangar.luna01",
+    "power": null,
+    "status": "operational",
+    "tags": [
+     "spacecraft",
+     "power"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.hangar.luna01.life_support",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "subsystem",
+    "location": "earth.command.hangar",
+    "mode": null,
+    "modules": [],
+    "name": "LUNA-01 life support",
+    "parent": "earth.command.hangar.luna01",
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "spacecraft",
+     "life_support"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.hangar.luna01.comms",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "subsystem",
+    "location": "earth.command.hangar",
+    "mode": null,
+    "modules": [],
+    "name": "LUNA-01 communications",
+    "parent": "earth.command.hangar.luna01",
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "spacecraft",
+     "communications"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.hangar.luna01.propulsion",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "subsystem",
+    "location": "earth.command.hangar",
+    "mode": null,
+    "modules": [],
+    "name": "LUNA-01 propulsion",
+    "parent": "earth.command.hangar.luna01",
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "spacecraft",
+     "propulsion"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.hangar.luna01.radiation_protection",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "subsystem",
+    "location": "earth.command.hangar",
+    "mode": null,
+    "modules": [],
+    "name": "LUNA-01 radiation protection",
+    "parent": "earth.command.hangar.luna01",
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "spacecraft",
+     "radiation"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.hangar.luna01.cargo_hold",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [
+     {
+      "action": "system.inspect",
+      "available": false,
+      "params": {},
+      "reason": "not_at_location"
+     }
+    ],
+    "kind": "container",
+    "location": "earth.command.hangar",
+    "mode": null,
+    "modules": [],
+    "name": "LUNA-01 cargo hold",
+    "parent": "earth.command.hangar.luna01",
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "spacecraft",
+     "cargo"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.hangar.storage",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [],
+    "kind": "container",
+    "location": "earth.command.hangar",
+    "mode": null,
+    "modules": [],
+    "name": "Hangar storage",
+    "parent": null,
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "storage",
+     "cargo"
+    ],
+    "vehicle_class": null
+   },
+   {
+    "access": "open",
+    "charge_kwh": null,
+    "critical": false,
+    "id": "earth.command.player_kit",
+    "infrastructure_state": null,
+    "infrastructure_type": null,
+    "inspected": false,
+    "interactions": [],
+    "kind": "container",
+    "location": "earth.command.observation_deck",
+    "mode": null,
+    "modules": [],
+    "name": "Personal kit",
+    "parent": null,
+    "power": null,
+    "status": "nominal",
+    "tags": [
+     "carried"
+    ],
+    "vehicle_class": null
+   }
+  ],
+  "player_location": "earth.command.engineering",
+  "recent_cues": [
+   {
+    "cooldown_ticks": 0,
+    "cue": "cue.omar.telescope",
+    "eligible_again_tick": null,
+    "line": "That bright rim on the crater edge is where LUNA-01 is going.",
+    "message_key": "cue.omar.telescope",
+    "once": true,
+    "priority": 10,
+    "speaker": "omar",
+    "tick": 0
+   },
+   {
+    "cooldown_ticks": 0,
+    "cue": "cue.maya.bus_b_down",
+    "eligible_again_tick": null,
+    "line": "Bus B just dropped. We're on battery. I need eyes on that breaker.",
+    "message_key": "cue.maya.bus_b_down",
+    "once": true,
+    "priority": 90,
+    "speaker": "maya",
+    "tick": 5
+   }
+  ]
+ }
+}

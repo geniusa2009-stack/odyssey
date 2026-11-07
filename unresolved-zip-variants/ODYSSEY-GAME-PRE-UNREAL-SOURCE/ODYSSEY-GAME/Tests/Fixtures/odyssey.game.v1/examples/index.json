@@ -1,0 +1,136 @@
+{
+ "examples": {
+  "black_box_earth_command": {
+   "description": "Black Box of the authorization-completed Earth Command timeline (simulation_status stays active: authorization ends the game mission, not the simulation)",
+   "file": "black_box_earth_command.json",
+   "model": "app.game.contracts.analysis:GameBlackBoxView"
+  },
+  "black_box_response": {
+   "description": "GET /sessions/{id}/black-box for a concluded LUNA-01 timeline (causal graph)",
+   "file": "black_box_response.json",
+   "model": "app.game.contracts.analysis:GameBlackBoxView"
+  },
+  "bootstrap": {
+   "description": "GET /sessions/{id}/bootstrap",
+   "file": "bootstrap.json",
+   "model": "app.game.contracts.protocol:GameBootstrap"
+  },
+  "capabilities": {
+   "description": "GET .../capabilities",
+   "file": "capabilities.json",
+   "model": "app.game.contracts.progression:CapabilitiesView"
+  },
+  "command_request": {
+   "description": "POST /sessions/{id}/commands body (semantic action)",
+   "file": "command_request.json",
+   "model": "app.game.contracts.protocol:GameCommandRequest"
+  },
+  "command_response": {
+   "description": "Response to the semantic action above",
+   "file": "command_response.json",
+   "model": "app.game.contracts.protocol:CommandResult"
+  },
+  "create_session_response": {
+   "description": "POST /sessions → token (shown once) and bootstrap",
+   "file": "create_session_response.json",
+   "model": "app.game.contracts.protocol:CreateGameSessionResponse"
+  },
+  "error_action_unavailable": {
+   "description": "409 DECISION_UNAVAILABLE with a safe reason (not_at_location)",
+   "file": "error_action_unavailable.json",
+   "model": "app.game.contracts.protocol:GameErrorResponse"
+  },
+  "error_mars_locked": {
+   "description": "409 mars_mission_locked: lock_code MARS_MISSION_LOCKED + missing capability ids",
+   "file": "error_mars_locked.json",
+   "model": "app.game.contracts.protocol:GameErrorResponse"
+  },
+  "error_stale_state": {
+   "description": "409 STALE_STATE: expected_state_version is behind; refresh the snapshot and retry",
+   "file": "error_stale_state.json",
+   "model": "app.game.contracts.protocol:GameErrorResponse"
+  },
+  "event_certification_granted": {
+   "description": "certification.granted at mission completion",
+   "file": "event_certification_granted.json",
+   "model": "app.game.contracts.protocol:GameEventEnvelope"
+  },
+  "event_incident_started": {
+   "description": "incident.started (only once the hidden fault has happened)",
+   "file": "event_incident_started.json",
+   "model": "app.game.contracts.protocol:GameEventEnvelope"
+  },
+  "event_inventory_changed": {
+   "description": "cargo.changed/inventory.changed after a transfer",
+   "file": "event_inventory_changed.json",
+   "model": "app.game.contracts.protocol:GameEventEnvelope"
+  },
+  "event_mission_failed_or_completed": {
+   "description": "black_box.ready when a mission ends (here: LUNA-01 concluded)",
+   "file": "event_mission_failed_or_completed.json",
+   "model": "app.game.contracts.protocol:GameEventEnvelope"
+  },
+  "event_mission_transitioned": {
+   "description": "mission.transitioned Earth Command → LUNA-01 (snapshot_required)",
+   "file": "event_mission_transitioned.json",
+   "model": "app.game.contracts.protocol:GameEventEnvelope"
+  },
+  "event_mission_updated": {
+   "description": "objective/mission update",
+   "file": "event_mission_updated.json",
+   "model": "app.game.contracts.protocol:GameEventEnvelope"
+  },
+  "expansion_map": {
+   "description": "GET .../expansion-map (Human Expansion Map)",
+   "file": "expansion_map.json",
+   "model": "app.game.contracts.progression:ExpansionMapView"
+  },
+  "features": {
+   "description": "GET /features",
+   "file": "features.json",
+   "model": "app.game.contracts.protocol:ServerFeatures"
+  },
+  "future_lens_response": {
+   "description": "POST /sessions/{id}/future-lens (known_only)",
+   "file": "future_lens_response.json",
+   "model": "app.game.contracts.analysis:GameFutureLensView"
+  },
+  "readiness_mars": {
+   "description": "GET .../readiness/mars_01_human_mission",
+   "file": "readiness_mars.json",
+   "model": "app.game.contracts.progression:ReadinessView"
+  },
+  "restore_response": {
+   "description": "POST /sessions/{id}/restore after a disconnect (single restore path)",
+   "file": "restore_response.json",
+   "model": "app.game.contracts.protocol:RestoreResult"
+  },
+  "snapshot_incident": {
+   "description": "GET /sessions/{id}/snapshot during the power incident (clock DECISION_PAUSED)",
+   "file": "snapshot_incident.json",
+   "model": "app.game.contracts.protocol:GameSnapshot"
+  },
+  "vehicle_luna01": {
+   "description": "GET .../vehicles/{id}",
+   "file": "vehicle_luna01.json",
+   "model": "app.game.contracts.progression:VehicleView"
+  },
+  "why_insight": {
+   "description": "GET .../insights/{id}/why",
+   "file": "why_insight.json",
+   "model": "app.game.contracts.progression:WhyView"
+  },
+  "ws_resumed": {
+   "description": "WebSocket RESUMED control frame (resume from last_seq)",
+   "file": "ws_resumed.json",
+   "model": "app.game.contracts.protocol:GameControlFrame"
+  },
+  "ws_resync_required": {
+   "description": "WebSocket RESYNC_REQUIRED control frame (call the restore path)",
+   "file": "ws_resync_required.json",
+   "model": "app.game.contracts.protocol:GameControlFrame"
+  }
+ },
+ "generated_by": "python -m app.tools.game_contract --write",
+ "protocol": "odyssey.game.v1"
+}

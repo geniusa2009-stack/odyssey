@@ -1,0 +1,10 @@
+{
+ "last_seq": 69,
+ "protocol": "odyssey.game.v1",
+ "reason": "events_expired",
+ "replayed": null,
+ "restore_path": "/api/game/v1/sessions/gs_aaaaaaaaaaaaaaaaaaaaaaaaam/restore",
+ "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+ "state_version": 23,
+ "type": "RESYNC_REQUIRED"
+}

@@ -1,0 +1,20 @@
+{
+  "case": "oxygen_generation_off",
+  "decision_verdicts": [
+    "decision_worsened_target"
+  ],
+  "failure_trace": {
+    "chains": [
+      "decision -> metric:control.mode.oxygen_generation -> metric:life_support.o2_generation_ratio -> metric:life_support.oxygen_days -> metric:crew.min_health",
+      "scenario:initial:life_support.oxygen_days -> metric:life_support.oxygen_days -> metric:crew.min_health"
+    ],
+    "roots": [
+      "decision",
+      "scenario:initial:life_support.oxygen_days"
+    ],
+    "target_metric": "crew.min_health",
+    "target_tick": 60
+  },
+  "final_tick": 60,
+  "outcome": "mission_failed_crew_loss"
+}

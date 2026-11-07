@@ -1,0 +1,176 @@
+# ODYSSEY campaign: eight major phases. Only content we understand is authored: Earth Command
+# (phase 1) and LUNA-01 (phase 2, the LUNA-01 v0.2.0 simulation). Later phases define their
+# position, prerequisites and gates only; they unlock structurally but cannot start until their
+# content exists (status "available", authored: false). No Mars science is invented here.
+id: odyssey.campaign
+title: ODYSSEY
+
+phases:
+  - id: EARTH_COMMAND
+    order: 1
+    title: Earth Command
+    summary: Ground operations at the ODYSSEY station; prepare and authorize LUNA-01.
+    authored: true
+    missions: [earth_command.station_readiness]
+  - id: LUNA_01
+    order: 2
+    title: "LUNA-01: The Last Light"
+    summary: Keep the ASTERIA outpost alive through the onset of the lunar night.
+    authored: true
+    missions: [luna_01.the_last_light]
+    prerequisites:
+      missions_completed: [earth_command.station_readiness]
+  - id: LUNAR_SURVIVAL
+    order: 3
+    title: Lunar Survival
+    summary: Sustained operations through repeated lunar nights.
+    authored: false
+    prerequisites:
+      phases_completed: [LUNA_01]
+      capabilities:
+        - {capability: power.load_management, stage: LUNAR_DEMONSTRATED}
+  - id: LUNAR_EXPLORATION
+    order: 4
+    title: Lunar Exploration
+    summary: Long-range surface mobility and science beyond the outpost.
+    authored: false
+    prerequisites:
+      phases_completed: [LUNAR_SURVIVAL]
+      capabilities:
+        - {capability: mobility.surface_rover, stage: LUNAR_DEMONSTRATED}
+  - id: LUNAR_NETWORK
+    order: 5
+    title: Lunar Network
+    summary: A connected network of lunar infrastructure.
+    authored: false
+    prerequisites:
+      phases_completed: [LUNAR_EXPLORATION]
+      capabilities:
+        - {capability: communications.surface_relay, stage: LUNAR_DEMONSTRATED}
+        - {capability: infrastructure.surface_construction, stage: LUNAR_DEMONSTRATED}
+  - id: DEEP_SPACE_READINESS
+    order: 6
+    title: Deep Space Readiness
+    summary: Qualify systems for long-duration missions far from Earth.
+    authored: false
+    prerequisites:
+      phases_completed: [LUNAR_NETWORK]
+  - id: PATH_TO_MARS
+    order: 7
+    title: Path to Mars
+    summary: Assemble and certify the systems a human Mars mission requires.
+    authored: false
+    prerequisites:
+      phases_completed: [DEEP_SPACE_READINESS]
+  - id: MARS_01
+    order: 8
+    title: MARS-01
+    summary: The first human mission to Mars (content deferred).
+    authored: false
+    prerequisites:
+      phases_completed: [PATH_TO_MARS]
+      readiness_profile: mars_01_human_mission
+
+missions:
+  - id: earth_command.station_readiness
+    phase: EARTH_COMMAND
+    title: Station Readiness
+    summary: >-
+      Get the ODYSSEY ground station and the LUNA-01 spacecraft ready for launch authorization.
+    world: earth_command
+    scenario: {source: game, id: earth-command, file: earth-command.yaml}
+    start_location: earth.command.observation_deck
+    player_kit: earth.command.player_kit
+    clock:
+      start_mode: PAUSED
+      start_on_zone_entered: true
+      realtime_ticks_per_second: 0.2     # one 15-minute tick every 5 s (gameplay parameter)
+      accelerated_multiplier: 4.0
+      max_catchup_ticks: 24              # at most 6 simulated hours settle while unattended
+    completion:
+      type: authorization
+      gate:
+        id: earth_command.luna01_launch_authorization
+        target: earth.command.hangar.luna01
+        requirements:
+          # Phrased over observable station power (not the incident) so the gate never hints at
+          # an incident before it has happened.
+          - id: station_power_nominal
+            reason: station_power_degraded
+            when:
+              all:
+                - {sim: {metric: component.power_bus_b.health, op: ">=", value: 0.8}}
+                - {sim: {metric: component.power_bus_b.in_maintenance, op: "<", value: 0.5}}
+                - {sim: {metric: power.unmet_kw, op: "<=", value: 0.05}}
+          - id: spacecraft_inspected
+            reason: spacecraft_inspection_incomplete
+            when:
+              all:
+                - {flag: "inspected:earth.command.hangar.luna01.power"}
+                - {flag: "inspected:earth.command.hangar.luna01.life_support"}
+                - {flag: "inspected:earth.command.hangar.luna01.comms"}
+                - {flag: "inspected:earth.command.hangar.luna01.radiation_protection"}
+          - id: radiation_protection_installed
+            reason: radiation_protection_missing
+            when: {module_installed: {host: earth.command.hangar.luna01, slot: radiation_protection}}
+          - id: required_cargo_loaded
+            reason: required_cargo_missing
+            when:
+              all:
+                - {item: {item: cargo.water_tank, container: earth.command.hangar.luna01.cargo_hold, min_quantity: 2}}
+                - {item: {item: spare.habitat_spares_kit, container: earth.command.hangar.luna01.cargo_hold}}
+          - id: spacecraft_charged
+            reason: spacecraft_charge_insufficient
+            when: {sim: {metric: rover.battery_kwh, op: ">=", value: 45.0}}
+    completion_evidence:
+      - evidence: evidence.power.station_incident_resolved
+        when: {incident: {id: earth.command.power_incident, stages: [resolved]}}
+      - evidence: evidence.power.critical_loads_protected
+        when: {not: {flag: "fact:earth.command.power_incident:critical_load_lost"}}
+      - evidence: evidence.power.reserve_protected
+        when: {not: {flag: "fact:earth.command.power_incident:reserve_depleted"}}
+      - evidence: evidence.logistics.manifest_within_mass_budget
+        when: {flag: "manifest_checked:earth.command.hangar.luna01.cargo_hold"}
+      - evidence: evidence.transportation.launch_authorized
+        when: {flag: "authorized:earth_command.luna01_launch_authorization"}
+    carry:
+      - {from_object: earth.command.hangar.luna01.cargo_hold, to_object: luna.asteria.lander.cargo_hold}
+    next: {phase: LUNA_01, mission: luna_01.the_last_light}
+
+  - id: luna_01.the_last_light
+    phase: LUNA_01
+    title: The Last Light
+    summary: >-
+      Keep the ASTERIA crew safe and the science alive as the Sun sets on the lunar south pole.
+    world: luna_01
+    scenario: {source: registry, id: luna-01}
+    start_location: luna.asteria.habitat
+    player_kit: luna.asteria.player_kit
+    clock:
+      start_mode: PAUSED
+      start_on_zone_entered: true
+      realtime_ticks_per_second: 0.25    # one 1-hour tick every 4 s (gameplay parameter)
+      accelerated_multiplier: 4.0
+      max_catchup_ticks: 24
+    completion:
+      type: simulation_concluded
+    completion_evidence:
+      - evidence: evidence.power.lunar_night_power_managed
+        when: {sim_outcome: {tiers: [success, exceptional]}}
+      - evidence: evidence.habitation.radiation_event_sheltered
+        when:
+          all:
+            - {sim_outcome: {tiers: [success, exceptional, partial]}}
+            - {sim: {metric: crew.max_dose_msv, op: "<", value: 15.0}}
+      - evidence: evidence.mobility.rover_traverse_completed
+        when: {sim: {metric: science.opportunities_completed, op: ">=", value: 3.0}}
+      - evidence: evidence.science.lunar_science_returned
+        when: {sim: {metric: science.opportunities_completed, op: ">=", value: 2.0}}
+      - evidence: evidence.communications.data_returned
+        when: {sim: {metric: comms.data_downlinked_mb, op: ">=", value: 800.0}}
+      - evidence: evidence.life_support.outpost_sustained
+        when: {sim_outcome: {tiers: [success, exceptional]}}
+    next: {phase: LUNAR_SURVIVAL}
+    replayable: true
+    prerequisites:
+      missions_completed: [earth_command.station_readiness]

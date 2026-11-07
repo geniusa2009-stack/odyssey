@@ -1,0 +1,601 @@
+{
+ "cases": [
+  {
+   "decisions": [],
+   "events_hash": "1e4d918fa84a8023133d3429e101b96e937cd5472472f41effb918c06b78e186",
+   "final_state_hash": "049cf2d8dc7f6812f543fec27af5b3f7099d3e596bc65a37eb3664df9b18b275",
+   "final_tick": 240,
+   "label": "passive:7",
+   "objectives": {
+    "crew_survival": "achieved",
+    "data_return": "failed",
+    "radiation_safety": "failed",
+    "reserves_at_end": "failed",
+    "science_return": "failed"
+   },
+   "outcome": "mission_complete_partial",
+   "seed": 7
+  },
+  {
+   "decisions": [
+    {
+     "decision": {
+      "opportunity_id": "regolith_survey",
+      "type": "start_science_activity"
+     },
+     "tick": 15
+    },
+    {
+     "decision": {
+      "opportunity_id": "ice_core_sampling",
+      "type": "start_science_activity"
+     },
+     "tick": 97
+    },
+    {
+     "decision": {
+      "location": "shelter",
+      "type": "set_crew_location"
+     },
+     "tick": 123
+    },
+    {
+     "decision": {
+      "location": "habitat",
+      "type": "set_crew_location"
+     },
+     "tick": 131
+    },
+    {
+     "decision": {
+      "action": "traverse",
+      "opportunity_id": "far_crater_traverse",
+      "type": "rover_command"
+     },
+     "tick": 181
+    },
+    {
+     "decision": {
+      "crew_id": "crew_pwr",
+      "type": "clean_solar_array"
+     },
+     "tick": 200
+    },
+    {
+     "decision": {
+      "mode": "eco",
+      "subsystem": "comms",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 207
+    },
+    {
+     "decision": {
+      "mode": "off",
+      "subsystem": "rover_charger",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 207
+    },
+    {
+     "decision": {
+      "target_c": 17.0,
+      "type": "set_thermal_setpoint"
+     },
+     "tick": 212
+    },
+    {
+     "decision": {
+      "mode": "eco",
+      "subsystem": "habitat_core",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 212
+    },
+    {
+     "decision": {
+      "action": "transfer_energy",
+      "opportunity_id": null,
+      "type": "rover_command"
+     },
+     "tick": 215
+    },
+    {
+     "decision": {
+      "mode": "boost",
+      "subsystem": "co2_scrubber",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 227
+    }
+   ],
+   "events_hash": "b0222945042daa51a869e633d024670893aa7b539ddffef6a8063561e11e7232",
+   "final_state_hash": "795d69208daa2eea3993af6387152f6aa3501776a983190d581a88789747f202",
+   "final_tick": 240,
+   "label": "balanced:1",
+   "objectives": {
+    "crew_survival": "achieved",
+    "data_return": "achieved",
+    "radiation_safety": "achieved",
+    "reserves_at_end": "failed",
+    "science_return": "achieved"
+   },
+   "outcome": "mission_complete",
+   "seed": 1
+  },
+  {
+   "decisions": [
+    {
+     "decision": {
+      "opportunity_id": "regolith_survey",
+      "type": "start_science_activity"
+     },
+     "tick": 15
+    },
+    {
+     "decision": {
+      "opportunity_id": "ice_core_sampling",
+      "type": "start_science_activity"
+     },
+     "tick": 97
+    },
+    {
+     "decision": {
+      "location": "shelter",
+      "type": "set_crew_location"
+     },
+     "tick": 123
+    },
+    {
+     "decision": {
+      "location": "habitat",
+      "type": "set_crew_location"
+     },
+     "tick": 131
+    },
+    {
+     "decision": {
+      "action": "traverse",
+      "opportunity_id": "far_crater_traverse",
+      "type": "rover_command"
+     },
+     "tick": 181
+    },
+    {
+     "decision": {
+      "crew_id": "crew_pwr",
+      "type": "clean_solar_array"
+     },
+     "tick": 200
+    },
+    {
+     "decision": {
+      "mode": "eco",
+      "subsystem": "comms",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 207
+    },
+    {
+     "decision": {
+      "mode": "off",
+      "subsystem": "rover_charger",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 207
+    },
+    {
+     "decision": {
+      "component": "water_processor",
+      "type": "schedule_maintenance"
+     },
+     "tick": 207
+    },
+    {
+     "decision": {
+      "target_c": 17.0,
+      "type": "set_thermal_setpoint"
+     },
+     "tick": 213
+    },
+    {
+     "decision": {
+      "mode": "eco",
+      "subsystem": "habitat_core",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 213
+    },
+    {
+     "decision": {
+      "action": "transfer_energy",
+      "opportunity_id": null,
+      "type": "rover_command"
+     },
+     "tick": 215
+    },
+    {
+     "decision": {
+      "mode": "boost",
+      "subsystem": "co2_scrubber",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 228
+    }
+   ],
+   "events_hash": "d88ddf7764712ad2f6363ab226302c2899b1ac6796d0158841068f37511026e2",
+   "final_state_hash": "74d2001bd42a9d0b13f1c561dfa71a4b217f725f7a8ffa76d044301836c2237b",
+   "final_tick": 240,
+   "label": "balanced:2",
+   "objectives": {
+    "crew_survival": "achieved",
+    "data_return": "achieved",
+    "radiation_safety": "failed",
+    "reserves_at_end": "failed",
+    "science_return": "achieved"
+   },
+   "outcome": "mission_complete",
+   "seed": 2
+  },
+  {
+   "decisions": [
+    {
+     "decision": {
+      "opportunity_id": "regolith_survey",
+      "type": "start_science_activity"
+     },
+     "tick": 15
+    },
+    {
+     "decision": {
+      "mode": "boost",
+      "subsystem": "science_payload",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 15
+    },
+    {
+     "decision": {
+      "opportunity_id": "ice_core_sampling",
+      "type": "start_science_activity"
+     },
+     "tick": 97
+    },
+    {
+     "decision": {
+      "action": "traverse",
+      "opportunity_id": "far_crater_traverse",
+      "type": "rover_command"
+     },
+     "tick": 181
+    }
+   ],
+   "events_hash": "153116dd0ef86f983ef889dc11fe2d3dc193ee95ea7c1952f2ec97cc417daffc",
+   "final_state_hash": "c1c36d8c826cf38fde15b5bbce409df61a5f8909d2eec6a784bef011f5431e22",
+   "final_tick": 240,
+   "label": "science_first:3",
+   "objectives": {
+    "crew_survival": "achieved",
+    "data_return": "achieved",
+    "radiation_safety": "failed",
+    "reserves_at_end": "failed",
+    "science_return": "achieved"
+   },
+   "outcome": "mission_complete",
+   "seed": 3
+  },
+  {
+   "decisions": [
+    {
+     "decision": {
+      "target_c": 12.0,
+      "type": "set_thermal_setpoint"
+     },
+     "tick": 0
+    },
+    {
+     "decision": {
+      "level": 0.7,
+      "type": "set_ration_level"
+     },
+     "tick": 0
+    },
+    {
+     "decision": {
+      "opportunity_id": "regolith_survey",
+      "type": "start_science_activity"
+     },
+     "tick": 15
+    },
+    {
+     "decision": {
+      "mode": "boost",
+      "subsystem": "science_payload",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 15
+    },
+    {
+     "decision": {
+      "opportunity_id": "ice_core_sampling",
+      "type": "start_science_activity"
+     },
+     "tick": 97
+    },
+    {
+     "decision": {
+      "action": "traverse",
+      "opportunity_id": "far_crater_traverse",
+      "type": "rover_command"
+     },
+     "tick": 181
+    }
+   ],
+   "events_hash": "029302f6e7e2d85bd1174868efbfa1249258e712bf22a5b1a2cde62e5f33ebd8",
+   "final_state_hash": "8d06a02059e5bb2a07fdb0f94fab0ea08ab21dced960fc0dab5fe202b337f516",
+   "final_tick": 226,
+   "label": "high_risk:4",
+   "objectives": {
+    "crew_survival": "failed",
+    "data_return": "achieved",
+    "radiation_safety": "failed",
+    "reserves_at_end": "failed",
+    "science_return": "achieved"
+   },
+   "outcome": "mission_failed_crew_loss",
+   "seed": 4
+  },
+  {
+   "decisions": [
+    {
+     "decision": {
+      "component": "rover",
+      "type": "schedule_maintenance"
+     },
+     "tick": 12
+    },
+    {
+     "decision": {
+      "component": "battery",
+      "type": "schedule_maintenance"
+     },
+     "tick": 13
+    },
+    {
+     "decision": {
+      "mode": "off",
+      "subsystem": "co2_scrubber",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 23
+    },
+    {
+     "decision": {
+      "action": "transfer_energy",
+      "opportunity_id": null,
+      "type": "rover_command"
+     },
+     "tick": 28
+    },
+    {
+     "decision": {
+      "crew_id": "crew_cdr",
+      "type": "clean_solar_array"
+     },
+     "tick": 45
+    },
+    {
+     "decision": {
+      "mode": "off",
+      "subsystem": "comms",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 69
+    },
+    {
+     "decision": {
+      "mode": "eco",
+      "subsystem": "rover_charger",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 85
+    },
+    {
+     "decision": {
+      "target_c": 12.0,
+      "type": "set_thermal_setpoint"
+     },
+     "tick": 90
+    },
+    {
+     "decision": {
+      "target_c": 15.0,
+      "type": "set_thermal_setpoint"
+     },
+     "tick": 114
+    }
+   ],
+   "events_hash": "bc5244731eb91f7714f93e8313047babf3c0a2d328bf0203dd8062a99227135f",
+   "final_state_hash": "6275ac2ae158937ac44d5cb42c90e141cfc2e437c0c0cf643682284fe0240c12",
+   "final_tick": 123,
+   "label": "random_valid:5",
+   "objectives": {
+    "crew_survival": "failed",
+    "data_return": "failed",
+    "radiation_safety": "achieved",
+    "reserves_at_end": "achieved",
+    "science_return": "failed"
+   },
+   "outcome": "mission_failed_crew_loss",
+   "seed": 5
+  },
+  {
+   "decisions": [
+    {
+     "decision": {
+      "mode": "eco",
+      "subsystem": "habitat_core",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 0
+    },
+    {
+     "decision": {
+      "mode": "eco",
+      "subsystem": "comms",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 0
+    },
+    {
+     "decision": {
+      "target_c": 16.0,
+      "type": "set_thermal_setpoint"
+     },
+     "tick": 0
+    },
+    {
+     "decision": {
+      "mode": "off",
+      "subsystem": "rover_charger",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 0
+    },
+    {
+     "decision": {
+      "opportunity_id": "regolith_survey",
+      "type": "start_science_activity"
+     },
+     "tick": 15
+    },
+    {
+     "decision": {
+      "mode": "eco",
+      "subsystem": "science_payload",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 15
+    },
+    {
+     "decision": {
+      "opportunity_id": "ice_core_sampling",
+      "type": "start_science_activity"
+     },
+     "tick": 97
+    },
+    {
+     "decision": {
+      "location": "shelter",
+      "type": "set_crew_location"
+     },
+     "tick": 123
+    },
+    {
+     "decision": {
+      "location": "habitat",
+      "type": "set_crew_location"
+     },
+     "tick": 131
+    },
+    {
+     "decision": {
+      "crew_id": "crew_pwr",
+      "type": "clean_solar_array"
+     },
+     "tick": 134
+    },
+    {
+     "decision": {
+      "action": "transfer_energy",
+      "opportunity_id": null,
+      "type": "rover_command"
+     },
+     "tick": 211
+    },
+    {
+     "decision": {
+      "crew_id": "crew_pwr",
+      "type": "clean_solar_array"
+     },
+     "tick": 237
+    }
+   ],
+   "events_hash": "5ea7db9dad2ea0f2860ac151d76146beaa06a4057178e7053f9eb42ae243cdee",
+   "final_state_hash": "8336a5025176b8942b4b20d6591f518be308c7ac54500c274ae83b50adf9748b",
+   "final_tick": 240,
+   "label": "power_conservative:6",
+   "objectives": {
+    "crew_survival": "achieved",
+    "data_return": "achieved",
+    "radiation_safety": "achieved",
+    "reserves_at_end": "failed",
+    "science_return": "achieved"
+   },
+   "outcome": "mission_complete",
+   "seed": 6
+  },
+  {
+   "decisions": [
+    {
+     "decision": {
+      "opportunity_id": "regolith_survey",
+      "type": "start_science_activity"
+     },
+     "tick": 15
+    },
+    {
+     "decision": {
+      "opportunity_id": "ice_core_sampling",
+      "type": "start_science_activity"
+     },
+     "tick": 97
+    },
+    {
+     "decision": {
+      "location": "shelter",
+      "type": "set_crew_location"
+     },
+     "tick": 123
+    },
+    {
+     "decision": {
+      "location": "habitat",
+      "type": "set_crew_location"
+     },
+     "tick": 131
+    },
+    {
+     "decision": {
+      "mode": "boost",
+      "subsystem": "co2_scrubber",
+      "type": "set_subsystem_mode"
+     },
+     "tick": 224
+    },
+    {
+     "decision": {
+      "target_c": 26.0,
+      "type": "set_thermal_setpoint"
+     },
+     "tick": 231
+    }
+   ],
+   "events_hash": "606b317f1d153b1182b958437b3ff08a4e490f0923f3df011f746a50e41088f1",
+   "final_state_hash": "09b01c1c61292b597608b3e5f5b1bf4390eed000553b67560b6cc93d782196a1",
+   "final_tick": 240,
+   "label": "naive_beginner:8",
+   "objectives": {
+    "crew_survival": "achieved",
+    "data_return": "achieved",
+    "radiation_safety": "achieved",
+    "reserves_at_end": "failed",
+    "science_return": "achieved"
+   },
+   "outcome": "mission_complete",
+   "seed": 8
+  }
+ ],
+ "commit": "9d0b00d",
+ "scenario_version": "0.1.0"
+}

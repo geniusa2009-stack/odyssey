@@ -1,0 +1,50 @@
+
+
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Subsystems/WorldSubsystem.h"
+
+#include "OdysseyWorldSubsystem.generated.h"
+
+class AOdysseySemanticAnchor;
+class AOdysseySemanticZone;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOdysseyLocationChangedSignature, FName, Previous, FName, Current);
+
+UCLASS()
+class ODYSSEYWORLD_API UOdysseyWorldSubsystem : public UWorldSubsystem
+{
+	GENERATED_BODY()
+
+public:
+	virtual void OnWorldBeginPlay(UWorld& InWorld) override;
+	virtual void Deinitialize() override;
+
+	void RegisterBinding(FName Id, AActor* Actor);
+	void UnregisterBinding(FName Id, AActor* Actor);
+
+	UFUNCTION(BlueprintPure, Category = "Odyssey|World")
+	AActor* FindBoundActor(FName SemanticId) const;
+
+	UFUNCTION(BlueprintPure, Category = "Odyssey|World")
+	AOdysseySemanticAnchor* FindAnchor(FName LocationId) const;
+
+	
+	UFUNCTION(BlueprintPure, Category = "Odyssey|World")
+	TArray<FName> GetMissingRequiredIds() const { return MissingRequired; }
+
+	UPROPERTY(BlueprintAssignable, Category = "Odyssey|World")
+	FOdysseyLocationChangedSignature OnPlayerSemanticLocationChanged;
+
+private:
+	UFUNCTION()
+	void HandleSnapshot(FName Reason);
+	void ValidateSliceCoverage();
+	void CheckPlayerLocation();
+
+	TMultiMap<FName, TWeakObjectPtr<AActor>> Bindings;
+	TArray<FName> MissingRequired;
+	FName LastPlayerLocation;
+};

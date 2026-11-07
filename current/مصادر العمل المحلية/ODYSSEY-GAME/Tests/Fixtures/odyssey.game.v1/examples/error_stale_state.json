@@ -1,0 +1,13 @@
+{
+ "error": {
+  "code": "STALE_STATE",
+  "details": {
+   "expected_state_version": 1
+  },
+  "message": "the session has changed since the state this command was based on",
+  "reason": "stale_state",
+  "recoverable": true,
+  "request_id": "00000000000000000000000000000000",
+  "state_version": 2
+ }
+}

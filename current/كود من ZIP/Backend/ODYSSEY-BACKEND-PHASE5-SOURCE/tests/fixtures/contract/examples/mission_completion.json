@@ -1,0 +1,473 @@
+{
+ "analysis_paths": {
+  "black_box": "/api/v1/mission-sessions/d0d00000-0000-0000-0000-000000000003/black-box/summary",
+  "engineering_profile": "/api/v1/mission-sessions/d0d00000-0000-0000-0000-000000000003/engineering-profile",
+  "history": "/api/v1/mission-sessions/d0d00000-0000-0000-0000-000000000003/history",
+  "mission_dna": "/api/v1/mission-sessions/d0d00000-0000-0000-0000-000000000003/mission-dna/share"
+ },
+ "better_tiers_blocked": [
+  {
+   "blocked_by": [
+    "life_support_stability",
+    "power_continuity",
+    "reserves_at_end",
+    "science_quality"
+   ],
+   "tier": "exceptional"
+  },
+  {
+   "blocked_by": [
+    "life_support_stability",
+    "power_continuity"
+   ],
+   "tier": "success"
+  }
+ ],
+ "concluded": true,
+ "decisions_count": 4,
+ "duration": {
+  "hours": 240.0,
+  "ticks": 240
+ },
+ "final_hud": {
+  "alerts": {
+   "caution": 1,
+   "critical": 2,
+   "warning": 7
+  },
+  "battery_soc": 0.0,
+  "co2_ppm": 15950.0,
+  "crew_min_health": 0.907,
+  "data_downlinked_mb": 1360.0,
+  "demand_kw": 10.9,
+  "dose_margin_msv": 1.61,
+  "food_days": 1.59,
+  "generation_kw": 0.0,
+  "habitat_temp_c": 11.9,
+  "link_up": false,
+  "max_dose_msv": 13.39,
+  "oxygen_days": 7.4,
+  "risk_index": 0.976,
+  "science_points": 84.0,
+  "tick": 240,
+  "unmet_kw": 10.9,
+  "water_days": 1.97
+ },
+ "objectives": [
+  {
+   "blockers": [],
+   "category": "primary",
+   "completion_fraction": null,
+   "evaluated": "continuously",
+   "id": "crew_survival",
+   "kind": "avoid",
+   "margin": 0.907,
+   "margin_unit": "index",
+   "message_key": "objective.crew_survival",
+   "required": true,
+   "resolved_tick": 239,
+   "rule": {
+    "all": null,
+    "any": null,
+    "current": 0.907,
+    "label": "Lowest crew health",
+    "met": false,
+    "metric": "crew.min_health",
+    "negate": null,
+    "op": "<=",
+    "target": 0.0,
+    "unit": "index"
+   },
+   "status": "achieved"
+  },
+  {
+   "blockers": [],
+   "category": "primary",
+   "completion_fraction": 1.0,
+   "evaluated": "continuously",
+   "id": "science_return",
+   "kind": "achieve",
+   "margin": null,
+   "margin_unit": null,
+   "message_key": "objective.science_return",
+   "required": true,
+   "resolved_tick": 115,
+   "rule": {
+    "all": null,
+    "any": null,
+    "current": 2.0,
+    "label": "Science activities completed",
+    "met": true,
+    "metric": "science.opportunities_completed",
+    "negate": null,
+    "op": ">=",
+    "target": 2.0,
+    "unit": "count"
+   },
+   "status": "achieved"
+  },
+  {
+   "blockers": [],
+   "category": "primary",
+   "completion_fraction": 1.0,
+   "evaluated": "continuously",
+   "id": "data_return",
+   "kind": "achieve",
+   "margin": null,
+   "margin_unit": null,
+   "message_key": "objective.data_return",
+   "required": true,
+   "resolved_tick": 107,
+   "rule": {
+    "all": null,
+    "any": null,
+    "current": 1360.0,
+    "label": "Science data downlinked",
+    "met": true,
+    "metric": "comms.data_downlinked_mb",
+    "negate": null,
+    "op": ">=",
+    "target": 800.0,
+    "unit": "MB"
+   },
+   "status": "achieved"
+  },
+  {
+   "blockers": [],
+   "category": "safety",
+   "completion_fraction": null,
+   "evaluated": "continuously",
+   "id": "radiation_safety",
+   "kind": "avoid",
+   "margin": 1.61,
+   "margin_unit": "mSv",
+   "message_key": "objective.radiation_safety",
+   "required": false,
+   "resolved_tick": 239,
+   "rule": {
+    "all": null,
+    "any": null,
+    "current": 13.39,
+    "label": "Highest crew dose",
+    "met": false,
+    "metric": "crew.max_dose_msv",
+    "negate": null,
+    "op": ">=",
+    "target": 15.0,
+    "unit": "mSv"
+   },
+   "status": "achieved"
+  },
+  {
+   "blockers": [],
+   "category": "safety",
+   "completion_fraction": null,
+   "evaluated": "continuously",
+   "id": "crew_health",
+   "kind": "avoid",
+   "margin": 0.407,
+   "margin_unit": "index",
+   "message_key": "objective.crew_health",
+   "required": false,
+   "resolved_tick": 239,
+   "rule": {
+    "all": null,
+    "any": null,
+    "current": 0.907,
+    "label": "Lowest crew health",
+    "met": false,
+    "metric": "crew.min_health",
+    "negate": null,
+    "op": "<",
+    "target": 0.5,
+    "unit": "index"
+   },
+   "status": "achieved"
+  },
+  {
+   "blockers": [
+    {
+     "code": "objective_failed",
+     "label": null,
+     "metric": null,
+     "tick": 224,
+     "unit": null,
+     "value": null
+    }
+   ],
+   "category": "stability",
+   "completion_fraction": null,
+   "evaluated": "continuously",
+   "id": "power_continuity",
+   "kind": "avoid",
+   "margin": -10.85,
+   "margin_unit": "kW",
+   "message_key": "objective.power_continuity",
+   "required": false,
+   "resolved_tick": 224,
+   "rule": {
+    "all": null,
+    "any": null,
+    "current": 10.9,
+    "label": "Unmet demand (load shed)",
+    "met": true,
+    "metric": "power.unmet_kw",
+    "negate": null,
+    "op": ">",
+    "target": 0.05,
+    "unit": "kW"
+   },
+   "status": "failed"
+  },
+  {
+   "blockers": [
+    {
+     "code": "objective_failed",
+     "label": null,
+     "metric": null,
+     "tick": 234,
+     "unit": null,
+     "value": null
+    }
+   ],
+   "category": "stability",
+   "completion_fraction": null,
+   "evaluated": "continuously",
+   "id": "life_support_stability",
+   "kind": "avoid",
+   "margin": null,
+   "margin_unit": null,
+   "message_key": "objective.life_support_stability",
+   "required": false,
+   "resolved_tick": 234,
+   "rule": {
+    "all": null,
+    "any": [
+     {
+      "all": null,
+      "any": null,
+      "current": 15950.0,
+      "label": "Cabin CO2 concentration",
+      "met": true,
+      "metric": "life_support.co2_ppm",
+      "negate": null,
+      "op": ">",
+      "target": 10500.0,
+      "unit": "ppm"
+     },
+     {
+      "all": null,
+      "any": null,
+      "current": 7.4,
+      "label": "Oxygen reserve (days of crew use)",
+      "met": false,
+      "metric": "life_support.oxygen_days",
+      "negate": null,
+      "op": "<",
+      "target": 1.0,
+      "unit": "days"
+     },
+     {
+      "all": null,
+      "any": null,
+      "current": 1.97,
+      "label": "Water reserve (days of gross crew use, no recycling)",
+      "met": false,
+      "metric": "life_support.water_days",
+      "negate": null,
+      "op": "<",
+      "target": 1.0,
+      "unit": "days"
+     },
+     {
+      "all": null,
+      "any": null,
+      "current": 11.9,
+      "label": "Habitat temperature",
+      "met": false,
+      "metric": "thermal.habitat_temp_c",
+      "negate": null,
+      "op": "<",
+      "target": 5.0,
+      "unit": "°C"
+     }
+    ],
+    "current": null,
+    "label": null,
+    "met": null,
+    "metric": null,
+    "negate": null,
+    "op": null,
+    "target": null,
+    "unit": null
+   },
+   "status": "failed"
+  },
+  {
+   "blockers": [
+    {
+     "code": "objective_failed",
+     "label": null,
+     "metric": null,
+     "tick": 239,
+     "unit": null,
+     "value": null
+    }
+   ],
+   "category": "efficiency",
+   "completion_fraction": null,
+   "evaluated": "at_mission_end",
+   "id": "reserves_at_end",
+   "kind": "achieve_at_end",
+   "margin": null,
+   "margin_unit": null,
+   "message_key": "objective.reserves_at_end",
+   "required": false,
+   "resolved_tick": 239,
+   "rule": {
+    "all": [
+     {
+      "all": null,
+      "any": null,
+      "current": 7.4,
+      "label": "Oxygen reserve (days of crew use)",
+      "met": true,
+      "metric": "life_support.oxygen_days",
+      "negate": null,
+      "op": ">=",
+      "target": 3.0,
+      "unit": "days"
+     },
+     {
+      "all": null,
+      "any": null,
+      "current": 1.97,
+      "label": "Water reserve (days of gross crew use, no recycling)",
+      "met": false,
+      "metric": "life_support.water_days",
+      "negate": null,
+      "op": ">=",
+      "target": 3.0,
+      "unit": "days"
+     },
+     {
+      "all": null,
+      "any": null,
+      "current": 0.0,
+      "label": "Battery state of charge",
+      "met": false,
+      "metric": "power.battery_soc",
+      "negate": null,
+      "op": ">=",
+      "target": 0.15,
+      "unit": "fraction"
+     }
+    ],
+    "any": null,
+    "current": null,
+    "label": null,
+    "met": null,
+    "metric": null,
+    "negate": null,
+    "op": null,
+    "target": null,
+    "unit": null
+   },
+   "status": "failed"
+  },
+  {
+   "blockers": [
+    {
+     "code": "objective_failed",
+     "label": null,
+     "metric": null,
+     "tick": 239,
+     "unit": null,
+     "value": null
+    }
+   ],
+   "category": "science",
+   "completion_fraction": 0.84,
+   "evaluated": "continuously",
+   "id": "science_quality",
+   "kind": "achieve",
+   "margin": null,
+   "margin_unit": null,
+   "message_key": "objective.science_quality",
+   "required": false,
+   "resolved_tick": 239,
+   "rule": {
+    "all": null,
+    "any": null,
+    "current": 84.0,
+    "label": "Science return",
+    "met": false,
+    "metric": "science.points",
+    "negate": null,
+    "op": ">=",
+    "target": 100.0,
+    "unit": "points"
+   },
+   "status": "failed"
+  },
+  {
+   "blockers": [
+    {
+     "code": "objective_failed",
+     "label": null,
+     "metric": null,
+     "tick": 239,
+     "unit": null,
+     "value": null
+    }
+   ],
+   "category": "discovery",
+   "completion_fraction": 0.667,
+   "evaluated": "continuously",
+   "id": "full_survey",
+   "kind": "achieve",
+   "margin": null,
+   "margin_unit": null,
+   "message_key": "objective.full_survey",
+   "required": false,
+   "resolved_tick": 239,
+   "rule": {
+    "all": null,
+    "any": null,
+    "current": 2.0,
+    "label": "Science activities completed",
+    "met": false,
+    "metric": "science.opportunities_completed",
+    "negate": null,
+    "op": ">=",
+    "target": 3.0,
+    "unit": "count"
+   },
+   "status": "failed"
+  }
+ ],
+ "outcome": {
+  "code": "mission_complete_partial",
+  "message_key": "outcome.mission_complete_partial",
+  "objectives_achieved": [
+   "crew_health",
+   "crew_survival",
+   "data_return",
+   "radiation_safety",
+   "science_return"
+  ],
+  "objectives_failed": [
+   "full_survey",
+   "life_support_stability",
+   "power_continuity",
+   "reserves_at_end",
+   "science_quality"
+  ],
+  "rule_id": "partial",
+  "tick": 239,
+  "tier": "partial"
+ },
+ "session_id": "d0d00000-0000-0000-0000-000000000003",
+ "state_version": 11,
+ "timeline_id": "d0d00000-0000-0000-0000-000000000004"
+}

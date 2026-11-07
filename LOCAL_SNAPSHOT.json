@@ -1,0 +1,12 @@
+{
+  "project": "ODYSSEY",
+  "date": "2026-11-07",
+  "file_count": 992,
+  "redacted_files": [
+    "current/كود من ZIP/Backend/ODYSSEY-BACKEND-PHASE5-SOURCE/.env.example",
+    "current/كود من ZIP/Backend/ODYSSEY-BACKEND-PHASE5-SOURCE/docker-compose.yml",
+    "current/كود من ZIP/Backend/ODYSSEY-BACKEND-PHASE5-SOURCE/docs/LOCAL_DEVELOPMENT.md",
+    "current/كود من ZIP/Backend/ODYSSEY-BACKEND-PHASE5-SOURCE/docs/RUN_LOCAL_GAME_BACKEND.md",
+    "current/كود من ZIP/Backend/ODYSSEY-BACKEND-PHASE5-SOURCE/docs/TESTING.md"
+  ]
+}

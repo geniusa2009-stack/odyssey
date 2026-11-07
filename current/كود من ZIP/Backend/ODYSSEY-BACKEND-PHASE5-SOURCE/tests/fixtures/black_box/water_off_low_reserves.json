@@ -1,0 +1,24 @@
+{
+  "case": "water_off_low_reserves",
+  "decision_verdicts": [
+    "decision_worsened_target"
+  ],
+  "failure_trace": {
+    "chains": [
+      "decision -> metric:control.mode.water_recovery -> metric:life_support.water_recovery_efficiency -> metric:life_support.water_days -> metric:crew.min_health",
+      "decision -> metric:control.mode.water_recovery -> metric:life_support.water_recovery_efficiency -> metric:life_support.water_days -> metric:life_support.o2_generation_ratio -> metric:life_support.oxygen_days -> metric:crew.min_health",
+      "scenario:initial:life_support.oxygen_days -> metric:life_support.oxygen_days -> metric:crew.min_health",
+      "scenario:initial:life_support.water_days -> metric:life_support.water_days -> metric:crew.min_health",
+      "scenario:initial:life_support.water_days -> metric:life_support.water_days -> metric:life_support.o2_generation_ratio -> metric:life_support.oxygen_days -> metric:crew.min_health"
+    ],
+    "roots": [
+      "decision",
+      "scenario:initial:life_support.oxygen_days",
+      "scenario:initial:life_support.water_days"
+    ],
+    "target_metric": "crew.min_health",
+    "target_tick": 49
+  },
+  "final_tick": 49,
+  "outcome": "mission_failed_crew_loss"
+}

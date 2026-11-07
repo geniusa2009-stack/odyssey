@@ -1,0 +1,81 @@
+ODYSSEY-GAME — PRE-UNREAL EXPORT MANIFEST
+Created: 2026-11-01T17:24:51Z (UTC)   git version 2.43.0
+State: Phase 6 integration scaffold + macOS verification runner, PENDING Unreal Editor verification.
+       Nothing Unreal-dependent has been compiled or run. Phase 6 is NOT complete.
+
+================================================================ REPOSITORY
+HEAD:    f221a925c2c0cd5f8687f02d392390f268f3ab48
+Branch:  feature/unreal-vertical-slice
+Tree:    83dfce5cac07ca628c81e85bd1b0abb92cd7a8c0
+Refs:
+  f221a925c2c0cd5f8687f02d392390f268f3ab48 refs/heads/feature/unreal-vertical-slice
+Ancestors verified: a685b0b57394e66e8d626fb912ca61501b6cf93a, 6e7ea6d568aa59784ffdcfa837b48cdcfbf7b65f
+Commits: 3   Tags: 0   Stashes: 0   Git LFS files: 0
+
+git status:
+  On branch feature/unreal-vertical-slice
+  nothing to commit, working tree clean
+
+git log --oneline -5:
+  f221a92 tools: add macOS Unreal verification runner
+  a685b0b game: add Training and Laboratory to the verification greybox (pending editor verification)
+  6e7ea6d game: scaffold Unreal integration pending editor verification
+
+================================================================ ARTIFACTS (SHA-256)
+b5c5659b4558ba8d8994ac9ee2a4c4af87a901d7515b338f0e1159015884194c  ODYSSEY-GAME-PRE-UNREAL.bundle
+b157c619203aeb63a3697c0e750ac57c8572858507f0e50c30d76199d3fee94c  ODYSSEY-GAME-PRE-UNREAL-SOURCE.zip
+Sizes: bundle 280859 bytes, source zip 307887 bytes
+Verify on macOS:  shasum -a 256 -c <(sed -n '/^[0-9a-f]\{64\}  ODYSSEY-GAME-PRE-UNREAL/p' ODYSSEY-GAME-PRE-UNREAL-MANIFEST.txt)
+
+================================================================ BUNDLE
+ODYSSEY-GAME-PRE-UNREAL.bundle  (git bundle create ODYSSEY-GAME-PRE-UNREAL.bundle --all)
+git bundle verify:
+  ODYSSEY-GAME-PRE-UNREAL.bundle is okay
+  The bundle contains these 2 refs:
+  f221a925c2c0cd5f8687f02d392390f268f3ab48 refs/heads/feature/unreal-vertical-slice
+  f221a925c2c0cd5f8687f02d392390f268f3ab48 HEAD
+  The bundle records a complete history.
+  The bundle uses this hash algorithm: sha1
+
+================================================================ SOURCE ARCHIVE
+ODYSSEY-GAME-PRE-UNREAL-SOURCE.zip  (top-level folder ODYSSEY-GAME/)
+Source file count: 168 files (= 168 tracked files at HEAD)
+Created with:  git archive --format=zip --prefix=ODYSSEY-GAME/ -o ODYSSEY-GAME-PRE-UNREAL-SOURCE.zip HEAD
+from a clean working tree, so it contains exactly the files tracked at HEAD (verified
+byte-identical to a tree restored from the bundle). Executable bits are kept.
+
+Exclusions (none of these is tracked; checked absent — 0 matches — in the archive):
+  .git/                (history is in the bundle)
+  Logs/                (macOS runner output; .gitignore'd)
+  DerivedDataCache/  Intermediate/  Saved/  Binaries/   (Unreal-generated; .gitignore'd)
+  .DS_Store
+  local secrets: .env, .env.*, *.pem, *.key, Config/User*.ini, Config/Local*.ini (.gitignore'd;
+                 none exist in the repository), plus local databases *.db *.sqlite *.sqlite3 *.rdb
+  everything else untracked/ignored, e.g. Tools/ProtocolCore/build/ (native test binaries)
+Note: Tools/Mac/tests/fixtures/ubt_failure.log is a tracked test fixture (not a Logs/ output) and
+is included.
+
+================================================================ RESTORE TEST (performed)
+  git clone -b feature/unreal-vertical-slice ODYSSEY-GAME-PRE-UNREAL.bundle game
+  restored HEAD f221a925c2c0cd5f8687f02d392390f268f3ab48 = expected; tree identical; 3/3 commits;
+  ancestors a685b0b and 6e7ea6d present; working tree clean
+  git fsck --full --strict: exit 0, no output (no problems)
+  source zip vs restored tree: identical (168 files)
+
+================================================================ RESTORE INSTRUCTIONS
+With history (recommended):
+  mkdir -p ~/dev && cd ~/dev
+  git clone -b feature/unreal-vertical-slice /path/to/ODYSSEY-GAME-PRE-UNREAL.bundle ODYSSEY-GAME
+  cd ODYSSEY-GAME
+  git rev-parse HEAD            # must print f221a925c2c0cd5f8687f02d392390f268f3ab48
+  git fsck --full --strict      # no output expected
+  git remote remove origin      # optional: drop the bundle as remote; add the real remote later
+  git lfs install --local       # before adding Unreal binary assets
+
+Source only (no history):
+  unzip ODYSSEY-GAME-PRE-UNREAL-SOURCE.zip -d ~/dev     # → ~/dev/ODYSSEY-GAME/
+
+Then, on the Mac with Unreal Engine 5.8 (from the project folder):
+  bash Tools/Mac/first_compile.sh
+  # if the build fails, send back: Logs/FAILURE_REPORT.txt
+  # (see Tools/Mac/README.md; the backend for runtime tests is the separate ODYSSEY-BACKEND-PHASE5 export)

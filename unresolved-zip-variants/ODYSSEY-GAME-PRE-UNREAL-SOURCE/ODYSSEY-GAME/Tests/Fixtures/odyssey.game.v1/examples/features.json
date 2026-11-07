@@ -1,0 +1,353 @@
+{
+ "actions": [
+  {
+   "content_defined": false,
+   "mutates": true,
+   "params": [],
+   "summary": "The player entered a semantic location (starts the mission clock once).",
+   "target": "location",
+   "type": "world.zone_entered"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [],
+   "summary": "The player found a point of interest.",
+   "target": "object",
+   "type": "world.poi_discovered"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [],
+   "summary": "Inspect a system or subsystem.",
+   "target": "object",
+   "type": "system.inspect"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [
+    {
+     "kind": "enum",
+     "name": "mode",
+     "required": true,
+     "values": []
+    }
+   ],
+   "summary": "Change a system's operating mode.",
+   "target": "object",
+   "type": "system.set_mode"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [
+    {
+     "kind": "enum",
+     "name": "direction",
+     "required": true,
+     "values": []
+    }
+   ],
+   "summary": "Reroute power between buses or storage.",
+   "target": "object",
+   "type": "power.reroute"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [],
+   "summary": "Repair a diagnosed fault.",
+   "target": "object",
+   "type": "repair.perform"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [
+    {
+     "kind": "enum",
+     "name": "operation",
+     "required": true,
+     "values": []
+    }
+   ],
+   "summary": "Start or stop an instrument.",
+   "target": "object",
+   "type": "science.instrument_operate"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [],
+   "summary": "Collect a sample at a site.",
+   "target": "object",
+   "type": "science.sample_collect"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [],
+   "summary": "Bring infrastructure online.",
+   "target": "object",
+   "type": "infrastructure.activate"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [],
+   "summary": "Take infrastructure offline.",
+   "target": "object",
+   "type": "infrastructure.deactivate"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [],
+   "summary": "Inspect a vehicle.",
+   "target": "object",
+   "type": "vehicle.inspect"
+  },
+  {
+   "content_defined": true,
+   "mutates": true,
+   "params": [
+    {
+     "kind": "enum",
+     "name": "order",
+     "required": true,
+     "values": []
+    }
+   ],
+   "summary": "Give a vehicle an order.",
+   "target": "object",
+   "type": "vehicle.dispatch"
+  },
+  {
+   "content_defined": false,
+   "mutates": true,
+   "params": [
+    {
+     "kind": "id",
+     "name": "item",
+     "required": true,
+     "values": []
+    },
+    {
+     "kind": "int",
+     "name": "quantity",
+     "required": true,
+     "values": []
+    },
+    {
+     "kind": "id",
+     "name": "from",
+     "required": true,
+     "values": []
+    }
+   ],
+   "summary": "Move cargo into a container (target = destination).",
+   "target": "container",
+   "type": "cargo.transfer"
+  },
+  {
+   "content_defined": false,
+   "mutates": true,
+   "params": [
+    {
+     "kind": "id",
+     "name": "item",
+     "required": true,
+     "values": []
+    },
+    {
+     "kind": "int",
+     "name": "quantity",
+     "required": true,
+     "values": []
+    },
+    {
+     "kind": "id",
+     "name": "from",
+     "required": true,
+     "values": []
+    }
+   ],
+   "summary": "Move items between containers (target = destination).",
+   "target": "container",
+   "type": "inventory.move"
+  },
+  {
+   "content_defined": false,
+   "mutates": true,
+   "params": [
+    {
+     "kind": "id",
+     "name": "slot",
+     "required": true,
+     "values": []
+    },
+    {
+     "kind": "id",
+     "name": "item",
+     "required": true,
+     "values": []
+    },
+    {
+     "kind": "id",
+     "name": "from",
+     "required": true,
+     "values": []
+    }
+   ],
+   "summary": "Install a hardware module in a slot.",
+   "target": "host",
+   "type": "module.install"
+  },
+  {
+   "content_defined": false,
+   "mutates": true,
+   "params": [
+    {
+     "kind": "id",
+     "name": "slot",
+     "required": true,
+     "values": []
+    },
+    {
+     "kind": "id",
+     "name": "to",
+     "required": true,
+     "values": []
+    }
+   ],
+   "summary": "Remove a module into a container.",
+   "target": "host",
+   "type": "module.remove"
+  },
+  {
+   "content_defined": false,
+   "mutates": true,
+   "params": [],
+   "summary": "Send the crew to a location (e.g. the radiation shelter).",
+   "target": "location",
+   "type": "crew.assign_location"
+  },
+  {
+   "content_defined": false,
+   "mutates": false,
+   "params": [],
+   "summary": "Ask a crew member for context (read-only).",
+   "target": "crew",
+   "type": "npc.context_request"
+  },
+  {
+   "content_defined": false,
+   "mutates": true,
+   "params": [],
+   "summary": "Authorize the mission at its gate (target = gate object).",
+   "target": "object",
+   "type": "mission.authorize"
+  },
+  {
+   "content_defined": false,
+   "mutates": true,
+   "params": [
+    {
+     "kind": "enum",
+     "name": "mode",
+     "required": true,
+     "values": [
+      "PAUSED",
+      "REALTIME",
+      "ACCELERATED"
+     ]
+    }
+   ],
+   "summary": "Pause, resume or accelerate time.",
+   "target": "none",
+   "type": "mission.clock_set"
+  },
+  {
+   "content_defined": false,
+   "mutates": true,
+   "params": [
+    {
+     "kind": "str",
+     "name": "label",
+     "required": false,
+     "values": []
+    }
+   ],
+   "summary": "Save a manual checkpoint.",
+   "target": "none",
+   "type": "checkpoint.save"
+  }
+ ],
+ "auth": "session_token (Authorization: Bearer); anonymous principal",
+ "clock_modes": [
+  "PAUSED",
+  "REALTIME",
+  "ACCELERATED",
+  "DECISION_PAUSED"
+ ],
+ "content_version": "1.0.0",
+ "error_codes": [
+  "AI_UNAVAILABLE",
+  "DECISION_UNAVAILABLE",
+  "IDEMPOTENCY_KEY_REUSED",
+  "INTERNAL_ERROR",
+  "INVALID_DECISION",
+  "INVALID_REQUEST",
+  "INVALID_TIMELINE",
+  "METHOD_NOT_ALLOWED",
+  "MISSION_COMPLETE",
+  "NASA_PROVIDER_UNAVAILABLE",
+  "NOT_FOUND",
+  "PAYLOAD_TOO_LARGE",
+  "PERMISSION_DENIED",
+  "RATE_LIMITED",
+  "SESSION_NOT_FOUND",
+  "SIMULATION_ERROR",
+  "STALE_STATE",
+  "VALIDATION_ERROR"
+ ],
+ "event_types": [
+  "mission.updated",
+  "mission.transitioned",
+  "objective.updated",
+  "system.state_changed",
+  "system.alert_changed",
+  "resource.threshold_changed",
+  "incident.started",
+  "incident.updated",
+  "incident.resolved",
+  "capability.progressed",
+  "certification.granted",
+  "discovery.recorded",
+  "inventory.changed",
+  "cargo.changed",
+  "infrastructure.changed",
+  "knowledge.unlocked",
+  "world.access_changed",
+  "world.object_revealed",
+  "interactions.changed",
+  "crew.updated",
+  "crew.cue",
+  "clock.updated",
+  "time.advanced",
+  "campaign.updated",
+  "timeline.changed",
+  "checkpoint.saved",
+  "future_lens.ready",
+  "black_box.ready"
+ ],
+ "limits": {
+  "event_retention": 2000,
+  "events_page_max": 500,
+  "max_catchup_ticks_default": 24,
+  "max_params": 8
+ },
+ "protocol": "odyssey.game.v1"
+}

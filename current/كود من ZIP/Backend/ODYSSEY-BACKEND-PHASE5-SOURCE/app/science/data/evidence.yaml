@@ -1,0 +1,150 @@
+# Science evidence registry.
+#
+# Every scientific assumption used by the simulation should map to an entry here.
+# verification_status:
+#   verified_primary   — value checked against the primary source
+#   verified_secondary — value checked against a reputable secondary source quoting the primary
+#   unverified         — placeholder; a source still has to be found/confirmed
+# retrieved_date is when the value was last checked (2026-10-06 for this initial set).
+
+- id: bvad_o2_consumption
+  concept: Crew oxygen consumption
+  claim: Nominal oxygen consumption is about 0.818 kg per crew member per day.
+  value: 0.818
+  unit: kg/CM-d
+  source_name: NASA Life Support Baseline Values and Assumptions Document (BVAD)
+  source_citation: "Anderson, M.S., Ewert, M.K., Keener, J.F. (2018). Life Support Baseline Values and Assumptions Document. NASA Johnson Space Center."
+  source_url: https://www.frontiersin.org/journals/space-technologies/articles/10.3389/frspt.2024.1461389/full
+  retrieved_date: "2026-10-06"
+  verification_status: verified_secondary
+  simulation_usage: [life_support.o2_consumption_kg_per_crew_day]
+  simplification: Constant rate; ignores activity level, EVA metabolic load and body mass.
+  confidence: high
+  notes: Value confirmed via a 2024 Frontiers in Space Technologies article tabulating BVAD values. Primary NTRS link to be added.
+
+- id: bvad_co2_production
+  concept: Crew CO2 production
+  claim: Nominal carbon dioxide production is about 1.04 kg per crew member per day.
+  value: 1.04
+  unit: kg/CM-d
+  source_name: NASA Life Support Baseline Values and Assumptions Document (BVAD)
+  source_citation: "Anderson, M.S., Ewert, M.K., Keener, J.F. (2018). Life Support Baseline Values and Assumptions Document. NASA Johnson Space Center."
+  source_url: https://www.frontiersin.org/journals/space-technologies/articles/10.3389/frspt.2024.1461389/full
+  retrieved_date: "2026-10-06"
+  verification_status: verified_secondary
+  simulation_usage: [life_support.co2_production_kg_per_crew_day]
+  simplification: Constant rate.
+  confidence: high
+
+- id: bvad_water_total
+  concept: Crew water requirement
+  claim: Total water requirement is about 4.35 kg per crew member per day (of which about 2.0 kg is drinking water).
+  value: 4.35
+  unit: kg/CM-d
+  source_name: NASA Life Support Baseline Values and Assumptions Document (BVAD)
+  source_citation: "Anderson, M.S., Ewert, M.K., Keener, J.F. (2018). Life Support Baseline Values and Assumptions Document. NASA Johnson Space Center."
+  source_url: https://www.frontiersin.org/journals/space-technologies/articles/10.3389/frspt.2024.1461389/full
+  retrieved_date: "2026-10-06"
+  verification_status: verified_secondary
+  simulation_usage: [life_support.water_use_kg_per_crew_day]
+  simplification: All water use is treated as one recoverable stream.
+  confidence: high
+
+- id: bvad_food_mass
+  concept: Crew food mass
+  claim: Food mass without packaging is about 1.51 kg per crew member per day.
+  value: 1.51
+  unit: kg/CM-d
+  source_name: NASA Life Support Baseline Values and Assumptions Document (BVAD)
+  source_citation: "Anderson, M.S., Ewert, M.K., Keener, J.F. (2018). Life Support Baseline Values and Assumptions Document. NASA Johnson Space Center."
+  source_url: https://www.frontiersin.org/journals/space-technologies/articles/10.3389/frspt.2024.1461389/full
+  retrieved_date: "2026-10-06"
+  verification_status: verified_secondary
+  simulation_usage: [food.consumption_kg_per_crew_day]
+  simplification: Packaging mass and food water content are ignored.
+  confidence: high
+
+- id: iss_water_recovery
+  concept: Water recovery efficiency
+  claim: ISS total water recovery was about 93–94% before the Brine Processor Assembly and reached 98% in 2023.
+  value: 0.93
+  unit: fraction
+  source_name: Space.com reporting on NASA ECLSS milestone (June 2023)
+  source_url: https://space.com/astronaut-pee-iss-water-recycling-98-percent-milestone
+  retrieved_date: "2026-10-06"
+  verification_status: verified_secondary
+  simulation_usage: [life_support.water_recovery_nominal]
+  simplification: The simulation uses the pre-BPA ~93% level as nominal and degrades it with power, temperature and component health.
+  confidence: high
+
+- id: change4_lnd_dose_rate
+  concept: Lunar surface radiation dose rate
+  claim: Chang'E-4's LND measured a dose equivalent rate of about 1369 µSv/day (≈0.057 mSv/h) on the lunar far side surface.
+  value: 0.057
+  unit: mSv/h
+  source_name: "Zhang, S. et al. (2020), First measurements of the radiation dose on the lunar surface, Science Advances 6(39): eaaz1334"
+  source_citation: "doi:10.1126/sciadv.aaz1334"
+  source_url: https://www.sci.news/space/radiation-dose-rates-lunar-surface-08893.html
+  retrieved_date: "2026-10-06"
+  verification_status: verified_secondary
+  simulation_usage: [environment.radiation_dose_rate_msv_h]
+  simplification: Constant galactic background; solar particle events are modelled as multiplicative modifiers whose size is a gameplay abstraction.
+  confidence: high
+  notes: Non-NASA mission (CNSA lander with a German-built instrument); included because it is the first direct surface measurement.
+
+- id: diviner_surface_temperature
+  concept: Lunar surface temperature extremes
+  claim: LRO Diviner measured equatorial noon temperatures near 400 K, night temperatures below 100 K, and permanently shadowed polar craters as cold as about 25 K.
+  unit: K
+  source_name: LRO Diviner Lunar Radiometer Experiment (UCLA)
+  source_url: https://www.diviner.ucla.edu/science
+  retrieved_date: "2026-10-06"
+  verification_status: verified_primary
+  simulation_usage: [environment.sink_temp_c]
+  simplification: The habitat sees a single effective radiative sink temperature that declines toward night; it is not a surface temperature.
+  confidence: medium
+  notes: Sink keyframes are an educational abstraction informed by these extremes, not a direct transformation of Diviner data.
+
+- id: electrolysis_stoichiometry
+  concept: Water electrolysis
+  claim: Producing 1 kg of O2 by electrolysis consumes about 1.125 kg of water (2 H2O → 2 H2 + O2; 36.03 g water per 32.00 g O2).
+  value: 1.125
+  unit: kg H2O / kg O2
+  source_name: Standard chemical stoichiometry
+  retrieved_date: "2026-10-06"
+  verification_status: verified_primary
+  simulation_usage: [life_support.water_per_kg_o2]
+  simplification: Hydrogen is vented; no Sabatier water recovery.
+  confidence: high
+
+- id: lunar_polar_illumination
+  concept: Polar illumination decline
+  claim: Near the lunar south pole the Sun stays near the horizon, so array output varies strongly with terrain shadowing and season.
+  source_name: "Candidate: LRO LOLA polar illumination studies (e.g. Mazarico et al. 2011, Icarus)"
+  retrieved_date: "2026-10-06"
+  verification_status: unverified
+  simulation_usage: [environment.solar_availability]
+  simplification: Solar availability is a stylized keyframe decline to darkness over 10 days.
+  confidence: low
+  notes: Source not yet confirmed; see docs/NASA_DATA_OPTIONS.md.
+
+- id: donki_sep_events
+  concept: Solar energetic particle events
+  claim: NASA's DONKI service catalogues solar energetic particle (SEP) events via an open API.
+  source_name: NASA DONKI (Space Weather Database Of Notifications, Knowledge, Information)
+  source_url: https://api.nasa.gov/DONKI/SEP
+  retrieved_date: "2026-10-06"
+  verification_status: verified_secondary
+  simulation_usage: [events.solar_particle_event]
+  simplification: Event timing and magnitude in LUNA-01 are scripted, not taken from a real SEP.
+  confidence: medium
+
+- id: co2_crew_limits
+  concept: Cabin CO2 limits
+  claim: Spacecraft cabin CO2 is kept to a few mmHg partial pressure; warning/critical thresholds used here are placeholders.
+  source_name: "Candidate: NASA SMAC / ISS flight rules"
+  retrieved_date: "2026-10-06"
+  verification_status: unverified
+  simulation_usage: [crew_health.co2_warning_ppm, crew_health.co2_critical_ppm]
+  simplification: Thresholds in ppm at 1 atm; health effect is an abstract penalty.
+  confidence: low

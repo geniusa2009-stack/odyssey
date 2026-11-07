@@ -1,0 +1,38 @@
+{
+ "active_alerts": [],
+ "available": true,
+ "concept": "Generation versus demand",
+ "explanation": "Electrical power cannot be stored in the wires. Any gap between what loads demand and what sources deliver is covered by the battery until it cannot be, then loads go dark.",
+ "inputs": [
+  {
+   "label": "Battery state of charge",
+   "mechanism": "With the battery empty, loads the array cannot cover are shed",
+   "metric": "power.battery_soc",
+   "unit": "fraction",
+   "value": 0.9
+  },
+  {
+   "label": "Generation vs rated",
+   "mechanism": "Too little generation leaves demand unmet once the battery is empty",
+   "metric": "power.generation_ratio",
+   "unit": "fraction",
+   "value": 0.0
+  }
+ ],
+ "insight": "power.generation_vs_demand",
+ "label": "Unmet demand (load shed)",
+ "metric": "power.unmet_kw",
+ "note": "Current values from the authoritative simulation.",
+ "observation": "When bus B dropped, the station kept drawing the same power from less supply.",
+ "provenance": {
+  "classification": "educational_abstraction",
+  "evidence_refs": [],
+  "note": null
+ },
+ "related_objects": [
+  "earth.command.engineering.power_bus_b",
+  "earth.command.engineering.station_battery"
+ ],
+ "unit": "kW",
+ "value": 0.0
+}

@@ -1,0 +1,22 @@
+{
+  "case": "random_valid:1",
+  "decision_verdicts": [
+    "decision_worsened_target"
+  ],
+  "failure_trace": {
+    "chains": [
+      "baseline:food.food_days -> metric:food.food_days -> metric:crew.min_health",
+      "decision -> metric:control.mode.co2_scrubber -> metric:life_support.co2_ppm -> metric:crew.min_health",
+      "event:solar_particle_event -> metric:env.radiation_dose_rate_msv_h -> metric:crew.received_dose_rate_msv_h -> metric:crew.min_health"
+    ],
+    "roots": [
+      "baseline:food.food_days",
+      "decision",
+      "event:solar_particle_event"
+    ],
+    "target_metric": "crew.min_health",
+    "target_tick": 190
+  },
+  "final_tick": 190,
+  "outcome": "mission_failed_crew_loss"
+}

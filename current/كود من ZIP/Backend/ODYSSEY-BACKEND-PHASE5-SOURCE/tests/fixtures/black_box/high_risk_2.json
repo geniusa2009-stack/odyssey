@@ -1,0 +1,34 @@
+{
+  "case": "high_risk:2",
+  "decision_verdicts": [
+    "decision_worsened_target",
+    "decision_worsened_target"
+  ],
+  "failure_trace": {
+    "chains": [
+      "decision -> metric:control.ration_level -> metric:crew.min_health",
+      "decision -> metric:control.thermal_setpoint -> metric:thermal.habitat_temp_c -> metric:crew.min_health",
+      "decision -> metric:control.thermal_setpoint -> metric:thermal.habitat_temp_c -> metric:life_support.water_recovery_efficiency -> metric:life_support.water_days -> metric:crew.min_health",
+      "environment:dust_accumulation -> metric:power.dust_factor -> metric:power.generation_ratio -> metric:power.battery_soc -> metric:power.supply_ratio.co2_scrubber -> metric:life_support.co2_ppm -> metric:crew.min_health",
+      "environment:dust_accumulation -> metric:power.dust_factor -> metric:power.generation_ratio -> metric:power.supply_ratio.co2_scrubber -> metric:life_support.co2_ppm -> metric:crew.min_health",
+      "environment:sink_temp_c -> metric:env.sink_temp_c -> metric:thermal.habitat_temp_c -> metric:crew.min_health",
+      "environment:sink_temp_c -> metric:env.sink_temp_c -> metric:thermal.habitat_temp_c -> metric:life_support.water_recovery_efficiency -> metric:life_support.water_days -> metric:crew.min_health",
+      "environment:solar_availability -> metric:env.solar_availability -> metric:power.generation_ratio -> metric:power.battery_soc -> metric:power.supply_ratio.co2_scrubber -> metric:life_support.co2_ppm -> metric:crew.min_health",
+      "environment:solar_availability -> metric:env.solar_availability -> metric:power.generation_ratio -> metric:power.supply_ratio.co2_scrubber -> metric:life_support.co2_ppm -> metric:crew.min_health",
+      "event:water_processor_pump_fault -> metric:component.water_processor.health -> metric:life_support.water_recovery_efficiency -> metric:life_support.water_days -> metric:crew.min_health",
+      "scenario:control.discretionary_load_kw -> metric:control.discretionary_load_kw -> metric:power.battery_soc -> metric:power.supply_ratio.co2_scrubber -> metric:life_support.co2_ppm -> metric:crew.min_health"
+    ],
+    "roots": [
+      "decision",
+      "environment:dust_accumulation",
+      "environment:sink_temp_c",
+      "environment:solar_availability",
+      "event:water_processor_pump_fault",
+      "scenario:control.discretionary_load_kw"
+    ],
+    "target_metric": "crew.min_health",
+    "target_tick": 234
+  },
+  "final_tick": 234,
+  "outcome": "mission_failed_crew_loss"
+}

@@ -1,0 +1,140 @@
+ODYSSEY EXPORT MANIFEST
+Created: 2026-10-30T23:23:50Z (UTC)   Tool: git version 2.43.0
+Purpose: durable export of both repositories before further Phase 6 work.
+Phase status: ODYSSEY-GAME is the Phase 6 integration scaffold PENDING Unreal Editor verification (Phase 6 NOT complete). Backend is the protected Phase 5 checkpoint.
+
+================================================================ ARTIFACTS (SHA-256)
+b09550a84116f1f69c4336f7829f7e229f43bd7685adadfc3cc1b61d03cd1658  ODYSSEY-GAME-PHASE6.bundle
+26792590a65a873f467f884996e19f22b5d4c11dc75f727e7cfeed8dc6c4471f  ODYSSEY-GAME-PHASE6-SOURCE.zip
+296cd1fe568869169218d230581a655df743fae2b32255b1058566248417e14e  ODYSSEY-BACKEND-PHASE5.bundle
+3a97ad013a9ac622716593257796d23e3272ca05c7256ec19ba5272ec7be72f1  ODYSSEY-BACKEND-PHASE5-SOURCE.zip
+
+Sizes (bytes):
+  ODYSSEY-GAME-PHASE6.bundle           261481
+  ODYSSEY-GAME-PHASE6-SOURCE.zip       288122
+  ODYSSEY-BACKEND-PHASE5.bundle        939548
+  ODYSSEY-BACKEND-PHASE5-SOURCE.zip    970843
+Verify on macOS:  shasum -a 256 -c <(sed -n '/^[0-9a-f]\{64\}  ODYSSEY-/p' ODYSSEY-EXPORT-MANIFEST.txt)
+
+================================================================ ODYSSEY-GAME
+HEAD:    a685b0b57394e66e8d626fb912ca61501b6cf93a
+Branch:  feature/unreal-vertical-slice
+Tree:    b4a613b595901c3b9a6dc24b6ca5d8df2e236fe9
+Branches in repository (all included in the bundle):
+  a685b0b57394e66e8d626fb912ca61501b6cf93a refs/heads/feature/unreal-vertical-slice
+Tags: 0   Stashes: 0   Commits (all refs): 2   Tracked files: 158
+Bundle:  ODYSSEY-GAME-PHASE6.bundle  (git bundle create ODYSSEY-GAME-PHASE6.bundle --all)
+  git bundle verify:
+    /mnt/user-data/outputs/ODYSSEY-GAME-PHASE6.bundle is okay
+    The bundle contains these 2 refs:
+    a685b0b57394e66e8d626fb912ca61501b6cf93a refs/heads/feature/unreal-vertical-slice
+    a685b0b57394e66e8d626fb912ca61501b6cf93a HEAD
+    The bundle records a complete history.
+    The bundle uses this hash algorithm: sha1
+  git bundle list-heads:
+    a685b0b57394e66e8d626fb912ca61501b6cf93a refs/heads/feature/unreal-vertical-slice
+    a685b0b57394e66e8d626fb912ca61501b6cf93a HEAD
+Source archive: ODYSSEY-GAME-PHASE6-SOURCE.zip  (top-level folder: ODYSSEY-GAME/)
+git status:
+  On branch feature/unreal-vertical-slice
+  nothing to commit, working tree clean
+git status --porcelain: 0 lines (clean)
+git log --oneline -5:
+  a685b0b game: add Training and Laboratory to the verification greybox (pending editor verification)
+  6e7ea6d game: scaffold Unreal integration pending editor verification
+
+================================================================ ODYSSEY BACKEND
+HEAD:    4f7be839a21b054b83d34151c56510fa45ba18a4
+Branch:  feature/unreal-game-backend
+Tree:    4587b66915b4e019a128bdbe19fdaad84c9bc4cd
+Branches in repository (all included in the bundle):
+  65f23d1e1f362a1320a932875dad550ed3a3ffed refs/heads/feature/odyssey-backend-core
+  4f7be839a21b054b83d34151c56510fa45ba18a4 refs/heads/feature/unreal-game-backend
+Tags: 0   Stashes: 0   Commits (all refs): 6   Tracked files: 336
+Bundle:  ODYSSEY-BACKEND-PHASE5.bundle  (git bundle create ODYSSEY-BACKEND-PHASE5.bundle --all)
+  git bundle verify:
+    /mnt/user-data/outputs/ODYSSEY-BACKEND-PHASE5.bundle is okay
+    The bundle contains these 3 refs:
+    65f23d1e1f362a1320a932875dad550ed3a3ffed refs/heads/feature/odyssey-backend-core
+    4f7be839a21b054b83d34151c56510fa45ba18a4 refs/heads/feature/unreal-game-backend
+    4f7be839a21b054b83d34151c56510fa45ba18a4 HEAD
+    The bundle records a complete history.
+    The bundle uses this hash algorithm: sha1
+  git bundle list-heads:
+    65f23d1e1f362a1320a932875dad550ed3a3ffed refs/heads/feature/odyssey-backend-core
+    4f7be839a21b054b83d34151c56510fa45ba18a4 refs/heads/feature/unreal-game-backend
+    4f7be839a21b054b83d34151c56510fa45ba18a4 HEAD
+Source archive: ODYSSEY-BACKEND-PHASE5-SOURCE.zip  (top-level folder: odyssey/)
+git status:
+  On branch feature/unreal-game-backend
+  nothing to commit, working tree clean
+git status --porcelain: 0 lines (clean)
+git log --oneline -5:
+  4f7be83 backend: add open-world game and Unreal integration domain
+  65f23d1 recovery: align reconstructed api v1 with recorded phase4 contract
+  fc50912 recovered: phase 4 frontend-safe application contract (api v1) + D25
+  7361005 recovered: phase 3 LUNA-01 meaningful decisions (scenario v0.2.0)
+  770afe7 recovered baseline: phase 2 verification and balancing lab
+
+================================================================ ARCHIVE CONTENTS AND EXCLUSIONS
+Both source archives were produced with:
+    git archive --format=zip --prefix=<folder>/ -o <archive> HEAD
+taken from a clean working tree (git status --porcelain empty), so each archive contains exactly
+the files tracked at HEAD (verified byte-identical to a tree restored from the bundle). Nothing
+untracked or ignored can enter it.
+
+Excluded (not tracked, or not part of a git archive), both archives:
+  .git/                                  (repository metadata; history is in the bundle)
+  every untracked or .gitignore'd path
+Explicitly checked absent (0 matches in each archive) — directory names anywhere in the tree:
+  DerivedDataCache/ Intermediate/ Saved/ Binaries/ build/ .venv/ venv/ __pycache__/ node_modules/
+  .mypy_cache/ .ruff_cache/ .pytest_cache/ .hypothesis/
+and files:
+  .DS_Store  .env  *.db  *.sqlite  *.sqlite3  *.rdb  *.pem  *.key  *.pyc
+ODYSSEY-GAME specifically excluded (ignored, present locally): Tools/ProtocolCore/build/ (native test binaries).
+ODYSSEY backend specifically excluded (ignored, present locally): .venv/, .mypy_cache/, .ruff_cache/,
+  .hypothesis/, __pycache__/ directories, local SQLite databases.
+Kept on purpose: backend .env.example (tracked configuration template; contains no secret values).
+Secrets: none tracked in either repository (scan of tracked paths for .env, keys, databases; game
+  config holds no credentials — session tokens are issued by the backend at runtime).
+Unreal Engine assets: the game repository contains no .uasset/.umap yet (Git LFS configured in
+  .gitattributes; `git lfs ls-files` is empty), so the bundle and the archive are complete without LFS.
+Executable bits are preserved in the archives (e.g. Tools/ProtocolCore/run_live.sh).
+
+================================================================ RESTORE TEST (performed before handover)
+Both bundles were cloned into fresh temporary directories:
+  ODYSSEY-GAME:  git clone -b feature/unreal-vertical-slice ODYSSEY-GAME-PHASE6.bundle
+                 HEAD a685b0b57394e66e8d626fb912ca61501b6cf93a  = expected   tree identical
+                 2/2 commits, refs identical, git fsck --full --strict: 0 problems, clean status
+  Backend:       git clone -b feature/unreal-game-backend ODYSSEY-BACKEND-PHASE5.bundle
+                 HEAD 4f7be839a21b054b83d34151c56510fa45ba18a4  = expected   tree identical
+                 both branches restored (feature/odyssey-backend-core 65f23d1…, feature/unreal-game-backend 4f7be83…)
+                 6/6 commits, git fsck --full --strict: 0 problems, clean status
+  Source zips:   diff -r against the restored trees: identical (game 158 files, backend 336 files)
+  Usability:     from the extracted game zip alone: native protocol tests 26/26 (959 checks),
+                 fixture integrity check, greybox dry run — all pass.
+
+================================================================ RESTORE INSTRUCTIONS
+Recommended (full history):
+  mkdir -p ~/dev && cd ~/dev
+  git clone -b feature/unreal-vertical-slice /path/to/ODYSSEY-GAME-PHASE6.bundle ODYSSEY-GAME
+  git clone -b feature/unreal-game-backend  /path/to/ODYSSEY-BACKEND-PHASE5.bundle odyssey
+  git -C ODYSSEY-GAME rev-parse HEAD   # a685b0b57394e66e8d626fb912ca61501b6cf93a
+  git -C odyssey      rev-parse HEAD   # 4f7be839a21b054b83d34151c56510fa45ba18a4
+  # the backend's other branch is available as origin/feature/odyssey-backend-core:
+  git -C odyssey branch feature/odyssey-backend-core origin/feature/odyssey-backend-core
+  # detach from the bundle path as remote (optional; add your real remote later):
+  git -C ODYSSEY-GAME remote remove origin; git -C odyssey remote remove origin
+  cd ODYSSEY-GAME && git lfs install --local   # before adding any Unreal binary assets
+
+Source only (no history):
+  unzip ODYSSEY-GAME-PHASE6-SOURCE.zip      # → ODYSSEY-GAME/
+  unzip ODYSSEY-BACKEND-PHASE5-SOURCE.zip   # → odyssey/
+  Note: a zip is not a git repository; use the bundles to continue development with history.
+
+After restoring:
+  backend:  cd odyssey && uv sync      (recreates .venv; local databases are created on first run)
+  game:     make -C ODYSSEY-GAME/Tools/ProtocolCore test        → 26/26 cases
+            python3 ODYSSEY-GAME/Tools/Contract/sync_fixtures.py --backend odyssey --check
+  Unreal:   follow ODYSSEY-GAME/Docs/VERIFICATION_CHECKLIST.md (UE 5.8, Apple Silicon).
+            Binaries/, Intermediate/, Saved/, DerivedDataCache/ are regenerated by Unreal.

@@ -1,0 +1,9 @@
+# ODYSSEY campaign content manifest. Saved games record content_version and content_hash and are
+# only loaded by a server whose content is compatible (docs/SAVE_RESTORE.md#content-versions).
+content_id: odyssey.campaign
+content_version: "1.0.0"
+compatible_from: "1.0.0"
+description: >-
+  Campaign content for the ODYSSEY open-world game: Earth Command (phase 1, fully authored),
+  LUNA-01 (phase 2, bound to the LUNA-01 v0.2.0 simulation), and the structure, gates and
+  locked placeholders of the later lunar, deep-space and Mars phases.

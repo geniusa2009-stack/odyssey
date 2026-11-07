@@ -1,0 +1,50 @@
+# Human Expansion readiness. A profile is a set of explicit gates; readiness percentages are
+# derived from gates met and never hide a missing critical gate. No Mars science is invented:
+# the gates name capabilities; the content that can certify them is deferred.
+profiles:
+  - id: mars_01_human_mission
+    title: MARS-01 human mission
+    lock_code: MARS_MISSION_LOCKED
+    gates:
+      - {id: gate.transport.crewed_transit, category: transport, critical: true,
+         title: Crewed deep-space transit, description: A crew vehicle qualified for the trip.,
+         requires: [{capability: transportation.crew_launch_readiness, stage: MARS_CERTIFIED}]}
+      - {id: gate.habitation.long_duration, category: long_duration_habitation, critical: true,
+         title: Long-duration habitation, description: Keep a crew healthy for the whole mission.,
+         requires: [{capability: habitation.long_duration, stage: MARS_CERTIFIED}]}
+      - {id: gate.life_support.closed_loop, category: life_support, critical: true,
+         title: Regenerative life support, description: Air and water recycled far from resupply.,
+         requires: [{capability: life_support.closed_loop, stage: MARS_CERTIFIED}]}
+      - {id: gate.power.surface_power, category: power, critical: true,
+         title: Surface power, description: Power through dust and night on another world.,
+         requires: [{capability: power.load_management, stage: MARS_CERTIFIED}]}
+      - {id: gate.radiation.protection, category: radiation_protection, critical: true,
+         title: Radiation protection, description: Shielding and sheltering for transit and surface.,
+         requires: [{capability: habitation.radiation_sheltering, stage: MARS_CERTIFIED}]}
+      - {id: gate.communications.deep_space, category: communications, critical: true,
+         title: Deep-space communications, description: Links that survive long delays and outages.,
+         requires: [{capability: communications.surface_relay, stage: MARS_CERTIFIED}]}
+      - {id: gate.autonomy.fault_management, category: autonomy, critical: true,
+         title: Autonomous fault management, description: Systems that act when Earth cannot.,
+         requires: [{capability: autonomy.fault_management, stage: MARS_CERTIFIED}]}
+      - {id: gate.robotics.teleoperation, category: robotics, critical: false,
+         title: Robotic precursors, description: Robots that scout and build ahead of the crew.,
+         requires: [{capability: robotics.teleoperation, stage: MARS_CERTIFIED}]}
+      - {id: gate.logistics.mass_budget, category: logistics, critical: true,
+         title: Logistics, description: A manifest that carries everything the mission needs.,
+         requires: [{capability: logistics.mass_budgeting, stage: MARS_CERTIFIED}]}
+      - id: gate.surface.systems
+        category: surface_systems
+        critical: false
+        title: Surface systems
+        description: Mobility, science and construction on the surface.
+        requires:
+          - {capability: mobility.surface_rover, stage: MARS_CERTIFIED}
+          - {capability: infrastructure.surface_construction, stage: MARS_CERTIFIED}
+          - {capability: science.surface_sampling, stage: MARS_CERTIFIED}
+      - {id: gate.edl.crewed_landing, category: entry_descent_landing, critical: true,
+         title: "Entry, descent and landing", description: Land a crew through an atmosphere.,
+         requires: [{capability: transportation.entry_descent_landing, stage: MARS_CERTIFIED}]}
+      - {id: gate.return.capability, category: return_capability, critical: true,
+         title: Return capability, description: Bring the crew home.,
+         requires: [{capability: transportation.planetary_return, stage: MARS_CERTIFIED}]}

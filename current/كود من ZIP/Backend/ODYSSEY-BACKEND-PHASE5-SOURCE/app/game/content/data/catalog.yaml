@@ -1,0 +1,159 @@
+# Items, modules, vehicle classes and infrastructure types. Masses and volumes are gameplay
+# parameters unless a provenance says otherwise. No currency, no rarity tiers.
+items:
+  - id: spare.breaker_module
+    name: Breaker module
+    category: spare
+    mass_kg: 4.0
+    volume_l: 6.0
+    max_stack: 10
+    tags: [power, repair]
+    provenance: {classification: gameplay_parameter}
+  - id: tool.diagnostic_scanner
+    name: Diagnostic scanner
+    category: tool
+    mass_kg: 1.5
+    volume_l: 3.0
+    stackable: false
+    max_stack: 1
+    tags: [diagnostics]
+    provenance: {classification: gameplay_parameter}
+  - id: cargo.water_tank
+    name: Water tank (50 L)
+    category: cargo
+    mass_kg: 56.0
+    volume_l: 70.0
+    max_stack: 8
+    tags: [life_support, consumable_supply]
+    provenance: {classification: educational_abstraction,
+                 note: 50 kg of water plus an assumed 6 kg tank.}
+  - id: cargo.food_pack
+    name: Food pack (crew-week)
+    category: cargo
+    mass_kg: 12.0
+    volume_l: 30.0
+    max_stack: 20
+    tags: [life_support, consumable_supply]
+    provenance: {classification: gameplay_parameter}
+  - id: spare.habitat_spares_kit
+    name: Habitat spares kit
+    category: spare
+    mass_kg: 25.0
+    volume_l: 60.0
+    max_stack: 4
+    tags: [repair, habitat]
+    provenance: {classification: gameplay_parameter}
+  - id: equipment.science_drill_kit
+    name: Science drill kit
+    category: equipment
+    mass_kg: 40.0
+    volume_l: 90.0
+    stackable: false
+    max_stack: 1
+    tags: [science]
+    provenance: {classification: gameplay_parameter}
+  - id: sample.regolith_core
+    name: Regolith core sample
+    category: sample
+    mass_kg: 2.0
+    volume_l: 1.5
+    stackable: false
+    max_stack: 1
+    unique: true
+    tags: [science, lunar]
+    provenance: {classification: educational_abstraction}
+  - id: module.radiation_shelter_liner
+    name: Radiation shelter liner
+    category: module
+    mass_kg: 80.0
+    volume_l: 200.0
+    stackable: false
+    max_stack: 1
+    tags: [radiation, shielding]
+    provenance: {classification: educational_abstraction,
+                 note: Hydrogen-rich shielding concept; mass is a gameplay value.}
+    module:
+      category: radiation_protection
+      mount: mount.internal_wall
+      environment_rating: [env.cislunar, env.lunar_surface]
+      mission_rating: [mission.luna_01]
+      provides: [shielding]
+  - id: module.isru_oxygen_pilot
+    name: Oxygen extraction pilot plant
+    category: module
+    mass_kg: 120.0
+    volume_l: 300.0
+    stackable: false
+    max_stack: 1
+    tags: [isru, experimental]
+    provenance: {classification: verified_evidence, evidence_refs: [electrolysis_stoichiometry],
+                 note: The chemistry is verified; the plant itself is a concept.}
+    module:
+      category: isru
+      mount: mount.external_payload
+      power_bus: bus.120v_dc
+      data_bus: bus.spacewire
+      environment_rating: [env.lunar_surface]
+      mission_rating: [mission.lunar_isru_demo]
+      qualification: {capability: isru.oxygen_extraction, stage: LAB_VALIDATED}
+      provides: [oxygen_production]
+
+vehicle_classes:
+  - id: vehicle.asteria_crew_lander
+    name: ASTERIA crew lander
+    vehicle_class: lander
+    mission_role: Carry a crew of four and their cargo to the lunar south pole.
+    environment_rating: [env.cislunar, env.lunar_surface]
+    mission_rating: [mission.luna_01]
+    crew_capacity: 4
+    cargo_mass_limit_kg: 400
+    cargo_volume_limit_l: 1200
+    life_support_crew_days: 4
+    slots:
+      - {id: radiation_protection, mount: mount.internal_wall, accepts: [radiation_protection],
+         required_for_mission: true, payload: true}
+      - {id: external_payload, mount: mount.external_payload, power_bus: bus.120v_dc,
+         data_bus: bus.spacewire, accepts: [science, isru, communications], payload: true}
+    provenance: {classification: story_assumption}
+  - id: vehicle.asteria_surface_rover
+    name: ASTERIA surface rover
+    vehicle_class: rover
+    mission_role: Teleoperated long-range science traverses.
+    environment_rating: [env.lunar_surface]
+    mission_rating: [mission.luna_01]
+    crew_capacity: 0
+    cargo_mass_limit_kg: 50
+    power_budget_kw: 1.5
+    slots:
+      - {id: science_mast, mount: mount.rover_mast, power_bus: bus.28v_dc, accepts: [science]}
+    provenance: {classification: gameplay_parameter, note: Power figures from the LUNA-01 scenario.}
+
+infrastructure_types:
+  - id: infra.surface_habitat
+    name: Surface habitat
+    category: habitat
+    description: Pressurized living and working volume for the crew.
+    initial_state: operational
+    provenance: {classification: story_assumption}
+  - id: infra.radiation_shelter
+    name: Radiation shelter
+    category: shelter
+    description: Heavily shielded volume the crew retreats to during a solar particle event.
+    depends_on_power: false
+    requires_modules: [radiation_protection]
+    initial_state: operational
+    provenance: {classification: verified_evidence, evidence_refs: [change4_lnd_dose_rate]}
+  - id: infra.solar_power_field
+    name: Solar power field
+    category: power
+    description: Photovoltaic arrays on the crater rim that see the low polar Sun.
+    depends_on_power: false
+    initial_state: operational
+    provenance: {classification: unverified, evidence_refs: [lunar_polar_illumination]}
+  - id: infra.surface_comms_relay
+    name: Surface comms relay
+    category: communications
+    description: Mast and radio linking the outpost to Earth and orbital relays.
+    depends_on_comms: false
+    initial_state: operational
+    provenance: {classification: gameplay_parameter}

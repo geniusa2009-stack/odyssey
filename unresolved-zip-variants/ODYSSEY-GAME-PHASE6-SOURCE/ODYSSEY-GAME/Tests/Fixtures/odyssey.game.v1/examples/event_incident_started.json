@@ -1,0 +1,30 @@
+{
+ "event_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam:5",
+ "payload": {
+  "incident": "earth.command.power_incident",
+  "involved_crew": [
+   "maya",
+   "jay"
+  ],
+  "involved_objects": [
+   "earth.command.engineering.power_bus_b",
+   "earth.command.engineering.station_battery",
+   "earth.command.mission_control.consoles",
+   "earth.command.engineering.air_handling",
+   "earth.command.hangar.ground_support"
+  ],
+  "message_key": "incident.earth.command.power_incident",
+  "stage": "active"
+ },
+ "prev_state_version": 2,
+ "protocol": "odyssey.game.v1",
+ "scope": "mission",
+ "seq": 5,
+ "server_time": "2026-10-27T06:00:00+00:00",
+ "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+ "sim_tick": 5,
+ "sim_time_hours": 1.25,
+ "state_version": 3,
+ "timeline_id": "gt_aaaaaaaaaaaaaaaaaaaaaaaaaq",
+ "type": "incident.started"
+}

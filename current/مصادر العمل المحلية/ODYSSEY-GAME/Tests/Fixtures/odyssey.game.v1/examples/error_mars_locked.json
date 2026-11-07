@@ -1,0 +1,42 @@
+{
+ "error": {
+  "code": "DECISION_UNAVAILABLE",
+  "details": {
+   "lock_code": "MARS_MISSION_LOCKED",
+   "missing": {
+    "phases": [
+     "PATH_TO_MARS"
+    ]
+   },
+   "missing_capabilities": [
+    "autonomy.fault_management",
+    "communications.surface_relay",
+    "habitation.long_duration",
+    "habitation.radiation_sheltering",
+    "life_support.closed_loop",
+    "logistics.mass_budgeting",
+    "power.load_management",
+    "transportation.crew_launch_readiness",
+    "transportation.entry_descent_landing",
+    "transportation.planetary_return"
+   ],
+   "missing_gates": [
+    "gate.transport.crewed_transit",
+    "gate.habitation.long_duration",
+    "gate.life_support.closed_loop",
+    "gate.power.surface_power",
+    "gate.radiation.protection",
+    "gate.communications.deep_space",
+    "gate.autonomy.fault_management",
+    "gate.logistics.mass_budget",
+    "gate.edl.crewed_landing",
+    "gate.return.capability"
+   ]
+  },
+  "message": "readiness gates are missing",
+  "reason": "mars_mission_locked",
+  "recoverable": true,
+  "request_id": "00000000000000000000000000000000",
+  "state_version": 23
+ }
+}

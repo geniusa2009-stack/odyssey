@@ -1,0 +1,409 @@
+# EARTH COMMAND — the ODYSSEY ground station (campaign phase 1).
+#
+# Semantic world only: locations are named anchors Unreal maps to its own level geometry; the
+# backend never stores coordinates. Objects bind to the `earth-command` simulation scenario
+# (consumers/components/opportunities); physical consequences come from the engine, game-side
+# consequences (flags, access, insights, discoveries) from the effects below.
+#
+# The power incident is hidden content: it is never part of the client catalog and only becomes
+# visible once the simulation event that triggers it has happened.
+id: earth_command
+name: ODYSSEY Earth Command
+
+regions:
+  - {id: earth.command.operations, name: Operations wing}
+  - {id: earth.command.engineering_wing, name: Engineering wing}
+  - {id: earth.command.hangar_wing, name: Hangar}
+  - {id: earth.command.crew_wing, name: Crew wing}
+
+locations:
+  - {id: earth.command.observation_deck, name: Observation deck, region: earth.command.operations}
+  - {id: earth.command.mission_control, name: Mission control, region: earth.command.operations,
+     kind: facility}
+  - {id: earth.command.engineering, name: Engineering bay, region: earth.command.engineering_wing,
+     kind: facility}
+  - {id: earth.command.laboratory, name: Science laboratory, region: earth.command.engineering_wing,
+     kind: facility}
+  - {id: earth.command.training, name: Training center, region: earth.command.crew_wing,
+     kind: facility}
+  - {id: earth.command.crew_area, name: Crew quarters, region: earth.command.crew_wing}
+  - {id: earth.command.medical, name: Medical bay, region: earth.command.crew_wing, kind: facility}
+  - {id: earth.command.hangar, name: Spacecraft hangar, region: earth.command.hangar_wing,
+     kind: facility}
+  - id: earth.command.airlock
+    name: Launch access airlock
+    region: earth.command.hangar_wing
+    access: locked
+    unlock_when: {flag: "authorized:earth_command.luna01_launch_authorization"}
+
+objects:
+  # ------------------------------------------------------------------ power systems
+  - id: earth.command.engineering.power_bus_b
+    kind: system
+    name: Power bus B
+    location: earth.command.engineering
+    tags: [power, distribution]
+    mission_relevance: [earth_command.station_readiness]
+    binding: {component: power_bus_b}
+    interactions:
+      - action: system.inspect
+      - action: repair.perform
+        requirements:
+          - id: diagnosed
+            reason: fault_not_diagnosed
+            when: {flag: "inspected:earth.command.engineering.power_bus_b"}
+          - id: spare_available
+            reason: required_spare_missing
+            when: {item: {item: spare.breaker_module, container: earth.command.engineering.spares_locker}}
+        consumes: [{item: spare.breaker_module}]
+        consumes_from: earth.command.engineering.spares_locker
+        engine:
+          - decision: {type: schedule_maintenance, component: power_bus_b}
+        effects:
+          set_flags: ["repair_started:earth.command.engineering.power_bus_b"]
+          crew_intents: [{crew: maya, intent: repairing_power_bus_b}]
+
+  - id: earth.command.engineering.station_battery
+    kind: system
+    name: Station battery bank
+    location: earth.command.engineering
+    tags: [power, storage]
+    binding: {component: station_battery}
+    interactions:
+      - action: system.inspect
+
+  - id: earth.command.engineering.thermal_plant
+    kind: system
+    name: Station heating plant
+    location: earth.command.engineering
+    tags: [thermal, load]
+    binding: {consumer: thermal_control, component: thermal_plant}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: thermal_control, mode: $mode}
+
+  - id: earth.command.engineering.air_handling
+    kind: system
+    name: Air handling
+    location: earth.command.engineering
+    critical: true
+    tags: [life_support, load, critical]
+    binding: {consumer: air_handling, component: air_handler}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: [eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: air_handling, mode: $mode}
+
+  - id: earth.command.engineering.water_systems
+    kind: system
+    name: Water systems
+    location: earth.command.engineering
+    tags: [life_support, load]
+    binding: {consumer: water_systems}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: water_systems, mode: $mode}
+
+  - id: earth.command.engineering.spares_locker
+    kind: container
+    name: Engineering spares locker
+    location: earth.command.engineering
+    tags: [storage]
+    container:
+      mass_limit_kg: 120
+      volume_limit_l: 400
+      accepts: [spare, tool, consumable]
+      initial:
+        - {item: spare.breaker_module, quantity: 2}
+        - {item: tool.diagnostic_scanner, quantity: 1}
+
+  # ------------------------------------------------------------------ operations
+  - id: earth.command.mission_control.consoles
+    kind: system
+    name: Mission control consoles
+    location: earth.command.mission_control
+    critical: true
+    tags: [communications, load, critical]
+    binding: {consumer: mission_control, component: mc_link}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: [eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: mission_control, mode: $mode}
+
+  - id: earth.command.observation_deck.lunar_telescope
+    kind: poi
+    name: Lunar telescope
+    location: earth.command.observation_deck
+    tags: [science, observation]
+    interactions:
+      - action: world.poi_discovered
+        once: true
+        effects:
+          discoveries: [discovery.earth.shackleton_rim_illumination]
+
+  - id: earth.command.laboratory.sample_analyzer
+    kind: interactable
+    name: Sample analyzer
+    location: earth.command.laboratory
+    tags: [science, load]
+    binding: {consumer: science_lab, opportunity: sample_analyzer_calibration}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal, boost]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: science_lab, mode: $mode}
+      - action: science.instrument_operate
+        params: {operation: {enum: [start_calibration, stop]}}
+        requirements:
+          - id: window_open
+            reason: instrument_not_ready
+            when: {sim_event: calibration_window}
+        engine_by_param:
+          operation:
+            start_calibration:
+              - decision: {type: start_science_activity, opportunity_id: sample_analyzer_calibration}
+            stop:
+              - decision: {type: stop_science_activity}
+
+  - id: earth.command.training.simulator
+    kind: interactable
+    name: Training simulator
+    location: earth.command.training
+    tags: [training, load]
+    binding: {consumer: training_simulator}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: training_simulator, mode: $mode}
+
+  - id: earth.command.medical.dosimetry_station
+    kind: interactable
+    name: Dosimetry station
+    location: earth.command.medical
+    tags: [radiation, crew_health]
+    interactions:
+      - action: system.inspect
+        effects:
+          insights: [radiation.lunar_surface_dose]
+
+  # ------------------------------------------------------------------ hangar and LUNA-01
+  - id: earth.command.hangar.ground_support
+    kind: system
+    name: Hangar ground support
+    location: earth.command.hangar
+    tags: [power, load, spacecraft]
+    binding: {consumer: hangar_ground_support, rover: true}
+    interactions:
+      - action: system.inspect
+      - action: system.set_mode
+        params: {mode: {enum: ["off", eco, nominal]}}
+        engine:
+          - decision: {type: set_subsystem_mode, subsystem: hangar_ground_support, mode: $mode}
+      - action: power.reroute
+        params: {direction: {enum: [to_station, stop]}}
+        engine_by_param:
+          direction:
+            to_station:
+              - decision: {type: rover_command, action: transfer_energy}
+            stop:
+              - decision: {type: rover_command, action: stow}
+              - decision: {type: rover_command, action: unstow}
+        effects_by_param:
+          direction:
+            to_station: {set_flags: ["rerouting:earth.command.hangar.ground_support"]}
+            stop: {clear_flags: ["rerouting:earth.command.hangar.ground_support"]}
+
+  - id: earth.command.hangar.luna01
+    kind: vehicle
+    name: LUNA-01 spacecraft
+    location: earth.command.hangar
+    critical: true
+    tags: [spacecraft, mission]
+    mission_relevance: [earth_command.station_readiness, luna_01.the_last_light]
+    vehicle_class: vehicle.asteria_crew_lander
+    initial: {access: restricted}
+    binding: {rover: true}
+    interactions:
+      - action: vehicle.inspect
+        requirements:
+          - id: inspection_ready
+            reason: spacecraft_not_inspection_ready
+            when: {object_state: {object: earth.command.hangar.luna01, field: access, equals: inspection_ready}}
+
+  - id: earth.command.hangar.luna01.power
+    kind: subsystem
+    name: LUNA-01 power system
+    location: earth.command.hangar
+    parent: earth.command.hangar.luna01
+    tags: [spacecraft, power]
+    binding: {component: spacecraft_bus}
+    interactions: &spacecraft_inspection
+      - action: system.inspect
+        requirements:
+          - id: inspection_ready
+            reason: spacecraft_not_inspection_ready
+            when: {object_state: {object: earth.command.hangar.luna01, field: access, equals: inspection_ready}}
+
+  - id: earth.command.hangar.luna01.life_support
+    kind: subsystem
+    name: LUNA-01 life support
+    location: earth.command.hangar
+    parent: earth.command.hangar.luna01
+    tags: [spacecraft, life_support]
+    interactions: *spacecraft_inspection
+
+  - id: earth.command.hangar.luna01.comms
+    kind: subsystem
+    name: LUNA-01 communications
+    location: earth.command.hangar
+    parent: earth.command.hangar.luna01
+    tags: [spacecraft, communications]
+    interactions: *spacecraft_inspection
+
+  - id: earth.command.hangar.luna01.propulsion
+    kind: subsystem
+    name: LUNA-01 propulsion
+    location: earth.command.hangar
+    parent: earth.command.hangar.luna01
+    tags: [spacecraft, propulsion]
+    interactions: *spacecraft_inspection
+
+  - id: earth.command.hangar.luna01.radiation_protection
+    kind: subsystem
+    name: LUNA-01 radiation protection
+    location: earth.command.hangar
+    parent: earth.command.hangar.luna01
+    tags: [spacecraft, radiation]
+    interactions:
+      - action: system.inspect
+        requirements:
+          - id: inspection_ready
+            reason: spacecraft_not_inspection_ready
+            when: {object_state: {object: earth.command.hangar.luna01, field: access, equals: inspection_ready}}
+        effects:
+          insights: [radiation.shelter_mass]
+
+  - id: earth.command.hangar.luna01.cargo_hold
+    kind: container
+    name: LUNA-01 cargo hold
+    location: earth.command.hangar
+    parent: earth.command.hangar.luna01
+    tags: [spacecraft, cargo]
+    container:
+      mass_limit_kg: 300
+      volume_limit_l: 900
+      accepts: [cargo, spare, sample, tool, consumable, equipment]
+    interactions:
+      - action: system.inspect
+        requirements:
+          - id: inspection_ready
+            reason: spacecraft_not_inspection_ready
+            when: {object_state: {object: earth.command.hangar.luna01, field: access, equals: inspection_ready}}
+        effects:
+          set_flags: ["manifest_checked:earth.command.hangar.luna01.cargo_hold"]
+          insights: [logistics.mass_budget]
+
+  - id: earth.command.hangar.storage
+    kind: container
+    name: Hangar storage
+    location: earth.command.hangar
+    tags: [storage, cargo]
+    container:
+      mass_limit_kg: 2000
+      volume_limit_l: 6000
+      accepts: [cargo, spare, module, sample, tool, consumable, equipment]
+      initial:
+        - {item: cargo.water_tank, quantity: 4}
+        - {item: spare.habitat_spares_kit, quantity: 2}
+        - {item: equipment.science_drill_kit, quantity: 1}
+        - {item: cargo.food_pack, quantity: 6}
+        - {item: module.radiation_shelter_liner, quantity: 1}
+        - {item: module.isru_oxygen_pilot, quantity: 1}
+
+  - id: earth.command.player_kit
+    kind: container
+    name: Personal kit
+    location: earth.command.observation_deck
+    tags: [carried]
+    container:
+      mass_limit_kg: 25
+      volume_limit_l: 60
+      accepts: [spare, tool, sample, consumable]
+      initial:
+        - {item: tool.diagnostic_scanner, quantity: 1}
+
+incidents:
+  - id: earth.command.power_incident
+    mission: earth_command.station_readiness
+    message_key: incident.earth.command.power_incident
+    trigger: {sim_event: bus_b_breaker_fault}
+    involved_objects:
+      - earth.command.engineering.power_bus_b
+      - earth.command.engineering.station_battery
+      - earth.command.mission_control.consoles
+      - earth.command.engineering.air_handling
+      - earth.command.hangar.ground_support
+    involved_crew: [maya, jay]
+    pause_clock_on_start: true
+    start_effects:
+      crew_intents:
+        - {crew: maya, intent: assessing_power_bus_b}
+        - {crew: jay, intent: monitoring_critical_loads}
+      insights: [power.generation_vs_demand]
+    stages:
+      - id: resolved
+        terminal: true
+        when:
+          all:
+            - {sim: {metric: component.power_bus_b.health, op: ">=", value: 0.8}}
+            - {sim: {metric: component.power_bus_b.in_maintenance, op: "<", value: 0.5}}
+            - {sim: {metric: power.unmet_kw, op: "<=", value: 0.05}}
+        effects:
+          object_updates:
+            - {object: earth.command.hangar.luna01, field: access, value: inspection_ready}
+          insights: [power.maintenance_tradeoff]
+          crew_intents:
+            - {crew: maya, intent: null}
+            - {crew: jay, intent: preparing_luna01_inspection}
+      - id: escalated
+        when:
+          any:
+            - {alert: critical_load_lost}
+            - {alert: battery_critical}
+      - id: investigating
+        when: {flag: "inspected:earth.command.engineering.power_bus_b"}
+      - id: active
+    facts:
+      - id: critical_load_lost
+        when: {alert: critical_load_lost}
+      - id: reserve_depleted
+        when: {alert: battery_critical}
+      - id: load_shed
+        when: {alert: load_shedding}
+
+discoveries:
+  - id: discovery.earth.shackleton_rim_illumination
+    category: science
+    title: Sunlight on the crater rim
+    summary: >-
+      Through the telescope, the rim of a south-polar crater stays lit while its floor stays
+      dark: the reason LUNA-01 lands where it does.
+    location: earth.command.observation_deck
+    provenance:
+      classification: unverified
+      evidence_refs: [lunar_polar_illumination]
+      note: Illumination fraction is not yet verified against a primary source.
+    insights: [power.polar_illumination]

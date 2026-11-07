@@ -1,0 +1,798 @@
+{
+ "capabilities": [
+  {
+   "certifications": [
+    "cert.earth_command.station_operations",
+    "cert.luna01.lunar_surface_operations"
+   ],
+   "description": "Balancing generation, storage and prioritized loads when supply falls short.",
+   "domain": "power",
+   "gameplay_effects": [
+    "Unlocks Lunar Survival at LUNAR_DEMONSTRATED"
+   ],
+   "id": "power.load_management",
+   "name": "Power load management",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "educational_abstraction",
+    "evidence_refs": [],
+    "note": "Simplified bus/battery/priority model; the engine's real equations."
+   },
+   "stage": "PROTOTYPE_TESTED",
+   "stages": [
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": true,
+       "description": "A station power fault was diagnosed and repaired.",
+       "id": "evidence.power.station_incident_resolved",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": true,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": true,
+       "description": "Critical loads stayed powered through a power incident.",
+       "id": "evidence.power.critical_loads_protected",
+       "pending_in_mission": false
+      },
+      {
+       "demonstrated": true,
+       "description": "The battery reserve never reached its critical level during an incident.",
+       "id": "evidence.power.reserve_protected",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": true,
+     "stage": "PROTOTYPE_TESTED"
+    },
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": false,
+       "description": "The outpost power system was managed through the onset of lunar night.",
+       "id": "evidence.power.lunar_night_power_managed",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DEEP_SPACE_QUALIFIED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "qualified",
+   "unlocks": [
+    "LUNAR_SURVIVAL"
+   ]
+  },
+  {
+   "certifications": [],
+   "description": "Building cargo manifests that respect a vehicle's mass and volume limits.",
+   "domain": "logistics",
+   "gameplay_effects": [],
+   "id": "logistics.mass_budgeting",
+   "name": "Mass budgeting",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "gameplay_parameter",
+    "evidence_refs": [],
+    "note": "Cargo masses are gameplay values."
+   },
+   "stage": "DISCOVERED",
+   "stages": [
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": true,
+       "description": "A spacecraft cargo manifest was checked against its mass budget.",
+       "id": "evidence.logistics.manifest_within_mass_budget",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": true,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "PROTOTYPE_TESTED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DEEP_SPACE_QUALIFIED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "qualified",
+   "unlocks": []
+  },
+  {
+   "certifications": [],
+   "description": "Bringing a crewed vehicle to a verified, authorized launch state.",
+   "domain": "transportation",
+   "gameplay_effects": [],
+   "id": "transportation.crew_launch_readiness",
+   "name": "Crew launch readiness",
+   "prerequisites": [
+    {
+     "capability": "power.load_management",
+     "met": true,
+     "stage": "DISCOVERED"
+    }
+   ],
+   "provenance": {
+    "classification": "story_assumption",
+    "evidence_refs": [],
+    "note": null
+   },
+   "stage": "PROTOTYPE_TESTED",
+   "stages": [
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": true,
+       "description": "A crewed launch was authorized with every readiness gate met.",
+       "id": "evidence.transportation.launch_authorized",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": true,
+     "stage": "PROTOTYPE_TESTED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DEEP_SPACE_QUALIFIED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "qualified",
+   "unlocks": []
+  },
+  {
+   "certifications": [
+    "cert.luna01.lunar_surface_operations"
+   ],
+   "description": "Protecting the crew from solar particle events with shielding and timely shelter.",
+   "domain": "habitation",
+   "gameplay_effects": [],
+   "id": "habitation.radiation_sheltering",
+   "name": "Radiation sheltering",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "verified_evidence",
+    "evidence_refs": [
+     "change4_lnd_dose_rate",
+     "donki_sep_events"
+    ],
+    "note": null
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": false,
+       "description": "The crew came through a solar particle event within the dose limit.",
+       "id": "evidence.habitation.radiation_event_sheltered",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DEEP_SPACE_QUALIFIED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": []
+  },
+  {
+   "certifications": [],
+   "description": "Planning and running rover traverses within energy and risk limits.",
+   "domain": "mobility",
+   "gameplay_effects": [],
+   "id": "mobility.surface_rover",
+   "name": "Surface rover operations",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "gameplay_parameter",
+    "evidence_refs": [],
+    "note": null
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": false,
+       "description": "A long-range rover traverse returned its science.",
+       "id": "evidence.mobility.rover_traverse_completed",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DEEP_SPACE_QUALIFIED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": [
+    "LUNAR_EXPLORATION"
+   ]
+  },
+  {
+   "certifications": [],
+   "description": "Operating robotic systems remotely across a communications link.",
+   "domain": "robotics",
+   "gameplay_effects": [],
+   "id": "robotics.teleoperation",
+   "name": "Teleoperation",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "educational_abstraction",
+    "evidence_refs": [],
+    "note": null
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": false,
+       "description": "A long-range rover traverse returned its science.",
+       "id": "evidence.mobility.rover_traverse_completed",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": false,
+     "stage": "PROTOTYPE_TESTED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": []
+  },
+  {
+   "certifications": [],
+   "description": "Keeping a surface outpost connected to Earth through relays and link windows.",
+   "domain": "communications",
+   "gameplay_effects": [],
+   "id": "communications.surface_relay",
+   "name": "Surface communications relay",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "gameplay_parameter",
+    "evidence_refs": [],
+    "note": null
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": false,
+       "description": "Mission data was returned to Earth through the surface relay.",
+       "id": "evidence.communications.data_returned",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": false,
+     "stage": "PROTOTYPE_TESTED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DEEP_SPACE_QUALIFIED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": [
+    "LUNAR_NETWORK"
+   ]
+  },
+  {
+   "certifications": [],
+   "description": "Building and connecting permanent infrastructure on another world.",
+   "domain": "infrastructure",
+   "gameplay_effects": [],
+   "id": "infrastructure.surface_construction",
+   "name": "Surface construction",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "story_assumption",
+    "evidence_refs": [],
+    "note": "Content deferred to Lunar Network."
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": []
+  },
+  {
+   "certifications": [],
+   "description": "Recycling air and water so a crew can stay far from resupply.",
+   "domain": "life_support",
+   "gameplay_effects": [],
+   "id": "life_support.closed_loop",
+   "name": "Regenerative life support",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "verified_evidence",
+    "evidence_refs": [
+     "bvad_o2_consumption",
+     "bvad_co2_production",
+     "iss_water_recovery"
+    ],
+    "note": null
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": false,
+       "description": "Life support stayed stable for the whole lunar mission.",
+       "id": "evidence.life_support.outpost_sustained",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DEEP_SPACE_QUALIFIED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": []
+  },
+  {
+   "certifications": [],
+   "description": "Collecting, documenting and returning planetary science.",
+   "domain": "science",
+   "gameplay_effects": [],
+   "id": "science.surface_sampling",
+   "name": "Surface science",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "educational_abstraction",
+    "evidence_refs": [],
+    "note": null
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": false,
+       "description": "A surface sample was collected and documented.",
+       "id": "evidence.science.surface_sample_collected",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": true,
+     "evidence": [
+      {
+       "demonstrated": false,
+       "description": "The mission's lunar science objectives were completed.",
+       "id": "evidence.science.lunar_science_returned",
+       "pending_in_mission": false
+      }
+     ],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": []
+  },
+  {
+   "certifications": [],
+   "description": "Producing oxygen from local resources instead of carrying it.",
+   "domain": "isru",
+   "gameplay_effects": [],
+   "id": "isru.oxygen_extraction",
+   "name": "Oxygen extraction",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "verified_evidence",
+    "evidence_refs": [
+     "electrolysis_stoichiometry"
+    ],
+    "note": "Chemistry verified; no ISRU gameplay is authored yet."
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "LAB_VALIDATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "PROTOTYPE_TESTED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": []
+  },
+  {
+   "certifications": [],
+   "description": "Systems that detect and contain faults when Earth is too far to help in time.",
+   "domain": "autonomy",
+   "gameplay_effects": [],
+   "id": "autonomy.fault_management",
+   "name": "Autonomous fault management",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "story_assumption",
+    "evidence_refs": [],
+    "note": "Content deferred."
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "PROTOTYPE_TESTED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DEEP_SPACE_QUALIFIED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": []
+  },
+  {
+   "certifications": [],
+   "description": "Landing a crewed vehicle through a planetary atmosphere.",
+   "domain": "transportation",
+   "gameplay_effects": [],
+   "id": "transportation.entry_descent_landing",
+   "name": "Entry, descent and landing",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "story_assumption",
+    "evidence_refs": [],
+    "note": "Content deferred; no Mars data invented."
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": []
+  },
+  {
+   "certifications": [],
+   "description": "Bringing a crew home from another planet's surface.",
+   "domain": "transportation",
+   "gameplay_effects": [],
+   "id": "transportation.planetary_return",
+   "name": "Planetary return",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "story_assumption",
+    "evidence_refs": [],
+    "note": "Content deferred."
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": []
+  },
+  {
+   "certifications": [],
+   "description": "Keeping a crew healthy and effective for many months away from Earth.",
+   "domain": "habitation",
+   "gameplay_effects": [],
+   "id": "habitation.long_duration",
+   "name": "Long-duration habitation",
+   "prerequisites": [],
+   "provenance": {
+    "classification": "story_assumption",
+    "evidence_refs": [],
+    "note": "Content deferred."
+   },
+   "stage": null,
+   "stages": [
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DISCOVERED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "DEEP_SPACE_QUALIFIED"
+    },
+    {
+     "attainable": false,
+     "evidence": [],
+     "reached": false,
+     "stage": "MARS_CERTIFIED"
+    }
+   ],
+   "status": "not_started",
+   "unlocks": []
+  }
+ ],
+ "certifications": [
+  {
+   "description": "Certified to run ground-station power operations during an incident.",
+   "granted": true,
+   "granted_on_completion_of": [
+    "earth_command.station_readiness"
+   ],
+   "id": "cert.earth_command.station_operations",
+   "name": "Station operations",
+   "provenance": {
+    "classification": "story_assumption",
+    "evidence_refs": [],
+    "note": null
+   },
+   "requires": [
+    {
+     "capability": "power.load_management",
+     "met": true,
+     "stage": "DISCOVERED"
+    }
+   ]
+  },
+  {
+   "description": "Certified to command a lunar surface outpost through night and storm.",
+   "granted": false,
+   "granted_on_completion_of": [
+    "luna_01.the_last_light"
+   ],
+   "id": "cert.luna01.lunar_surface_operations",
+   "name": "Lunar surface operations",
+   "provenance": {
+    "classification": "story_assumption",
+    "evidence_refs": [],
+    "note": null
+   },
+   "requires": [
+    {
+     "capability": "power.load_management",
+     "met": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    },
+    {
+     "capability": "habitation.radiation_sheltering",
+     "met": false,
+     "stage": "LUNAR_DEMONSTRATED"
+    }
+   ]
+  }
+ ]
+}

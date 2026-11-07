@@ -1,0 +1,54 @@
+{
+ "blockers": [],
+ "cargo": [
+  "earth.command.hangar.luna01.cargo_hold"
+ ],
+ "class_name": "ASTERIA crew lander",
+ "crew_capacity": 4,
+ "environment_rating": [
+  "env.cislunar",
+  "env.lunar_surface"
+ ],
+ "id": "earth.command.hangar.luna01",
+ "life_support_crew_days": 4.0,
+ "mission_rating": [
+  "mission.luna_01"
+ ],
+ "mission_role": "Carry a crew of four and their cargo to the lunar south pole.",
+ "name": "LUNA-01 spacecraft",
+ "payload_limit_kg": 400.0,
+ "payload_mass_kg": 217.0,
+ "power_budget_kw": null,
+ "provenance": {
+  "classification": "story_assumption",
+  "evidence_refs": [],
+  "note": null
+ },
+ "qualification": [],
+ "ready": true,
+ "slots": [
+  {
+   "accepts": [
+    "radiation_protection"
+   ],
+   "installed": "module.radiation_shelter_liner",
+   "mount": "mount.internal_wall",
+   "payload": true,
+   "required_for_mission": true,
+   "slot": "radiation_protection"
+  },
+  {
+   "accepts": [
+    "science",
+    "isru",
+    "communications"
+   ],
+   "installed": null,
+   "mount": "mount.external_payload",
+   "payload": true,
+   "required_for_mission": false,
+   "slot": "external_payload"
+  }
+ ],
+ "vehicle_class": "vehicle.asteria_crew_lander"
+}

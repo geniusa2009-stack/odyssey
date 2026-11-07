@@ -1,0 +1,18 @@
+{
+  "case": "scrubber_off",
+  "decision_verdicts": [
+    "decision_worsened_target"
+  ],
+  "failure_trace": {
+    "chains": [
+      "decision -> metric:control.mode.co2_scrubber -> metric:life_support.co2_ppm -> metric:crew.min_health"
+    ],
+    "roots": [
+      "decision"
+    ],
+    "target_metric": "crew.min_health",
+    "target_tick": 112
+  },
+  "final_tick": 112,
+  "outcome": "mission_failed_crew_loss"
+}

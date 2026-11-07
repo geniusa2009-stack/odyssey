@@ -1,0 +1,1072 @@
+{
+ "comment": "Phase 6 verification map definition (UNREAL_EDITOR_VERIFICATION_REQUIRED for the map it produces). Single source for Tools/Editor/build_earth_command_greybox.py, Tools/SemanticIds/generate_registry.py (RequiredInSlice/Binding) and the native tests. Units cm, 1 uu = 1 cm. Doors: side -> [[centre, width]]; door height 260. System class 'console' = AOdysseyPowerConsole (physical panel; its controls are data, availability always the backend's); 'system' = AOdysseySystemActor.",
+ "map": "/Game/Earth/EarthCommand/Maps/L_EarthCommand_Slice",
+ "outliner_root": "EarthCommandGreybox",
+ "allowed_areas": [
+  "observation_deck",
+  "main_corridor",
+  "mission_control",
+  "engineering",
+  "hangar_entrance",
+  "training",
+  "laboratory"
+ ],
+ "light_rules": {
+  "static": {},
+  "room_load": {
+   "comment": "room ceiling lights of a sheddable load's room: dim to standby when the backend reports the load off",
+   "power": {
+    "off": 0.35
+   },
+   "mode": {
+    "eco": 0.75
+   }
+  },
+  "equipment": {
+   "comment": "the equipment's own indicator/screen light",
+   "power": {
+    "off": 0.0
+   },
+   "mode": {
+    "eco": 0.5
+   },
+   "status": {
+    "offline": 0.0,
+    "damaged": 0.4
+   }
+  },
+  "bus_room": {
+   "comment": "Engineering ceiling lights follow power bus B",
+   "power": {
+    "off": 0.25
+   },
+   "status": {
+    "damaged": 0.5,
+    "offline": 0.25
+   }
+  },
+  "warning": {
+   "comment": "on while an active incident involves the followed object",
+   "warning": true
+  }
+ },
+ "areas": [
+  {
+   "id": "main_corridor",
+   "name": "MainCorridor",
+   "location": null,
+   "bounds": [
+    0,
+    4000,
+    -200,
+    200
+   ],
+   "height": 320,
+   "doors": {
+    "W": [
+     [
+      0,
+      300
+     ]
+    ],
+    "E": [
+     [
+      0,
+      300
+     ]
+    ],
+    "N": [
+     [
+      1400,
+      240
+     ],
+     [
+      2700,
+      240
+     ]
+    ],
+    "S": [
+     [
+      2500,
+      240
+     ],
+     [
+      3650,
+      240
+     ]
+    ]
+   },
+   "anchor": null,
+   "zone": null,
+   "systems": [],
+   "lights": [
+    {
+     "label": "Corridor_Light0",
+     "at": [
+      400,
+      0,
+      280
+     ],
+     "intensity": 2500,
+     "radius": 700,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": null,
+     "rule": null
+    },
+    {
+     "label": "Corridor_Light1",
+     "at": [
+      1200,
+      0,
+      280
+     ],
+     "intensity": 2500,
+     "radius": 700,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": null,
+     "rule": null
+    },
+    {
+     "label": "Corridor_Light2",
+     "at": [
+      2000,
+      0,
+      280
+     ],
+     "intensity": 2500,
+     "radius": 700,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": null,
+     "rule": null
+    },
+    {
+     "label": "Corridor_Light3",
+     "at": [
+      2800,
+      0,
+      280
+     ],
+     "intensity": 2500,
+     "radius": 700,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": null,
+     "rule": null
+    },
+    {
+     "label": "Corridor_Light4",
+     "at": [
+      3600,
+      0,
+      280
+     ],
+     "intensity": 2500,
+     "radius": 700,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": null,
+     "rule": null
+    }
+   ],
+   "blocks": []
+  },
+  {
+   "id": "observation_deck",
+   "name": "ObservationDeck",
+   "location": "earth.command.observation_deck",
+   "bounds": [
+    -1600,
+    0,
+    -900,
+    900
+   ],
+   "height": 600,
+   "doors": {
+    "E": [
+     [
+      0,
+      300
+     ]
+    ],
+    "W": [
+     [
+      0,
+      1400
+     ]
+    ]
+   },
+   "anchor": {
+    "label": "Anchor_ObservationDeck",
+    "at": [
+     -500,
+     0,
+     0
+    ],
+    "yaw": 180
+   },
+   "zone": {
+    "label": "Zone_ObservationDeck",
+    "center": [
+     -800,
+     0,
+     200
+    ],
+    "extent": [
+     780,
+     880,
+     200
+    ]
+   },
+   "systems": [
+    {
+     "id": "earth.command.observation_deck.lunar_telescope",
+     "label": "Sys_LunarTelescope",
+     "class": "system",
+     "at": [
+      -1250,
+      300,
+      120
+     ],
+     "size": [
+      80,
+      80,
+      240
+     ],
+     "yaw": 0,
+     "mesh": "cylinder",
+     "presented": [
+      "system.inspect"
+     ]
+    },
+    {
+     "id": "earth.command.player_kit",
+     "label": "Store_PlayerKit",
+     "class": "system",
+     "at": [
+      -300,
+      -700,
+      50
+     ],
+     "size": [
+      120,
+      60,
+      100
+     ],
+     "yaw": 0,
+     "mesh": "cube",
+     "presented": []
+    }
+   ],
+   "lights": [
+    {
+     "label": "ObsDeck_Light",
+     "at": [
+      -800,
+      0,
+      560
+     ],
+     "intensity": 3000,
+     "radius": 1400,
+     "color": [
+      0.85,
+      0.9,
+      1.0
+     ],
+     "follows": null,
+     "rule": null
+    }
+   ],
+   "blocks": []
+  },
+  {
+   "id": "mission_control",
+   "name": "MissionControl",
+   "location": "earth.command.mission_control",
+   "bounds": [
+    800,
+    2000,
+    200,
+    1400
+   ],
+   "height": 420,
+   "doors": {
+    "S": [
+     [
+      1400,
+      240
+     ]
+    ]
+   },
+   "anchor": {
+    "label": "Anchor_MissionControl",
+    "at": [
+     1400,
+     450,
+     0
+    ],
+    "yaw": 90
+   },
+   "zone": {
+    "label": "Zone_MissionControl",
+    "center": [
+     1400,
+     800,
+     200
+    ],
+    "extent": [
+     580,
+     580,
+     200
+    ]
+   },
+   "systems": [
+    {
+     "id": "earth.command.mission_control.consoles",
+     "label": "Sys_Consoles",
+     "class": "system",
+     "at": [
+      1400,
+      1150,
+      60
+     ],
+     "size": [
+      800,
+      120,
+      120
+     ],
+     "yaw": 0,
+     "mesh": "cube",
+     "presented": [
+      "system.inspect"
+     ]
+    }
+   ],
+   "lights": [
+    {
+     "label": "MissionControl_Light",
+     "at": [
+      1400,
+      800,
+      380
+     ],
+     "intensity": 3500,
+     "radius": 1000,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": null,
+     "rule": null
+    }
+   ],
+   "blocks": []
+  },
+  {
+   "id": "training",
+   "name": "Training",
+   "location": "earth.command.training",
+   "bounds": [
+    2200,
+    3200,
+    200,
+    1200
+   ],
+   "height": 380,
+   "doors": {
+    "S": [
+     [
+      2700,
+      240
+     ]
+    ]
+   },
+   "anchor": {
+    "label": "Anchor_Training",
+    "at": [
+     2700,
+     450,
+     0
+    ],
+    "yaw": 90
+   },
+   "zone": {
+    "label": "Zone_Training",
+    "center": [
+     2700,
+     700,
+     190
+    ],
+    "extent": [
+     480,
+     480,
+     190
+    ]
+   },
+   "systems": [
+    {
+     "id": "earth.command.training.simulator",
+     "label": "Sys_TrainingSimulator",
+     "class": "console",
+     "at": [
+      2700,
+      1000,
+      100
+     ],
+     "size": [
+      300,
+      150,
+      200
+     ],
+     "yaw": 0,
+     "mesh": "cube",
+     "controls": [
+      {
+       "action": "system.inspect",
+       "label": "DIAGNOSTIC"
+      },
+      {
+       "action": "system.set_mode",
+       "label": "LOAD OFF",
+       "params": {
+        "mode": "off"
+       }
+      },
+      {
+       "action": "system.set_mode",
+       "label": "LOAD NOMINAL",
+       "params": {
+        "mode": "nominal"
+       }
+      }
+     ]
+    }
+   ],
+   "lights": [
+    {
+     "label": "Training_Light0",
+     "at": [
+      2450,
+      700,
+      340
+     ],
+     "intensity": 3000,
+     "radius": 800,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": "earth.command.training.simulator",
+     "rule": "room_load"
+    },
+    {
+     "label": "Training_Light1",
+     "at": [
+      2950,
+      700,
+      340
+     ],
+     "intensity": 3000,
+     "radius": 800,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": "earth.command.training.simulator",
+     "rule": "room_load"
+    },
+    {
+     "label": "Training_SimulatorIndicator",
+     "at": [
+      2700,
+      880,
+      230
+     ],
+     "intensity": 1500,
+     "radius": 400,
+     "color": [
+      0.4,
+      0.75,
+      1.0
+     ],
+     "follows": "earth.command.training.simulator",
+     "rule": "equipment"
+    }
+   ],
+   "blocks": []
+  },
+  {
+   "id": "engineering",
+   "name": "Engineering",
+   "location": "earth.command.engineering",
+   "bounds": [
+    1800,
+    3200,
+    -1600,
+    -200
+   ],
+   "height": 420,
+   "doors": {
+    "N": [
+     [
+      2500,
+      240
+     ]
+    ]
+   },
+   "anchor": {
+    "label": "Anchor_Engineering",
+    "at": [
+     2500,
+     -450,
+     0
+    ],
+    "yaw": -90
+   },
+   "zone": {
+    "label": "Zone_Engineering",
+    "center": [
+     2500,
+     -900,
+     200
+    ],
+    "extent": [
+     680,
+     680,
+     200
+    ]
+   },
+   "systems": [
+    {
+     "id": "earth.command.engineering.power_bus_b",
+     "label": "Sys_PowerBusB",
+     "class": "console",
+     "at": [
+      2500,
+      -1000,
+      0
+     ],
+     "size": [
+      160,
+      50,
+      130
+     ],
+     "yaw": 90,
+     "mesh": "cube",
+     "presented": [],
+     "controls": [
+      {
+       "action": "system.inspect",
+       "label": "DIAGNOSTIC"
+      },
+      {
+       "action": "repair.perform",
+       "label": "BREAKER SERVICE"
+      }
+     ]
+    },
+    {
+     "id": "earth.command.engineering.station_battery",
+     "label": "Sys_StationBattery",
+     "class": "system",
+     "at": [
+      2000,
+      -1400,
+      100
+     ],
+     "size": [
+      240,
+      120,
+      200
+     ],
+     "yaw": 0,
+     "mesh": "cube",
+     "presented": [
+      "system.inspect",
+      "power.reroute"
+     ]
+    },
+    {
+     "id": "earth.command.engineering.thermal_plant",
+     "label": "Sys_ThermalPlant",
+     "class": "system",
+     "at": [
+      3000,
+      -1400,
+      150
+     ],
+     "size": [
+      240,
+      160,
+      300
+     ],
+     "yaw": 0,
+     "mesh": "cube",
+     "presented": [
+      "system.inspect"
+     ]
+    },
+    {
+     "id": "earth.command.engineering.air_handling",
+     "label": "Sys_AirHandling",
+     "class": "system",
+     "at": [
+      3050,
+      -700,
+      120
+     ],
+     "size": [
+      100,
+      240,
+      240
+     ],
+     "yaw": 0,
+     "mesh": "cube",
+     "presented": [
+      "system.inspect"
+     ]
+    },
+    {
+     "id": "earth.command.engineering.water_systems",
+     "label": "Sys_WaterSystems",
+     "class": "system",
+     "at": [
+      3050,
+      -350,
+      100
+     ],
+     "size": [
+      100,
+      160,
+      200
+     ],
+     "yaw": 0,
+     "mesh": "cube",
+     "presented": [
+      "system.inspect"
+     ]
+    },
+    {
+     "id": "earth.command.engineering.spares_locker",
+     "label": "Store_SparesLocker",
+     "class": "system",
+     "at": [
+      1900,
+      -700,
+      110
+     ],
+     "size": [
+      80,
+      160,
+      220
+     ],
+     "yaw": 0,
+     "mesh": "cube",
+     "presented": []
+    }
+   ],
+   "lights": [
+    {
+     "label": "Engineering_Light0",
+     "at": [
+      2150,
+      -550,
+      380
+     ],
+     "intensity": 3500,
+     "radius": 900,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": "earth.command.engineering.power_bus_b",
+     "rule": "bus_room"
+    },
+    {
+     "label": "Engineering_Light1",
+     "at": [
+      2850,
+      -550,
+      380
+     ],
+     "intensity": 3500,
+     "radius": 900,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": "earth.command.engineering.power_bus_b",
+     "rule": "bus_room"
+    },
+    {
+     "label": "Engineering_Light2",
+     "at": [
+      2150,
+      -1250,
+      380
+     ],
+     "intensity": 3500,
+     "radius": 900,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": "earth.command.engineering.power_bus_b",
+     "rule": "bus_room"
+    },
+    {
+     "label": "Engineering_Light3",
+     "at": [
+      2850,
+      -1250,
+      380
+     ],
+     "intensity": 3500,
+     "radius": 900,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": "earth.command.engineering.power_bus_b",
+     "rule": "bus_room"
+    },
+    {
+     "label": "Engineering_Warning",
+     "at": [
+      2500,
+      -1150,
+      260
+     ],
+     "intensity": 5000,
+     "radius": 600,
+     "color": [
+      1.0,
+      0.25,
+      0.1
+     ],
+     "follows": "earth.command.engineering.power_bus_b",
+     "rule": "warning"
+    }
+   ],
+   "blocks": []
+  },
+  {
+   "id": "laboratory",
+   "name": "Laboratory",
+   "location": "earth.command.laboratory",
+   "bounds": [
+    3350,
+    3950,
+    -1200,
+    -200
+   ],
+   "height": 380,
+   "doors": {
+    "N": [
+     [
+      3650,
+      240
+     ]
+    ]
+   },
+   "anchor": {
+    "label": "Anchor_Laboratory",
+    "at": [
+     3650,
+     -450,
+     0
+    ],
+    "yaw": -90
+   },
+   "zone": {
+    "label": "Zone_Laboratory",
+    "center": [
+     3650,
+     -700,
+     190
+    ],
+    "extent": [
+     280,
+     480,
+     190
+    ]
+   },
+   "systems": [
+    {
+     "id": "earth.command.laboratory.sample_analyzer",
+     "label": "Sys_SampleAnalyzer",
+     "class": "console",
+     "at": [
+      3650,
+      -1000,
+      90
+     ],
+     "size": [
+      160,
+      120,
+      180
+     ],
+     "yaw": 0,
+     "mesh": "cube",
+     "controls": [
+      {
+       "action": "system.inspect",
+       "label": "DIAGNOSTIC"
+      },
+      {
+       "action": "system.set_mode",
+       "label": "LOAD OFF",
+       "params": {
+        "mode": "off"
+       }
+      },
+      {
+       "action": "system.set_mode",
+       "label": "LOAD NOMINAL",
+       "params": {
+        "mode": "nominal"
+       }
+      }
+     ]
+    }
+   ],
+   "lights": [
+    {
+     "label": "Laboratory_Light0",
+     "at": [
+      3650,
+      -550,
+      340
+     ],
+     "intensity": 3000,
+     "radius": 700,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": "earth.command.laboratory.sample_analyzer",
+     "rule": "room_load"
+    },
+    {
+     "label": "Laboratory_Light1",
+     "at": [
+      3650,
+      -950,
+      340
+     ],
+     "intensity": 3000,
+     "radius": 700,
+     "color": [
+      1.0,
+      0.96,
+      0.9
+     ],
+     "follows": "earth.command.laboratory.sample_analyzer",
+     "rule": "room_load"
+    },
+    {
+     "label": "Laboratory_AnalyzerIndicator",
+     "at": [
+      3650,
+      -880,
+      220
+     ],
+     "intensity": 1500,
+     "radius": 400,
+     "color": [
+      0.4,
+      1.0,
+      0.6
+     ],
+     "follows": "earth.command.laboratory.sample_analyzer",
+     "rule": "equipment"
+    }
+   ],
+   "blocks": []
+  },
+  {
+   "id": "hangar_entrance",
+   "name": "HangarEntrance",
+   "location": "earth.command.hangar",
+   "bounds": [
+    4000,
+    4800,
+    -600,
+    600
+   ],
+   "height": 500,
+   "doors": {
+    "W": [
+     [
+      0,
+      300
+     ]
+    ],
+    "E": [
+     [
+      0,
+      800
+     ]
+    ]
+   },
+   "anchor": {
+    "label": "Anchor_Hangar",
+    "at": [
+     4300,
+     0,
+     0
+    ],
+    "yaw": 0
+   },
+   "zone": {
+    "label": "Zone_Hangar",
+    "center": [
+     4400,
+     0,
+     200
+    ],
+    "extent": [
+     380,
+     580,
+     200
+    ]
+   },
+   "systems": [
+    {
+     "id": "earth.command.hangar.luna01",
+     "label": "Sys_Luna01",
+     "class": "system",
+     "at": [
+      6400,
+      0,
+      350
+     ],
+     "size": [
+      900,
+      450,
+      700
+     ],
+     "yaw": 0,
+     "mesh": "cube",
+     "presented": [
+      "system.inspect",
+      "mission.authorize"
+     ]
+    }
+   ],
+   "lights": [
+    {
+     "label": "Hangar_Light",
+     "at": [
+      6000,
+      0,
+      1100
+     ],
+     "intensity": 20000,
+     "radius": 3000,
+     "color": [
+      0.9,
+      0.95,
+      1.0
+     ],
+     "follows": null,
+     "rule": null
+    }
+   ],
+   "blocks": [
+    {
+     "label": "Hangar_Floor",
+     "center": [
+      6200,
+      0,
+      -10
+     ],
+     "size": [
+      2800,
+      2400,
+      20
+     ]
+    }
+   ]
+  }
+ ],
+ "crew": [
+  {
+   "id": "maya",
+   "label": "Crew_Maya",
+   "area": "mission_control",
+   "at": [
+    1400,
+    900,
+    100
+   ],
+   "yaw": 90
+  },
+  {
+   "id": "omar",
+   "label": "Crew_Omar",
+   "area": "engineering",
+   "at": [
+    2300,
+    -1000,
+    100
+   ],
+   "yaw": 0
+  },
+  {
+   "id": "sofia",
+   "label": "Crew_Sofia",
+   "area": "hangar_entrance",
+   "at": [
+    4500,
+    300,
+    100
+   ],
+   "yaw": 0
+  },
+  {
+   "id": "jay",
+   "label": "Crew_Jay",
+   "area": "observation_deck",
+   "at": [
+    -900,
+    400,
+    100
+   ],
+   "yaw": 180
+  }
+ ],
+ "player_start": {
+  "label": "PlayerStart_Fallback",
+  "at": [
+   200,
+   0,
+   100
+  ]
+ }
+}

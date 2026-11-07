@@ -1,0 +1,342 @@
+[
+ {
+  "Name": "earth.command.observation_deck",
+  "Id": "earth.command.observation_deck",
+  "Kind": "location",
+  "World": "earth_command",
+  "DisplayName": "Observation deck",
+  "Location": "",
+  "Binding": "Anchor_ObservationDeck",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.mission_control",
+  "Id": "earth.command.mission_control",
+  "Kind": "location",
+  "World": "earth_command",
+  "DisplayName": "Mission control",
+  "Location": "",
+  "Binding": "Anchor_MissionControl",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.engineering",
+  "Id": "earth.command.engineering",
+  "Kind": "location",
+  "World": "earth_command",
+  "DisplayName": "Engineering bay",
+  "Location": "",
+  "Binding": "Anchor_Engineering",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.laboratory",
+  "Id": "earth.command.laboratory",
+  "Kind": "location",
+  "World": "earth_command",
+  "DisplayName": "Science laboratory",
+  "Location": "",
+  "Binding": "Anchor_Laboratory",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.training",
+  "Id": "earth.command.training",
+  "Kind": "location",
+  "World": "earth_command",
+  "DisplayName": "Training center",
+  "Location": "",
+  "Binding": "Anchor_Training",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.crew_area",
+  "Id": "earth.command.crew_area",
+  "Kind": "location",
+  "World": "earth_command",
+  "DisplayName": "Crew quarters",
+  "Location": "",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.medical",
+  "Id": "earth.command.medical",
+  "Kind": "location",
+  "World": "earth_command",
+  "DisplayName": "Medical bay",
+  "Location": "",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.hangar",
+  "Id": "earth.command.hangar",
+  "Kind": "location",
+  "World": "earth_command",
+  "DisplayName": "Spacecraft hangar",
+  "Location": "",
+  "Binding": "Anchor_Hangar",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.airlock",
+  "Id": "earth.command.airlock",
+  "Kind": "location",
+  "World": "earth_command",
+  "DisplayName": "Launch access airlock",
+  "Location": "",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.engineering.power_bus_b",
+  "Id": "earth.command.engineering.power_bus_b",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Power bus B",
+  "Location": "earth.command.engineering",
+  "Binding": "Sys_PowerBusB",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.engineering.station_battery",
+  "Id": "earth.command.engineering.station_battery",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Station battery bank",
+  "Location": "earth.command.engineering",
+  "Binding": "Sys_StationBattery",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.engineering.thermal_plant",
+  "Id": "earth.command.engineering.thermal_plant",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Station heating plant",
+  "Location": "earth.command.engineering",
+  "Binding": "Sys_ThermalPlant",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.engineering.air_handling",
+  "Id": "earth.command.engineering.air_handling",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Air handling",
+  "Location": "earth.command.engineering",
+  "Binding": "Sys_AirHandling",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.engineering.water_systems",
+  "Id": "earth.command.engineering.water_systems",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Water systems",
+  "Location": "earth.command.engineering",
+  "Binding": "Sys_WaterSystems",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.engineering.spares_locker",
+  "Id": "earth.command.engineering.spares_locker",
+  "Kind": "container",
+  "World": "earth_command",
+  "DisplayName": "Engineering spares locker",
+  "Location": "earth.command.engineering",
+  "Binding": "Store_SparesLocker",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.mission_control.consoles",
+  "Id": "earth.command.mission_control.consoles",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Mission control consoles",
+  "Location": "earth.command.mission_control",
+  "Binding": "Sys_Consoles",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.observation_deck.lunar_telescope",
+  "Id": "earth.command.observation_deck.lunar_telescope",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Lunar telescope",
+  "Location": "earth.command.observation_deck",
+  "Binding": "Sys_LunarTelescope",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.laboratory.sample_analyzer",
+  "Id": "earth.command.laboratory.sample_analyzer",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Sample analyzer",
+  "Location": "earth.command.laboratory",
+  "Binding": "Sys_SampleAnalyzer",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.training.simulator",
+  "Id": "earth.command.training.simulator",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Training simulator",
+  "Location": "earth.command.training",
+  "Binding": "Sys_TrainingSimulator",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.medical.dosimetry_station",
+  "Id": "earth.command.medical.dosimetry_station",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Dosimetry station",
+  "Location": "earth.command.medical",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.hangar.ground_support",
+  "Id": "earth.command.hangar.ground_support",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "Hangar ground support",
+  "Location": "earth.command.hangar",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.hangar.luna01",
+  "Id": "earth.command.hangar.luna01",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "LUNA-01 spacecraft",
+  "Location": "earth.command.hangar",
+  "Binding": "Sys_Luna01",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "earth.command.hangar.luna01.power",
+  "Id": "earth.command.hangar.luna01.power",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "LUNA-01 power system",
+  "Location": "earth.command.hangar",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.hangar.luna01.life_support",
+  "Id": "earth.command.hangar.luna01.life_support",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "LUNA-01 life support",
+  "Location": "earth.command.hangar",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.hangar.luna01.comms",
+  "Id": "earth.command.hangar.luna01.comms",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "LUNA-01 communications",
+  "Location": "earth.command.hangar",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.hangar.luna01.propulsion",
+  "Id": "earth.command.hangar.luna01.propulsion",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "LUNA-01 propulsion",
+  "Location": "earth.command.hangar",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.hangar.luna01.radiation_protection",
+  "Id": "earth.command.hangar.luna01.radiation_protection",
+  "Kind": "object",
+  "World": "earth_command",
+  "DisplayName": "LUNA-01 radiation protection",
+  "Location": "earth.command.hangar",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.hangar.luna01.cargo_hold",
+  "Id": "earth.command.hangar.luna01.cargo_hold",
+  "Kind": "container",
+  "World": "earth_command",
+  "DisplayName": "LUNA-01 cargo hold",
+  "Location": "earth.command.hangar",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.hangar.storage",
+  "Id": "earth.command.hangar.storage",
+  "Kind": "container",
+  "World": "earth_command",
+  "DisplayName": "Hangar storage",
+  "Location": "earth.command.hangar",
+  "Binding": "",
+  "RequiredInSlice": false
+ },
+ {
+  "Name": "earth.command.player_kit",
+  "Id": "earth.command.player_kit",
+  "Kind": "container",
+  "World": "earth_command",
+  "DisplayName": "Personal kit",
+  "Location": "earth.command.observation_deck",
+  "Binding": "Store_PlayerKit",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "maya",
+  "Id": "maya",
+  "Kind": "crew",
+  "World": "",
+  "DisplayName": "Maya — Systems Engineer",
+  "Location": "",
+  "Binding": "Crew_Maya",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "omar",
+  "Id": "omar",
+  "Kind": "crew",
+  "World": "",
+  "DisplayName": "Omar — Planetary Scientist",
+  "Location": "",
+  "Binding": "Crew_Omar",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "sofia",
+  "Id": "sofia",
+  "Kind": "crew",
+  "World": "",
+  "DisplayName": "Sofia — Life Support Specialist",
+  "Location": "",
+  "Binding": "Crew_Sofia",
+  "RequiredInSlice": true
+ },
+ {
+  "Name": "jay",
+  "Id": "jay",
+  "Kind": "crew",
+  "World": "",
+  "DisplayName": "Jay — Mission Operations",
+  "Location": "",
+  "Binding": "Crew_Jay",
+  "RequiredInSlice": true
+ }
+]

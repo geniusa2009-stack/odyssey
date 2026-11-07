@@ -1,0 +1,813 @@
+{
+ "edges": [
+  {
+   "explanation": "Station Readiness is part of Earth Command",
+   "kind": "contains",
+   "satisfied": true,
+   "source": "phase:EARTH_COMMAND",
+   "target": "mission:earth_command.station_readiness"
+  },
+  {
+   "explanation": "The Last Light is part of LUNA-01: The Last Light",
+   "kind": "contains",
+   "satisfied": true,
+   "source": "phase:LUNA_01",
+   "target": "mission:luna_01.the_last_light"
+  },
+  {
+   "explanation": "LUNAR_SURVIVAL requires LUNA_01 completed",
+   "kind": "requires",
+   "satisfied": false,
+   "source": "phase:LUNA_01",
+   "target": "phase:LUNAR_SURVIVAL"
+  },
+  {
+   "explanation": "requires power.load_management at LUNAR_DEMONSTRATED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:power.load_management",
+   "target": "phase:LUNAR_SURVIVAL"
+  },
+  {
+   "explanation": "LUNAR_EXPLORATION requires LUNAR_SURVIVAL completed",
+   "kind": "requires",
+   "satisfied": false,
+   "source": "phase:LUNAR_SURVIVAL",
+   "target": "phase:LUNAR_EXPLORATION"
+  },
+  {
+   "explanation": "requires mobility.surface_rover at LUNAR_DEMONSTRATED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:mobility.surface_rover",
+   "target": "phase:LUNAR_EXPLORATION"
+  },
+  {
+   "explanation": "LUNAR_NETWORK requires LUNAR_EXPLORATION completed",
+   "kind": "requires",
+   "satisfied": false,
+   "source": "phase:LUNAR_EXPLORATION",
+   "target": "phase:LUNAR_NETWORK"
+  },
+  {
+   "explanation": "requires communications.surface_relay at LUNAR_DEMONSTRATED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:communications.surface_relay",
+   "target": "phase:LUNAR_NETWORK"
+  },
+  {
+   "explanation": "requires infrastructure.surface_construction at LUNAR_DEMONSTRATED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:infrastructure.surface_construction",
+   "target": "phase:LUNAR_NETWORK"
+  },
+  {
+   "explanation": "DEEP_SPACE_READINESS requires LUNAR_NETWORK completed",
+   "kind": "requires",
+   "satisfied": false,
+   "source": "phase:LUNAR_NETWORK",
+   "target": "phase:DEEP_SPACE_READINESS"
+  },
+  {
+   "explanation": "PATH_TO_MARS requires DEEP_SPACE_READINESS completed",
+   "kind": "requires",
+   "satisfied": false,
+   "source": "phase:DEEP_SPACE_READINESS",
+   "target": "phase:PATH_TO_MARS"
+  },
+  {
+   "explanation": "MARS_01 requires PATH_TO_MARS completed",
+   "kind": "requires",
+   "satisfied": false,
+   "source": "phase:PATH_TO_MARS",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "critical gate Crewed deep-space transit",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.transport.crewed_transit",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "critical gate Long-duration habitation",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.habitation.long_duration",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "critical gate Regenerative life support",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.life_support.closed_loop",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "critical gate Surface power",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.power.surface_power",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "critical gate Radiation protection",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.radiation.protection",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "critical gate Deep-space communications",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.communications.deep_space",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "critical gate Autonomous fault management",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.autonomy.fault_management",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "gate Robotic precursors",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.robotics.teleoperation",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "critical gate Logistics",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.logistics.mass_budget",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "gate Surface systems",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.surface.systems",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "critical gate Entry, descent and landing",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.edl.crewed_landing",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "critical gate Return capability",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "gate:gate.return.capability",
+   "target": "phase:MARS_01"
+  },
+  {
+   "explanation": "Station Readiness can demonstrate evidence",
+   "kind": "qualifies",
+   "satisfied": true,
+   "source": "mission:earth_command.station_readiness",
+   "target": "capability:power.load_management"
+  },
+  {
+   "explanation": "The Last Light can demonstrate evidence",
+   "kind": "qualifies",
+   "satisfied": false,
+   "source": "mission:luna_01.the_last_light",
+   "target": "capability:power.load_management"
+  },
+  {
+   "explanation": "Station Readiness can demonstrate evidence",
+   "kind": "qualifies",
+   "satisfied": true,
+   "source": "mission:earth_command.station_readiness",
+   "target": "capability:logistics.mass_budgeting"
+  },
+  {
+   "explanation": "requires power.load_management at DISCOVERED",
+   "kind": "requires",
+   "satisfied": true,
+   "source": "capability:power.load_management",
+   "target": "capability:transportation.crew_launch_readiness"
+  },
+  {
+   "explanation": "Station Readiness can demonstrate evidence",
+   "kind": "qualifies",
+   "satisfied": true,
+   "source": "mission:earth_command.station_readiness",
+   "target": "capability:transportation.crew_launch_readiness"
+  },
+  {
+   "explanation": "The Last Light can demonstrate evidence",
+   "kind": "qualifies",
+   "satisfied": false,
+   "source": "mission:luna_01.the_last_light",
+   "target": "capability:habitation.radiation_sheltering"
+  },
+  {
+   "explanation": "The Last Light can demonstrate evidence",
+   "kind": "qualifies",
+   "satisfied": false,
+   "source": "mission:luna_01.the_last_light",
+   "target": "capability:mobility.surface_rover"
+  },
+  {
+   "explanation": "The Last Light can demonstrate evidence",
+   "kind": "qualifies",
+   "satisfied": false,
+   "source": "mission:luna_01.the_last_light",
+   "target": "capability:robotics.teleoperation"
+  },
+  {
+   "explanation": "The Last Light can demonstrate evidence",
+   "kind": "qualifies",
+   "satisfied": false,
+   "source": "mission:luna_01.the_last_light",
+   "target": "capability:communications.surface_relay"
+  },
+  {
+   "explanation": "The Last Light can demonstrate evidence",
+   "kind": "qualifies",
+   "satisfied": false,
+   "source": "mission:luna_01.the_last_light",
+   "target": "capability:life_support.closed_loop"
+  },
+  {
+   "explanation": "The Last Light can demonstrate evidence",
+   "kind": "qualifies",
+   "satisfied": false,
+   "source": "mission:luna_01.the_last_light",
+   "target": "capability:science.surface_sampling"
+  },
+  {
+   "explanation": "requires power.load_management at DISCOVERED",
+   "kind": "certifies",
+   "satisfied": true,
+   "source": "capability:power.load_management",
+   "target": "certification:cert.earth_command.station_operations"
+  },
+  {
+   "explanation": "requires power.load_management at LUNAR_DEMONSTRATED",
+   "kind": "certifies",
+   "satisfied": false,
+   "source": "capability:power.load_management",
+   "target": "certification:cert.luna01.lunar_surface_operations"
+  },
+  {
+   "explanation": "requires habitation.radiation_sheltering at LUNAR_DEMONSTRATED",
+   "kind": "certifies",
+   "satisfied": false,
+   "source": "capability:habitation.radiation_sheltering",
+   "target": "certification:cert.luna01.lunar_surface_operations"
+  },
+  {
+   "explanation": "requires transportation.crew_launch_readiness at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:transportation.crew_launch_readiness",
+   "target": "gate:gate.transport.crewed_transit"
+  },
+  {
+   "explanation": "requires habitation.long_duration at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:habitation.long_duration",
+   "target": "gate:gate.habitation.long_duration"
+  },
+  {
+   "explanation": "requires life_support.closed_loop at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:life_support.closed_loop",
+   "target": "gate:gate.life_support.closed_loop"
+  },
+  {
+   "explanation": "requires power.load_management at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:power.load_management",
+   "target": "gate:gate.power.surface_power"
+  },
+  {
+   "explanation": "requires habitation.radiation_sheltering at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:habitation.radiation_sheltering",
+   "target": "gate:gate.radiation.protection"
+  },
+  {
+   "explanation": "requires communications.surface_relay at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:communications.surface_relay",
+   "target": "gate:gate.communications.deep_space"
+  },
+  {
+   "explanation": "requires autonomy.fault_management at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:autonomy.fault_management",
+   "target": "gate:gate.autonomy.fault_management"
+  },
+  {
+   "explanation": "requires robotics.teleoperation at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:robotics.teleoperation",
+   "target": "gate:gate.robotics.teleoperation"
+  },
+  {
+   "explanation": "requires logistics.mass_budgeting at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:logistics.mass_budgeting",
+   "target": "gate:gate.logistics.mass_budget"
+  },
+  {
+   "explanation": "requires mobility.surface_rover at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:mobility.surface_rover",
+   "target": "gate:gate.surface.systems"
+  },
+  {
+   "explanation": "requires infrastructure.surface_construction at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:infrastructure.surface_construction",
+   "target": "gate:gate.surface.systems"
+  },
+  {
+   "explanation": "requires science.surface_sampling at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:science.surface_sampling",
+   "target": "gate:gate.surface.systems"
+  },
+  {
+   "explanation": "requires transportation.entry_descent_landing at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:transportation.entry_descent_landing",
+   "target": "gate:gate.edl.crewed_landing"
+  },
+  {
+   "explanation": "requires transportation.planetary_return at MARS_CERTIFIED",
+   "kind": "gates",
+   "satisfied": false,
+   "source": "capability:transportation.planetary_return",
+   "target": "gate:gate.return.capability"
+  }
+ ],
+ "nodes": [
+  {
+   "evidence_refs": [],
+   "id": "phase:EARTH_COMMAND",
+   "label": "Earth Command",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "completed",
+   "type": "phase"
+  },
+  {
+   "evidence_refs": [],
+   "id": "mission:earth_command.station_readiness",
+   "label": "Station Readiness",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": "earth_command.station_readiness",
+   "state": "completed",
+   "type": "mission"
+  },
+  {
+   "evidence_refs": [],
+   "id": "phase:LUNA_01",
+   "label": "LUNA-01: The Last Light",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "active",
+   "type": "phase"
+  },
+  {
+   "evidence_refs": [],
+   "id": "mission:luna_01.the_last_light",
+   "label": "The Last Light",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": "luna_01.the_last_light",
+   "state": "active",
+   "type": "mission"
+  },
+  {
+   "evidence_refs": [],
+   "id": "phase:LUNAR_SURVIVAL",
+   "label": "Lunar Survival",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "locked",
+   "type": "phase"
+  },
+  {
+   "evidence_refs": [],
+   "id": "phase:LUNAR_EXPLORATION",
+   "label": "Lunar Exploration",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "locked",
+   "type": "phase"
+  },
+  {
+   "evidence_refs": [],
+   "id": "phase:LUNAR_NETWORK",
+   "label": "Lunar Network",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "locked",
+   "type": "phase"
+  },
+  {
+   "evidence_refs": [],
+   "id": "phase:DEEP_SPACE_READINESS",
+   "label": "Deep Space Readiness",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "locked",
+   "type": "phase"
+  },
+  {
+   "evidence_refs": [],
+   "id": "phase:PATH_TO_MARS",
+   "label": "Path to Mars",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "locked",
+   "type": "phase"
+  },
+  {
+   "evidence_refs": [],
+   "id": "phase:MARS_01",
+   "label": "MARS-01",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "locked",
+   "type": "phase"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:power.load_management",
+   "label": "Power load management",
+   "progress": "2/5 stages",
+   "related_capability": "power.load_management",
+   "related_mission": null,
+   "state": "PROTOTYPE_TESTED",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:logistics.mass_budgeting",
+   "label": "Mass budgeting",
+   "progress": "1/5 stages",
+   "related_capability": "logistics.mass_budgeting",
+   "related_mission": null,
+   "state": "DISCOVERED",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:transportation.crew_launch_readiness",
+   "label": "Crew launch readiness",
+   "progress": "1/4 stages",
+   "related_capability": "transportation.crew_launch_readiness",
+   "related_mission": null,
+   "state": "PROTOTYPE_TESTED",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [
+    "change4_lnd_dose_rate",
+    "donki_sep_events"
+   ],
+   "id": "capability:habitation.radiation_sheltering",
+   "label": "Radiation sheltering",
+   "progress": "0/4 stages",
+   "related_capability": "habitation.radiation_sheltering",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:mobility.surface_rover",
+   "label": "Surface rover operations",
+   "progress": "0/4 stages",
+   "related_capability": "mobility.surface_rover",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:robotics.teleoperation",
+   "label": "Teleoperation",
+   "progress": "0/4 stages",
+   "related_capability": "robotics.teleoperation",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:communications.surface_relay",
+   "label": "Surface communications relay",
+   "progress": "0/5 stages",
+   "related_capability": "communications.surface_relay",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:infrastructure.surface_construction",
+   "label": "Surface construction",
+   "progress": "0/3 stages",
+   "related_capability": "infrastructure.surface_construction",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [
+    "bvad_o2_consumption",
+    "bvad_co2_production",
+    "iss_water_recovery"
+   ],
+   "id": "capability:life_support.closed_loop",
+   "label": "Regenerative life support",
+   "progress": "0/4 stages",
+   "related_capability": "life_support.closed_loop",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:science.surface_sampling",
+   "label": "Surface science",
+   "progress": "0/3 stages",
+   "related_capability": "science.surface_sampling",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [
+    "electrolysis_stoichiometry"
+   ],
+   "id": "capability:isru.oxygen_extraction",
+   "label": "Oxygen extraction",
+   "progress": "0/5 stages",
+   "related_capability": "isru.oxygen_extraction",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:autonomy.fault_management",
+   "label": "Autonomous fault management",
+   "progress": "0/4 stages",
+   "related_capability": "autonomy.fault_management",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:transportation.entry_descent_landing",
+   "label": "Entry, descent and landing",
+   "progress": "0/2 stages",
+   "related_capability": "transportation.entry_descent_landing",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:transportation.planetary_return",
+   "label": "Planetary return",
+   "progress": "0/2 stages",
+   "related_capability": "transportation.planetary_return",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "capability:habitation.long_duration",
+   "label": "Long-duration habitation",
+   "progress": "0/3 stages",
+   "related_capability": "habitation.long_duration",
+   "related_mission": null,
+   "state": "not_started",
+   "type": "capability"
+  },
+  {
+   "evidence_refs": [],
+   "id": "certification:cert.earth_command.station_operations",
+   "label": "Station operations",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "granted",
+   "type": "certification"
+  },
+  {
+   "evidence_refs": [],
+   "id": "certification:cert.luna01.lunar_surface_operations",
+   "label": "Lunar surface operations",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "not_granted",
+   "type": "certification"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.transport.crewed_transit",
+   "label": "Crewed deep-space transit",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing_critical",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.habitation.long_duration",
+   "label": "Long-duration habitation",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing_critical",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.life_support.closed_loop",
+   "label": "Regenerative life support",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing_critical",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.power.surface_power",
+   "label": "Surface power",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing_critical",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.radiation.protection",
+   "label": "Radiation protection",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing_critical",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.communications.deep_space",
+   "label": "Deep-space communications",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing_critical",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.autonomy.fault_management",
+   "label": "Autonomous fault management",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing_critical",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.robotics.teleoperation",
+   "label": "Robotic precursors",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.logistics.mass_budget",
+   "label": "Logistics",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing_critical",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.surface.systems",
+   "label": "Surface systems",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.edl.crewed_landing",
+   "label": "Entry, descent and landing",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing_critical",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "gate:gate.return.capability",
+   "label": "Return capability",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "missing_critical",
+   "type": "readiness_gate"
+  },
+  {
+   "evidence_refs": [],
+   "id": "infrastructure:infra.surface_habitat",
+   "label": "Surface habitat",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "known",
+   "type": "infrastructure"
+  },
+  {
+   "evidence_refs": [
+    "change4_lnd_dose_rate"
+   ],
+   "id": "infrastructure:infra.radiation_shelter",
+   "label": "Radiation shelter",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "known",
+   "type": "infrastructure"
+  },
+  {
+   "evidence_refs": [
+    "lunar_polar_illumination"
+   ],
+   "id": "infrastructure:infra.solar_power_field",
+   "label": "Solar power field",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "known",
+   "type": "infrastructure"
+  },
+  {
+   "evidence_refs": [],
+   "id": "infrastructure:infra.surface_comms_relay",
+   "label": "Surface comms relay",
+   "progress": null,
+   "related_capability": null,
+   "related_mission": null,
+   "state": "known",
+   "type": "infrastructure"
+  }
+ ]
+}

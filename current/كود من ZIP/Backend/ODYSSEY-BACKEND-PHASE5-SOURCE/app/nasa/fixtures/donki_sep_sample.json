@@ -1,0 +1,17 @@
+{
+  "_comment": "SYNTHETIC sample in the shape of a DONKI /DONKI/SEP response. These are NOT real space weather events; ids and times are invented placeholders for offline development and tests.",
+  "events": [
+    {
+      "sepID": "SAMPLE-SEP-0001",
+      "eventTime": "2000-01-01T00:00Z",
+      "instruments": [{"displayName": "SAMPLE/INSTRUMENT"}],
+      "link": null
+    },
+    {
+      "sepID": "SAMPLE-SEP-0002",
+      "eventTime": "2000-01-15T12:00Z",
+      "instruments": [{"displayName": "SAMPLE/INSTRUMENT"}],
+      "link": null
+    }
+  ]
+}

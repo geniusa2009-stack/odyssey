@@ -1,0 +1,762 @@
+{
+ "blocked_tiers": {
+  "exceptional": [
+   "life_support_stability",
+   "power_continuity",
+   "reserves_at_end",
+   "science_quality"
+  ],
+  "success": [
+   "life_support_stability",
+   "power_continuity"
+  ]
+ },
+ "counterfactuals_evaluated": true,
+ "decisions_count": 4,
+ "final_tick": 240,
+ "key_moments": [
+  {
+   "category": "phase",
+   "data": {
+    "from": "landing",
+    "to": "base_setup"
+   },
+   "key": "base_setup",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 1
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "evidence": []
+   },
+   "key": "landing_complete",
+   "kind": "milestone",
+   "severity": null,
+   "tick": 2
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "base_setup",
+    "to": "initial_resource_management"
+   },
+   "key": "initial_resource_management",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 11
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "evidence": []
+   },
+   "key": "regolith_survey_window",
+   "kind": "science_opportunity",
+   "severity": null,
+   "tick": 14
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "opportunity": "regolith_survey"
+   },
+   "key": "science_completed:regolith_survey",
+   "kind": "milestone",
+   "severity": null,
+   "tick": 24
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "initial_resource_management",
+    "to": "reduced_solar_availability"
+   },
+   "key": "reduced_solar_availability",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 47
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "reduced_solar_availability",
+    "to": "power_management"
+   },
+   "key": "power_management",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 71
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "power_management",
+    "to": "scientific_opportunity"
+   },
+   "key": "scientific_opportunity",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 95
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "evidence": []
+   },
+   "key": "ice_core_window",
+   "kind": "science_opportunity",
+   "severity": null,
+   "tick": 96
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "category": "primary",
+    "objective": "data_return",
+    "required": true,
+    "status": "achieved"
+   },
+   "key": "data_return",
+   "kind": "objective",
+   "severity": null,
+   "tick": 107
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "opportunity": "ice_core_sampling"
+   },
+   "key": "science_completed:ice_core_sampling",
+   "kind": "milestone",
+   "severity": null,
+   "tick": 115
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "category": "primary",
+    "objective": "science_return",
+    "required": true,
+    "status": "achieved"
+   },
+   "key": "science_return",
+   "kind": "objective",
+   "severity": null,
+   "tick": 115
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "scientific_opportunity",
+    "to": "environmental_emergency"
+   },
+   "key": "environmental_emergency",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 119
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "environmental_emergency",
+    "to": "communication_loss"
+   },
+   "key": "communication_loss",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 139
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "communication_loss",
+    "to": "resource_cascade"
+   },
+   "key": "resource_cascade",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 159
+  },
+  {
+   "category": "failure",
+   "data": {
+    "evidence": []
+   },
+   "key": "water_processor_pump_fault",
+   "kind": "system_fault",
+   "severity": "warning",
+   "tick": 162
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "resource_cascade",
+    "to": "rover_decision"
+   },
+   "key": "rover_decision",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 179
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "evidence": []
+   },
+   "key": "far_crater_window",
+   "kind": "science_opportunity",
+   "severity": null,
+   "tick": 180
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "rover_decision",
+    "to": "final_low_power"
+   },
+   "key": "final_low_power",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 199
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "evidence": []
+   },
+   "key": "last_light",
+   "kind": "milestone",
+   "severity": "caution",
+   "tick": 210
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "opportunity": "far_crater_traverse"
+   },
+   "key": "science_missed:far_crater_traverse",
+   "kind": "science_opportunity",
+   "severity": null,
+   "tick": 220
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "category": "stability",
+    "objective": "power_continuity",
+    "required": false,
+    "status": "failed"
+   },
+   "key": "power_continuity",
+   "kind": "objective",
+   "severity": null,
+   "tick": 224
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "category": "stability",
+    "objective": "life_support_stability",
+    "required": false,
+    "status": "failed"
+   },
+   "key": "life_support_stability",
+   "kind": "objective",
+   "severity": null,
+   "tick": 234
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "category": "safety",
+    "objective": "crew_health",
+    "required": false,
+    "status": "achieved"
+   },
+   "key": "crew_health",
+   "kind": "objective",
+   "severity": null,
+   "tick": 239
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "category": "primary",
+    "objective": "crew_survival",
+    "required": true,
+    "status": "achieved"
+   },
+   "key": "crew_survival",
+   "kind": "objective",
+   "severity": null,
+   "tick": 239
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "category": "discovery",
+    "objective": "full_survey",
+    "required": false,
+    "status": "failed"
+   },
+   "key": "full_survey",
+   "kind": "objective",
+   "severity": null,
+   "tick": 239
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "category": "safety",
+    "objective": "radiation_safety",
+    "required": false,
+    "status": "achieved"
+   },
+   "key": "radiation_safety",
+   "kind": "objective",
+   "severity": null,
+   "tick": 239
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "category": "efficiency",
+    "objective": "reserves_at_end",
+    "required": false,
+    "status": "failed"
+   },
+   "key": "reserves_at_end",
+   "kind": "objective",
+   "severity": null,
+   "tick": 239
+  },
+  {
+   "category": "milestone",
+   "data": {
+    "category": "science",
+    "objective": "science_quality",
+    "required": false,
+    "status": "failed"
+   },
+   "key": "science_quality",
+   "kind": "objective",
+   "severity": null,
+   "tick": 239
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "final_low_power",
+    "to": "mission_conclusion"
+   },
+   "key": "mission_conclusion",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 239
+  },
+  {
+   "category": "phase",
+   "data": {
+    "from": "mission_conclusion",
+    "to": "post_mission_analysis"
+   },
+   "key": "post_mission_analysis",
+   "kind": "phase_change",
+   "severity": null,
+   "tick": 239
+  }
+ ],
+ "mission_status": "concluded",
+ "outcome": {
+  "code": "mission_complete_partial",
+  "message_key": "outcome.mission_complete_partial",
+  "objectives_achieved": [
+   "crew_health",
+   "crew_survival",
+   "data_return",
+   "radiation_safety",
+   "science_return"
+  ],
+  "objectives_failed": [
+   "full_survey",
+   "life_support_stability",
+   "power_continuity",
+   "reserves_at_end",
+   "science_quality"
+  ],
+  "rule_id": "partial",
+  "tick": 239,
+  "tier": "partial"
+ },
+ "session_id": "d0d00000-0000-0000-0000-000000000003",
+ "shortfalls": [
+  {
+   "blocks_tiers": [
+    "exceptional",
+    "success"
+   ],
+   "category": "stability",
+   "causal_chain": {
+    "counterfactual": {
+     "target_metric": "power.unmet_kw",
+     "target_tick": 225,
+     "verdict": "decision_worsened_target",
+     "with_decision": 2.23,
+     "without_decision": 0.0
+    },
+    "steps": [
+     {
+      "kind": "decision",
+      "label": "Decision: start_science_activity",
+      "tick": 100,
+      "value": null,
+      "via": "set the value of this quantity"
+     },
+     {
+      "kind": "metric",
+      "label": "Demand from discretionary loads (science payload, rover charging)",
+      "tick": 101,
+      "value": 1.2,
+      "via": "Science operations and rover charging draw down the battery"
+     },
+     {
+      "kind": "metric",
+      "label": "Battery state of charge",
+      "tick": 211,
+      "value": 0.311,
+      "via": "With the battery empty, loads the array cannot cover are shed"
+     },
+     {
+      "kind": "metric",
+      "label": "Unmet demand (load shed)",
+      "tick": 225,
+      "value": 2.23,
+      "via": null
+     }
+    ],
+    "target_metric": "power.unmet_kw",
+    "target_tick": 225
+   },
+   "consequence": "blocked outcome tier 'success'",
+   "decisions_on_path_without_effect": [],
+   "facts": [],
+   "intermediate_effects": [
+    {
+     "label": "Demand from discretionary loads (science payload, rover charging)",
+     "metric": "control.discretionary_load_kw",
+     "unit": "kW"
+    },
+    {
+     "label": "Battery state of charge",
+     "metric": "power.battery_soc",
+     "unit": "fraction"
+    },
+    {
+     "label": "Solar availability",
+     "metric": "env.solar_availability",
+     "unit": "fraction"
+    },
+    {
+     "label": "Generation vs rated",
+     "metric": "power.generation_ratio",
+     "unit": "fraction"
+    }
+   ],
+   "kind": "traced",
+   "objective": "power_continuity",
+   "other_causes": [
+    {
+     "id": "environment:solar_availability",
+     "kind": "environment",
+     "label": "Natural environment profile (Solar availability)"
+    }
+   ],
+   "resolved_tick": 224,
+   "root_decisions": [
+    {
+     "decision_id": "dec_jzy5ztbgtpofvweqqw4w",
+     "decision_type": "start_science_activity",
+     "option_id": "start_science_activity:ice_core_sampling",
+     "tick": 100,
+     "verdict": "decision_worsened_target"
+    }
+   ],
+   "triggers": [
+    {
+     "label": "Unmet demand (load shed)",
+     "metric": "power.unmet_kw",
+     "op": ">",
+     "threshold": 0.05,
+     "tick": 225,
+     "unit": "kW",
+     "value": 2.23
+    }
+   ]
+  },
+  {
+   "blocks_tiers": [
+    "exceptional",
+    "success"
+   ],
+   "category": "stability",
+   "causal_chain": {
+    "counterfactual": null,
+    "steps": [
+     {
+      "kind": "environment",
+      "label": "Natural regolith dust accumulation on the array",
+      "tick": 134,
+      "value": null,
+      "via": "set the value of this quantity"
+     },
+     {
+      "kind": "metric",
+      "label": "Array dust transmission",
+      "tick": 134,
+      "value": 0.92,
+      "via": "Regolith dust on the array blocks incoming light"
+     },
+     {
+      "kind": "metric",
+      "label": "Generation vs rated",
+      "tick": 139,
+      "value": 0.403,
+      "via": "When generation falls below demand the battery discharges"
+     },
+     {
+      "kind": "metric",
+      "label": "Battery state of charge",
+      "tick": 211,
+      "value": 0.311,
+      "via": "A depleted battery forces lower-priority loads to be shed"
+     },
+     {
+      "kind": "metric",
+      "label": "Power supply to CO2 removal",
+      "tick": 226,
+      "value": 0.0,
+      "via": "Unpowered scrubbers let exhaled CO2 accumulate"
+     },
+     {
+      "kind": "metric",
+      "label": "Cabin CO2 concentration",
+      "tick": 235,
+      "value": 11183.0,
+      "via": null
+     }
+    ],
+    "target_metric": "life_support.co2_ppm",
+    "target_tick": 235
+   },
+   "consequence": "blocked outcome tier 'success'",
+   "decisions_on_path_without_effect": [],
+   "facts": [],
+   "intermediate_effects": [
+    {
+     "label": "Array dust transmission",
+     "metric": "power.dust_factor",
+     "unit": "fraction"
+    },
+    {
+     "label": "Generation vs rated",
+     "metric": "power.generation_ratio",
+     "unit": "fraction"
+    },
+    {
+     "label": "Battery state of charge",
+     "metric": "power.battery_soc",
+     "unit": "fraction"
+    },
+    {
+     "label": "Power supply to CO2 removal",
+     "metric": "power.supply_ratio.co2_scrubber",
+     "unit": "fraction"
+    },
+    {
+     "label": "Solar availability",
+     "metric": "env.solar_availability",
+     "unit": "fraction"
+    }
+   ],
+   "kind": "traced",
+   "objective": "life_support_stability",
+   "other_causes": [
+    {
+     "id": "environment:dust_accumulation",
+     "kind": "environment",
+     "label": "Natural regolith dust accumulation on the array"
+    },
+    {
+     "id": "environment:solar_availability",
+     "kind": "environment",
+     "label": "Natural environment profile (Solar availability)"
+    }
+   ],
+   "resolved_tick": 234,
+   "root_decisions": [],
+   "triggers": [
+    {
+     "label": "Cabin CO2 concentration",
+     "metric": "life_support.co2_ppm",
+     "op": ">",
+     "threshold": 10500.0,
+     "tick": 235,
+     "unit": "ppm",
+     "value": 11183.0
+    }
+   ]
+  },
+  {
+   "blocks_tiers": [
+    "exceptional"
+   ],
+   "category": "efficiency",
+   "causal_chain": {
+    "counterfactual": null,
+    "steps": [
+     {
+      "kind": "event",
+      "label": "Event water_processor_pump_fault",
+      "tick": 162,
+      "value": null,
+      "via": "set the value of this quantity"
+     },
+     {
+      "kind": "metric",
+      "label": "water_processor health",
+      "tick": 163,
+      "value": 0.552,
+      "via": "A degraded processor recovers less water"
+     },
+     {
+      "kind": "metric",
+      "label": "Water recovery efficiency",
+      "tick": 163,
+      "value": 0.597,
+      "via": "Water not recovered is lost from the reserve"
+     },
+     {
+      "kind": "metric",
+      "label": "Water reserve (days of gross crew use, no recycling)",
+      "tick": 240,
+      "value": 1.97,
+      "via": null
+     }
+    ],
+    "target_metric": "life_support.water_days",
+    "target_tick": 240
+   },
+   "consequence": "blocked outcome tier 'exceptional'",
+   "decisions_on_path_without_effect": [],
+   "facts": [],
+   "intermediate_effects": [
+    {
+     "label": "water_processor health",
+     "metric": "component.water_processor.health",
+     "unit": "index"
+    },
+    {
+     "label": "Water recovery efficiency",
+     "metric": "life_support.water_recovery_efficiency",
+     "unit": "fraction"
+    }
+   ],
+   "kind": "traced",
+   "objective": "reserves_at_end",
+   "other_causes": [
+    {
+     "id": "event:water_processor_pump_fault",
+     "kind": "event",
+     "label": "Event water_processor_pump_fault"
+    }
+   ],
+   "resolved_tick": 239,
+   "root_decisions": [],
+   "triggers": [
+    {
+     "label": "Water reserve (days of gross crew use, no recycling)",
+     "metric": "life_support.water_days",
+     "op": ">=",
+     "threshold": 3.0,
+     "tick": 240,
+     "unit": "days",
+     "value": 1.97
+    },
+    {
+     "label": "Battery state of charge",
+     "metric": "power.battery_soc",
+     "op": ">=",
+     "threshold": 0.15,
+     "tick": 240,
+     "unit": "fraction",
+     "value": 0.0
+    }
+   ]
+  },
+  {
+   "blocks_tiers": [
+    "exceptional"
+   ],
+   "category": "science",
+   "causal_chain": null,
+   "consequence": "blocked outcome tier 'exceptional'",
+   "decisions_on_path_without_effect": [],
+   "facts": [
+    "science campaign far_crater_traverse missed (never started)",
+    "science campaign ice_core_sampling completed",
+    "science campaign regolith_survey completed"
+   ],
+   "intermediate_effects": [],
+   "kind": "omission",
+   "objective": "science_quality",
+   "other_causes": [],
+   "resolved_tick": 239,
+   "root_decisions": [],
+   "triggers": [
+    {
+     "label": "Science return",
+     "metric": "science.points",
+     "op": ">=",
+     "threshold": 100.0,
+     "tick": 240,
+     "unit": "points",
+     "value": 84.0
+    }
+   ]
+  },
+  {
+   "blocks_tiers": [],
+   "category": "discovery",
+   "causal_chain": null,
+   "consequence": "did not change the outcome tier",
+   "decisions_on_path_without_effect": [],
+   "facts": [
+    "science campaign far_crater_traverse missed (never started)",
+    "science campaign ice_core_sampling completed",
+    "science campaign regolith_survey completed"
+   ],
+   "intermediate_effects": [],
+   "kind": "omission",
+   "objective": "full_survey",
+   "other_causes": [],
+   "resolved_tick": 239,
+   "root_decisions": [],
+   "triggers": [
+    {
+     "label": "Science activities completed",
+     "metric": "science.opportunities_completed",
+     "op": ">=",
+     "threshold": 3.0,
+     "tick": 240,
+     "unit": "count",
+     "value": 2.0
+    }
+   ]
+  }
+ ],
+ "state_version": 11,
+ "statement": "Decisions are named as root causes only when a counterfactual replay without them makes the failing quantity better. Decisions on a causal path whose removal changes nothing are listed separately and never blamed.",
+ "timeline_id": "d0d00000-0000-0000-0000-000000000004"
+}

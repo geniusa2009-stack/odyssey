@@ -1,0 +1,9 @@
+{
+ "action": "world.zone_entered",
+ "command_id": "cmd-0001",
+ "expected_state_version": 1,
+ "idempotency_key": "idem-000001",
+ "params": {},
+ "session_id": "gs_aaaaaaaaaaaaaaaaaaaaaaaaam",
+ "target": "earth.command.engineering"
+}

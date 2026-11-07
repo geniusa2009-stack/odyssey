@@ -1,0 +1,93 @@
+# Crew (semantic state only) and short contextual cues. Cues are one line, prioritized, with
+# cooldowns; Unreal owns voice, animation and presentation. No dialogue trees.
+crew:
+  - {id: maya, name: Maya, role: Systems Engineer, specialty: power,
+     sim_crew: {earth-command: maya, luna-01: crew_pwr}}
+  - {id: omar, name: Omar, role: Planetary Scientist, specialty: science,
+     sim_crew: {earth-command: omar, luna-01: crew_sci}}
+  - {id: sofia, name: Sofia, role: Life Support Specialist, specialty: life_support,
+     sim_crew: {earth-command: sofia, luna-01: crew_ls}}
+  - {id: jay, name: Jay, role: Mission Operations, specialty: operations,
+     sim_crew: {earth-command: jay, luna-01: crew_cdr}}
+
+cues:
+  - id: cue.omar.telescope
+    speaker: omar
+    priority: 10
+    once: true
+    when: {location: earth.command.observation_deck}
+    line: That bright rim on the crater edge is where LUNA-01 is going.
+    message_key: cue.omar.telescope
+  - id: cue.maya.bus_b_down
+    speaker: maya
+    priority: 90
+    once: true
+    when: {incident: {id: earth.command.power_incident, stages: [active]}}
+    line: Bus B just dropped. We're on battery. I need eyes on that breaker.
+    message_key: cue.maya.bus_b_down
+  - id: cue.jay.load_shedding
+    speaker: jay
+    priority: 80
+    cooldown_ticks: 8
+    when: {alert: load_shedding}
+    line: Loads are being shed. Mission control and air handling stay up, whatever it takes.
+    message_key: cue.jay.load_shedding
+  - id: cue.maya.repair_tradeoff
+    speaker: maya
+    priority: 70
+    once: true
+    when: {incident: {id: earth.command.power_incident, stages: [investigating]}}
+    line: The breaker's gone. Swapping it takes the whole bus offline for a while.
+    message_key: cue.maya.repair_tradeoff
+  - id: cue.sofia.reserve_low
+    speaker: sofia
+    priority: 85
+    cooldown_ticks: 8
+    when: {alert: battery_low}
+    line: Battery reserve is getting low. Air handling can't ride this out forever.
+    message_key: cue.sofia.reserve_low
+  - id: cue.omar.calibration_window
+    speaker: omar
+    priority: 20
+    once: true
+    when: {sim_event: calibration_window}
+    line: The analyzer calibration window is open, if we can spare the power.
+    message_key: cue.omar.calibration_window
+  - id: cue.jay.inspection_ready
+    speaker: jay
+    priority: 75
+    once: true
+    when: {incident: {id: earth.command.power_incident, stages: [resolved]}}
+    line: Power's stable. LUNA-01 is cleared for inspection.
+    message_key: cue.jay.inspection_ready
+  - id: cue.maya.spacecraft_charge
+    speaker: maya
+    priority: 50
+    cooldown_ticks: 16
+    when:
+      all:
+        - {incident: {id: earth.command.power_incident, stages: [resolved]}}
+        - {sim: {metric: rover.battery_kwh, op: "<", value: 45.0}}
+    line: LUNA-01 is below launch charge. Ground support needs to stay on.
+    message_key: cue.maya.spacecraft_charge
+  - id: cue.sofia.radiation_shelter
+    speaker: sofia
+    priority: 95
+    cooldown_ticks: 4
+    when: {alert: radiation_elevated}
+    line: Particle flux is climbing fast. Everyone into the shelter.
+    message_key: cue.sofia.radiation_shelter
+  - id: cue.maya.sunset
+    speaker: maya
+    priority: 60
+    once: true
+    when: {sim_event: sunlight_decline}
+    line: The Sun's dropping toward the horizon. Our margins start shrinking now.
+    message_key: cue.maya.sunset
+  - id: cue.jay.relay_down
+    speaker: jay
+    priority: 70
+    cooldown_ticks: 6
+    when: {alert: comms_link_down}
+    line: We've lost the link to Earth. We're on our own until it's back.
+    message_key: cue.jay.relay_down
