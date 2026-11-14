@@ -152,8 +152,11 @@ def sign(F, text, sub, w=1024, h=256, color=WHITE):
 def floor_text(F, text, w=1024, h=256):
     img = Image.new("RGB", (w, h), (20, 23, 27))
     d = ImageDraw.Draw(img)
-    tw = d.textlength(text, font=F.bold(64)) + 6 * (len(text) - 1)
-    tracked(d, ((w - tw) / 2, 82), text, F.bold(64), AMBER, 6)
+    size = 64
+    while d.textlength(text, font=F.bold(size)) + 4 * (len(text) - 1) > w * 0.9:  # fit with margin
+        size -= 2
+    tw = d.textlength(text, font=F.bold(size)) + 4 * (len(text) - 1)
+    tracked(d, ((w - tw) / 2, (h - size) / 2 - 6), text, F.bold(size), AMBER, 4)
     return img
 
 

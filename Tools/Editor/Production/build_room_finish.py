@@ -428,7 +428,7 @@ def place_all(kits, meshes, mi, door_parts, pack):
     # ---------------- Training (x 2200..3200, y 200..1200, h 380); simulator at (2700, 1000)
     F = "Training"
     spawn(meshes["SafetyBorder"], "TRN_SafetyZone", (2700.0, 985.0, 0.0), folder=F)
-    spawn(meshes["FloorText"], "TRN_FloorMarking_KeepClear", (2700.0, 740.0, 0.0), yaw=90.0, folder=F)
+    spawn(meshes["FloorText"], "TRN_FloorMarking_KeepClear", (2700.0, 740.0, 0.0), yaw=-90.0, folder=F)  # reads for someone approaching from the south
     toward = math.degrees(math.atan2(1000.0 - 600.0, 2700.0 - 2380.0))
     spawn(pack["console"], "TRN_InstructorStation", (2380.0, 600.0, 0.0), yaw=toward + 180.0, scale=0.55, folder=F, coll="BlockAll")
     back = math.radians(toward + 180.0)
