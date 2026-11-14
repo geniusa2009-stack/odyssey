@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ODYSSEY — an educational space-engineering simulation project. Explore mission systems, technical architecture, and verified project resources.">
+<meta name="theme-color" content="#06111f">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<title>ODYSSEY — Mission Experience</title>
+<link rel="stylesheet" href="./styles.css">
+<script src="./app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="ODYSSEY home"><span class="brand-mark" aria-hidden="true">◈</span> ODYSSEY <span class="brand-sub">SPACE EXPERIENCE</span></a>
+  <nav aria-label="Main navigation"><a href="#mission">Mission</a><a href="#experience">Experience</a><a href="#technology">Technology</a><a href="#resources">Resources</a></nav>
+  <span class="status"><span aria-hidden="true" class="status-dot"></span> JUDGES PREVIEW</span>
+</header>
+<main id="main">
+<section id="top" class="hero wrap">
+  <div class="hero-copy">
+    <p class="eyebrow">PROJECT BRIEFING / 2026</p>
+    <h1>THE NEXT MISSION<br><em>BEGINS WITH A DECISION.</em></h1>
+    <p class="lede">ODYSSEY is an educational space-engineering project built around consequential decisions: power, life support, safety, and the science behind operating a lunar outpost.</p>
+    <div class="actions"><a class="action primary" href="#experience">Explore the mission <span aria-hidden="true">↗</span></a><a class="action secondary" href="https://github.com/geniusa2009-stack/odyssey" rel="noopener noreferrer" target="_blank">Project source <span aria-hidden="true">↗</span></a></div>
+    <p class="fineprint">This site is a project overview, not a claim that live Unreal streaming is available.</p>
+  </div>
+  <div class="planet-scene" aria-hidden="true"><div class="stars"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="planet"><div class="planet-shade"></div></div><div class="planet-glow"></div><div class="scene-readout"><span>EARTH COMMAND // LUNA-01</span><span>◦ MISSION SYSTEMS ONLINE</span></div></div>
+  <div class="hero-bottom"><span>01 — EARTH COMMAND</span><span>02 — LUNAR OUTPOST</span><span>03 — MISSION DECISIONS</span></div>
+</section>
+<section id="mission" class="wrap section two-col">
+  <div><p class="eyebrow">01 / THE MISSION</p><h2>Learn the systems.<br><span class="muted">Feel the trade-offs.</span></h2></div>
+  <div class="body-copy"><p>What happens when engineering decisions compete for limited energy, time, and safety margins? ODYSSEY's documented LUNA-01 scenario models interconnected mission systems and the consequences of decisions during the approach of lunar night.</p><p>Its project architecture combines a simulation backend with a planned immersive Unreal Engine client. The recorded Earth Command slice has a seven-area level specification and a set of testable system behaviors.</p><p class="small-note">Project documentation distinguishes verified code, scenario fixtures, planned content, and features still awaiting runtime demonstration.</p></div>
+</section>
+<section id="experience" class="experience section">
+  <div class="wrap"><p class="eyebrow">02 / SCENARIO EXPLORER</p>
+    <div class="section-head"><h2>ONE FAILURE.<br><span class="muted">TWO RESPONSES.</span></h2><p>Explore one engineering decision documented in the Earth Command slice. This is a lightweight explanation of the logic, not a streamed Unreal game session.</p></div>
+    <div class="decision-grid">
+      <div class="decision-panel"><div class="panel-top"><span class="panel-index">MISSION SIMULATION / ILLUSTRATION</span><span class="pulse-icon" aria-hidden="true">●</span></div><h3>Power bus B incident</h3><p>Choose how the station handles a fault affecting power distribution. The documented backend evaluates different consequences depending on the order of actions.</p>
+      <div class="choice-group" role="group" aria-label="Choose incident response"><button type="button" class="choice" data-choice="repair" aria-pressed="false"><span>01</span><strong>Repair immediately</strong><span aria-hidden="true">↗</span></button><button type="button" class="choice" data-choice="shed" aria-pressed="false"><span>02</span><strong>Shed noncritical loads first</strong><span aria-hidden="true">↗</span></button></div></div>
+      <div class="result-panel" aria-live="polite"><div class="panel-top"><span class="panel-index">CONSEQUENCE READOUT</span><span class="result-indicator" id="indicator">AWAITING INPUT</span></div><div class="gauge" aria-hidden="true"><span id="gauge-fill"></span></div><h3 id="result-title">Make your decision.</h3><p id="result-body">Different choices reveal different engineering trade-offs. Both are legitimate paths through the documented scenario logic.</p><div class="result-foot">SOURCE / <a href="https://github.com/geniusa2009-stack/odyssey/blob/main/current/%D9%85%D8%B5%D8%A7%D8%AF%D8%B1%20%D8%A7%D9%84%D8%B9%D9%85%D9%84%20%D8%A7%D9%84%D9%85%D8%AD%D9%84%D9%8A%D8%A9/ODYSSEY-GAME/Docs/EARTH_COMMAND_GREYBOX.md" rel="noopener noreferrer" target="_blank">Earth Command design specification</a></div></div>
+    </div>
+  </div>
+</section>
+<section id="technology" class="wrap section">
+  <p class="eyebrow">03 / UNDER THE HOOD</p>
+  <div class="section-head"><h2>ENGINEERING,<br><span class="muted">NOT JUST A SCENE.</span></h2><p>The codebase documents a simulation-first approach, a versioned game protocol, and an Unreal integration layer.</p></div>
+  <div class="tech-grid"><article class="tech-card"><span>01 / SIMULATION</span><h3>Deterministic engine</h3><p>Replayable state transitions, mission resources, scenario parameters, and consequence tracing.</p></article><article class="tech-card"><span>02 / GAME PROTOCOL</span><h3>Server-authoritative state</h3><p>Versioned commands, persisted progress, and realtime event flows between simulation and client.</p></article><article class="tech-card"><span>03 / UNREAL</span><h3>Immersive client architecture</h3><p>Earth Command level specification, interaction systems, and Pixel Streaming 2 editor modules.</p></article></div>
+</section>
+<section id="demo" class="wrap section demo-section">
+  <div class="demo-panel"><div><p class="eyebrow">04 / LIVE EXPERIENCE</p><h2>THE BROWSER IS<br><span class="muted">THE DESTINATION.</span></h2><p id="demo-description">A playable cloud session has not been published yet. When a validated Unreal package is available, this section will link to the actual live experience.</p><div id="demo-actions" class="actions"><span class="soon">STREAMING DEMO / NOT YET LIVE</span></div></div><div id="video-area" class="video-area"><div class="video-placeholder"><span class="crosshair" aria-hidden="true">⊕</span><strong>MISSION FEED</strong><span>Preview media can be added without replacing the site</span></div></div></div>
+</section>
+<section id="resources" class="wrap section resources"><div><p class="eyebrow">05 / TRACEABLE SOURCES</p><h2>EXPLORE THE<br><span class="muted">PROJECT RECORD.</span></h2></div><div class="resource-list"><a href="https://github.com/geniusa2009-stack/odyssey" target="_blank" rel="noopener noreferrer"><span>01</span><strong>ODYSSEY source snapshot</strong><span aria-hidden="true">↗</span></a><a href="https://www.spaceappschallenge.org/" target="_blank" rel="noopener noreferrer"><span>02</span><strong>NASA Space Apps Challenge</strong><span aria-hidden="true">↗</span></a><a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/pixel-streaming-in-unreal-engine" target="_blank" rel="noopener noreferrer"><span>03</span><strong>Unreal Pixel Streaming reference</strong><span aria-hidden="true">↗</span></a></div></section>
+</main>
+<footer class="wrap footer"><span>ODYSSEY / SPACE EXPERIENCE</span><span>Educational project overview. NASA and Epic Games are not sponsors of this site.</span><span>2026</span></footer>
+</body></html>
