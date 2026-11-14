@@ -11,7 +11,8 @@
 		{ "Name": "OdysseyInteraction", "Type": "Runtime", "LoadingPhase": "Default" },
 		{ "Name": "OdysseyPlayer", "Type": "Runtime", "LoadingPhase": "Default" },
 		{ "Name": "OdysseyUI", "Type": "Runtime", "LoadingPhase": "Default" },
-		{ "Name": "OdysseyDebug", "Type": "Runtime", "LoadingPhase": "Default" }
+		{ "Name": "OdysseyDebug", "Type": "Runtime", "LoadingPhase": "Default" },
+		{ "Name": "OdysseySpace", "Type": "Runtime", "LoadingPhase": "Default" }
 	],
 	"Plugins": [
 		{ "Name": "OdysseyAPI", "Enabled": true },

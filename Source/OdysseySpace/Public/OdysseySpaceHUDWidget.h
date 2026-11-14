@@ -1,0 +1,24 @@
+// Code-drawn front-end / navigation HUD for the space experience: brand badge, main menu,
+// transfer planner (Earth / Moon / Mars), transfer telemetry, arrival banner and fades.
+// Restrained ODYSSEY styling: graphite panels, white type, ion-blue accents only where meaningful.
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Blueprint/UserWidget.h"
+
+#include "OdysseySpaceHUDWidget.generated.h"
+
+class AOdysseySpacePlayerController;
+
+UCLASS()
+class ODYSSEYSPACE_API UOdysseySpaceHUDWidget : public UUserWidget
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(Transient) TObjectPtr<AOdysseySpacePlayerController> Owner;
+
+protected:
+	virtual int32 NativePaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect,
+		FSlateWindowElementList& OutDrawElements, int32 LayerId, const FWidgetStyle& InWidgetStyle, bool bParentEnabled) const override;
+};

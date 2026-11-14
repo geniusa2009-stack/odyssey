@@ -10,6 +10,6 @@ public class OdysseyEditorTarget : TargetRules
 		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 		ExtraModuleNames.AddRange(new string[] {
 			"OdysseyCore", "OdysseyBackend", "OdysseyRealtime", "OdysseyWorld",
-			"OdysseyInteraction", "OdysseyPlayer", "OdysseyUI", "OdysseyDebug" });
+			"OdysseyInteraction", "OdysseyPlayer", "OdysseyUI", "OdysseyDebug", "OdysseySpace" });
 	}
 }
