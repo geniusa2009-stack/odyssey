@@ -9,6 +9,7 @@ Work is confined to `feature/android-judge-build`, based on `feature/odyssey-spa
 - Local NDK metadata matches 27.2.12479018; Java 17.0.20.1 is installed. Complete Android SDK/build-tools/sdkmanager are missing locally. None was used to compile an APK.
 - Installed official Google SDK Platform Tools **37.0.1** in the task workspace, without a global install. `adb devices -l`: **no connected device**.
 - GitHub repository runner inventory: **zero self-hosted runners**. Repository artifact inventory: **zero artifacts** at inspection.
+- GitHub CPU workflow [43609231395](https://github.com/geniusa2009-stack/odyssey/actions/runs/43609231395) passed static/config and protocol checks; both Android build jobs were skipped, so this does not establish APK build success.
 - CPU protocol suite: **26/26 cases, 959 checks passed** locally.
 - CPU project/config checks passed; desktop default config, source art and content/maps remain unchanged against the base commit.
 - Python helpers parse; the build helper refuses macOS before invoking Unreal.
@@ -25,7 +26,7 @@ Explicit plugin descriptor inspection is recorded in `ANDROID_PLUGIN_AUDIT.json`
 
 ## Build on a provisioned Windows/Linux x86_64 machine
 
-Do not run Unreal, cook shaders, or rebuild the engine on the 8 GB Mac. Supply a licensed matching native UE 5.8.4 installation on a builder with at least 80 GiB free and preferably 32+ GB RAM. The macOS editor binary cannot serve as a native Windows/Linux editor/cooker.
+Do not run Unreal, cook shaders, or rebuild the engine on the 8 GB Mac. Supply a licensed matching native UE 5.8.4 installation on a builder with at least 80 GiB free and preferably 32+ GB RAM, plus Python 3.11 or newer. The macOS editor binary cannot serve as a native Windows/Linux editor/cooker.
 
 ```sh
 git clone --single-branch --branch feature/android-judge-build https://github.com/geniusa2009-stack/odyssey.git
@@ -75,7 +76,7 @@ This only proves installation/activity startup/process presence where its result
 
 ## Tooling report
 
-- Existing: UE 5.8.4 source/config and built Mac editor metadata (inspected only; Epic license); project UMG/Slate, Enhanced Input and runtime plugins (existing engine dependencies); Git/Git LFS; Python 3; Clang native protocol tests.
+- Existing: UE 5.8.4 source/config and built Mac editor metadata (inspected only; Epic license); project UMG/Slate, Enhanced Input and runtime plugins (existing engine dependencies); Git 2.50.1 / Git LFS 3.8.1; Python 3.13.5; Apple Clang 17.0.0 for native protocol tests.
 - Installed: Google Android SDK Platform Tools 37.0.1 from `https://dl.google.com/android/repository/platform-tools-latest-darwin.zip`, for ADB device detection only. SDK license/third-party notices are included in its package. It is a local development tool, not a shipped game dependency.
 - No newly enabled or installed Unreal plugin. AndroidFileServer is excluded from this Android target, while desktop defaults remain available.
 - Build signing keys, SDK/NDK/JDK, ADB, editor tooling, captures, test receipts and source-art folders do not belong in the judge APK. CI artifacts should contain only intended APK/checksum/receipts, never signing keystores or credentials. Do not ship this untested Development candidate as a production release.

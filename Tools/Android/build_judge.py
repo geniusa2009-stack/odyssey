@@ -29,6 +29,8 @@ def main():
     # Enforce the user's 8 GB Mac restriction before any Unreal/toolchain executable is invoked.
     if platform.system() not in ('Windows', 'Linux') or platform.machine().lower() not in ('amd64', 'x86_64'):
         sys.exit('REFUSED: use a provisioned Windows/Linux x86_64 Unreal builder. No local Mac Unreal build is permitted.')
+    if sys.version_info < (3, 11):
+        sys.exit('Use Python 3.11 or newer on the remote builder.')
     if args.max_actions < 1 or args.max_actions > 8:
         sys.exit('--max-actions must be 1..8')
     from check_project import check
@@ -96,7 +98,14 @@ def main():
     with zipfile.ZipFile(apk) as archive:
         names = archive.namelist()
         assert 'AndroidManifest.xml' in names
-        assert any(n.startswith('assets/') and n.endswith(('.pak', '.ucas')) for n in names), 'Missing embedded game content'
+        # UEDeployAndroid embeds its ZIP-format OBB as assets/main.obb.png in a single APK.
+        # Direct pak/IoStore payloads are also accepted; an external OBB is rejected above.
+        content = [n for n in names if n.startswith('assets/') and n.endswith(('.pak', '.ucas'))]
+        if 'assets/main.obb.png' in names:
+            with archive.open('assets/main.obb.png') as embedded:
+                with zipfile.ZipFile(embedded) as data:
+                    content.extend(n for n in data.namelist() if n.endswith(('.pak', '.ucas')))
+        assert content, 'Missing embedded game content'
         assert any(n.startswith('lib/arm64-v8a/') and n.endswith('.so') for n in names), 'Missing ARM64 game library'
         assert not any(n.startswith(('lib/x86/', 'lib/x86_64/', 'lib/armeabi-v7a/')) for n in names), 'Unexpected non-ARM64 ABI'
         for name in names:

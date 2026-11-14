@@ -45,7 +45,13 @@ jobs:
         if: always()
         with:
           name: ODYSSEY-Judge-Android-Windows-candidate
-          path: Artifacts/AndroidJudge
+          path: |
+            Artifacts/AndroidJudge/*.apk
+            Artifacts/AndroidJudge/*.sha256.txt
+            Artifacts/AndroidJudge/build-receipt.json
+            Artifacts/AndroidJudge/apk-signature.txt
+            Artifacts/AndroidJudge/apk-badging.txt
+            Artifacts/AndroidJudge/ANDROID_JUDGE_INSTALL.md
           if-no-files-found: ignore
           retention-days: 30
   android-linux:
@@ -66,6 +72,12 @@ jobs:
         if: always()
         with:
           name: ODYSSEY-Judge-Android-Linux-candidate
-          path: Artifacts/AndroidJudge
+          path: |
+            Artifacts/AndroidJudge/*.apk
+            Artifacts/AndroidJudge/*.sha256.txt
+            Artifacts/AndroidJudge/build-receipt.json
+            Artifacts/AndroidJudge/apk-signature.txt
+            Artifacts/AndroidJudge/apk-badging.txt
+            Artifacts/AndroidJudge/ANDROID_JUDGE_INSTALL.md
           if-no-files-found: ignore
           retention-days: 30
