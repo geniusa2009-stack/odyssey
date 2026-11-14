@@ -47,7 +47,7 @@ for entry in report:
     a.set_editor_property('tags',[unreal.Name('OdysseyProductionVisual')])
 for label,text,loc,yaw in [
  ('ART_Label_Distribution','EC-04  /  ELECTRICAL DISTRIBUTION',(2160,-1360,441),90),
- ('ART_Label_Coolant','COOLANT  /  SUPPLY + RETURN',(1850,-1040,213),0),
+ ('ART_Label_Coolant','COOLANT  /  SUPPLY + RETURN',(1854,-1040,213),0),
  ('ART_Label_Inspection','SERVICE ACCESS  /  02',(2960,-1354,173),90),
  ('ART_Label_PressureHatch','PRESSURE LINER  /  INSPECTION',(1848,-730,174),0)]:
     a=actors.get(label)
