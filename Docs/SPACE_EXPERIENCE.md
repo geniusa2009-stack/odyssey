@@ -69,3 +69,25 @@ and telemetry use real distances (384,400 km, ~225 M km) and mission times (3.1 
 * `SM_ODY_StationSlidingDoor` is imported but not placed: it needs an open/close door actor so the
   Engineering traversal stays clear.
 * Mission Control and Training rooms are still greybox shells around the new hero props.
+
+## Polish pass (2026-11-14, second session)
+* **First launch:** instead of a black hold, an ODYSSEY preparation screen shows the real remaining
+  shader-compile job count (from the shader compiler), an indeterminate progress sweep and elapsed time;
+  the intro logo starts when compilation settles. Later launches skip straight to the logo.
+* **Quality presets:** `Q` / gamepad Select cycles Low / Medium / High / Epic (GameUserSettings).
+* **Earth:** hero option — albedo and clouds at 8K (`--earth-size 8192`), normal + masks at 4K.
+  Textures are in the World LOD group, so Low / Medium scalability stream lower mips.
+* **Moon:** 4K maps; craters with subtle irregular rims, central peaks, ejecta blankets, ray craters
+  and a secondary crater field; highland albedo variation.
+* **Mars:** bright dust provinces and wind streaks over the existing canyon / volcano / basin features.
+* **OTV-1 Meridian (hero):** docking ring with guide petals, framed crew windows, gold MLI blankets,
+  hinged twin radiator panels per wing (navigation lights on the outer tips), tank seams, thrust skirt,
+  gimbal actuators, tail strobe and a printed ODYSSEY / OTV-1 MERIDIAN marking curved to the tank.
+* **Flow:** Earth Command → F10 / gamepad Start returns to orbit (front end opens at the menu).
+
+### Performance (1600×900, Apple M3 / 8 GB, editor binary in -game, default scalability)
+FPS chart over the full capture tour: average GPU 22.6 ms, render thread 40.9 ms, game thread 44.8 ms
+(averages include first-use streaming / shader hitches; steady flight frames 6–35 ms). Process memory
+≈ 6 GB in the editor binary; a cooked Development build would be considerably lower. Biggest costs:
+Lumen on the space map (could be disabled there — space has no bounce light worth computing), the
+8K Earth maps, and the 147k-triangle planet sphere (×3).
