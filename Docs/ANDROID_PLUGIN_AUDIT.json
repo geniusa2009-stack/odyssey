@@ -1,0 +1,201 @@
+[
+  {
+    "name": "EnhancedInput",
+    "version": "1.0",
+    "project_editor_only": false,
+    "supported_target_platforms": "no explicit restriction",
+    "android_excluded_by_project": false,
+    "modules": [
+      {
+        "name": "EnhancedInput",
+        "type": "Runtime",
+        "platform_allow": null
+      },
+      {
+        "name": "InputBlueprintNodes",
+        "type": "UncookedOnly",
+        "platform_allow": null
+      },
+      {
+        "name": "InputEditor",
+        "type": "Editor",
+        "platform_allow": null
+      }
+    ]
+  },
+  {
+    "name": "EditorScriptingUtilities",
+    "version": "1.0",
+    "project_editor_only": true,
+    "supported_target_platforms": "no explicit restriction",
+    "android_excluded_by_project": false,
+    "modules": [
+      {
+        "name": "EditorScriptingUtilities",
+        "type": "Editor",
+        "platform_allow": null
+      }
+    ]
+  },
+  {
+    "name": "ModelingToolsEditorMode",
+    "version": "0.1",
+    "project_editor_only": true,
+    "supported_target_platforms": "no explicit restriction",
+    "android_excluded_by_project": false,
+    "modules": [
+      {
+        "name": "ModelingToolsEditorMode",
+        "type": "Editor",
+        "platform_allow": null
+      }
+    ]
+  },
+  {
+    "name": "AndroidFileServer",
+    "version": "1.0",
+    "project_editor_only": false,
+    "supported_target_platforms": "no explicit restriction",
+    "android_excluded_by_project": true,
+    "modules": [
+      {
+        "name": "AndroidFileServer",
+        "type": "Runtime",
+        "platform_allow": [
+          "Android",
+          "Win64",
+          "Mac",
+          "Linux"
+        ]
+      },
+      {
+        "name": "AndroidFileServerEditor",
+        "type": "Editor",
+        "platform_allow": [
+          "Win64",
+          "Mac",
+          "Linux"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "SmartObjects",
+    "version": "0.1",
+    "project_editor_only": false,
+    "supported_target_platforms": "no explicit restriction",
+    "android_excluded_by_project": false,
+    "modules": [
+      {
+        "name": "SmartObjectsModule",
+        "type": "Runtime",
+        "platform_allow": null
+      },
+      {
+        "name": "SmartObjectsTestSuite",
+        "type": "UncookedOnly",
+        "platform_allow": null
+      },
+      {
+        "name": "SmartObjectsEditorModule",
+        "type": "Editor",
+        "platform_allow": null
+      }
+    ]
+  },
+  {
+    "name": "GameplayAbilities",
+    "version": "1.0",
+    "project_editor_only": false,
+    "supported_target_platforms": "no explicit restriction",
+    "android_excluded_by_project": false,
+    "modules": [
+      {
+        "name": "GameplayAbilities",
+        "type": "Runtime",
+        "platform_allow": null
+      },
+      {
+        "name": "GameplayAbilitiesEditor",
+        "type": "UncookedOnly",
+        "platform_allow": null
+      }
+    ]
+  },
+  {
+    "name": "StateTree",
+    "version": "0.1",
+    "project_editor_only": false,
+    "supported_target_platforms": "no explicit restriction",
+    "android_excluded_by_project": false,
+    "modules": [
+      {
+        "name": "StateTreeModule",
+        "type": "Runtime",
+        "platform_allow": null
+      },
+      {
+        "name": "StateTreeTestSuite",
+        "type": "UncookedOnly",
+        "platform_allow": null
+      },
+      {
+        "name": "StateTreeDeveloper",
+        "type": "DeveloperTool",
+        "platform_allow": null
+      },
+      {
+        "name": "StateTreeEditorModule",
+        "type": "UncookedOnly",
+        "platform_allow": null
+      }
+    ]
+  },
+  {
+    "name": "GameplayStateTree",
+    "version": "1.0",
+    "project_editor_only": false,
+    "supported_target_platforms": "no explicit restriction",
+    "android_excluded_by_project": false,
+    "modules": [
+      {
+        "name": "GameplayStateTreeModule",
+        "type": "Runtime",
+        "platform_allow": null
+      }
+    ]
+  },
+  {
+    "name": "PythonScriptPlugin",
+    "version": "1.0",
+    "project_editor_only": true,
+    "supported_target_platforms": "no explicit restriction",
+    "android_excluded_by_project": false,
+    "modules": [
+      {
+        "name": "PythonScriptPluginPreload",
+        "type": "Runtime",
+        "platform_allow": null
+      },
+      {
+        "name": "PythonScriptPlugin",
+        "type": "UncookedOnly",
+        "platform_allow": null
+      }
+    ]
+  },
+  {
+    "name": "OdysseyAPI",
+    "version": "0.6.0",
+    "project_editor_only": false,
+    "supported_target_platforms": "no explicit restriction",
+    "android_excluded_by_project": false,
+    "modules": [
+      {
+        "name": "OdysseyAPI",
+        "type": "Runtime",
+        "platform_allow": null
+      }
+    ]
+  }
+]
