@@ -180,6 +180,10 @@ void AOdysseySpacePlayerController::PlayerTick(float DeltaTime)
 				FlowTime = 0.f;
 			}
 		}
+		if (bCapture)
+		{
+			TickCapture(DeltaTime);
+		}
 		return;
 	}
 	if (Flow == EOdysseySpaceFlow::Intro && (!Logo || Logo->IsFinished() || Logo->GetSceneReveal() >= 0.999f))
@@ -394,6 +398,7 @@ void AOdysseySpacePlayerController::BuildCaptureTour()
 	auto Progress = [this](float U) { return [this, U]() { return Director && Director->IsTraveling() && Director->GetTelemetry().Progress >= U; }; };
 	auto Arrived = [this](float Seconds) { return [this, Seconds]() { return Director && !Director->IsTraveling() && Director->GetTelemetry().Phase == EOdysseyTransitPhase::Parked && Director->SinceArrival() >= Seconds; }; };
 
+	Capture.Add({[this]() { return !bAwaitingShaders || ShaderWait > 3.f; }, Nothing, TEXT("SPACE_00_preparation")});
 	Capture.Add({[this]() { return Logo && Logo->GetElapsed() >= 2.15f; }, Nothing, TEXT("SPACE_01_logo_draw_on")});
 	Capture.Add({[this]() { return Logo && Logo->GetElapsed() >= 4.6f; }, Nothing, TEXT("SPACE_02_logo_lockup")});
 	Capture.Add({[this]() { return Flow == EOdysseySpaceFlow::Menu && FlowTime >= 3.5f; }, Nothing, TEXT("SPACE_03_menu_earth")});

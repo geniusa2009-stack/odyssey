@@ -150,7 +150,7 @@ def area_quantile(values, lat, q):
 
 
 # ---------------------------------------------------------------- Earth
-def earth(size):
+def earth(size, aux=None):
     W, H = size, size // 2
     n1, n2, n3, n4 = Noise3(11), Noise3(23), Noise3(37), Noise3(41)
 
@@ -215,8 +215,12 @@ def earth(size):
 
     data = chunked(W, H, surface, 6)
     save("T_Earth_Albedo", data[..., :3])
-    save("T_Earth_Masks", data[..., 3:6])
-    save("T_Earth_Normal", normal_from_height(data[..., 5], 9.0 * W / 4096.0))
+    masks, nrm = data[..., 3:6], normal_from_height(data[..., 5], 9.0 * W / 4096.0)
+    if aux and aux < W:  # detail maps at the lower resolution keep memory in check
+        masks = np.asarray(Image.fromarray((np.clip(masks, 0, 1) * 255).astype(np.uint8)).resize((aux, aux // 2), Image.LANCZOS), np.float32) / 255.0
+        nrm = np.asarray(Image.fromarray((np.clip(nrm, 0, 1) * 255).astype(np.uint8)).resize((aux, aux // 2), Image.LANCZOS), np.float32) / 255.0
+    save("T_Earth_Masks", masks)
+    save("T_Earth_Normal", nrm)
     del data
 
     def clouds(p, lat, lon):
@@ -259,16 +263,22 @@ def stamp_craters(hgt, alb, seed, count, rmin, rmax, depth, bright, rays_fractio
         if not sel.any():
             continue
         dd = d[sel]
+        # irregular rim: low-order angular harmonics so no two craters share a perfect circle
+        ang = np.arctan2(p[1][sel] * dx - p[0][sel] * dy, p[2][sel] - cosd[sel] * dz)
+        k1, k2 = 6 + int(age * 97) % 5, 13 + int(age * 53) % 7
+        dd = dd * (1.0 + 0.018 * np.sin(ang * k1 + age * 11.0) + 0.01 * np.sin(ang * k2 + age * 5.0))
         fresh = 0.35 + 0.65 * age
         bowl = np.where(dd < 1.0, -(1.0 - dd * dd), 0.0) * depth * r * 40.0
         rim = np.exp(-((dd - 1.0) / 0.18) ** 2) * depth * r * 18.0
         if r > rmax * 0.45:  # large craters: flat floor + central peak
             bowl = np.maximum(bowl, -depth * r * 26.0) + np.exp(-(dd / 0.16) ** 2) * depth * r * 14.0
+        elif r > rmax * 0.18:  # mid-size craters: small central peak
+            bowl = bowl + np.exp(-(dd / 0.12) ** 2) * depth * r * 7.0
         hgt[r0:r1][sel] += (bowl + rim) * fresh
         a = alb[r0:r1]
-        shade = np.where(dd < 1.0, -0.05, 0.0) + np.exp(-((dd - 1.0) / 0.25) ** 2) * bright * fresh
+        shade = np.where(dd < 1.0, -0.05, 0.0) + np.exp(-((dd - 1.0) / 0.25) ** 2) * bright * fresh \
+            + np.where(dd > 1.0, np.exp(-(dd - 1.0) / 0.7), 0.0) * bright * 0.45 * fresh
         if age > 1.0 - rays_fraction:
-            ang = np.arctan2(p[1][sel] * dx - p[0][sel] * dy, p[2][sel] - cosd[sel] * dz)
             rays = (np.cos(ang * (7 + int(age * 9))) * 0.5 + 0.5) ** 6
             shade += rays * np.exp(-np.maximum(dd - 1.0, 0) / 1.2) * bright * 1.4 * (dd > 0.9)
         a[sel] = a[sel] + shade[:, None]
@@ -294,6 +304,8 @@ def moon(size):
     alb, hgt = data[..., :3].copy(), data[..., 3].copy()
     del data
     stamp_craters(hgt, alb, 7, 1400, 0.003, 0.12, 0.06, 0.045, 0.03)
+    stamp_craters(hgt, alb, 17, 2600, 0.0015, 0.006, 0.05, 0.03, 0.0)  # secondary field
+    alb *= (0.94 + 0.12 * chunked(W, H, lambda p, la, lo: (fbm(n2, p, 9.0, 5) * 0.5 + 0.5)[..., None], 1))
     hgt += 0.05 * chunked(W, H, lambda p, la, lo: fbm(n1, p, 40.0, 4)[..., None], 1)[..., 0]
     save("T_Moon_Albedo", alb)
     save("T_Moon_Normal", normal_from_height(hgt * 0.6, 14.0 * W / 4096.0))
@@ -337,6 +349,10 @@ def mars(size):
         c = mix(bright, mid, smooth(0.2, 0.8, dichotomy * 0.7 + fbm(n4, p, 4.0, 5) * 0.5 + 0.2))
         c = mix(c, darkc, dark * 0.85)
         c = c * (0.9 + 0.18 * fbm(n3, p, 18.0, 4)[..., None])
+        dust = smooth(0.15, 0.45, fbm(n4, p, 1.1, 4, offset=(3.0, 8.0, 1.0)))
+        c = mix(c, col("#D79766"), dust * 0.45)
+        streak = ridged(n2, (p[0] * 3.0, p[1] * 3.0, p[2] * 0.6), 6.0, 4)
+        c = c * (0.94 + 0.1 * streak[..., None])
         h = dichotomy * 0.35 + fbm(n1, p, 3.0, 7) * 0.2
 
         # Tharsis-like rise with three shield volcanoes and one giant
@@ -449,13 +465,14 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--size", type=int, default=4096)
     ap.add_argument("--stars-size", type=int, default=8192)
+    ap.add_argument("--earth-size", type=int, default=0, help="hero Earth albedo/clouds size (e.g. 8192); 0 = --size")
     ap.add_argument("--only", default="earth,moon,mars,stars")
     a = ap.parse_args()
     jobs = a.only.split(",")
     if "earth" in jobs:
-        earth(a.size)
+        earth(a.earth_size or a.size, aux=a.size if a.earth_size else None)
     if "moon" in jobs:
-        moon(a.size // 2)
+        moon(a.size)
     if "mars" in jobs:
         mars(a.size)
     if "stars" in jobs:
