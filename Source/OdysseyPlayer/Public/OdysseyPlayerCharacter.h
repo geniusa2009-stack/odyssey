@@ -47,6 +47,10 @@ public:
 
 	// Place the pawn at a semantic anchor (used by the game mode; no backend traffic).
 	void PlaceAt(const FTransform& Anchor);
+	// Android touch surfaces call the same movement and physical interaction paths as desktop.
+	void MobileMove(FVector2D Axis);
+	void MobileLook(FVector2D Axis);
+	void MobileAction(int32 Index);
 
 protected:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;

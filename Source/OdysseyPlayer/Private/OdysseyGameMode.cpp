@@ -19,8 +19,12 @@
 #include "UnrealClient.h"
 #include "Engine/World.h"
 #include "OdysseyBackendSubsystem.h"
+#include "OdysseyBackendSettings.h"
 #include "OdysseyCore.h"
 #include "OdysseyHUDWidget.h"
+#if PLATFORM_ANDROID
+#include "OdysseyMobileControls.h"
+#endif
 #include "OdysseyPlayerCharacter.h"
 #include "OdysseySemanticAnchor.h"
 #include "OdysseyWorldSubsystem.h"
@@ -34,6 +38,17 @@ AOdysseyGameMode::AOdysseyGameMode()
 void AOdysseyGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+	if (GetDefault<UOdysseyBackendSettings>()->IsAndroidJudgeOffline())
+	{
+		// The existing PlayerStart and local door/hologram presentation remain authoritative here.
+		// Do not claim a backend session or synthesize incident outcomes.
+		if (APlayerController* PC = GetWorld()->GetFirstPlayerController())
+		{
+			if (APawn* Pawn = PC->GetPawn()) Pawn->EnableInput(PC);
+		}
+		bPlaced = true;
+		return;
+	}
 	if (UOdysseyBackendSubsystem* B = UOdysseyBackendSubsystem::Get(this))
 	{
 		B->OnSessionReady.AddDynamic(this, &AOdysseyGameMode::HandleSessionReady);
@@ -95,6 +110,9 @@ void AOdysseyPlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 	if (InputComponent)
 	{
+#if PLATFORM_ANDROID
+		InputComponent->BindKey(EKeys::Android_Back, IE_Pressed, this, &AOdysseyPlayerController::ReturnToOrbit);
+#endif
 		InputComponent->BindKey(EKeys::F10, IE_Pressed, this, &AOdysseyPlayerController::ReturnToOrbit);
 		InputComponent->BindKey(EKeys::Gamepad_Special_Right, IE_Pressed, this, &AOdysseyPlayerController::ReturnToOrbit);
 	}
@@ -217,6 +235,29 @@ void AOdysseyPlayerController::BeginPlay()
 		ConsoleCommand(TEXT("Odyssey.Debug.Overlay 0"));
 		ConsoleCommand(TEXT("StartFPSChart"));
 	}
+#if PLATFORM_ANDROID
+	if (IsLocalController())
+	{
+		UOdysseyMobileControls* Touch = CreateWidget<UOdysseyMobileControls>(this);
+		Touch->bStation = true;
+		Touch->OnMove = [this](FVector2D V) { if (auto* P = Cast<AOdysseyPlayerCharacter>(GetPawn())) P->MobileMove(V); };
+		Touch->OnLook = [this](FVector2D V) { if (auto* P = Cast<AOdysseyPlayerCharacter>(GetPawn())) P->MobileLook(V); };
+		Touch->OnAction = [this](int32 I) {
+			if (I == 3) ReturnToOrbit();
+			else if (auto* P = Cast<AOdysseyPlayerCharacter>(GetPawn())) P->MobileAction(I);
+		};
+		Touch->AddToViewport(20);
+		Touch->SetHeading(TEXT("ODYSSEY / EARTH COMMAND"), TEXT("JUDGE DEMO / OFFLINE EXPLORATION\nExplore the station. Live incident decisions require a connected session."));
+		Touch->SetAction(0, TEXT("USE"));
+		Touch->SetAction(1, TEXT("NEXT"));
+		Touch->SetAction(2, TEXT("CLOSE"));
+		Touch->SetAction(3, TEXT("ORBIT"));
+		MobileControls = Touch;
+		bEnableTouchEvents = true;
+		SetInputMode(FInputModeGameAndUI());
+		ConsoleCommand(TEXT("Odyssey.Debug.Overlay 0"));
+	}
+#else
 	if (IsLocalController() && HUDClass)
 	{
 		HUD = CreateWidget<UOdysseyHUDWidget>(this, HUDClass);
@@ -229,4 +270,5 @@ void AOdysseyPlayerController::BeginPlay()
 			}
 		}
 	}
+#endif
 }

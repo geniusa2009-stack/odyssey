@@ -82,6 +82,9 @@ protected:
 
 private:
 	void SetFlow(EOdysseySpaceFlow NewFlow);
+	void UpdateMobileControls();
+	float MobileUpdateTime = 0.f;
+	TWeakObjectPtr<class UUserWidget> MobileControls;
 	UFUNCTION() void HandleArrived(int32 BodyIndex);
 
 	// input trampolines

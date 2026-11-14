@@ -9,6 +9,7 @@ public class OdysseySpace : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		CppStandard = CppStandardVersion.Cpp20;
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG" });
+		if (Target.Platform == UnrealTargetPlatform.Android) PrivateDependencyModuleNames.Add("OdysseyUI");
 		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore", "RHI" });  // RHI: GPU frame time for the capture-tour profile
 	}
 }

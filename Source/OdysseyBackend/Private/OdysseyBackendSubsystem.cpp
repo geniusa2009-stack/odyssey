@@ -119,6 +119,10 @@ void UOdysseyBackendSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 	Super::Initialize(Collection);
 	Registry = Collection.InitializeDependency<UOdysseySemanticRegistry>();
 	Router = NewObject<UOdysseyEventRouter>(this);
+	if (GetDefault<UOdysseyBackendSettings>()->IsAndroidJudgeOffline())
+	{
+		return; // No HTTP, WebSocket, credentials or retries in the isolated Android exploration build.
+	}
 	TickerHandle = FTSTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateUObject(this, &UOdysseyBackendSubsystem::Tick), 0.0f);
 	if (GetDefault<UOdysseyBackendSettings>()->bAutoStartSession)
 	{
@@ -170,6 +174,10 @@ std::string UOdysseyBackendSubsystem::NewUuid()
 void UOdysseyBackendSubsystem::StartSession()
 {
 	const UOdysseyBackendSettings* Settings = GetDefault<UOdysseyBackendSettings>();
+	if (Settings->IsAndroidJudgeOffline())
+	{
+		return;
+	}
 	EnvName = Settings->GetActiveEnvironmentName();
 	FString Error;
 	if (!Settings->ResolveActiveEnvironment(Env, Error))

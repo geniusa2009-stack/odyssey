@@ -55,4 +55,5 @@ protected:
 
 private:
 	UPROPERTY() TObjectPtr<class UOdysseyHUDWidget> HUD;
+	TWeakObjectPtr<class UUserWidget> MobileControls;
 };

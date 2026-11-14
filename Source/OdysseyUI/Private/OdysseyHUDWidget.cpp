@@ -5,6 +5,7 @@
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
 #include "OdysseyBackendSubsystem.h"
+#include "OdysseyBackendSettings.h"
 #include "OdysseyEventRouter.h"
 #include "OdysseyInteractableComponent.h"
 #include "OdysseyInteractorComponent.h"
@@ -49,7 +50,10 @@ FText UOdysseyHUDWidget::PromptText() const
 	}
 	switch (F->GetPromptState())
 	{
-	case EOdysseyPromptState::Offline: return NSLOCTEXT("Odyssey", "PromptOffline", "Station link offline");
+	case EOdysseyPromptState::Offline:
+		if (GetDefault<UOdysseyBackendSettings>()->IsAndroidJudgeOffline())
+			return NSLOCTEXT("Odyssey", "JudgeLocalPrompt", "Explore equipment — live station actions require a connected session");
+		return NSLOCTEXT("Odyssey", "PromptOffline", "Station link offline");
 	case EOdysseyPromptState::Pending: return NSLOCTEXT("Odyssey", "PromptPending", "…");
 	case EOdysseyPromptState::Refreshing: return NSLOCTEXT("Odyssey", "PromptRefreshing", "Updating");
 	default: return F->PromptText;
@@ -58,6 +62,14 @@ FText UOdysseyHUDWidget::PromptText() const
 
 void UOdysseyHUDWidget::Refresh_Implementation()
 {
+	if (GetDefault<UOdysseyBackendSettings>()->IsAndroidJudgeOffline())
+	{
+		if (ConnectionState) ConnectionState->SetText(NSLOCTEXT("Odyssey", "JudgeOffline", "JUDGE DEMO / OFFLINE EXPLORATION"));
+		if (MissionContext) MissionContext->SetText(NSLOCTEXT("Odyssey", "JudgeExplore", "Earth Command — explore the station"));
+		if (CriticalWarning) CriticalWarning->SetText(FText::GetEmpty());
+		if (ObjectiveCue) ObjectiveCue->SetText(NSLOCTEXT("Odyssey", "JudgeLimits", "Live incident decisions are unavailable in this offline build"));
+		return;
+	}
 	const UOdysseyBackendSubsystem* B = UOdysseyBackendSubsystem::Get(this);
 	if (!B)
 	{

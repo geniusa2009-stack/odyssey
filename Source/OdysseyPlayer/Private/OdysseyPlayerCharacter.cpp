@@ -166,3 +166,13 @@ void AOdysseyPlayerCharacter::PlaceAt(const FTransform& Anchor)
 		Controller->SetControlRotation(FRotator(-10.f, Anchor.Rotator().Yaw, 0.f));
 	}
 }
+
+void AOdysseyPlayerCharacter::MobileMove(FVector2D Axis) { Move(FInputActionValue(Axis)); }
+void AOdysseyPlayerCharacter::MobileLook(FVector2D Axis) { Look(FInputActionValue(Axis)); }
+void AOdysseyPlayerCharacter::MobileAction(int32 Index)
+{
+	const FInputActionValue Empty;
+	if (Index == 0) Interact(Empty);
+	else if (Index == 1) Cycle(Empty);
+	else if (Index == 2) Back(Empty);
+}

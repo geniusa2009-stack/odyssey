@@ -17,6 +17,9 @@
 #include "OdysseyLogoWidget.h"
 #include "OdysseySpace.h"
 #include "OdysseySpaceHUDWidget.h"
+#if PLATFORM_ANDROID
+#include "OdysseyMobileControls.h"
+#endif
 #include "OdysseyTransitDirector.h"
 #include "ShaderCompiler.h"
 #include "UnrealClient.h"
@@ -87,7 +90,34 @@ void AOdysseySpacePlayerController::BeginPlay()
 			Logo->AddToViewport(10);
 		}
 	}
+#if PLATFORM_ANDROID
+	if (IsLocalController())
+	{
+		if (HUD) HUD->SetVisibility(ESlateVisibility::Collapsed);
+		UOdysseyMobileControls* Touch = CreateWidget<UOdysseyMobileControls>(this);
+		Touch->OnAction = [this](int32 I) {
+			if (Flow == EOdysseySpaceFlow::Menu)
+			{
+				if (I < NumMenuItems) { MenuIndex = I; Confirm(); }
+			}
+			else if (Flow == EOdysseySpaceFlow::Navigation)
+			{
+				if (I < 3) SelectBody(I);
+				else if (I == 3) Confirm();
+				else if (I == 4) CycleCamera();
+				else if (I == 5) Descend();
+				else if (I == 6) Back();
+			}
+		};
+		Touch->AddToViewport(20);
+		Touch->SetVisibility(ESlateVisibility::Collapsed);
+		MobileControls = Touch;
+		bEnableTouchEvents = true;
+	}
+	SetInputMode(FInputModeGameAndUI());
+#else
 	SetInputMode(FInputModeGameOnly());
+#endif
 	// the development diagnostics overlay belongs to the station; the space front end stays clean
 	ConsoleCommand(TEXT("Odyssey.Debug.Overlay 0"));
 
@@ -127,6 +157,9 @@ void AOdysseySpacePlayerController::SetupInputComponent()
 	InputComponent->BindKey(EKeys::SpaceBar, IE_Pressed, this, &AOdysseySpacePlayerController::OnConfirm);
 	InputComponent->BindKey(EKeys::Gamepad_FaceButton_Bottom, IE_Pressed, this, &AOdysseySpacePlayerController::OnConfirm);
 	InputComponent->BindKey(EKeys::LeftMouseButton, IE_Pressed, this, &AOdysseySpacePlayerController::OnConfirm);
+#if PLATFORM_ANDROID
+	InputComponent->BindKey(EKeys::Android_Back, IE_Pressed, this, &AOdysseySpacePlayerController::OnBack);
+#endif
 	InputComponent->BindKey(EKeys::Escape, IE_Pressed, this, &AOdysseySpacePlayerController::OnBack);
 	InputComponent->BindKey(EKeys::BackSpace, IE_Pressed, this, &AOdysseySpacePlayerController::OnBack);
 	InputComponent->BindKey(EKeys::Gamepad_FaceButton_Right, IE_Pressed, this, &AOdysseySpacePlayerController::OnBack);
@@ -154,6 +187,8 @@ void AOdysseySpacePlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 	FlowTime += DeltaTime;
+	MobileUpdateTime += DeltaTime;
+	if (MobileUpdateTime >= 0.15f) { MobileUpdateTime = 0.f; UpdateMobileControls(); }
 	if (bAwaitingShaders)
 	{
 		// first launch compiles shaders on demand: keep the screen black until compilation settles
@@ -197,7 +232,9 @@ void AOdysseySpacePlayerController::PlayerTick(float DeltaTime)
 		{
 			bLevelOpened = true;
 			UE_LOG(LogOdysseySpace, Log, TEXT("opening %s"), *EarthCommandMap);
+#if !PLATFORM_ANDROID
 			ConsoleCommand(TEXT("Odyssey.Debug.Overlay 1"));
+#endif
 			UGameplayStatics::OpenLevel(this, FName(*EarthCommandMap));
 		}
 	}
@@ -465,4 +502,38 @@ void AOdysseySpacePlayerController::TickCapture(float Dt)
 	}
 	++CaptureStep;
 	StepClock = 0.f;
+}
+
+void AOdysseySpacePlayerController::UpdateMobileControls()
+{
+#if PLATFORM_ANDROID
+	UOdysseyMobileControls* Touch = Cast<UOdysseyMobileControls>(MobileControls.Get());
+	if (!Touch || !Director) return;
+	Touch->SetVisibility(Flow == EOdysseySpaceFlow::Menu || Flow == EOdysseySpaceFlow::Navigation
+		? ESlateVisibility::SelfHitTestInvisible : ESlateVisibility::Collapsed);
+	for (int32 I = 0; I < 8; ++I) Touch->SetAction(I, FString());
+	if (Flow == EOdysseySpaceFlow::Menu)
+	{
+		Touch->SetHeading(TEXT("ODYSSEY / MISSION SELECT"), TEXT("EARTH COMMAND / DEEP SPACE PROGRAM\nJudge demo — offline exploration"));
+		for (int32 I = 0; I < NumMenuItems; ++I) Touch->SetAction(I, MenuLabel(I).ToString());
+	}
+	else if (Flow == EOdysseySpaceFlow::Navigation)
+	{
+		const bool Traveling = Director->IsTraveling();
+		const bool Aligning = Director->GetTelemetry().Phase == EOdysseyTransitPhase::Aligning;
+		const AOdysseyCelestialBody* Current = Director->GetBody(Director->GetCurrentBody());
+		const AOdysseyCelestialBody* Selected = Director->GetBody(SelectedBody);
+		const FOdysseyTransitTelemetry& T = Director->GetTelemetry();
+		Touch->SetHeading((Director->SinceArrival() < 7.f && !Traveling) ? TEXT("ODYSSEY / ORBIT ESTABLISHED") : TEXT("ODYSSEY / SOLAR TRANSIT"), FString::Printf(
+			TEXT("ORBIT: %s  /  DESTINATION: %s\n%s  /  %.0f%%  /  %.2f KM/S"),
+			Current ? *Current->DisplayName.ToString() : TEXT("--"), Selected ? *Selected->DisplayName.ToString() : TEXT("--"),
+			*UEnum::GetDisplayValueAsText(T.Phase).ToString(), T.Progress * 100.f, T.VelocityKms));
+		const TCHAR* Bodies[] = {TEXT("EARTH"), TEXT("MOON"), TEXT("MARS")};
+		for (int32 I = 0; I < 3; ++I) Touch->SetAction(I, FString(I == SelectedBody ? TEXT("> ") : TEXT("")) + Bodies[I], !Traveling && !Aligning);
+		Touch->SetAction(3, TEXT("LAUNCH"), !Traveling && !Aligning && SelectedBody != Director->GetCurrentBody());
+		Touch->SetAction(4, TEXT("CAMERA"), !Traveling && !Aligning);
+		Touch->SetAction(5, TEXT("DESCEND"), !Traveling && !Aligning && Current && Current->BodyId == FName(TEXT("earth")));
+		Touch->SetAction(6, TEXT("MENU"), !Traveling && !Aligning);
+	}
+#endif
 }

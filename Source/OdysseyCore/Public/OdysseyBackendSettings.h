@@ -64,6 +64,19 @@ public:
 	UPROPERTY(EditAnywhere, Config, Category = "Session")
 	bool bAutoStartSession = true;
 
+	// Judge exploration is opt-in in AndroidGame.ini; desktop always uses the canonical backend.
+	UPROPERTY(EditAnywhere, Config, Category = "Session")
+	bool bAndroidJudgeOffline = false;
+
+	bool IsAndroidJudgeOffline() const
+	{
+#if PLATFORM_ANDROID
+		return bAndroidJudgeOffline;
+#else
+		return false;
+#endif
+	}
+
 	virtual FName GetCategoryName() const override { return TEXT("Game"); }
 
 	FName GetActiveEnvironmentName() const;
