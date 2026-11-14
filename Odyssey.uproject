@@ -23,7 +23,8 @@
 		{ "Name": "GameplayAbilities", "Enabled": true },
 		{ "Name": "ModelingToolsEditorMode", "Enabled": true, "TargetAllowList": [ "Editor" ] },
 		{ "Name": "PythonScriptPlugin", "Enabled": true, "TargetAllowList": [ "Editor" ] },
-		{ "Name": "EditorScriptingUtilities", "Enabled": true, "TargetAllowList": [ "Editor" ] }
+		{ "Name": "EditorScriptingUtilities", "Enabled": true, "TargetAllowList": [ "Editor" ] },
+		{ "Name": "PixelStreaming2", "Enabled": true, "PlatformAllowList": [ "Linux", "Win64" ] }
 	],
-	"TargetPlatforms": [ "Mac", "Windows" ]
+	"TargetPlatforms": [ "Mac", "Windows", "Linux" ]
 }
