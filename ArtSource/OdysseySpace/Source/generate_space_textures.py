@@ -172,7 +172,7 @@ def earth(size):
         mount = ridged(n3, p, 4.0, 6) * smooth(0.02, 0.12, e)
         elev = np.clip(e * 1.5 + mount * 0.32, 0.0, 1.0)
         alat = np.abs(lat) * (180.0 / math.pi)
-        moist = fbm(n4, p, 2.2, 6, offset=(11.0, 3.0, 5.0)) * 0.5 + 0.58
+        moist = fbm(n4, p, 2.6, 6, offset=(11.0, 3.0, 5.0)) * 0.55 + 0.5
         # subtropical deserts near 20-30 deg, wetter tropics and mid-latitudes
         moist = moist + 0.28 * np.exp(-((alat - 2.0) / 12.0) ** 2) - 0.32 * np.exp(-((alat - 24.0) / 9.0) ** 2) \
             + 0.12 * np.exp(-((alat - 52.0) / 14.0) ** 2) - 0.2 * smooth(0.25, 0.7, elev)
@@ -223,12 +223,12 @@ def earth(size):
         alat = np.abs(lat) * (180.0 / math.pi)
         # zonal stretch: weather systems are elongated east-west
         q = (p[0] * 1.0, p[1] * 1.0, p[2] * 2.4)
-        warp = fbm(n2, q, 2.0, 5)
-        q2 = (q[0] + warp * 0.45, q[1] - warp * 0.35, q[2] + warp * 0.25)
-        c = fbm(n3, q2, 2.6, 8, gain=0.55) * 0.5 + 0.5
+        warp = fbm(n2, q, 3.0, 5)
+        q2 = (q[0] + warp * 0.3, q[1] - warp * 0.24, q[2] + warp * 0.18)
+        c = fbm(n3, q2, 4.2, 8, gain=0.56) * 0.5 + 0.5
         band = 0.16 * np.exp(-((alat - 4.0) / 8.0) ** 2) - 0.14 * np.exp(-((alat - 24.0) / 8.0) ** 2) \
             + 0.12 * np.exp(-((alat - 55.0) / 12.0) ** 2)
-        c = smooth(0.45, 0.74, c + band) * 0.95
+        c = smooth(0.52, 0.8, c + band) * 0.92
         wisps = smooth(0.55, 0.9, ridged(n4, q2, 9.0, 4)) * 0.25
         return np.clip(c + wisps * smooth(0.3, 0.6, c), 0, 1)[..., None]
 
@@ -242,7 +242,7 @@ def stamp_craters(hgt, alb, seed, count, rmin, rmax, depth, bright, rays_fractio
     rng = np.random.default_rng(seed)
     # power-law size distribution: many small, few large
     u = rng.random(count)
-    radii = rmin * (rmax / rmin) ** (u ** 3.2)
+    radii = rmin * (rmax / rmin) ** (u ** 4.5)
     dirs = rng.normal(size=(count, 3))
     dirs /= np.linalg.norm(dirs, axis=1)[:, None]
     ages = rng.random(count)
@@ -293,7 +293,7 @@ def moon(size):
     data = chunked(W, H, base, 4)
     alb, hgt = data[..., :3].copy(), data[..., 3].copy()
     del data
-    stamp_craters(hgt, alb, 7, 900, 0.004, 0.16, 0.06, 0.10, 0.04)
+    stamp_craters(hgt, alb, 7, 1400, 0.003, 0.12, 0.06, 0.045, 0.03)
     hgt += 0.05 * chunked(W, H, lambda p, la, lo: fbm(n1, p, 40.0, 4)[..., None], 1)[..., 0]
     save("T_Moon_Albedo", alb)
     save("T_Moon_Normal", normal_from_height(hgt * 0.6, 14.0 * W / 4096.0))
@@ -367,8 +367,8 @@ def mars(size):
         edge_n = 80.5 + 3.0 * fbm(n4, p, 6.0, 4) + 1.5 * np.sin(lon * 3.0 + alat * 0.6)
         edge_s = 84.0 + 2.0 * fbm(n3, p, 6.0, 4)
         cap = np.where(lat > 0, smooth(edge_n - 1.0, edge_n + 1.0, alat), smooth(edge_s - 0.7, edge_s + 0.7, alat))
-        troughs = smooth(0.6, 0.75, np.sin(np.arctan2(p[1], p[0]) * 2.0 + alat * 1.4 + fbm(n1, p, 4.0, 3) * 3.0) * 0.5 + 0.5)
-        cap = cap * (1.0 - 0.35 * troughs * cap)
+        troughs = smooth(0.62, 0.8, np.sin(np.arctan2(p[1], p[0]) * 2.0 + alat * 0.9 + fbm(n1, p, 6.0, 4) * 5.0) * 0.5 + 0.5)
+        cap = cap * (1.0 - 0.14 * troughs * cap)
         c = mix(c, col("#EDE6DE"), cap)
         frost = smooth(64.0, 76.0, alat) * 0.25
         c = mix(c, col("#C9A890"), frost)

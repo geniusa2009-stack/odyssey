@@ -209,7 +209,7 @@ float c = saturate(Cloud * CloudStrength);
 float3 b = lerp(Albedo, float3(0.80, 0.82, 0.85), c);
 float ndv = saturate(dot(normalize(N), normalize(V)));
 float day = saturate(dot(normalize(N), normalize(L)) * 1.5 + 0.35);
-float rim = pow(1.0 - ndv, 3.0);
+float rim = pow(1.0 - ndv, 4.0);
 return lerp(b, Atmo, saturate(rim * Haze * day));""", ["Albedo", "Cloud", "N", "V", "L", "Atmo", "CloudStrength", "Haze"], F3, -600, -500, "PlanetBase")
     emis = custom(m, """
 float c = saturate(Cloud * CloudStrength);
@@ -238,22 +238,33 @@ return normalize(lerp(n, float3(0, 0, 1), c));""", ["Nrm", "Cloud", "CloudStreng
 
 def build_atmosphere():
     m = material("M_ODY_PlanetAtmosphere", unreal.BlendMode.BLEND_ADDITIVE, unreal.MaterialShadingModel.MSM_UNLIT)
+    # Analytic limb: for each view ray, the closest approach d to the planet centre decides between
+    # the glow band (R < d < Ra, thin and bright) and a faint haze over the planet's edge (d < R).
     nws = expr(m, unreal.MaterialExpressionVertexNormalWS, -900, -300)
     cam = expr(m, unreal.MaterialExpressionCameraVectorWS, -900, -200)
+    oc = expr(m, unreal.MaterialExpressionObjectPositionWS, -900, -400)
+    try:
+        oc.set_editor_property("origin_type", unreal.PositionOrigin.CAMERA_RELATIVE)
+    except Exception as e:
+        raise RuntimeError(f"ObjectPositionWS has no camera-relative origin in this engine: {e}")
     sun = vector(m, "SunDirection", unreal.LinearColor(0.1, -0.45, 0.9, 0), -900, -100)
     col = vector(m, "AtmosphereColor", unreal.LinearColor(0.28, 0.55, 1.0, 1), -900, 0)
     sunset = vector(m, "SunsetColor", unreal.LinearColor(1.0, 0.45, 0.2, 1), -900, 100)
     inten = scalar(m, "Intensity", 3.0, -900, 200)
-    power = scalar(m, "Power", 2.2, -900, 300)
+    power = scalar(m, "Power", 1.6, -900, 300)
+    pr = scalar(m, "PlanetRadius", 1.0e6, -900, 400)
+    ar = scalar(m, "AtmosphereRadius", 1.022e6, -900, 500)
     c = custom(m, """
-float3 n = normalize(N); float3 v = normalize(V); float3 l = normalize(L);
-float ndv = saturate(dot(n, v));
-float rim = pow(1.0 - ndv, Power);
-float day = saturate(dot(n, l) * 0.9 + 0.28);
+float3 n = normalize(N); float3 l = normalize(L);
+float3 rd = -normalize(V);
+float d = length(cross(OC, rd));
+float shell = max(Ra - R, 1.0);
+float glow = pow(saturate((Ra - d) / shell), Power) * step(R, d);
+float haze = exp(-max(R - d, 0.0) / (shell * 1.6)) * 0.22 * step(d, R);
+float day = saturate(dot(n, l) * 1.1 + 0.18);
 float term = saturate(1.0 - abs(dot(n, l)) * 3.0);
-float edge = saturate(ndv * 7.0);
-return (Color * day + Sunset * term * 0.6) * rim * edge * Intensity;""", ["N", "V", "L", "Color", "Sunset", "Intensity", "Power"], F3, -400, 0, "AtmosphereRim")
-    for src, pin in ((nws, "N"), (cam, "V"), (sun, "L"), (col, "Color"), (sunset, "Sunset"), (inten, "Intensity"), (power, "Power")):
+return (Color * day + Sunset * term * 0.5) * (glow + haze) * Intensity;""", ["N", "V", "L", "OC", "Color", "Sunset", "Intensity", "Power", "R", "Ra"], F3, -400, 0, "AtmosphereLimb")
+    for src, pin in ((nws, "N"), (cam, "V"), (sun, "L"), (oc, "OC"), (col, "Color"), (sunset, "Sunset"), (inten, "Intensity"), (power, "Power"), (pr, "R"), (ar, "Ra")):
         link(src, c, pin)
     mel.connect_material_property(c, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR)
     return finish(m)
@@ -334,20 +345,20 @@ def build_materials(tex):
     plume = build_plume()
     hs = unreal.load_asset(HARD_SURFACE)
     mi = {
-        "Earth": instance("MI_Earth_Surface", surf, {"CloudStrength": 1.0, "Haze": 0.55, "CityIntensity": 4.0, "NightAmbient": 0.006,
-                                                     "LandRoughness": 0.82, "OceanRoughness": 0.32, "NormalStrength": 1.0},
+        "Earth": instance("MI_Earth_Surface", surf, {"CloudStrength": 1.0, "Haze": 0.45, "CityIntensity": 4.0, "NightAmbient": 0.006,
+                                                     "LandRoughness": 0.82, "OceanRoughness": 0.24, "NormalStrength": 1.0},
                           {"AtmosphereColor": unreal.LinearColor(0.3, 0.55, 1.0, 1)},
                           {"Albedo": tex["T_Earth_Albedo"], "Normal": tex["T_Earth_Normal"], "Masks": tex["T_Earth_Masks"], "Clouds": tex["T_Earth_Clouds"]}),
         "Moon": instance("MI_Moon_Surface", surf, {"CloudStrength": 0.0, "Haze": 0.0, "CityIntensity": 0.0, "NightAmbient": 0.02,
                                                    "LandRoughness": 0.95, "OceanRoughness": 0.95, "NormalStrength": 1.6},
                          {}, {"Albedo": tex["T_Moon_Albedo"], "Normal": tex["T_Moon_Normal"], "Masks": tex["T_Space_BlackLinear"], "Clouds": tex["T_Space_BlackLinear"]}),
-        "Mars": instance("MI_Mars_Surface", surf, {"CloudStrength": 0.0, "Haze": 0.4, "CityIntensity": 0.0, "NightAmbient": 0.008,
+        "Mars": instance("MI_Mars_Surface", surf, {"CloudStrength": 0.0, "Haze": 0.3, "CityIntensity": 0.0, "NightAmbient": 0.008,
                                                    "LandRoughness": 0.9, "OceanRoughness": 0.9, "NormalStrength": 1.3},
                          {"AtmosphereColor": unreal.LinearColor(0.85, 0.55, 0.38, 1)},
                          {"Albedo": tex["T_Mars_Albedo"], "Normal": tex["T_Mars_Normal"], "Masks": tex["T_Space_BlackLinear"], "Clouds": tex["T_Space_BlackLinear"]}),
-        "EarthAtmo": instance("MI_Earth_Atmosphere", atmo, {"Intensity": 3.2, "Power": 2.4},
+        "EarthAtmo": instance("MI_Earth_Atmosphere", atmo, {"Intensity": 2.6, "Power": 1.5, "PlanetRadius": 1.0e6, "AtmosphereRadius": 1.022e6},
                               {"AtmosphereColor": unreal.LinearColor(0.26, 0.55, 1.0, 1), "SunsetColor": unreal.LinearColor(1.0, 0.42, 0.18, 1)}),
-        "MarsAtmo": instance("MI_Mars_Atmosphere", atmo, {"Intensity": 1.4, "Power": 3.2},
+        "MarsAtmo": instance("MI_Mars_Atmosphere", atmo, {"Intensity": 1.2, "Power": 2.2, "PlanetRadius": 5.32e5, "AtmosphereRadius": 5.32e5 * 1.03},
                              {"AtmosphereColor": unreal.LinearColor(0.9, 0.55, 0.36, 1), "SunsetColor": unreal.LinearColor(0.12, 0.2, 0.32, 1)}),
         "Stars": stars, "Sun": sun, "Plume": plume,
         "RcsPlume": instance("MI_OTV_RCSPlume", plume, {"Intensity": 10.0}, {"CoreColor": unreal.LinearColor(1, 1, 1, 1), "EdgeColor": unreal.LinearColor(0.7, 0.8, 1.0, 1)}),

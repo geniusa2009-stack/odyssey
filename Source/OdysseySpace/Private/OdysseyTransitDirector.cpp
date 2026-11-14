@@ -442,9 +442,15 @@ FTransform AOdysseyTransitDirector::VistaTransform(double T) const
 	const FVector Out = (V - C).GetSafeNormal();
 	const FVector Tan = B->OrbitTangent(OrbitTheta);
 	const FVector N = B->OrbitNormal();
-	const double A = 0.55 * FMath::Sin(T * 0.06);
-	const FVector Cam = V + (-Tan * FMath::Cos(A) + N * FMath::Sin(A) * 0.7) * L * 2.9 + Out * L * 0.5;
-	const FVector Look = V + (C - V).GetSafeNormal() * L * 0.35 + Tan * L * 0.25;
+	// pitch down to just above the real horizon so the planet fills the lower part of the frame
+	const double H = FMath::Max(1.0, FVector::Dist(V, C) - B->Radius);
+	const double Dip = FMath::Acos(B->Radius / (B->Radius + H));
+	const double Pitch = FMath::Max(0.0, Dip - FMath::DegreesToRadians(8.0));
+	FVector Fwd = (Tan * FMath::Cos(Pitch) - Out * FMath::Sin(Pitch)).GetSafeNormal();
+	Fwd = FQuat(Out, 0.5 * FMath::Sin(T * 0.06)).RotateVector(Fwd);
+	const FVector Cam = V - Fwd * L * 2.7 + Out * L * 0.45 + FVector::CrossProduct(Out, Fwd).GetSafeNormal() * L * 0.25 * FMath::Sin(T * 0.04);
+	const FVector Look = V + Fwd * L * 1.6;
+	(void)N;
 	return FTransform(LookQuat(Cam, Look, Out), Cam);
 }
 
@@ -457,8 +463,10 @@ FTransform AOdysseyTransitDirector::PlanetTransform(double T) const
 	const FVector Side = FVector::CrossProduct(Sun, FVector::UpVector).GetSafeNormal();
 	FVector Dir = (Sun * 0.75 + Side * 0.65 + FVector::UpVector * 0.22).GetSafeNormal();
 	Dir = FQuat(FVector::UpVector, 0.02 * T).RotateVector(Dir);
-	const FVector Cam = C + Dir * B->Radius * 3.1;
-	return FTransform(LookQuat(Cam, C, FVector::UpVector), Cam);
+	const FVector Cam = C + Dir * B->Radius * 3.3;
+	// planet left of centre, clear of the navigation panel on the right
+	const FVector Right = FVector::CrossProduct(FVector::UpVector, (C - Cam).GetSafeNormal()).GetSafeNormal();
+	return FTransform(LookQuat(Cam, C + Right * B->Radius * 0.2, FVector::UpVector), Cam);
 }
 
 FTransform AOdysseyTransitDirector::ShotTransform(int32 Shot, const FVector& V, const FVector& Fwd, const FVector& Up) const
