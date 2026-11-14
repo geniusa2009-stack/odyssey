@@ -187,8 +187,10 @@ void AOdysseySpacePlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 	FlowTime += DeltaTime;
+#if PLATFORM_ANDROID
 	MobileUpdateTime += DeltaTime;
 	if (MobileUpdateTime >= 0.15f) { MobileUpdateTime = 0.f; UpdateMobileControls(); }
+#endif
 	if (bAwaitingShaders)
 	{
 		// first launch compiles shaders on demand: keep the screen black until compilation settles
