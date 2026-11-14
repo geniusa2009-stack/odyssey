@@ -52,3 +52,20 @@ and telemetry use real distances (384,400 km, ~225 M km) and mission times (3.1 
   → `Saved/Odyssey/SpaceCapture/SPACE_01..15_*.png`, then quits.
 * The Engineering slice test now names its map explicitly (the default map is the front end):
   `UnrealEditor Odyssey.uproject /Game/Earth/EarthCommand/Maps/L_EarthCommand_Slice -game -nullrhi … Odyssey.Slice.Engineering`
+
+## Results (2026-11-14, UE 5.8.4, Apple M3 / 8 GB)
+| Check | Result |
+|---|---|
+| `OdysseyEditor` build with `OdysseySpace` (2 parallel actions) | succeeded |
+| `Odyssey.Space.Flow` | **Success**, 0 errors (warnings: backend readiness ping, no backend needed here) — Moon arrival at 1.350 R (parking orbit 1.350), Mars at 1.220 R (1.220) |
+| `-OdysseyCapture` tour | 15/15 screenshots, 0 material compile failures, ~85 s |
+| `Odyssey.Slice.Engineering` (with station imports placed) | **Success**, 41 checks, 0 errors (1 benign missing-save warning) |
+| Native protocol core | 26/26 cases, 959 checks |
+| Backend snapshot | 336 files byte-identical to the recorded manifest |
+
+### Known limits / next steps
+* Planet maps are procedural (4K); a hero close-up of Earth would benefit from 8K albedo/clouds.
+* The first launch compiles shaders (the front end holds black until compilation settles).
+* `SM_ODY_StationSlidingDoor` is imported but not placed: it needs an open/close door actor so the
+  Engineering traversal stays clear.
+* Mission Control and Training rooms are still greybox shells around the new hero props.

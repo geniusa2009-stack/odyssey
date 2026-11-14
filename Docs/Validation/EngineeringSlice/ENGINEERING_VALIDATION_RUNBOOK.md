@@ -70,8 +70,10 @@ curl -s http://127.0.0.1:8000/api/v1/ready
 ```
 
 ## 5. Odyssey.Slice.Engineering
+Since 2026-11-14 the game's default map is the space front end, so the Engineering map is named on
+the command line.
 ```
-"$UE/Engine/Binaries/Mac/UnrealEditor.app/Contents/MacOS/UnrealEditor" "$PROJ" -game -nullrhi -unattended \
+"$UE/Engine/Binaries/Mac/UnrealEditor.app/Contents/MacOS/UnrealEditor" "$PROJ" /Game/Earth/EarthCommand/Maps/L_EarthCommand_Slice -game -nullrhi -unattended \
   -nosound -nosplash -ExecCmds="Automation RunTests Odyssey.Slice.Engineering" \
   -TestExit="Automation Test Queue Empty" -log -abslog="$S/slice_test.log" -ReportExportPath="$S/slice_report"
 ```
