@@ -1,0 +1,43 @@
+{'succeeded': 0, 'succeededWithWarnings': 1, 'failed': 0, 'notRun': 0, 'totalDuration': 35.44742965698242}
+Odyssey.Slice.Engineering Success errors 0 warnings 1 duration 35.44742965698242
+   Zone_Engineering box IsValid=true, Min=(X=1820.000 Y=-1380.000 Z=0.000), Max=(X=3180.000 Y=-220.000 Z=500.000)
+   console mesh SM_PROXY_PowerConsole bounds IsValid=true, Min=(X=-45.000 Y=-90.000 Z=0.000), Max=(X=44.000 Y=90.000 Z=125.432)
+   Unreal-only proxy actors in Engineering: 7
+   session ready; backend location earth.command.observation_deck
+   walked corridor → Engineering in 1.2 s, at X=2500.000 Y=-755.072 Z=94.002
+   backend accepted world.zone_entered → earth.command.engineering after 0.0 s
+   walked Engineering → corridor in 1.1 s, at X=2500.000 Y=-114.920 Z=92.150
+   at the Power Console operator position X=2251.605 Y=-1010.570 Z=93.953 after 1.6 s
+   power_bus_b before incident: power=None mode=None status=operational
+   before incident: bus_room scale 1.000 (expected 1.000), warning scale 0.000 (expected 0.000)
+   before incident: OdysseyLightFixture_0 intensity 3500.0 (expected 3500.0), emissive factor 1.000
+   before incident: OdysseyLightFixture_1 intensity 3500.0 (expected 3500.0), emissive factor 1.000
+   before incident: OdysseyLightFixture_2 intensity 3500.0 (expected 3500.0), emissive factor 1.000
+   before incident: OdysseyLightFixture_3 intensity 3500.0 (expected 3500.0), emissive factor 1.000
+   before incident: warning light intensity 0.0 (expected 0.0)
+   backend incident involving power_bus_b after 20.5 s
+   power_bus_b during incident: power=None mode=None status=damaged
+   during incident: bus_room scale 0.500 (expected 0.500), warning scale 1.000 (expected 1.000)
+   during incident: OdysseyLightFixture_0 intensity 1750.0 (expected 1750.0), emissive factor 0.500
+   during incident: OdysseyLightFixture_1 intensity 1750.0 (expected 1750.0), emissive factor 0.500
+   during incident: OdysseyLightFixture_2 intensity 1750.0 (expected 1750.0), emissive factor 0.500
+   during incident: OdysseyLightFixture_3 intensity 1750.0 (expected 1750.0), emissive factor 0.500
+   during incident: warning light intensity 5000.0 (expected 5000.0)
+   control DIAGNOSTIC (system.inspect): offered=1 available=1 reason=None
+   control BREAKER SERVICE (repair.perform): offered=1 available=0 reason=fault_not_diagnosed
+   pressed DIAGNOSTIC → SubmitIntent local id 2
+   resolution: action=system.inspect target=earth.command.engineering.power_bus_b outcome=applied reason=None error=None
+   control DIAGNOSTIC (system.inspect): offered=1 available=1 reason=None
+   control BREAKER SERVICE (repair.perform): offered=1 available=0 reason=fault_not_diagnosed
+   pressed BREAKER SERVICE → SubmitIntent local id 3
+   resolution: action=repair.perform target=earth.command.engineering.power_bus_b outcome=applied reason=None error=None
+   mission.clock_set mode=ACCELERATED → SubmitIntent local id 4
+   resolution: action=mission.clock_set outcome=applied reason=None
+   backend resolved the incident after 5.9 s
+   power_bus_b after repair: power=None mode=None status=operational
+   after resolution: bus_room scale 1.000 (expected 1.000), warning scale 0.000 (expected 0.000)
+   after resolution: OdysseyLightFixture_0 intensity 3500.0 (expected 3500.0), emissive factor 1.000
+   after resolution: OdysseyLightFixture_1 intensity 3500.0 (expected 3500.0), emissive factor 1.000
+   after resolution: OdysseyLightFixture_2 intensity 3500.0 (expected 3500.0), emissive factor 1.000
+   after resolution: OdysseyLightFixture_3 intensity 3500.0 (expected 3500.0), emissive factor 1.000
+   after resolution: warning light intensity 0.0 (expected 0.0)

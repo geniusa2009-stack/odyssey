@@ -21,6 +21,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "Tools" / "Editor" / "build_earth_command_greybox.py"
+sys.path.insert(0, str(SCRIPT.parent))
 LAYOUT = ROOT / "Content" / "Systems" / "Greybox" / "L_EarthCommand_Slice.layout.json"
 
 
@@ -59,13 +60,20 @@ class Rec:
     def set_box_extent(self, e, update):
         self.props["extent"] = e
 
+    def set_material(self, i, m):
+        self.props[f"material{i}"] = m
+
+    def set_collision_profile_name(self, n):
+        self.props["collision_profile"] = n
+
 
 def make_stub(spawned: list[Rec], saved: list[str]) -> types.ModuleType:
     u = types.ModuleType("unreal")
     for n in ["StaticMeshActor", "OdysseySemanticAnchor", "OdysseySemanticZone", "OdysseySystemActor",
               "OdysseyPowerConsole", "OdysseyCrewPlaceholder", "PlayerStart", "SkyLight", "PointLight",
               "OdysseySemanticBindingComponent", "BoxComponent", "StaticMeshComponent", "OdysseyInteractableComponent",
-              "OdysseyObjectPresentationComponent", "PointLightComponent", "SkyLightComponent"]:
+              "OdysseyObjectPresentationComponent", "PointLightComponent", "SkyLightComponent",
+              "OdysseyLightFixture", "RectLightComponent", "WidgetComponent"]:
         setattr(u, n, type(n, (), {}))
     u.OdysseyLightRule = lambda: Rec("OdysseyLightRule")
     u.OdysseyConsoleControl = lambda: Rec("OdysseyConsoleControl")
@@ -73,12 +81,12 @@ def make_stub(spawned: list[Rec], saved: list[str]) -> types.ModuleType:
     u.Text = str
     u.OdysseyLightGroup = lambda: Rec("OdysseyLightGroup")
     u.Vector = lambda *a: tuple(a)
-    u.Rotator = lambda *a: tuple(a)
-    u.Color = lambda *a: tuple(a)
+    u.Rotator = lambda *a, **k: tuple(a) + tuple(k.values())
+    u.Color = lambda *a, **k: tuple(a) + tuple(k.values())
     u.Name = str
     u.load_asset = lambda p: p
     u.log = lambda m: print(m)
-    u.Paths = types.SimpleNamespace(project_content_dir=lambda: str(ROOT / "Content"))
+    u.Paths = types.SimpleNamespace(project_content_dir=lambda: str(ROOT / "Content"), project_dir=lambda: str(ROOT))
     u.EditorAssetLibrary = types.SimpleNamespace(does_asset_exist=lambda p: False)
 
     class EAS:
@@ -108,6 +116,15 @@ def run(layout_override: dict | None = None) -> tuple[list[Rec], list[str]]:
     spawned: list[Rec] = []
     saved: list[str] = []
     sys.modules["unreal"] = make_stub(spawned, saved)
+    # Engineering art-pass assets (materials, proxies, kit) are generated in the editor; stub them.
+    import odyssey_kit_geometry as geo
+    fake = types.ModuleType("odyssey_slice_assets")
+    fake.build_all = lambda layout, placements: (
+        {k: f"MI_ODY_{k}" for k in geo.MATERIAL_ORDER},
+        {k: f"SM:{fn().asset}" for k, fn in geo.PROXY_BUILDERS.items()},
+        [(n, f"SM:{n}", (0, 0, 0)) for n in ("SM_KIT_ENG_Floor", "SM_KIT_ENG_Walls", "SM_KIT_ENG_DoorFrame",
+                                              "SM_KIT_ENG_Ceiling", "SM_KIT_ENG_Services", "SM_KIT_ENG_CorridorTransition")])
+    sys.modules["odyssey_slice_assets"] = fake
     if layout_override is not None:
         tmp = ROOT / "Tools" / "Editor" / ".dry_run_layout.json"
         tmp.write_text(json.dumps(layout_override))

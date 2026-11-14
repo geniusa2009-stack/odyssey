@@ -94,7 +94,7 @@ void UOdysseyInteractableComponent::SetFocused(bool bFocused)
 	}
 }
 
-void UOdysseyInteractableComponent::Activate()
+void UOdysseyInteractableComponent::ActivateInteraction()
 {
 	OnActivatedEvent.Broadcast();
 	OnActivated();

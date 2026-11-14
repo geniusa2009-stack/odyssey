@@ -9,6 +9,6 @@ public class OdysseyPlayer : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		CppStandard = CppStandardVersion.Cpp20;
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "OdysseyCore", "OdysseyBackend", "OdysseyWorld", "OdysseyInteraction", "OdysseyUI" });
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "Json" });  // UMG: OdysseyGameMode creates the HUD widget; Json: Engineering slice automation test reads the map definition
 	}
 }

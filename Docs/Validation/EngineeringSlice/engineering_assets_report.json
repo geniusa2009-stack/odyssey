@@ -1,0 +1,505 @@
+{
+ "proxies": {
+  "SM_PROXY_PowerConsole": {
+   "bounds_min": [
+    -45.0,
+    -90.0,
+    0.0
+   ],
+   "bounds_max": [
+    44.0,
+    90.0,
+    125.4
+   ],
+   "triangles": 912,
+   "vertices": 1728,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_White",
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Alu",
+    "MI_ODY_Ion",
+    "MI_ODY_Amber",
+    "MI_ODY_Red",
+    "MI_ODY_Screen"
+   ],
+   "sections": 8,
+   "simple_collision_primitives": 1,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_DEFAULT: 0>",
+   "nanite": false,
+   "envelope_W_H_D_cm": [
+    180,
+    125,
+    90
+   ],
+   "pivot": "floor",
+   "expected_min": [
+    -45.0,
+    -90.0,
+    0
+   ],
+   "expected_max": [
+    45.0,
+    90.0,
+    125
+   ],
+   "reference": "01_Power_Console.png",
+   "movable_parts": [
+    "control desk switch caps",
+    "e-stop guard",
+    "service door"
+   ],
+   "collision": "box"
+  },
+  "SM_PROXY_PowerBusB_Cabinet": {
+   "bounds_min": [
+    0.0,
+    -58.5,
+    0.0
+   ],
+   "bounds_max": [
+    60.0,
+    58.5,
+    220.0
+   ],
+   "triangles": 964,
+   "vertices": 1864,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_White",
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Alu",
+    "MI_ODY_Ion",
+    "MI_ODY_Amber",
+    "MI_ODY_Red",
+    "MI_ODY_Screen"
+   ],
+   "sections": 8,
+   "simple_collision_primitives": 1,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_DEFAULT: 0>",
+   "nanite": false,
+   "envelope_W_H_D_cm": [
+    120,
+    220,
+    60
+   ],
+   "pivot": "wall_base",
+   "expected_min": [
+    0,
+    -60.0,
+    0
+   ],
+   "expected_max": [
+    60,
+    60.0,
+    220
+   ],
+   "reference": "02_Power_Bus_B_Cabinet.png",
+   "movable_parts": [
+    "three main breaker handles",
+    "lower access door",
+    "MCB strip"
+   ],
+   "collision": "box"
+  },
+  "SM_PROXY_ORION_Terminal": {
+   "bounds_min": [
+    -30.0,
+    -35.0,
+    0.0
+   ],
+   "bounds_max": [
+    30.0,
+    35.0,
+    155.0
+   ],
+   "triangles": 216,
+   "vertices": 424,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_White",
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Alu",
+    "MI_ODY_Ion",
+    "MI_ODY_Screen"
+   ],
+   "sections": 6,
+   "simple_collision_primitives": 1,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_DEFAULT: 0>",
+   "nanite": false,
+   "envelope_W_H_D_cm": [
+    70,
+    155,
+    60
+   ],
+   "pivot": "floor",
+   "expected_min": [
+    -30.0,
+    -35.0,
+    0
+   ],
+   "expected_max": [
+    30.0,
+    35.0,
+    155
+   ],
+   "reference": "08B_ORION_Physical_Terminal.png",
+   "movable_parts": [
+    "touch screen surface",
+    "power button"
+   ],
+   "collision": "box"
+  },
+  "SM_PROXY_ServerRack_42U": {
+   "bounds_min": [
+    -50.0,
+    -30.0,
+    0.0
+   ],
+   "bounds_max": [
+    50.0,
+    30.0,
+    210.0
+   ],
+   "triangles": 672,
+   "vertices": 1344,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_White",
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Ion",
+    "MI_ODY_Amber",
+    "MI_ODY_Screen"
+   ],
+   "sections": 6,
+   "simple_collision_primitives": 1,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_DEFAULT: 0>",
+   "nanite": false,
+   "envelope_W_H_D_cm": [
+    60,
+    210,
+    100
+   ],
+   "pivot": "floor",
+   "expected_min": [
+    -50.0,
+    -30.0,
+    0
+   ],
+   "expected_max": [
+    50.0,
+    30.0,
+    210
+   ],
+   "reference": "09_Server_Equipment_Rack.png",
+   "movable_parts": [
+    "front door",
+    "server sleds"
+   ],
+   "collision": "box"
+  },
+  "SM_PROXY_CeilingLight_Linear": {
+   "bounds_min": [
+    -100.0,
+    -25.0,
+    -13.5
+   ],
+   "bounds_max": [
+    100.0,
+    25.0,
+    0.0
+   ],
+   "triangles": 216,
+   "vertices": 432,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_White",
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Ion",
+    "MI_ODY_Amber",
+    "MI_ODY_Diffuser"
+   ],
+   "sections": 6,
+   "simple_collision_primitives": 0,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_SIMPLE_AS_COMPLEX: 2>",
+   "nanite": false,
+   "envelope_W_H_D_cm": [
+    50,
+    14,
+    200
+   ],
+   "pivot": "ceiling",
+   "expected_min": [
+    -100.0,
+    -25.0,
+    -14
+   ],
+   "expected_max": [
+    100.0,
+    25.0,
+    0
+   ],
+   "reference": "11_Ceiling_Light_Module_Reference.png",
+   "movable_parts": [
+    "diffuser panel"
+   ],
+   "collision": "none"
+  },
+  "SM_PROXY_WallUtilityPanel": {
+   "bounds_min": [
+    0.0,
+    -50.0,
+    -60.0
+   ],
+   "bounds_max": [
+    18.0,
+    50.0,
+    60.0
+   ],
+   "triangles": 432,
+   "vertices": 756,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_White",
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Alu",
+    "MI_ODY_Ion",
+    "MI_ODY_Amber",
+    "MI_ODY_Red",
+    "MI_ODY_Screen"
+   ],
+   "sections": 8,
+   "simple_collision_primitives": 0,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_SIMPLE_AS_COMPLEX: 2>",
+   "nanite": false,
+   "envelope_W_H_D_cm": [
+    100,
+    120,
+    18
+   ],
+   "pivot": "wall",
+   "expected_min": [
+    0,
+    -50.0,
+    -60.0
+   ],
+   "expected_max": [
+    18,
+    50.0,
+    60.0
+   ],
+   "reference": "12_Wall_Utility_Panel.png",
+   "movable_parts": [
+    "power access door",
+    "emergency switch guard"
+   ],
+   "collision": "none"
+  },
+  "SM_PROXY_VentModule_A": {
+   "bounds_min": [
+    0.0,
+    -70.0,
+    -40.0
+   ],
+   "bounds_max": [
+    39.6,
+    70.0,
+    40.0
+   ],
+   "triangles": 348,
+   "vertices": 696,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_White",
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Alu",
+    "MI_ODY_Ion",
+    "MI_ODY_Amber"
+   ],
+   "sections": 6,
+   "simple_collision_primitives": 0,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_SIMPLE_AS_COMPLEX: 2>",
+   "nanite": false,
+   "envelope_W_H_D_cm": [
+    140,
+    80,
+    40
+   ],
+   "pivot": "wall",
+   "expected_min": [
+    0,
+    -70.0,
+    -40.0
+   ],
+   "expected_max": [
+    40,
+    70.0,
+    40.0
+   ],
+   "reference": "13_Ventilation_Module.png",
+   "movable_parts": [
+    "louver blades",
+    "filter hatch"
+   ],
+   "collision": "none"
+  }
+ },
+ "kit": {
+  "SM_KIT_ENG_Floor": {
+   "bounds_min": [
+    -688.5,
+    -588.5,
+    0.0
+   ],
+   "bounds_max": [
+    688.5,
+    588.5,
+    3.2
+   ],
+   "triangles": 2448,
+   "vertices": 4896,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal"
+   ],
+   "sections": 2,
+   "simple_collision_primitives": 0,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
+   "nanite": false
+  },
+  "SM_KIT_ENG_Walls": {
+   "bounds_min": [
+    -697.0,
+    -597.0,
+    0.0
+   ],
+   "bounds_max": [
+    697.0,
+    597.0,
+    500.0
+   ],
+   "triangles": 4380,
+   "vertices": 7396,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_White",
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Alu",
+    "MI_ODY_Ion"
+   ],
+   "sections": 5,
+   "simple_collision_primitives": 0,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
+   "nanite": false
+  },
+  "SM_KIT_ENG_DoorFrame": {
+   "bounds_min": [
+    -156.0,
+    536.5,
+    0.0
+   ],
+   "bounds_max": [
+    156.0,
+    590.0,
+    304.0
+   ],
+   "triangles": 192,
+   "vertices": 296,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Alu",
+    "MI_ODY_Ion",
+    "MI_ODY_Amber"
+   ],
+   "sections": 5,
+   "simple_collision_primitives": 0,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
+   "nanite": false
+  },
+  "SM_KIT_ENG_Ceiling": {
+   "bounds_min": [
+    -688.0,
+    -590.0,
+    468.0
+   ],
+   "bounds_max": [
+    688.0,
+    590.0,
+    500.0
+   ],
+   "triangles": 696,
+   "vertices": 1392,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_White",
+    "MI_ODY_Gunmetal"
+   ],
+   "sections": 2,
+   "simple_collision_primitives": 0,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_SIMPLE_AS_COMPLEX: 2>",
+   "nanite": false
+  },
+  "SM_KIT_ENG_Services": {
+   "bounds_min": [
+    -670.0,
+    -560.0,
+    210.0
+   ],
+   "bounds_max": [
+    682.0,
+    529.0,
+    494.0
+   ],
+   "triangles": 972,
+   "vertices": 1498,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Alu",
+    "MI_ODY_Red"
+   ],
+   "sections": 4,
+   "simple_collision_primitives": 0,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_SIMPLE_AS_COMPLEX: 2>",
+   "nanite": false
+  },
+  "SM_KIT_ENG_CorridorTransition": {
+   "bounds_min": [
+    -156.0,
+    10.0,
+    0.0
+   ],
+   "bounds_max": [
+    156.0,
+    51.5,
+    300.0
+   ],
+   "triangles": 216,
+   "vertices": 340,
+   "uv_channels": 1,
+   "material_slots": [
+    "MI_ODY_Graphite",
+    "MI_ODY_Gunmetal",
+    "MI_ODY_Alu",
+    "MI_ODY_Ion",
+    "MI_ODY_Amber"
+   ],
+   "sections": 5,
+   "simple_collision_primitives": 0,
+   "collision_trace": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
+   "nanite": false
+  }
+ }
+}

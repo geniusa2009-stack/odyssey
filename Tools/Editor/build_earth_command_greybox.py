@@ -23,7 +23,9 @@ Run inside the editor (after compiling the C++ modules and importing the registr
 """
 
 import json
+import math
 import os
+import sys
 
 import unreal
 
@@ -36,6 +38,15 @@ DOOR_H = 260.0  # cm
 les = unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 eas = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
 
+# Engineering slice art pass: areas may carry "kit", "dressing", "shell_material", systems a "proxy" or
+# "material", lights a "fixture". Their assets come from odyssey_slice_assets.py (proxies are NOT
+# production meshes; see Tools/Editor/odyssey_kit_geometry.py). Areas without those keys build exactly
+# as before.
+_EDITOR_DIR = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else os.path.join(
+    unreal.Paths.project_dir(), "Tools", "Editor")
+if _EDITOR_DIR not in sys.path:
+    sys.path.insert(0, _EDITOR_DIR)
+
 
 def v(p):
     return unreal.Vector(float(p[0]), float(p[1]), float(p[2]))
@@ -46,6 +57,7 @@ class Builder:
         self.layout = layout
         self.root = layout["outliner_root"]
         self.bound = {}  # semantic id -> actor (for light wiring)
+        self.assets = None  # (materials, proxies, kit) once generated
 
     # ---------------------------------------------------------------- primitives
     def place(self, cls, label, folder, loc, yaw=0.0):
@@ -72,8 +84,9 @@ class Builder:
         h = float(area["height"])
         folder = f"{name}/Shell"
         cx, cy = (x0 + x1) / 2.0, (y0 + y1) / 2.0
-        self.block(f"{name}_Floor", folder, (cx, cy, -WALL / 2), (x1 - x0, y1 - y0, WALL))
-        self.block(f"{name}_Ceiling", folder, (cx, cy, h + WALL / 2), (x1 - x0, y1 - y0, WALL))
+        shell_mat = self.material(area.get("shell_material"))
+        made = [self.block(f"{name}_Floor", folder, (cx, cy, -WALL / 2), (x1 - x0, y1 - y0, WALL)),
+                self.block(f"{name}_Ceiling", folder, (cx, cy, h + WALL / 2), (x1 - x0, y1 - y0, WALL))]
         sides = {"N": (x0, x1, y1), "S": (x0, x1, y0), "E": (y0, y1, x1), "W": (y0, y1, x0)}
         for side, (a0, a1, fixed) in sides.items():
             cuts = sorted(tuple(d) for d in area["doors"].get(side, []))
@@ -86,16 +99,99 @@ class Builder:
                 if e - s < 1:
                     continue
                 if side in ("N", "S"):
-                    self.block(f"{name}_Wall{side}{i}", folder, ((s + e) / 2, fixed, h / 2), (e - s, WALL, h))
+                    made.append(self.block(f"{name}_Wall{side}{i}", folder, ((s + e) / 2, fixed, h / 2), (e - s, WALL, h)))
                 else:
-                    self.block(f"{name}_Wall{side}{i}", folder, (fixed, (s + e) / 2, h / 2), (WALL, e - s, h))
+                    made.append(self.block(f"{name}_Wall{side}{i}", folder, (fixed, (s + e) / 2, h / 2), (WALL, e - s, h)))
             for j, (centre, width) in enumerate(cuts):
                 if h - DOOR_H <= 1:
                     continue
                 if side in ("N", "S"):
-                    self.block(f"{name}_Lintel{side}{j}", folder, (centre, fixed, (h + DOOR_H) / 2), (width, WALL, h - DOOR_H))
+                    made.append(self.block(f"{name}_Lintel{side}{j}", folder, (centre, fixed, (h + DOOR_H) / 2), (width, WALL, h - DOOR_H)))
                 else:
-                    self.block(f"{name}_Lintel{side}{j}", folder, (fixed, centre, (h + DOOR_H) / 2), (WALL, width, h - DOOR_H))
+                    made.append(self.block(f"{name}_Lintel{side}{j}", folder, (fixed, centre, (h + DOOR_H) / 2), (WALL, width, h - DOOR_H)))
+        if shell_mat is not None:
+            for a in made:
+                a.static_mesh_component.set_material(0, shell_mat)
+
+    # ---------------------------------------------------------------- Engineering art pass (proxies, kit)
+    def material(self, key):
+        return self.assets[0][key] if (key and self.assets) else None
+
+    def needs_assets(self):
+        return any(a.get("kit") or a.get("dressing") for a in self.layout["areas"])
+
+    def placements(self):
+        """World placements the finish kit routes services around (Engineering only)."""
+        import odyssey_kit_geometry as geo
+        eng = next(a for a in self.layout["areas"] if a["id"] == "engineering")
+        out, excl, racks = {}, [], []
+        for s in eng.get("systems", []):
+            x, y, z = s["at"]
+            if s.get("proxy"):
+                p = geo.PROXY_BUILDERS[s["proxy"]]()
+                excl.append(self.envelope_aabb(geo.expected_bounds(p), s["at"], s.get("yaw", 0)))
+            else:
+                sx, sy, sz = s["size"]
+                excl.append((x - sx / 2, x + sx / 2, y - sy / 2, y + sy / 2, z - sz / 2, z + sz / 2))
+            key = s["label"].replace("Sys_", "").replace("Store_", "")
+            out[{"ThermalPlant": "thermal_plant", "AirHandling": "air_handling"}.get(key, key)] = s["at"]
+        for d in eng.get("dressing", []):
+            p = geo.PROXY_BUILDERS[d["proxy"]]()
+            excl.append(self.envelope_aabb(geo.expected_bounds(p), d["at"], d.get("yaw", 0)))
+            if d["proxy"] == "bus_b_cabinet":
+                out["bus_b_cabinet"] = d["at"]
+            if d["proxy"] == "server_rack":
+                racks.append(d["at"])
+        xs = sorted(r[0] for r in racks)
+        out["server_racks_span"] = (xs[0] - 30, xs[-1] + 30, racks[0][1])
+        x0, x1 = eng["bounds"][0] + 10, eng["bounds"][1] - 10
+        pitch = (x1 - x0) / round((x1 - x0) / 200)
+        out["tray_b_x"] = max((x0 + pitch * (i + 0.5) for i in range(round((x1 - x0) / 200))
+                               if x0 + pitch * (i + 0.5) < xs[0] - 60), key=lambda v: v)
+        out["exclusions"] = excl
+        return out
+
+    @staticmethod
+    def envelope_aabb(local_bounds, at, yaw):
+        (lx0, ly0, lz0), (lx1, ly1, lz1) = local_bounds
+        c, s = math.cos(math.radians(yaw)), math.sin(math.radians(yaw))
+        pts = [(at[0] + x * c - y * s, at[1] + x * s + y * c) for x in (lx0, lx1) for y in (ly0, ly1)]
+        return (min(p[0] for p in pts), max(p[0] for p in pts), min(p[1] for p in pts), max(p[1] for p in pts),
+                at[2] + lz0, at[2] + lz1)
+
+    def ensure_assets(self):
+        if self.assets is None and self.needs_assets():
+            import odyssey_slice_assets
+            self.assets = odyssey_slice_assets.build_all(self.layout, self.placements())
+
+    def proxy_mesh(self, key):
+        return self.assets[1][key]
+
+    @staticmethod
+    def tag(actor, *tags):
+        actor.set_editor_property("tags", [unreal.Name(t) for t in tags])
+
+    def dressing(self, area):
+        """Unreal-only environment actors (no semantic binding, no backend id)."""
+        name = area["name"]
+        import odyssey_kit_geometry as geo
+        for d in area.get("dressing", []):
+            a = self.place(unreal.StaticMeshActor, d["label"], f"{name}/Proxies", d["at"], d.get("yaw", 0))
+            smc = a.static_mesh_component
+            smc.set_static_mesh(self.proxy_mesh(d["proxy"]))
+            box_collision = geo.PROXY_BUILDERS[d["proxy"]]().collision == "box"
+            smc.set_collision_profile_name("BlockAll" if box_collision else "NoCollision")
+            self.tag(a, "OdysseyProxy", "UnrealOnly", "AwaitingProductionMesh")
+
+    def kit(self, area):
+        if not area.get("kit") or not self.assets:
+            return
+        for mesh_name, sm, pivot in self.assets[2]:
+            a = self.place(unreal.StaticMeshActor, mesh_name.replace("SM_KIT_", "Kit_"), f"{area['name']}/Kit", pivot)
+            smc = a.static_mesh_component
+            smc.set_static_mesh(sm)
+            smc.set_collision_profile_name("BlockAll" if mesh_name in ("SM_KIT_ENG_Floor", "SM_KIT_ENG_Walls", "SM_KIT_ENG_DoorFrame", "SM_KIT_ENG_CorridorTransition") else "NoCollision")
+            self.tag(a, "OdysseyKit", "UnrealOnly")
 
     # ---------------------------------------------------------------- semantic actors
     def area_actors(self, area):
@@ -110,8 +206,23 @@ class Builder:
             console = s["class"] == "console"
             cls = unreal.OdysseyPowerConsole if console else unreal.OdysseySystemActor
             a = self.bind(self.place(cls, s["label"], name, s["at"], s.get("yaw", 0)), s["id"])
-            a.get_component_by_class(unreal.StaticMeshComponent).set_static_mesh(unreal.load_asset(MESHES[s.get("mesh", "cube")]))
-            a.set_actor_scale3d(unreal.Vector(s["size"][0] / 100.0, s["size"][1] / 100.0, s["size"][2] / 100.0))
+            body = a.get_component_by_class(unreal.StaticMeshComponent)
+            if s.get("proxy"):
+                # proxy mesh at true scale (pivot bottom-centre); the actor itself is never scaled
+                body.set_static_mesh(self.proxy_mesh(s["proxy"]))
+                body.set_collision_profile_name("BlockAll")
+                self.tag(a, "OdysseyProxy", "AwaitingProductionMesh")
+                if console:
+                    # diegetic display sits on the main screen of the console proxy
+                    disp = a.get_component_by_class(unreal.WidgetComponent)
+                    disp.set_editor_property("relative_location", unreal.Vector(-8.0, 0.0, 103.0))
+                    disp.set_editor_property("relative_rotation", unreal.Rotator(pitch=12.0, yaw=0.0, roll=0.0))
+                    disp.set_editor_property("relative_scale3d", unreal.Vector(0.15, 0.15, 0.15))
+            else:
+                body.set_static_mesh(unreal.load_asset(MESHES[s.get("mesh", "cube")]))
+                a.set_actor_scale3d(unreal.Vector(s["size"][0] / 100.0, s["size"][1] / 100.0, s["size"][2] / 100.0))
+                if self.material(s.get("material")) is not None:
+                    body.set_material(0, self.material(s.get("material")))
             if console:
                 a.set_editor_property("controls", [self.control(c) for c in s.get("controls", [])])
             elif s.get("presented"):
@@ -138,12 +249,19 @@ class Builder:
         return c
 
     def light(self, folder, spec):
-        l = self.place(unreal.PointLight, spec["label"], folder, spec["at"])
-        c = l.get_component_by_class(unreal.PointLightComponent)
+        if spec.get("fixture"):
+            # ceiling light module: fixture mesh + rect light; its emissive follows the light intensity
+            l = self.place(unreal.OdysseyLightFixture, spec["label"], folder, spec["at"], spec.get("fixture_yaw", 0))
+            l.get_component_by_class(unreal.StaticMeshComponent).set_static_mesh(self.proxy_mesh(spec["fixture"]))
+            self.tag(l, "OdysseyProxy", "AwaitingProductionMesh")
+            c = l.get_component_by_class(unreal.RectLightComponent)
+        else:
+            l = self.place(unreal.PointLight, spec["label"], folder, spec["at"])
+            c = l.get_component_by_class(unreal.PointLightComponent)
         c.set_editor_property("intensity", float(spec["intensity"]))
         c.set_editor_property("attenuation_radius", float(spec["radius"]))
         r, g, b = spec["color"]
-        c.set_editor_property("light_color", unreal.Color(int(r * 255), int(g * 255), int(b * 255), 255))
+        c.set_editor_property("light_color", unreal.Color(r=int(r * 255), g=int(g * 255), b=int(b * 255), a=255))
         return l
 
     def lights(self, area):
@@ -187,11 +305,14 @@ class Builder:
         extra = [a["id"] for a in self.layout["areas"] if a["id"] not in allowed]
         if extra:
             raise RuntimeError(f"map definition contains areas outside the vertical slice: {extra}")
+        self.ensure_assets()
         self.prepare_map()
         groups = {}
         for area in self.layout["areas"]:
             self.shell(area)
             self.area_actors(area)
+            self.dressing(area)
+            self.kit(area)
             for key, actors in self.lights(area).items():
                 groups.setdefault(key, []).extend(actors)
         self.wire(groups)

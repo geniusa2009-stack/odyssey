@@ -73,7 +73,7 @@ public:
 
 	// Called by the player's interactor.
 	void SetFocused(bool bFocused);
-	void Activate();
+	void ActivateInteraction();
 	bool IsFocused() const { return bIsFocused; }
 
 	UPROPERTY(BlueprintAssignable, Category = "Odyssey|Interaction") FOdysseyPromptSignature OnPromptStateChanged;

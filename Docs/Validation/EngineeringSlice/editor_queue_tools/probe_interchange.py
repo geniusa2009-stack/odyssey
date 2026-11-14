@@ -1,0 +1,15 @@
+import unreal
+names = [n for n in dir(unreal) if "Interchange" in n and ("Pipeline" in n or "Manager" in n or "ImportAsset" in n or "Gltf" in n or "GLTF" in n)]
+print("classes:", names[:80])
+print("ImportAssetParameters doc:", (unreal.ImportAssetParameters.__doc__ or "")[:1500])
+m = unreal.InterchangeManager.get_interchange_manager_scripted()
+print("manager methods:", [x for x in dir(m) if not x.startswith("_")][:60])
+p = unreal.InterchangeGenericAssetsPipeline()
+print("generic pipeline props:", [x for x in dir(p) if not x.startswith("_")][:80])
+mp = p.get_editor_property("mesh_pipeline")
+print("mesh pipeline props:", [x for x in dir(mp) if not x.startswith("_")][:120])
+cp = p.get_editor_property("common_meshes_properties")
+print("common mesh props:", [x for x in dir(cp) if not x.startswith("_")][:80])
+mat = p.get_editor_property("material_pipeline")
+print("material pipeline props:", [x for x in dir(mat) if not x.startswith("_")][:80])
+print("SourceData:", [x for x in dir(unreal.InterchangeManager) if "source" in x.lower()])

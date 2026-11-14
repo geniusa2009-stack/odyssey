@@ -94,7 +94,7 @@ void UOdysseyInteractorComponent::Interact()
 {
 	if (Focused.IsValid())
 	{
-		Focused->Activate();
+		Focused->ActivateInteraction();
 	}
 }
 
