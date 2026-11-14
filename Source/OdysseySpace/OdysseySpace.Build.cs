@@ -9,6 +9,6 @@ public class OdysseySpace : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		CppStandard = CppStandardVersion.Cpp20;
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG" });
-		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore", "RHI" });  // RHI: GPU frame time for the capture-tour profile
+		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore", "RHI", "OdysseyUI" });  // OdysseyUI: touch controls  // RHI: GPU frame time for the capture-tour profile
 	}
 }

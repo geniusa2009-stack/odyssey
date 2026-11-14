@@ -18,6 +18,10 @@ class ODYSSEYSPACE_API UOdysseySpaceHUDWidget : public UUserWidget
 public:
 	UPROPERTY(Transient) TObjectPtr<AOdysseySpacePlayerController> Owner;
 
+	// Touch hit tests matching the painted layout (local slate units of the full-viewport HUD).
+	static int32 HitMenuItem(FVector2f P, FVector2f Screen);
+	static int32 HitPlannerRow(FVector2f P, FVector2f Screen, int32 NumBodies);
+
 protected:
 	virtual int32 NativePaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect,
 		FSlateWindowElementList& OutDrawElements, int32 LayerId, const FWidgetStyle& InWidgetStyle, bool bParentEnabled) const override;

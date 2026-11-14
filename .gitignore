@@ -48,3 +48,11 @@ Thumbs.db
 
 # ---- macOS verification runner output (Tools/Mac)
 Logs/
+
+# ---- Android judge build: signing material and package outputs stay local
+*.keystore
+*.jks
+*.apk
+*.aab
+*.obb
+Build/Android/

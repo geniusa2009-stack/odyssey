@@ -60,6 +60,12 @@ public:
 	UPROPERTY(EditAnywhere, Config, Category = "Session")
 	FString DisplayName = TEXT("Commander");
 
+	// Judge offline demo (set only by the Android judge build, Config/Android/AndroidGame.ini): no
+	// backend connection is attempted; the station is explorable and backend-driven state stays idle.
+	// The normal backend architecture is untouched and desktop builds never set this.
+	UPROPERTY(EditAnywhere, Config, Category = "Session")
+	bool bOfflineDemo = false;
+
 	// Start the backend session automatically when the game instance starts.
 	UPROPERTY(EditAnywhere, Config, Category = "Session")
 	bool bAutoStartSession = true;

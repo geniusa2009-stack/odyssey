@@ -4,6 +4,7 @@
 #include "OdysseyBrandPaint.h"
 #include "OdysseyCelestialBody.h"
 #include "OdysseySpaceGameMode.h"
+#include "OdysseyTouchControls.h"
 #include "OdysseyTransitDirector.h"
 
 namespace
@@ -141,10 +142,13 @@ int32 UOdysseySpaceHUDWidget::NativePaint(const FPaintArgs& Args, const FGeometr
 
 	Badge(P, S, Flow == EOdysseySpaceFlow::Menu ? In : 0.85f * In);
 
-	const FSlateFontInfo Mono = Font(TEXT("Mono"), FMath::Max(8.f, S * 0.0105f), 200);
-	const FSlateFontInfo MonoSmall = Font(TEXT("Mono"), FMath::Max(8.f, S * 0.0088f), 220);
+	// phones: small print is enlarged so it stays readable at arm's length on a 6" screen
+	const bool bTouch = UOdysseyTouchControls::ShouldUseTouch();
+	const float FS = bTouch ? 1.45f : 1.f;
+	const FSlateFontInfo Mono = Font(TEXT("Mono"), FMath::Max(8.f, S * 0.0105f * FS), 200);
+	const FSlateFontInfo MonoSmall = Font(TEXT("Mono"), FMath::Max(8.f, S * 0.0088f * FS), 220);
 	const FSlateFontInfo Label = Font(TEXT("Bold"), FMath::Max(10.f, S * 0.026f), 260);
-	const FSlateFontInfo Body = Font(TEXT("Regular"), FMath::Max(9.f, S * 0.0125f), 40);
+	const FSlateFontInfo Body = Font(TEXT("Regular"), FMath::Max(9.f, S * 0.0125f * (bTouch ? 1.3f : 1.f)), 40);
 	const FSlateFontInfo Title = Font(TEXT("Bold"), FMath::Max(14.f, S * 0.05f), 520);
 
 	if (Flow == EOdysseySpaceFlow::Menu)
@@ -170,7 +174,14 @@ int32 UOdysseySpaceHUDWidget::NativePaint(const FPaintArgs& Args, const FGeometr
 			Q.Text(FVector2f(X0 + Shift + S * 0.046f, Y + S * 0.038f), AOdysseySpacePlayerController::MenuDetail(i).ToString(), Body, bSel ? Muted(1.f) : Muted(0.5f), 2);
 			Y += S * 0.082f;
 		}
-		Hints(P, FVector2f(X0, S * 0.9f), {{TEXT("W / S"), TEXT("SELECT")}, {TEXT("ENTER"), TEXT("CONFIRM")}, {TEXT("Q"), FString(TEXT("QUALITY  ")) + PC->GetQualityName()}}, S);
+		if (bTouch)
+		{
+			P.Text(FVector2f(X0, S * 0.9f), FString(TEXT("TAP A MISSION TO BEGIN   /   QUALITY  ")) + PC->GetQualityName(), MonoSmall, Muted(0.9f * In));
+		}
+		else
+		{
+			Hints(P, FVector2f(X0, S * 0.9f), {{TEXT("W / S"), TEXT("SELECT")}, {TEXT("ENTER"), TEXT("CONFIRM")}, {TEXT("Q"), FString(TEXT("QUALITY  ")) + PC->GetQualityName()}}, S);
+		}
 		if (Cur)
 		{
 			P.TextAligned(FVector2f(Screen.X - S * 0.05f, S * 0.93f), FVector2f(1.f, 0.f),
@@ -271,6 +282,10 @@ int32 UOdysseySpaceHUDWidget::NativePaint(const FPaintArgs& Args, const FGeometr
 			}
 			P.TextAligned(FVector2f(Screen.X - S * 0.05f, Screen.Y - S * 0.105f - S * 0.03f), FVector2f(1.f, 0.f), TEXT("OTV-1 MERIDIAN  /  CREW 4  /  NOMINAL"), MonoSmall, Muted(0.85f));
 		}
+		else if (!bAligning && bTouch)
+		{
+			P.Text(FVector2f(S * 0.05f, S * 0.92f), TEXT("TAP A DESTINATION, THEN LAUNCH"), MonoSmall, Muted(0.9f));
+		}
 		else if (!bAligning)
 		{
 			TArray<TPair<FString, FString>> Items = {{TEXT("A / D"), TEXT("DESTINATION")}, {TEXT("ENTER"), TEXT("LAUNCH TRANSFER")}, {TEXT("C"), TEXT("CAMERA")}};
@@ -304,4 +319,35 @@ int32 UOdysseySpaceHUDWidget::NativePaint(const FPaintArgs& Args, const FGeometr
 		P.TextAligned(Screen * 0.5f, FVector2f(0.5f, 0.5f), TEXT("DESCENDING TO EARTH COMMAND"), Mono, Ion(Fade), 21);
 	}
 	return Layer + 30;
+}
+
+int32 UOdysseySpaceHUDWidget::HitMenuItem(FVector2f P, FVector2f Screen)
+{
+	const float S = Screen.Y;
+	const float X0 = S * 0.07f;
+	for (int32 i = 0; i < AOdysseySpacePlayerController::NumMenuItems; ++i)
+	{
+		const float Y = S * 0.38f + i * S * 0.082f;
+		if (P.X >= X0 - S * 0.02f && P.X <= X0 + S * 0.46f && P.Y >= Y - S * 0.006f && P.Y < Y + S * 0.076f)
+		{
+			return i;
+		}
+	}
+	return INDEX_NONE;
+}
+
+int32 UOdysseySpaceHUDWidget::HitPlannerRow(FVector2f P, FVector2f Screen, int32 NumBodies)
+{
+	const float S = Screen.Y;
+	const float W = S * 0.44f, RowH = S * 0.075f;
+	const FVector2f Pos(Screen.X - W - S * 0.04f, S * 0.11f);
+	for (int32 i = 0; i < NumBodies; ++i)
+	{
+		const float Y = Pos.Y + S * 0.075f + i * RowH;
+		if (P.X >= Pos.X && P.X <= Pos.X + W && P.Y >= Y && P.Y < Y + RowH)
+		{
+			return i;
+		}
+	}
+	return INDEX_NONE;
 }

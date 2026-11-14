@@ -97,6 +97,12 @@ AOdysseyPowerConsole* AOdysseyPlayerCharacter::ActiveConsole() const
 	return F ? Cast<AOdysseyPowerConsole>(F->GetOwner()) : nullptr;
 }
 
+void AOdysseyPlayerCharacter::TouchMove(const FVector2D& Axis) { Move(FInputActionValue(Axis)); }
+void AOdysseyPlayerCharacter::TouchLook(const FVector2D& Axis) { Look(FInputActionValue(Axis)); }
+void AOdysseyPlayerCharacter::TouchInteract() { Interact(FInputActionValue(true)); }
+void AOdysseyPlayerCharacter::TouchCycle() { Cycle(FInputActionValue(true)); }
+void AOdysseyPlayerCharacter::TouchBack() { Back(FInputActionValue(true)); }
+
 void AOdysseyPlayerCharacter::Move(const FInputActionValue& Value)
 {
 	if (bInInteractionStance || !Controller)

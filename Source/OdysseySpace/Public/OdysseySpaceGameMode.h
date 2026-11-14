@@ -16,6 +16,7 @@
 class AOdysseyTransitDirector;
 class UOdysseyLogoWidget;
 class UOdysseySpaceHUDWidget;
+class UOdysseyTouchControls;
 
 UENUM(BlueprintType)
 enum class EOdysseySpaceFlow : uint8
@@ -94,6 +95,13 @@ private:
 	void OnBody3() { SelectBody(2); }
 	void OnConfirm();
 	void OnBack();
+
+	// touch controls (phones): buttons follow the flow; taps on menu items / planner rows select them
+	void UpdateTouch();
+	void HandleTouchButton(FName Id);
+	bool HandleTouchTap(FVector2f Pos, FVector2f Screen);
+	UPROPERTY(Transient) TObjectPtr<UOdysseyTouchControls> Touch;
+	FString TouchLayout;
 
 	// scripted validation tour
 	struct FCaptureStep

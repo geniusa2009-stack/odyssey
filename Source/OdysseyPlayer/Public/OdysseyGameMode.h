@@ -55,4 +55,9 @@ protected:
 
 private:
 	UPROPERTY() TObjectPtr<class UOdysseyHUDWidget> HUD;
+
+	// touch controls (phones): move stick, drag-to-look, USE / NEXT / BACK / ORBIT
+	void TickTouch();
+	void HandleTouchButton(FName Id);
+	UPROPERTY() TObjectPtr<class UOdysseyTouchControls> Touch;
 };

@@ -49,7 +49,9 @@ FText UOdysseyHUDWidget::PromptText() const
 	}
 	switch (F->GetPromptState())
 	{
-	case EOdysseyPromptState::Offline: return NSLOCTEXT("Odyssey", "PromptOffline", "Station link offline");
+	case EOdysseyPromptState::Offline:
+		return UOdysseyBackendSubsystem::IsOfflineDemo() ? NSLOCTEXT("Odyssey", "PromptDemo", "Live station link required — offline demo")
+			: NSLOCTEXT("Odyssey", "PromptOffline", "Station link offline");
 	case EOdysseyPromptState::Pending: return NSLOCTEXT("Odyssey", "PromptPending", "…");
 	case EOdysseyPromptState::Refreshing: return NSLOCTEXT("Odyssey", "PromptRefreshing", "Updating");
 	default: return F->PromptText;
@@ -68,6 +70,7 @@ void UOdysseyHUDWidget::Refresh_Implementation()
 	{
 		const EOdysseySessionState S = B->GetSessionState();
 		ConnectionState->SetText(bReady ? FText::GetEmpty()
+			: UOdysseyBackendSubsystem::IsOfflineDemo() ? NSLOCTEXT("Odyssey", "JudgeDemo", "Judge demo · offline station tour")
 			: S == EOdysseySessionState::Recovering ? NSLOCTEXT("Odyssey", "Reconnecting", "Re-establishing station link")
 			: S == EOdysseySessionState::Failed ? NSLOCTEXT("Odyssey", "LinkFailed", "Station link unavailable")
 												: NSLOCTEXT("Odyssey", "Connecting", "Connecting to ODYSSEY"));

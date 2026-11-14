@@ -171,6 +171,11 @@ void UOdysseyBackendSubsystem::StartSession()
 {
 	const UOdysseyBackendSettings* Settings = GetDefault<UOdysseyBackendSettings>();
 	EnvName = Settings->GetActiveEnvironmentName();
+	if (Settings->bOfflineDemo)
+	{
+		UE_LOG(LogOdysseyBackend, Log, TEXT("ODYSSEY judge offline demo: no backend session is started"));
+		return;
+	}
 	FString Error;
 	if (!Settings->ResolveActiveEnvironment(Env, Error))
 	{
@@ -627,6 +632,11 @@ const odyssey::MirrorModel* UOdysseyBackendSubsystem::GetMirrorModel() const
 EOdysseySessionState UOdysseyBackendSubsystem::GetSessionState() const
 {
 	return Machine ? ToUE(Machine->state()) : EOdysseySessionState::Idle;
+}
+
+bool UOdysseyBackendSubsystem::IsOfflineDemo()
+{
+	return GetDefault<UOdysseyBackendSettings>()->bOfflineDemo;
 }
 
 bool UOdysseyBackendSubsystem::IsSessionReady() const

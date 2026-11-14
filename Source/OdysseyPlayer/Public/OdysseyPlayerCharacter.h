@@ -45,6 +45,14 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Odyssey|Interaction") bool bInInteractionStance = false;
 	UPROPERTY(BlueprintReadOnly, Category = "Odyssey|Interaction") int32 SelectedControl = 0;
 
+	// Direct entry points for on-screen touch controls: identical behaviour to the input-action
+	// handlers, usable without the Enhanced Input assets.
+	void TouchMove(const FVector2D& Axis);
+	void TouchLook(const FVector2D& Axis);
+	void TouchInteract();
+	void TouchCycle();
+	void TouchBack();
+
 	// Place the pawn at a semantic anchor (used by the game mode; no backend traffic).
 	void PlaceAt(const FTransform& Anchor);
 

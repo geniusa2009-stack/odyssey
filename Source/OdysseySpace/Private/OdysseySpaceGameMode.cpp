@@ -17,6 +17,7 @@
 #include "OdysseyLogoWidget.h"
 #include "OdysseySpace.h"
 #include "OdysseySpaceHUDWidget.h"
+#include "OdysseyTouchControls.h"
 #include "OdysseyTransitDirector.h"
 #include "ShaderCompiler.h"
 #include "UnrealClient.h"
@@ -86,6 +87,16 @@ void AOdysseySpacePlayerController::BeginPlay()
 		{
 			Logo->AddToViewport(10);
 		}
+		if (UOdysseyTouchControls::ShouldUseTouch())
+		{
+			Touch = CreateWidget<UOdysseyTouchControls>(this, UOdysseyTouchControls::StaticClass());
+			if (Touch)
+			{
+				Touch->OnPressed.BindUObject(this, &AOdysseySpacePlayerController::HandleTouchButton);
+				Touch->OnTap.BindUObject(this, &AOdysseySpacePlayerController::HandleTouchTap);
+				Touch->AddToViewport(20);  // above the logo so a tap can skip the intro
+			}
+		}
 	}
 	SetInputMode(FInputModeGameOnly());
 	// the development diagnostics overlay belongs to the station; the space front end stays clean
@@ -128,6 +139,7 @@ void AOdysseySpacePlayerController::SetupInputComponent()
 	InputComponent->BindKey(EKeys::Gamepad_FaceButton_Bottom, IE_Pressed, this, &AOdysseySpacePlayerController::OnConfirm);
 	InputComponent->BindKey(EKeys::LeftMouseButton, IE_Pressed, this, &AOdysseySpacePlayerController::OnConfirm);
 	InputComponent->BindKey(EKeys::Escape, IE_Pressed, this, &AOdysseySpacePlayerController::OnBack);
+	InputComponent->BindKey(EKeys::Android_Back, IE_Pressed, this, &AOdysseySpacePlayerController::OnBack);
 	InputComponent->BindKey(EKeys::BackSpace, IE_Pressed, this, &AOdysseySpacePlayerController::OnBack);
 	InputComponent->BindKey(EKeys::Gamepad_FaceButton_Right, IE_Pressed, this, &AOdysseySpacePlayerController::OnBack);
 	InputComponent->BindKey(EKeys::C, IE_Pressed, this, &AOdysseySpacePlayerController::CycleCamera);
@@ -186,6 +198,7 @@ void AOdysseySpacePlayerController::PlayerTick(float DeltaTime)
 		}
 		return;
 	}
+	UpdateTouch();
 	if (Flow == EOdysseySpaceFlow::Intro && (!Logo || Logo->IsFinished() || Logo->GetSceneReveal() >= 0.999f))
 	{
 		SetFlow(EOdysseySpaceFlow::Menu);
@@ -205,6 +218,86 @@ void AOdysseySpacePlayerController::PlayerTick(float DeltaTime)
 	{
 		TickCapture(DeltaTime);
 	}
+}
+
+void AOdysseySpacePlayerController::UpdateTouch()
+{
+	if (!Touch)
+	{
+		return;
+	}
+	const bool bTravel = Director && Director->IsTraveling();
+	const bool bAligning = Director && Director->GetTelemetry().Phase == EOdysseyTransitPhase::Aligning;
+	const AOdysseyCelestialBody* Cur = Director ? Director->GetBody(Director->GetCurrentBody()) : nullptr;
+	const bool bAtEarth = Cur && Cur->BodyId == FName(TEXT("earth"));
+	FString Layout = TEXT("none");
+	if (Flow == EOdysseySpaceFlow::Menu) Layout = TEXT("menu");
+	else if (Flow == EOdysseySpaceFlow::Navigation) Layout = (bTravel || bAligning) ? TEXT("travel") : bAtEarth ? TEXT("nav-earth") : TEXT("nav");
+	if (Layout == TouchLayout)
+	{
+		return;
+	}
+	TouchLayout = Layout;
+	TArray<FOdysseyTouchButton> B;
+	auto Add = [&B](FName Id, const TCHAR* Label, FVector2f Anchor, FVector2f Offset, float R, bool bPrimary)
+	{
+		FOdysseyTouchButton X;
+		X.Id = Id; X.Label = Label; X.Anchor = Anchor; X.Offset = Offset; X.Radius = R; X.bPrimary = bPrimary;
+		B.Add(X);
+	};
+	if (Layout == TEXT("menu"))
+	{
+		Add(TEXT("quality"), TEXT("QUALITY"), FVector2f(1.f, 1.f), FVector2f(-0.06f, -0.16f), 0.05f, false);
+	}
+	else if (Layout.StartsWith(TEXT("nav")))
+	{
+		Add(TEXT("launch"), TEXT("LAUNCH"), FVector2f(1.f, 1.f), FVector2f(-0.10f, -0.12f), 0.085f, true);
+		Add(TEXT("camera"), TEXT("CAMERA"), FVector2f(1.f, 1.f), FVector2f(-0.30f, -0.08f), 0.058f, false);
+		Add(TEXT("menu"), TEXT("MENU"), FVector2f(0.f, 0.f), FVector2f(0.055f, 0.15f), 0.045f, false);
+		if (Layout == TEXT("nav-earth"))
+		{
+			Add(TEXT("descend"), TEXT("DESCEND"), FVector2f(1.f, 1.f), FVector2f(-0.27f, -0.26f), 0.065f, false);
+		}
+	}
+	Touch->SetButtons(B);
+}
+
+void AOdysseySpacePlayerController::HandleTouchButton(FName Id)
+{
+	if (Id == TEXT("launch")) Confirm();
+	else if (Id == TEXT("camera")) CycleCamera();
+	else if (Id == TEXT("descend")) Descend();
+	else if (Id == TEXT("menu")) Back();
+	else if (Id == TEXT("quality")) CycleQuality();
+}
+
+bool AOdysseySpacePlayerController::HandleTouchTap(FVector2f Pos, FVector2f Screen)
+{
+	if (Flow == EOdysseySpaceFlow::Intro)
+	{
+		SkipIntro();
+		return true;
+	}
+	if (Flow == EOdysseySpaceFlow::Menu)
+	{
+		const int32 Item = UOdysseySpaceHUDWidget::HitMenuItem(Pos, Screen);
+		if (Item != INDEX_NONE)
+		{
+			MenuIndex = Item;
+			Confirm();
+			return true;
+		}
+	}
+	else if (Flow == EOdysseySpaceFlow::Navigation && Director && !Director->IsTraveling())
+	{
+		const int32 Row = UOdysseySpaceHUDWidget::HitPlannerRow(Pos, Screen, Director->NumBodies());
+		if (Row != INDEX_NONE)
+		{
+			SelectBody(Row);
+			return true;
+		}
+	}
+	return false;
 }
 
 void AOdysseySpacePlayerController::SkipIntro()

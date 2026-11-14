@@ -73,6 +73,8 @@ public:
 	// ------------------------------------------------------------ mirror views (read-only, not authoritative)
 	UFUNCTION(BlueprintPure, Category = "Odyssey|State") EOdysseySessionState GetSessionState() const;
 	UFUNCTION(BlueprintPure, Category = "Odyssey|State") bool IsSessionReady() const;
+	// Judge offline demo build (no backend by design): UI shows a clean demo status, never errors.
+	UFUNCTION(BlueprintPure, Category = "Odyssey|State") static bool IsOfflineDemo();
 	UFUNCTION(BlueprintPure, Category = "Odyssey|State") FOdysseyMissionContext GetMissionContext() const;
 	UFUNCTION(BlueprintPure, Category = "Odyssey|State") FName GetPlayerSemanticLocation() const;
 	UFUNCTION(BlueprintPure, Category = "Odyssey|State") FOdysseyObjectView GetObjectView(FName ObjectId) const;

@@ -119,7 +119,7 @@ void UOdysseyDebugSubsystem::HandleVerified(int32 Count, const FString& First)
 void UOdysseyDebugSubsystem::Draw(UCanvas* Canvas, APlayerController* PC)
 {
 	const UOdysseyBackendSubsystem* B = GetGameInstance()->GetSubsystem<UOdysseyBackendSubsystem>();
-	if (!bOverlay || !Canvas || !B)
+	if (!bOverlay || !Canvas || !B || UOdysseyBackendSubsystem::IsOfflineDemo())  // judge build: no dev overlay
 	{
 		return;
 	}

@@ -22,6 +22,9 @@
 #include "OdysseyCore.h"
 #include "OdysseyHUDWidget.h"
 #include "OdysseyPlayerCharacter.h"
+#include "OdysseyInteractableComponent.h"
+#include "OdysseyInteractorComponent.h"
+#include "OdysseyTouchControls.h"
 #include "OdysseySemanticAnchor.h"
 #include "OdysseyWorldSubsystem.h"
 
@@ -43,6 +46,10 @@ void AOdysseyGameMode::BeginPlay()
 			HandleSessionReady();  // the game instance connected before this map loaded
 			return;
 		}
+	}
+	if (UOdysseyBackendSubsystem::IsOfflineDemo())
+	{
+		return;  // judge offline demo: no session will arrive; the station is explorable from PlayerStart
 	}
 	if (APlayerController* PC = GetWorld()->GetFirstPlayerController())
 	{
@@ -97,6 +104,7 @@ void AOdysseyPlayerController::SetupInputComponent()
 	{
 		InputComponent->BindKey(EKeys::F10, IE_Pressed, this, &AOdysseyPlayerController::ReturnToOrbit);
 		InputComponent->BindKey(EKeys::Gamepad_Special_Right, IE_Pressed, this, &AOdysseyPlayerController::ReturnToOrbit);
+		InputComponent->BindKey(EKeys::Android_Back, IE_Pressed, this, &AOdysseyPlayerController::ReturnToOrbit);
 	}
 }
 
@@ -143,6 +151,61 @@ void AOdysseyPlayerController::PlayerTick(float DeltaTime)
 	if (TourStep >= 0)
 	{
 		TickStationTour(DeltaTime);
+	}
+	TickTouch();
+}
+
+void AOdysseyPlayerController::TickTouch()
+{
+	AOdysseyPlayerCharacter* C = Cast<AOdysseyPlayerCharacter>(GetPawn());
+	if (!Touch || !C)
+	{
+		return;
+	}
+	const FVector2D Move = Touch->GetMove();
+	if (!Move.IsNearlyZero(0.05))
+	{
+		C->TouchMove(Move);
+	}
+	const FVector2D Look = Touch->ConsumeLook();
+	if (!Look.IsNearlyZero())
+	{
+		C->TouchLook(Look);
+	}
+	const UOdysseyInteractorComponent* I = C->Interactor;
+	const bool bStance = C->bInInteractionStance;
+	Touch->SetButtonVisible(TEXT("use"), bStance || (I && I->GetFocused()));
+	Touch->SetButtonVisible(TEXT("next"), bStance);
+	Touch->SetButtonVisible(TEXT("back"), bStance);
+	Touch->SetStickEnabled(!bStance);
+	// the station has no UMG HUD class assigned; the touch layer carries status + prompt
+	FString Prompt;
+	if (const UOdysseyInteractableComponent* F = I ? I->GetFocused() : nullptr)
+	{
+		Prompt = F->GetPromptState() == EOdysseyPromptState::Offline && UOdysseyBackendSubsystem::IsOfflineDemo()
+			? FString(TEXT("Live station link required — offline demo")) : F->PromptText.ToString();
+	}
+	Touch->SetStatus(UOdysseyBackendSubsystem::IsOfflineDemo() ? TEXT("EARTH COMMAND  ·  JUDGE DEMO  ·  OFFLINE") : TEXT(""), Prompt);
+}
+
+void AOdysseyPlayerController::HandleTouchButton(FName Id)
+{
+	AOdysseyPlayerCharacter* C = Cast<AOdysseyPlayerCharacter>(GetPawn());
+	if (Id == TEXT("orbit"))
+	{
+		ReturnToOrbit();
+	}
+	else if (C && Id == TEXT("use"))
+	{
+		C->TouchInteract();
+	}
+	else if (C && Id == TEXT("next"))
+	{
+		C->TouchCycle();
+	}
+	else if (C && Id == TEXT("back"))
+	{
+		C->TouchBack();
 	}
 }
 
@@ -216,6 +279,29 @@ void AOdysseyPlayerController::BeginPlay()
 		TourWait = 8.f;  // let the map, shaders and the backend snapshot settle
 		ConsoleCommand(TEXT("Odyssey.Debug.Overlay 0"));
 		ConsoleCommand(TEXT("StartFPSChart"));
+	}
+	if (IsLocalController() && TourStep < 0 && UOdysseyTouchControls::ShouldUseTouch())
+	{
+		Touch = CreateWidget<UOdysseyTouchControls>(this, UOdysseyTouchControls::StaticClass());
+		if (Touch)
+		{
+			auto Make = [](FName Id, const TCHAR* Label, FVector2f Anchor, FVector2f Offset, float R, bool bPrimary)
+			{
+				FOdysseyTouchButton B;
+				B.Id = Id; B.Label = Label; B.Anchor = Anchor; B.Offset = Offset; B.Radius = R; B.bPrimary = bPrimary;
+				return B;
+			};
+			Touch->SetButtons({
+				Make(TEXT("use"), TEXT("USE"), FVector2f(1.f, 1.f), FVector2f(-0.10f, -0.13f), 0.085f, true),
+				Make(TEXT("next"), TEXT("NEXT"), FVector2f(1.f, 1.f), FVector2f(-0.29f, -0.08f), 0.058f, false),
+				Make(TEXT("back"), TEXT("BACK"), FVector2f(1.f, 1.f), FVector2f(-0.27f, -0.25f), 0.058f, false),
+				Make(TEXT("orbit"), TEXT("ORBIT"), FVector2f(1.f, 0.f), FVector2f(-0.06f, 0.07f), 0.05f, false),
+			});
+			Touch->SetStickEnabled(true);
+			Touch->SetLookEnabled(true);
+			Touch->OnPressed.BindUObject(this, &AOdysseyPlayerController::HandleTouchButton);
+			Touch->AddToViewport(20);
+		}
 	}
 	if (IsLocalController() && HUDClass)
 	{
