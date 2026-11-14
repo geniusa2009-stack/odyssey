@@ -1,0 +1,626 @@
+{
+ "name": "OD_ENV_WallUtilityPanel",
+ "title": "Wall Utility Panel",
+ "reference_image": "12_Wall_Utility_Panel.png",
+ "description": "Wall-mounted utility panel: gunmetal wall backplate, chamfered white frame with ion strips, recessed equipment bay holding a hinged power-access door, status display, circular power connectors and data ports, a guarded emergency switch and intake/exhaust vents.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 1.0,
+  "H_z": 1.2,
+  "D_x": 0.18
+ },
+ "pivot": {
+  "type": "wall",
+  "text": "centre of the rear face (flush to wall)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    0,
+    -50.0,
+    -60.0
+   ],
+   "max": [
+    18,
+    50.0,
+    60.0
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "PowerAccessDoor",
+   "role": "movable",
+   "pivot_cm_ue": [
+    7.0,
+    41.0,
+    14.0
+   ],
+   "triangles": 320,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 110,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ]
+   },
+   "note": "Power access door, hinge on the +Y (viewer's left) edge",
+   "children": []
+  },
+  {
+   "name": "EmergencySwitch_Button",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    14.6,
+    -35.5,
+    13.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.6
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "EmergencySwitch_Guard",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    14.6,
+    -35.5,
+    26.0
+   ],
+   "triangles": 92,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_Glass",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     0,
+     0,
+     1
+    ],
+    "note": "flip-up cover hinged on its top edge"
+   },
+   "note": "",
+   "children": []
+  }
+ ],
+ "static_components": [
+  "Body",
+  "StatusLights",
+  "Screen_Status"
+ ],
+ "collision_recommendation": "None needed (flush wall detail) or one box 0.18 x 1.00 x 1.20 for traces.",
+ "nanite_recommendation": "Nanite ON for Body; door/guard/button/display small separate meshes.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 128,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_Amber_Emissive": {
+   "triangles": 220,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 1080,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Display": {
+   "triangles": 12,
+   "base_srgb": "#09131C",
+   "metallic": 0.0,
+   "roughness": 0.12,
+   "emissive": false
+  },
+  "OD_MAT_EmergencyRed_Emissive": {
+   "triangles": 100,
+   "base_srgb": "#B84743",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_Glass": {
+   "triangles": 44,
+   "base_srgb": "#9FB7BF",
+   "metallic": 0.0,
+   "roughness": 0.04,
+   "emissive": false
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 724,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 1228,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_HazardPaint": {
+   "triangles": 440,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.55,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 200,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "EmergencySwitch_Button",
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ]
+  },
+  {
+   "node": "EmergencySwitch_Guard",
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Status display",
+   "socket": "SOCKET_Interact_Screen",
+   "text": "Utility status UI"
+  },
+  {
+   "name": "Power door",
+   "socket": "SOCKET_Interact_PowerDoor",
+   "text": "Opens 110 deg"
+  },
+  {
+   "name": "Emergency switch",
+   "socket": "SOCKET_Interact_Emergency",
+   "text": "Lift guard 100 deg, press button"
+  },
+  {
+   "name": "Connectors",
+   "socket": "SOCKET_Interact_Connectors",
+   "text": "Plug-in point for cables/tools"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Wall",
+   "socket": "SOCKET_Mount_Wall",
+   "text": "Flush to wall; four corner anchors"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_ENV_WallUtilityPanel",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Body",
+    "StatusLights",
+    "PowerAccessDoor",
+    "Screen_Status",
+    "EmergencySwitch_Button",
+    "EmergencySwitch_Guard",
+    "SOCKET_Interact_Screen",
+    "SOCKET_Interact_PowerDoor",
+    "SOCKET_Interact_Emergency",
+    "SOCKET_Interact_Connectors",
+    "SOCKET_Mount_Wall",
+    "SOCKET_Mount_Anchor_1",
+    "SOCKET_Mount_Anchor_2",
+    "SOCKET_Mount_Anchor_3",
+    "SOCKET_Mount_Anchor_4"
+   ]
+  },
+  {
+   "name": "Body",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 3244,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": null,
+   "note": "Backplate, frame, bay, vents, connector plate",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 464,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Frame ion strips and LEDs",
+   "children": []
+  },
+  {
+   "name": "PowerAccessDoor",
+   "role": "movable",
+   "pivot_cm_ue": [
+    7.0,
+    41.0,
+    14.0
+   ],
+   "triangles": 320,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 110,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ]
+   },
+   "note": "Power access door, hinge on the +Y (viewer's left) edge",
+   "children": []
+  },
+  {
+   "name": "Screen_Status",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Utility status display (0..1 UV)",
+   "children": []
+  },
+  {
+   "name": "EmergencySwitch_Button",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    14.6,
+    -35.5,
+    13.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.6
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "EmergencySwitch_Guard",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    14.6,
+    -35.5,
+    26.0
+   ],
+   "triangles": 92,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_Glass",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     0,
+     0,
+     1
+    ],
+    "note": "flip-up cover hinged on its top edge"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Screen",
+   "role": "socket",
+   "pivot_cm_ue": [
+    7.5,
+    -8.0,
+    22.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Status display",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_PowerDoor",
+   "role": "socket",
+   "pivot_cm_ue": [
+    11.8,
+    17.8,
+    14.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Power access door pull",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Emergency",
+   "role": "socket",
+   "pivot_cm_ue": [
+    18.0,
+    -35.5,
+    13.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Emergency switch (lift guard, press)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Connectors",
+   "role": "socket",
+   "pivot_cm_ue": [
+    9.2,
+    -2.0,
+    -1.5
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Power connectors",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Wall",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Pivot: centre of the rear face, flush to wall",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Anchor_1",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    44,
+    54
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Wall anchor through backplate corner",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Anchor_2",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    -44,
+    54
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Wall anchor through backplate corner",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Anchor_3",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    44,
+    -54
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Wall anchor through backplate corner",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Anchor_4",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    -44,
+    -54
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Wall anchor through backplate corner",
+   "children": []
+  }
+ ],
+ "notes": [
+  "Reference is drawn landscape; the prototype contract is portrait W 1.00 x H 1.20 m, which this follows."
+ ],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_ENV_WallUtilityPanel.glb",
+   "nodes": [
+    "OD_ENV_WallUtilityPanel",
+    "Body",
+    "StatusLights",
+    "PowerAccessDoor",
+    "Screen_Status",
+    "EmergencySwitch_Button",
+    "EmergencySwitch_Guard",
+    "SOCKET_Interact_Screen",
+    "SOCKET_Interact_PowerDoor",
+    "SOCKET_Interact_Emergency",
+    "SOCKET_Interact_Connectors",
+    "SOCKET_Mount_Wall",
+    "SOCKET_Mount_Anchor_1",
+    "SOCKET_Mount_Anchor_2",
+    "SOCKET_Mount_Anchor_3",
+    "SOCKET_Mount_Anchor_4"
+   ],
+   "material_slots": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_Display",
+    "OD_MAT_Glass"
+   ],
+   "triangles": 4176,
+   "bounds_ue_cm": {
+    "min": [
+     0.0,
+     -50.0,
+     -60.0
+    ],
+    "max": [
+     18.0,
+     50.0,
+     60.0
+    ]
+   },
+   "size_m": {
+    "D_x": 0.18,
+    "W_y": 1.0,
+    "H_z": 1.2
+   },
+   "root_node": "OD_ENV_WallUtilityPanel",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 103,
+   "hulls": 191,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

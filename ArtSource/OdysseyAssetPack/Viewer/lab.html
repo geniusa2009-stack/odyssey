@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ODYSSEY Asset Lab</title>
+<style>
+  html, body { margin:0; height:100%; background:#16191d; color:#d8d9d5; font:12px/1.4 system-ui, sans-serif; overflow:hidden; }
+  canvas { width:100%; height:100%; display:block; }
+  #bar { position:absolute; top:8px; left:8px; display:flex; gap:6px; flex-wrap:wrap; }
+  button { background:#262c33cc; color:#d8d9d5; border:1px solid #30363d; border-radius:4px; padding:5px 8px; cursor:pointer; }
+  .lbl { position:absolute; transform:translate(-50%,-100%); background:#16191dcc; border:1px solid #30363d; padding:1px 5px;
+         border-radius:3px; font-size:11px; white-space:nowrap; pointer-events:none; }
+  #check { position:absolute; right:8px; bottom:8px; background:#16191dcc; padding:6px 8px; border-radius:4px; max-width:46ch; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="bar"><button id="bWide">Wide</button><button id="bClose">Operations row</button><button id="bLabels">Labels</button>
+<a href="index.html"><button>Inspector</button></a></div>
+<div id="labels"></div>
+<div id="check"></div>
+<script type="module">
+import { THREE, ASSETS, makeRenderer, makeStudio, fitShadow, loadAsset, makeHuman } from './common.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const canvas = document.getElementById('c');
+const renderer = makeRenderer(canvas, innerWidth, innerHeight);
+const { scene, key } = makeStudio(renderer, 0x868a8d);
+const camera = new THREE.PerspectiveCamera(32, innerWidth / innerHeight, 0.05, 300);
+const controls = new OrbitControls(camera, canvas); controls.enableDamping = true;
+
+// viewer-only staging (NOT part of any asset): a lab back wall, a short wall partition and a ceiling beam
+const stageMat = new THREE.MeshStandardMaterial({ color: 0x5b6066, roughness: 0.85 });
+const wall = new THREE.Mesh(new THREE.BoxGeometry(0.2, 6.2, 30), stageMat); wall.position.set(-6.4, 3.1, 0); wall.receiveShadow = true; scene.add(wall);
+const part = new THREE.Mesh(new THREE.BoxGeometry(0.2, 3.0, 3.6), stageMat); part.position.set(1.0, 1.5, -9.6); part.castShadow = part.receiveShadow = true; scene.add(part);
+const beam = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.12, 0.7), stageMat); beam.position.set(2.0, 2.96, -6.2); beam.castShadow = true; scene.add(beam);
+const post = new THREE.Mesh(new THREE.BoxGeometry(0.12, 2.9, 0.12), stageMat); post.position.set(3.2, 1.45, -6.2); post.castShadow = true; scene.add(post);
+
+// placements in UNREAL terms converted to three: [x_fwd, y_right, z_up, yawDeg]; three pos = (x, z, y)
+const P = {
+  OD_OBS_WindowFrame:          [-6.3, 0, 0.6, 0],
+  OD_ENV_SlidingDoor:          [-4.6, 10.6, 0, 0],
+  OD_ENV_EmergencyBulkhead:    [-4.6, -10.6, 0, 0],
+  OD_TRN_TrainingSimulator:    [-3.4, 7.0, 0, 0],
+  OD_MCC_MainConsole:          [-2.9, 0, 0, 0],
+  OD_ENG_PowerBusB:            [-6.3, -5.4, 0, 0],
+  OD_SYS_ServerRack:           [-5.6, -6.8, 0, 0],
+  OD_ENG_PowerConsole:         [-2.6, -5.6, 0, 0],
+  OD_LAB_SampleAnalyzer:       [-2.6, 3.2, 0, 0],
+  OD_SYS_ORIONTerminal:        [0.0, 2.0, 0, 0],
+  OD_MCC_MissionControlChair:  [-1.2, 0, 0, 180],
+  OD_PROP_SupplyCrate:         [0.4, -3.2, 0, 0],
+  OD_ENV_CeilingLight:         [2.0, -6.2, 2.9, 0],
+  OD_ENV_WallUtilityPanel:     [1.1, -10.6, 1.45, 0],
+  OD_ENV_VentilationModule:    [1.1, -8.6, 2.3, 0],
+};
+const labels = [];
+const group = new THREE.Group(); scene.add(group);
+const report = [];
+for (const name of ASSETS) {
+  const obj = await loadAsset(name);
+  const [x, y, z, yaw] = P[name];
+  obj.position.set(x, z, y);
+  obj.rotation.y = THREE.MathUtils.degToRad(yaw);
+  group.add(obj);
+  const b = new THREE.Box3().setFromObject(obj); const s = b.getSize(new THREE.Vector3());
+  report.push(`${name}: ${(yaw ? s.x : s.z).toFixed(2)} x ${s.y.toFixed(2)} x ${(yaw ? s.z : s.x).toFixed(2)} m`);
+  const el = document.createElement('div'); el.className = 'lbl'; el.textContent = name.replace('OD_', '');
+  document.getElementById('labels').appendChild(el);
+  labels.push({ el, p: new THREE.Vector3((b.min.x + b.max.x) / 2, b.max.y + 0.08, (b.min.z + b.max.z) / 2) });
+}
+const human = makeHuman(1.8); human.position.set(0.9, 0, -1.4); scene.add(human);
+const hl = document.createElement('div'); hl.className = 'lbl'; hl.textContent = 'Human 1.80 m (reference only)';
+document.getElementById('labels').appendChild(hl); labels.push({ el: hl, p: new THREE.Vector3(0.9, 1.92, -1.4) });
+document.getElementById('check').textContent = `Loaded ${report.length}/15 GLBs (three.js GLTFLoader).`;
+window.labReport = report;
+
+const box = new THREE.Box3().setFromObject(group);
+fitShadow(key, box);
+function shot(which) {
+  if (which === 'close') { camera.position.set(7.5, 2.6, 4.2); controls.target.set(-2.2, 0.9, -1.5); }
+  else { camera.position.set(17, 7.2, 11.5); controls.target.set(-2.6, 1.3, 0); }
+  controls.update();
+}
+shot('wide');
+document.getElementById('bWide').onclick = () => shot('wide');
+document.getElementById('bClose').onclick = () => shot('close');
+let showLabels = true;
+document.getElementById('bLabels').onclick = () => { showLabels = !showLabels; };
+function place() {
+  for (const l of labels) {
+    const v = l.p.clone().project(camera);
+    l.el.style.display = showLabels && v.z < 1 ? 'block' : 'none';
+    l.el.style.left = ((v.x + 1) / 2 * innerWidth) + 'px'; l.el.style.top = ((1 - v.y) / 2 * innerHeight) + 'px';
+  }
+}
+addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); });
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); place(); });
+window.lab = {
+  async capture(name, which, w = 2400, h = 1200) {
+    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); shot(which);
+    renderer.render(scene, camera);
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    const res = await fetch(`/save-render?name=${name}.png`, { method: 'POST', body: blob });
+    renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+    return res.status;
+  }
+};
+</script>
+</body>
+</html>

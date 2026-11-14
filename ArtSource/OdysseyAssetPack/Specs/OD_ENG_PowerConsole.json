@@ -1,0 +1,1199 @@
+{
+ "name": "OD_ENG_PowerConsole",
+ "title": "Power Console (Engineering)",
+ "reference_image": "01_Power_Console.png",
+ "description": "Free-standing engineering power distribution console. Seated-height sloped control desk (front edge 0.74 m) with five control modules: selector knob bank, interlock buttons, three bus-load faders, dual rotary selectors and a mushroom emergency stop on a hazard plate. Reclined main schematic display flanked by toed-in status displays. Side equipment pods with recessed intake vents; hinged front service door; bolted rear hatch with cable glands and a rear exhaust grille.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 1.8,
+  "H_z": 1.25,
+  "D_x": 0.9
+ },
+ "pivot": {
+  "type": "floor",
+  "text": "bottom-centre of the envelope (floor contact)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    -45.0,
+    -90.0,
+    0
+   ],
+   "max": [
+    45.0,
+    90.0,
+    125
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "ServicePanel",
+   "role": "movable",
+   "pivot_cm_ue": [
+    25.0,
+    -54.6,
+    11.4
+   ],
+   "triangles": 532,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 95,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ],
+    "note": "free edge (+Y) swings out toward +X"
+   },
+   "note": "Front service door, hinge on the -Y edge",
+   "children": []
+  },
+  {
+   "name": "Control_Knob_01",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    21.753,
+    65.0,
+    79.763
+   ],
+   "triangles": 388,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0.2265,
+     0.0,
+     0.974
+    ],
+    "range_deg": [
+     -135,
+     135
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Toggle_01",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    30.734,
+    77.0,
+    78.649
+   ],
+   "triangles": 60,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "range_deg": [
+     -40,
+     40
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Toggle_02",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    22.942,
+    47.0,
+    80.461
+   ],
+   "triangles": 60,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "range_deg": [
+     -40,
+     40
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Toggle_03",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    22.942,
+    41.0,
+    80.461
+   ],
+   "triangles": 60,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "range_deg": [
+     -40,
+     40
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_01",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    22.772,
+    9.0,
+    79.731
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.974,
+     0.0,
+     0.2265
+    ],
+    "range_cm": [
+     -8.8,
+     8.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_02",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    22.772,
+    0.0,
+    79.731
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.974,
+     0.0,
+     0.2265
+    ],
+    "range_cm": [
+     -8.8,
+     8.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_03",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    22.772,
+    -9.0,
+    79.731
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.974,
+     0.0,
+     0.2265
+    ],
+    "range_cm": [
+     -8.8,
+     8.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Knob_02",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    17.857,
+    -31.0,
+    80.669
+   ],
+   "triangles": 388,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0.2265,
+     0.0,
+     0.974
+    ],
+    "range_deg": [
+     -135,
+     135
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Knob_03",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    17.857,
+    -44.0,
+    80.669
+   ],
+   "triangles": 388,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0.2265,
+     0.0,
+     0.974
+    ],
+    "range_deg": [
+     -135,
+     135
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_EStop",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    20.263,
+    -70.0,
+    82.183
+   ],
+   "triangles": 312,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.2265,
+     -0.0,
+     -0.974
+    ],
+    "range_cm": [
+     0,
+     0.8
+    ],
+    "note": "press to latch, twist to release"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Buttons",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 1012,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -0.2265,
+     -0.0,
+     -0.974
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "All momentary button caps (one node; press = translate -n 0.3 cm per cap in code/BP)",
+   "children": []
+  }
+ ],
+ "static_components": [
+  "Body",
+  "StatusLights",
+  "Screen_Main",
+  "Screen_Left",
+  "Screen_Right"
+ ],
+ "collision_recommendation": "Custom: 4 convex hulls (UCX) - plinth+lower body box (0.90 x 1.80 x 0.62), desk wedge, display housing prism, rear feet. Controls: no collision; use per-control trigger boxes for interaction traces. ServicePanel: own simple box when opened.",
+ "nanite_recommendation": "Body: Nanite ON (dense bevels/screws, static). Screens, controls, ServicePanel, StatusLights: Nanite optional (low poly, movable/emissive) - keep them as separate static mesh components.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 632,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_Amber_Emissive": {
+   "triangles": 176,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 3428,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Display": {
+   "triangles": 36,
+   "base_srgb": "#09131C",
+   "metallic": 0.0,
+   "roughness": 0.12,
+   "emissive": false
+  },
+  "OD_MAT_EmergencyRed_Emissive": {
+   "triangles": 488,
+   "base_srgb": "#B84743",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 2928,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 5344,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_HazardPaint": {
+   "triangles": 132,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.55,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 2336,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  },
+  "OD_MAT_Rubber": {
+   "triangles": 672,
+   "base_srgb": "#141618",
+   "metallic": 0.0,
+   "roughness": 0.88,
+   "emissive": false
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_Fader_01",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_Fader_02",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_Fader_03",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_EStop",
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ]
+  },
+  {
+   "node": "Control_Buttons",
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Main display",
+   "socket": "SOCKET_Interact_MainScreen",
+   "text": "Bus schematic UI; render target on OD_MAT_Display"
+  },
+  {
+   "name": "Desk controls",
+   "socket": "SOCKET_Interact_Desk",
+   "text": "Knobs rotate, faders slide, toggles flip, buttons press"
+  },
+  {
+   "name": "Emergency stop",
+   "socket": "SOCKET_Interact_EStop",
+   "text": "Press to latch; drives emergency state"
+  },
+  {
+   "name": "Service door",
+   "socket": "SOCKET_Interact_ServicePanel",
+   "text": "Hinged maintenance access"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Floor",
+   "socket": "SOCKET_Mount_Floor",
+   "text": "Free-standing; pivot on floor, 4 feet with rubber pads"
+  },
+  {
+   "name": "Cable feed",
+   "socket": "SOCKET_Cable_Rear",
+   "text": "Rear gland plate; leave >= 0.30 m rear clearance"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_ENG_PowerConsole",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Body",
+    "StatusLights",
+    "ServicePanel",
+    "Controls",
+    "Screen_Main",
+    "Screen_Left",
+    "Screen_Right",
+    "SOCKET_Interact_MainScreen",
+    "SOCKET_Interact_Desk",
+    "SOCKET_Interact_EStop",
+    "SOCKET_Interact_ServicePanel",
+    "SOCKET_Operator_Stand",
+    "SOCKET_Mount_Floor",
+    "SOCKET_Cable_Rear"
+   ]
+  },
+  {
+   "name": "Body",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 11092,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_Rubber"
+   ],
+   "motion": null,
+   "note": "Static shell, desk, housing, bezels, vents, control bases",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 1640,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Ion/amber/red status strips and LEDs (drive EmissiveScale)",
+   "children": []
+  },
+  {
+   "name": "ServicePanel",
+   "role": "movable",
+   "pivot_cm_ue": [
+    25.0,
+    -54.6,
+    11.4
+   ],
+   "triangles": 532,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 95,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ],
+    "note": "free edge (+Y) swings out toward +X"
+   },
+   "note": "Front service door, hinge on the -Y edge",
+   "children": []
+  },
+  {
+   "name": "Controls",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Interactive desk controls; caps/levers are separate nodes",
+   "children": [
+    "Control_Knob_01",
+    "Control_Toggle_01",
+    "Control_Toggle_02",
+    "Control_Toggle_03",
+    "Control_Fader_01",
+    "Control_Fader_02",
+    "Control_Fader_03",
+    "Control_Knob_02",
+    "Control_Knob_03",
+    "Control_EStop",
+    "Control_Buttons"
+   ]
+  },
+  {
+   "name": "Control_Knob_01",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    21.753,
+    65.0,
+    79.763
+   ],
+   "triangles": 388,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0.2265,
+     0.0,
+     0.974
+    ],
+    "range_deg": [
+     -135,
+     135
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Toggle_01",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    30.734,
+    77.0,
+    78.649
+   ],
+   "triangles": 60,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "range_deg": [
+     -40,
+     40
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Toggle_02",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    22.942,
+    47.0,
+    80.461
+   ],
+   "triangles": 60,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "range_deg": [
+     -40,
+     40
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Toggle_03",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    22.942,
+    41.0,
+    80.461
+   ],
+   "triangles": 60,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "range_deg": [
+     -40,
+     40
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_01",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    22.772,
+    9.0,
+    79.731
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.974,
+     0.0,
+     0.2265
+    ],
+    "range_cm": [
+     -8.8,
+     8.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_02",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    22.772,
+    0.0,
+    79.731
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.974,
+     0.0,
+     0.2265
+    ],
+    "range_cm": [
+     -8.8,
+     8.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_03",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    22.772,
+    -9.0,
+    79.731
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.974,
+     0.0,
+     0.2265
+    ],
+    "range_cm": [
+     -8.8,
+     8.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Knob_02",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    17.857,
+    -31.0,
+    80.669
+   ],
+   "triangles": 388,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0.2265,
+     0.0,
+     0.974
+    ],
+    "range_deg": [
+     -135,
+     135
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Knob_03",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    17.857,
+    -44.0,
+    80.669
+   ],
+   "triangles": 388,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0.2265,
+     0.0,
+     0.974
+    ],
+    "range_deg": [
+     -135,
+     135
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_EStop",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    20.263,
+    -70.0,
+    82.183
+   ],
+   "triangles": 312,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.2265,
+     -0.0,
+     -0.974
+    ],
+    "range_cm": [
+     0,
+     0.8
+    ],
+    "note": "press to latch, twist to release"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Buttons",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 1012,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -0.2265,
+     -0.0,
+     -0.974
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "All momentary button caps (one node; press = translate -n 0.3 cm per cap in code/BP)",
+   "children": []
+  },
+  {
+   "name": "Screen_Main",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Main bus schematic display (0..1 UV on OD_MAT_Display)",
+   "children": []
+  },
+  {
+   "name": "Screen_Left",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Side status display (0..1 UV on OD_MAT_Display)",
+   "children": []
+  },
+  {
+   "name": "Screen_Right",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Side status display (0..1 UV on OD_MAT_Display)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_MainScreen",
+   "role": "socket",
+   "pivot_cm_ue": [
+    -2.45,
+    1.0,
+    101.843
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Look-at / focus point of the main display",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Desk",
+   "role": "socket",
+   "pivot_cm_ue": [
+    23.746,
+    0.0,
+    79.504
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Hand/IK target over the fader bank",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_EStop",
+   "role": "socket",
+   "pivot_cm_ue": [
+    21.033,
+    -70.0,
+    85.495
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "E-stop cap top",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_ServicePanel",
+   "role": "socket",
+   "pivot_cm_ue": [
+    25.0,
+    47.0,
+    36.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Service door pull",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Operator_Stand",
+   "role": "socket",
+   "pivot_cm_ue": [
+    95.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Operator floor position (seated chair or standing)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Floor",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Floor mount = pivot",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Cable_Rear",
+   "role": "socket",
+   "pivot_cm_ue": [
+    -42.2,
+    0.0,
+    21.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Rear cable gland plate (power feed in)",
+   "children": []
+  }
+ ],
+ "notes": [],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_ENG_PowerConsole.glb",
+   "nodes": [
+    "OD_ENG_PowerConsole",
+    "Body",
+    "StatusLights",
+    "ServicePanel",
+    "Controls",
+    "Control_Knob_01",
+    "Control_Toggle_01",
+    "Control_Toggle_02",
+    "Control_Toggle_03",
+    "Control_Fader_01",
+    "Control_Fader_02",
+    "Control_Fader_03",
+    "Control_Knob_02",
+    "Control_Knob_03",
+    "Control_EStop",
+    "Control_Buttons",
+    "Screen_Main",
+    "Screen_Left",
+    "Screen_Right",
+    "SOCKET_Interact_MainScreen",
+    "SOCKET_Interact_Desk",
+    "SOCKET_Interact_EStop",
+    "SOCKET_Interact_ServicePanel",
+    "SOCKET_Operator_Stand",
+    "SOCKET_Mount_Floor",
+    "SOCKET_Cable_Rear"
+   ],
+   "material_slots": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_Rubber",
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_Display"
+   ],
+   "triangles": 16172,
+   "bounds_ue_cm": {
+    "min": [
+     -45.0,
+     -90.0,
+     0.0
+    ],
+    "max": [
+     45.0,
+     90.0,
+     125.0
+    ]
+   },
+   "size_m": {
+    "D_x": 0.9,
+    "W_y": 1.8,
+    "H_z": 1.25
+   },
+   "root_node": "OD_ENG_PowerConsole",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 368,
+   "hulls": 612,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

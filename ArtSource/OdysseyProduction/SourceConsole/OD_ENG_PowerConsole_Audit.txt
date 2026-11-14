@@ -1,0 +1,18 @@
+ODYSSEY Power Console — GLB Audit
+
+Fixed safely:
+- Pivot moved from model center to bottom-center.
+- Scale conformed to approved Engineering proxy envelope: 1.80m W × 1.25m H × 0.90m D.
+- Forward remains +Z in glTF/Y-up coordinates.
+- Mesh/node/material renamed for ODYSSEY production use.
+- Original mesh indices, UVs and embedded compressed PBR textures preserved byte-for-byte except POSITION data.
+
+Vertices: 274,265
+Approx. triangles: 293,949
+Embedded textures: 2 × 2048² (base color + metallic/roughness)
+
+Known remaining production issues:
+- The source mesh is highly fragmented (many disconnected surface islands). It is visually coherent but not clean hard-surface topology.
+- Buttons, screens and controls are not separated as independent movable parts.
+- No dedicated normal map or emissive map is present; screens should eventually use separate Unreal dynamic/emissive materials.
+- Recommended next pass: import to Unreal with Nanite for prototype validation, then Blender remesh/retopology only if it needs close-up animation/interactions.

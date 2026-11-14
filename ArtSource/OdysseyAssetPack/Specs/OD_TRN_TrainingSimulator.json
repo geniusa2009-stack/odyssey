@@ -1,0 +1,920 @@
+{
+ "name": "OD_TRN_TrainingSimulator",
+ "title": "Training Simulator",
+ "reference_image": "03_Training_Simulator.png",
+ "description": "Walk-on crew training simulator: 0.14 m chamfered platform with floor gratings, ion edge lights and a hazard step edge; rear wall unit with two white columns (energy-cell windows, vents, access panels), header beam with sign display and down-lights, a 2.1 x 1.1 m main simulation screen, an instructor desk (desk display, knob, three faders, button banks, e-stop) and a swivelling trainee seat with arm consoles facing the screen.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 3.2,
+  "H_z": 2.8,
+  "D_x": 3.8
+ },
+ "pivot": {
+  "type": "floor",
+  "text": "bottom-centre of the plinth (floor contact)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    -190.0,
+    -160.0,
+    0
+   ],
+   "max": [
+    190.0,
+    160.0,
+    280
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "Control_Knob",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -111.326,
+    40.0,
+    101.376
+   ],
+   "triangles": 388,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0.1863,
+     0.0,
+     0.9825
+    ],
+    "range_deg": [
+     -135,
+     135
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_01",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -109.323,
+    4.0,
+    101.2
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.9825,
+     0.0,
+     0.1863
+    ],
+    "range_cm": [
+     -10.8,
+     10.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_02",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -109.323,
+    -6.0,
+    101.2
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.9825,
+     0.0,
+     0.1863
+    ],
+    "range_cm": [
+     -10.8,
+     10.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_03",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -109.323,
+    -16.0,
+    101.2
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.9825,
+     0.0,
+     0.1863
+    ],
+    "range_cm": [
+     -10.8,
+     10.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_EStop",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -109.967,
+    -48.0,
+    103.174
+   ],
+   "triangles": 312,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.1863,
+     -0.0,
+     -0.9825
+    ],
+    "range_cm": [
+     0,
+     0.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Buttons",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 748,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -0.1863,
+     -0.0,
+     -0.9825
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "SimSeat",
+   "role": "movable",
+   "pivot_cm_ue": [
+    40.0,
+    -50.0,
+    42.0
+   ],
+   "triangles": 1320,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_Rubber"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "range_deg": [
+     -120,
+     120
+    ]
+   },
+   "note": "Trainee seat (swivel); arm consoles carry the trainee controls",
+   "children": [
+    "SimSeat_Lights"
+   ]
+  }
+ ],
+ "static_components": [
+  "Body",
+  "StatusLights",
+  "Sign_Header",
+  "Screen_Main",
+  "Screen_Desk",
+  "SimSeat_Base",
+  "SimSeat_Lights"
+ ],
+ "collision_recommendation": "Custom: platform box (walkable, 0.14 m step), rear wall unit box, desk box, seat pedestal cylinder + seat box (5 UCX).",
+ "nanite_recommendation": "Body Nanite ON (large, many bevels). Screen/sign/seat/controls separate.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 608,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_Amber_Emissive": {
+   "triangles": 132,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 2176,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Display": {
+   "triangles": 36,
+   "base_srgb": "#09131C",
+   "metallic": 0.0,
+   "roughness": 0.12,
+   "emissive": false
+  },
+  "OD_MAT_EmergencyRed_Emissive": {
+   "triangles": 312,
+   "base_srgb": "#B84743",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 3116,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 4156,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_HazardPaint": {
+   "triangles": 388,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.55,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 2848,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  },
+  "OD_MAT_Rubber": {
+   "triangles": 132,
+   "base_srgb": "#141618",
+   "metallic": 0.0,
+   "roughness": 0.88,
+   "emissive": false
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_Fader_01",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_Fader_02",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_Fader_03",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_EStop",
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ]
+  },
+  {
+   "node": "Control_Buttons",
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "SimSeat",
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "SimSeat_Lights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Desk",
+   "socket": "SOCKET_Interact_Desk",
+   "text": "Scenario controls"
+  },
+  {
+   "name": "Main screen",
+   "socket": "SOCKET_Interact_Screen",
+   "text": "Simulation render target"
+  },
+  {
+   "name": "Trainee seat",
+   "socket": "SOCKET_Sit_Trainee",
+   "text": "Sit; seat swivels +-120 deg"
+  },
+  {
+   "name": "Boarding",
+   "socket": "SOCKET_Board",
+   "text": "Step onto platform"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Floor",
+   "socket": "SOCKET_Mount_Floor",
+   "text": "Free-standing; needs 2.9 m ceiling clearance"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_TRN_TrainingSimulator",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Body",
+    "StatusLights",
+    "Sign_Header",
+    "Screen_Main",
+    "Controls",
+    "Screen_Desk",
+    "SimSeat_Base",
+    "SimSeat",
+    "SOCKET_Interact_Desk",
+    "SOCKET_Interact_Screen",
+    "SOCKET_Sit_Trainee",
+    "SOCKET_Board",
+    "SOCKET_Mount_Floor"
+   ]
+  },
+  {
+   "name": "Body",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 8348,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": null,
+   "note": "Platform, rear wall unit, columns, header, desk",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 1756,
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Platform edge, column cores, header accents",
+   "children": []
+  },
+  {
+   "name": "Sign_Header",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "ODYSSEY Training Simulator sign (0..1 UV)",
+   "children": []
+  },
+  {
+   "name": "Screen_Main",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Main simulation screen (0..1 UV on OD_MAT_Display)",
+   "children": []
+  },
+  {
+   "name": "Controls",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Instructor / trainee desk controls",
+   "children": [
+    "Control_Knob",
+    "Control_Fader_01",
+    "Control_Fader_02",
+    "Control_Fader_03",
+    "Control_EStop",
+    "Control_Buttons"
+   ]
+  },
+  {
+   "name": "Control_Knob",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -111.326,
+    40.0,
+    101.376
+   ],
+   "triangles": 388,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0.1863,
+     0.0,
+     0.9825
+    ],
+    "range_deg": [
+     -135,
+     135
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_01",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -109.323,
+    4.0,
+    101.2
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.9825,
+     0.0,
+     0.1863
+    ],
+    "range_cm": [
+     -10.8,
+     10.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_02",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -109.323,
+    -6.0,
+    101.2
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.9825,
+     0.0,
+     0.1863
+    ],
+    "range_cm": [
+     -10.8,
+     10.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Fader_03",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -109.323,
+    -16.0,
+    101.2
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.9825,
+     0.0,
+     0.1863
+    ],
+    "range_cm": [
+     -10.8,
+     10.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_EStop",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -109.967,
+    -48.0,
+    103.174
+   ],
+   "triangles": 312,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     -0.1863,
+     -0.0,
+     -0.9825
+    ],
+    "range_cm": [
+     0,
+     0.8
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_Buttons",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 748,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -0.1863,
+     -0.0,
+     -0.9825
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Screen_Desk",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Desk scenario display",
+   "children": []
+  },
+  {
+   "name": "SimSeat_Base",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 440,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": null,
+   "note": "Seat pedestal on the platform",
+   "children": []
+  },
+  {
+   "name": "SimSeat",
+   "role": "movable",
+   "pivot_cm_ue": [
+    40.0,
+    -50.0,
+    42.0
+   ],
+   "triangles": 1320,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_Rubber"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "range_deg": [
+     -120,
+     120
+    ]
+   },
+   "note": "Trainee seat (swivel); arm consoles carry the trainee controls",
+   "children": [
+    "SimSeat_Lights"
+   ]
+  },
+  {
+   "name": "SimSeat_Lights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    40.0,
+    -50.0,
+    42.0
+   ],
+   "triangles": 352,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Desk",
+   "role": "socket",
+   "pivot_cm_ue": [
+    -108.988,
+    0.0,
+    102.968
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Desk controls (instructor)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Screen",
+   "role": "socket",
+   "pivot_cm_ue": [
+    -136.0,
+    0.0,
+    171.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Main simulation screen centre",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Sit_Trainee",
+   "role": "socket",
+   "pivot_cm_ue": [
+    32.0,
+    -50.0,
+    61.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Trainee seat anchor (faces -X)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Board",
+   "role": "socket",
+   "pivot_cm_ue": [
+    175.0,
+    0.0,
+    14.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Step-on point at the platform front edge",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Floor",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Floor pivot (plinth bottom-centre)",
+   "children": []
+  }
+ ],
+ "notes": [],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_TRN_TrainingSimulator.glb",
+   "nodes": [
+    "OD_TRN_TrainingSimulator",
+    "Body",
+    "StatusLights",
+    "Sign_Header",
+    "Screen_Main",
+    "Controls",
+    "Control_Knob",
+    "Control_Fader_01",
+    "Control_Fader_02",
+    "Control_Fader_03",
+    "Control_EStop",
+    "Control_Buttons",
+    "Screen_Desk",
+    "SimSeat_Base",
+    "SimSeat",
+    "SimSeat_Lights",
+    "SOCKET_Interact_Desk",
+    "SOCKET_Interact_Screen",
+    "SOCKET_Sit_Trainee",
+    "SOCKET_Board",
+    "SOCKET_Mount_Floor"
+   ],
+   "material_slots": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_Display",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_Rubber"
+   ],
+   "triangles": 13904,
+   "bounds_ue_cm": {
+    "min": [
+     -190.0,
+     -160.0,
+     0.0
+    ],
+    "max": [
+     190.0,
+     160.0,
+     280.0
+    ]
+   },
+   "size_m": {
+    "D_x": 3.8,
+    "W_y": 3.2,
+    "H_z": 2.8
+   },
+   "root_node": "OD_TRN_TrainingSimulator",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 375,
+   "hulls": 531,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

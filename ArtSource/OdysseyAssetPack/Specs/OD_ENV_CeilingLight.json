@@ -1,0 +1,341 @@
+{
+ "name": "OD_ENV_CeilingLight",
+ "title": "Ceiling Light Module (2.0 m)",
+ "reference_image": "11_Ceiling_Light_Module_Reference.png",
+ "description": "Linear ceiling luminaire, 2.0 m standard module: white chamfered housing, gunmetal end caps, two ceiling brackets, recessed graphite bezel holding a drop-down emissive diffuser, ion edge strips and cap bars, side slot vents with hazard markers. Compact 1.2 m / 0.6 m variants can be made by changing the housing length in the script.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 0.5,
+  "H_z": 0.14,
+  "D_x": 2.0
+ },
+ "pivot": {
+  "type": "ceiling",
+  "text": "top-centre (ceiling flush); length along X",
+  "expected_bounds_ue_cm": {
+   "min": [
+    -100.0,
+    -25.0,
+    -14
+   ],
+   "max": [
+    100.0,
+    25.0,
+    0
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "Diffuser",
+   "role": "movable",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    -11.3
+   ],
+   "triangles": 28,
+   "materials": [
+    "OD_MAT_Diffuser_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     0,
+     0,
+     -1
+    ],
+    "range_cm": [
+     0,
+     3
+    ],
+    "note": "drops for lamp service"
+   },
+   "note": "Emissive diffuser panel (OD_MAT_Diffuser_Emissive)",
+   "children": []
+  }
+ ],
+ "static_components": [
+  "Body",
+  "StatusLights"
+ ],
+ "collision_recommendation": "None (ceiling fixture, out of reach). If needed: one box 2.00 x 0.50 x 0.14.",
+ "nanite_recommendation": "Nanite ON for Body; Diffuser/StatusLights emissive meshes can stay non-Nanite.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 44,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_Diffuser_Emissive": {
+   "triangles": 28,
+   "base_srgb": "#EEF2F3",
+   "metallic": 0.0,
+   "roughness": 0.5,
+   "emissive": true
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 388,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 1752,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_HazardPaint": {
+   "triangles": 176,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.55,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 176,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Diffuser",
+   "materials": [
+    "OD_MAT_Diffuser_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Light state",
+   "socket": "SOCKET_Light",
+   "text": "Normal (ion) / analysis (amber) / emergency (red): swap strip MI"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Ceiling",
+   "socket": "SOCKET_Mount_Ceiling",
+   "text": "Flush; two brackets at x = +-0.70 m"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_ENV_CeilingLight",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Body",
+    "StatusLights",
+    "Diffuser",
+    "SOCKET_Light",
+    "SOCKET_Mount_Ceiling",
+    "SOCKET_Mount_Bracket_A",
+    "SOCKET_Mount_Bracket_B"
+   ]
+  },
+  {
+   "name": "Body",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 2360,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": null,
+   "note": "Housing, end caps, bezel, brackets",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 176,
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Ion edge strips (state colour via material instance)",
+   "children": []
+  },
+  {
+   "name": "Diffuser",
+   "role": "movable",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    -11.3
+   ],
+   "triangles": 28,
+   "materials": [
+    "OD_MAT_Diffuser_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     0,
+     0,
+     -1
+    ],
+    "range_cm": [
+     0,
+     3
+    ],
+    "note": "drops for lamp service"
+   },
+   "note": "Emissive diffuser panel (OD_MAT_Diffuser_Emissive)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Light",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    -14.5
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Rect light origin (0.30 x 1.66 m), facing -Z",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Ceiling",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Pivot: top-centre, flush to ceiling",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Bracket_A",
+   "role": "socket",
+   "pivot_cm_ue": [
+    70.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Ceiling bracket anchor",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Bracket_B",
+   "role": "socket",
+   "pivot_cm_ue": [
+    -70.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Ceiling bracket anchor",
+   "children": []
+  }
+ ],
+ "notes": [
+  "Reference shows a 0.60 x 0.30 m section; this module follows the in-repo prototype contract (2.00 x 0.50 x 0.14 m) so it replaces SM_PROXY_CeilingLight_Linear in place."
+ ],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_ENV_CeilingLight.glb",
+   "nodes": [
+    "OD_ENV_CeilingLight",
+    "Body",
+    "StatusLights",
+    "Diffuser",
+    "SOCKET_Light",
+    "SOCKET_Mount_Ceiling",
+    "SOCKET_Mount_Bracket_A",
+    "SOCKET_Mount_Bracket_B"
+   ],
+   "material_slots": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_Diffuser_Emissive"
+   ],
+   "triangles": 2564,
+   "bounds_ue_cm": {
+    "min": [
+     -100.0,
+     -25.0,
+     -14.0
+    ],
+    "max": [
+     100.0,
+     25.0,
+     0.0
+    ]
+   },
+   "size_m": {
+    "D_x": 2.0,
+    "W_y": 0.5,
+    "H_z": 0.14
+   },
+   "root_node": "OD_ENV_CeilingLight",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 134,
+   "hulls": 155,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

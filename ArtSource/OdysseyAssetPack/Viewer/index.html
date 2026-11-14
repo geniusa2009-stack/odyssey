@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ODYSSEY Asset Inspector</title>
+<style>
+  :root { --bg:#16191d; --panel:#1f2328; --line:#30363d; --text:#d8d9d5; --dim:#8b949e; --ion:#61bed2; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--text); font:13px/1.4 system-ui, sans-serif; }
+  #app { display:grid; grid-template-columns: 250px 1fr 300px; height:100%; }
+  aside { background:var(--panel); border-right:1px solid var(--line); overflow:auto; padding:10px; }
+  aside.right { border-right:0; border-left:1px solid var(--line); }
+  h1 { font-size:13px; letter-spacing:.12em; margin:2px 0 10px; color:var(--ion); }
+  h2 { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); margin:14px 0 6px; }
+  button { background:#262c33; color:var(--text); border:1px solid var(--line); border-radius:4px; padding:5px 8px; cursor:pointer; font:inherit; }
+  button.on, button:hover { border-color:var(--ion); }
+  .list button { display:block; width:100%; text-align:left; margin:2px 0; }
+  .row { display:flex; flex-wrap:wrap; gap:4px; }
+  #view { position:relative; min-width:0; }
+  canvas#c { width:100%; height:100%; display:block; }
+  #hud { position:absolute; left:10px; bottom:8px; color:#fff; text-shadow:0 1px 2px #000; font-size:12px; pointer-events:none; }
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  td { padding:2px 4px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .tree div { padding:1px 0; white-space:nowrap; }
+  .tag { color:var(--dim); font-size:11px; }
+  input[type=range] { width:100%; }
+  @media (max-width: 900px) { #app { grid-template-columns: 1fr; grid-template-rows: auto 60vh auto; } }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="app">
+  <aside>
+    <h1>ODYSSEY · ASSET INSPECTOR</h1>
+    <div class="list" id="list"></div>
+    <p class="tag">Open the <a href="lab.html" style="color:var(--ion)">Asset Lab</a> (all 15 + 1.80 m human).</p>
+  </aside>
+  <div id="view"><canvas id="c"></canvas><div id="hud"></div></div>
+  <aside class="right">
+    <h2>Views</h2>
+    <div class="row" id="views"></div>
+    <h2>Display</h2>
+    <div class="row">
+      <button id="bHuman">1.80 m human</button><button id="bBox">Bounds</button>
+      <button id="bAxes">Pivot axes</button><button id="bWire">Wireframe</button>
+    </div>
+    <h2>Movable parts</h2>
+    <input type="range" id="motion" min="0" max="1" step="0.01" value="0">
+    <h2>Capture</h2>
+    <button id="bCapture">Capture inspection set → Renders/</button>
+    <h2>Asset</h2>
+    <table id="info"></table>
+    <h2>Node hierarchy</h2>
+    <div class="tree" id="tree"></div>
+  </aside>
+</div>
+<script type="module">
+import { THREE, ASSETS, makeRenderer, makeStudio, fitShadow, loadAsset, makeHuman, collectMotions, applyMotions } from './common.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const canvas = document.getElementById('c');
+const view = document.getElementById('view');
+const renderer = makeRenderer(canvas, view.clientWidth, view.clientHeight);
+const { scene, key, ground } = makeStudio(renderer);
+const camera = new THREE.PerspectiveCamera(35, view.clientWidth / view.clientHeight, 0.02, 200);
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+let current = null, motions = [], human = makeHuman(), boxHelper = null, axes = new THREE.AxesHelper(0.5);
+human.visible = false; axes.visible = false; scene.add(human, axes);
+let wire = false, currentName = '';
+
+const VIEWS = {
+  front34: [1, 0.45, 0.8], rear34: [-1, 0.5, -0.8], side: [0, 0.12, 1], top: [0.55, 1.5, 0.35], front: [1, 0.12, 0],
+};
+document.getElementById('views').innerHTML = Object.keys(VIEWS).map(k => `<button data-v="${k}">${k}</button>`).join('');
+document.getElementById('views').onclick = (e) => { if (e.target.dataset.v) setView(e.target.dataset.v); };
+
+function bounds() { return new THREE.Box3().setFromObject(current); }
+function setView(name, aspect) {
+  if (!current) return;
+  const b = bounds(); const c = b.getCenter(new THREE.Vector3()); const s = b.getSize(new THREE.Vector3());
+  const r = s.length() / 2;
+  const d = new THREE.Vector3(...VIEWS[name]).normalize();
+  if (b.max.y <= 0.001) d.y = -d.y;   // ceiling-mounted: inspect from below
+  const fov = THREE.MathUtils.degToRad(camera.fov);
+  const a = aspect || camera.aspect;
+  const dist = r / Math.sin(Math.min(fov, 2 * Math.atan(Math.tan(fov / 2) * a)) / 2) * 0.92;
+  camera.position.copy(c).addScaledVector(d, dist);
+  camera.near = dist / 100; camera.far = dist * 10; camera.updateProjectionMatrix();
+  controls.target.copy(c); controls.update();
+}
+
+async function show(name) {
+  currentName = name;
+  if (current) { scene.remove(current); }
+  if (boxHelper) { scene.remove(boxHelper); boxHelper = null; }
+  document.querySelectorAll('#list button').forEach(b => b.classList.toggle('on', b.dataset.n === name));
+  current = await loadAsset(name);
+  scene.add(current);
+  motions = collectMotions(current);
+  document.getElementById('motion').value = 0;
+  const b = bounds(); const s = b.getSize(new THREE.Vector3());
+  // UE axes: D = gl.x, W = gl.z, H = gl.y
+  human.position.set(b.min.x + s.x * 0.5 + 0.0, 0, b.min.z - 0.55);
+  ground.visible = b.max.y > 0.001;
+  if (!ground.visible) { current.position.y = 0; }
+  if (name === 'OD_ENV_CeilingLight') human.position.y = 0;
+  fitShadow(key, b.clone().union(new THREE.Box3().setFromObject(human)));
+  let tris = 0; current.traverse(o => { if (o.isMesh) tris += o.geometry.index.count / 3; });
+  const mats = new Set(); current.traverse(o => { if (o.isMesh) mats.add(o.material.name); });
+  document.getElementById('info').innerHTML = `
+    <tr><td>Name</td><td>${name}</td></tr>
+    <tr><td>W (Y)</td><td>${s.z.toFixed(3)} m</td></tr><tr><td>H (Z)</td><td>${s.y.toFixed(3)} m</td></tr>
+    <tr><td>D (X)</td><td>${s.x.toFixed(3)} m</td></tr><tr><td>Triangles</td><td>${tris}</td></tr>
+    <tr><td>Materials</td><td>${[...mats].sort().join('<br>')}</td></tr>
+    <tr><td>Spec</td><td><a style="color:var(--ion)" href="../Specs/${name}.md">${name}.md</a></td></tr>`;
+  const lines = [];
+  (function walk(o, d) {
+    if (o.isMesh) return;
+    const ud = o.userData || {};
+    lines.push(`<div style="padding-left:${d * 12}px">${o.name} <span class="tag">${ud.od_role || ''}${ud.od_motion ? ' · ' + ud.od_motion.type : ''}</span></div>`);
+    o.children.forEach(c => walk(c, d + 1));
+  })(current.children[0] || current, 0);
+  document.getElementById('tree').innerHTML = lines.join('');
+  setWire(wire);
+  setView('front34');
+  document.getElementById('hud').textContent = `${name} · drag to orbit, wheel to zoom · +X = asset front`;
+}
+
+function setWire(on) { wire = on; if (current) current.traverse(o => { if (o.isMesh) o.material.wireframe = on; }); }
+document.getElementById('bHuman').onclick = (e) => { human.visible = !human.visible; e.target.classList.toggle('on', human.visible); };
+document.getElementById('bAxes').onclick = (e) => { axes.visible = !axes.visible; e.target.classList.toggle('on', axes.visible); };
+document.getElementById('bWire').onclick = (e) => { setWire(!wire); e.target.classList.toggle('on', wire); };
+document.getElementById('bBox').onclick = (e) => {
+  if (boxHelper) { scene.remove(boxHelper); boxHelper = null; } else { boxHelper = new THREE.Box3Helper(bounds(), 0xffb000); scene.add(boxHelper); }
+  e.target.classList.toggle('on', !!boxHelper);
+};
+document.getElementById('motion').oninput = (e) => applyMotions(motions, +e.target.value);
+
+async function capture(name, w = 1600, h = 1200) {
+  const W = view.clientWidth, H = view.clientHeight;
+  renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+  const out = [];
+  for (const v of ['front34', 'rear34', 'side', 'top']) {
+    setView(v, w / h); renderer.render(scene, camera);
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    const res = await fetch(`/save-render?name=${name}_${v}.png`, { method: 'POST', body: blob });
+    out.push(`${v}:${res.status}`);
+  }
+  renderer.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix(); setView('front34');
+  return out;
+}
+window.inspector = { show, setView, capture, applyMotions: (t) => applyMotions(motions, t), human };
+document.getElementById('bCapture').onclick = async () => { document.getElementById('hud').textContent = (await capture(currentName)).join(' '); };
+
+const list = document.getElementById('list');
+for (const n of ASSETS) {
+  const r = await fetch(`../GLB/${n}.glb`, { method: 'HEAD' });
+  if (!r.ok) continue;
+  const b = document.createElement('button'); b.textContent = n; b.dataset.n = n; b.onclick = () => show(n); list.appendChild(b);
+}
+new ResizeObserver(() => { renderer.setSize(view.clientWidth, view.clientHeight, false); camera.aspect = view.clientWidth / view.clientHeight; camera.updateProjectionMatrix(); }).observe(view);
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+const q = new URLSearchParams(location.search).get('asset');
+show(q && ASSETS.includes(q) ? q : (list.firstChild ? list.firstChild.dataset.n : ASSETS[0]));
+</script>
+</body>
+</html>

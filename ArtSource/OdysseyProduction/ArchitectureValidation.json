@@ -1,0 +1,95 @@
+{
+  "OD_ENG_Architecture": {
+    "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyProduction/OD_ENG_Architecture.glb",
+    "nodes": [
+      "OD_ENG_Architecture",
+      "SouthPressureLiner",
+      "WestPressureLiner",
+      "EastPressureLiner",
+      "NorthPressureLiner",
+      "StructuralFrame_N560",
+      "StructuralFrame_N190",
+      "StructuralFrame_200",
+      "StructuralFrame_560",
+      "CeilingServiceCassettes",
+      "CoolingDistribution",
+      "CableDistribution",
+      "ConsoleTaskLightSupports",
+      "FloorDeckAndMaintenanceZones"
+    ],
+    "material_slots": [
+      "OD_MAT_AerospaceWhite",
+      "OD_MAT_BrushedAluminum",
+      "OD_MAT_Graphite",
+      "OD_MAT_Gunmetal",
+      "OD_MAT_Rubber",
+      "OD_MAT_HazardPaint"
+    ],
+    "triangles": 13972,
+    "bounds_ue_cm": {
+      "min": [
+        -688.0,
+        -590.0,
+        0.0
+      ],
+      "max": [
+        687.0,
+        590.0,
+        507.0
+      ]
+    },
+    "size_m": {
+      "D_x": 13.75,
+      "W_y": 11.8,
+      "H_z": 5.07
+    },
+    "root_node": "OD_ENG_Architecture",
+    "root_translation": [
+      0,
+      0,
+      0
+    ]
+  },
+  "OD_ENG_ServicePlant": {
+    "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyProduction/OD_ENG_ServicePlant.glb",
+    "nodes": [
+      "OD_ENG_ServicePlant",
+      "StationBatteryCabinet",
+      "ThermalPlant",
+      "AirHandlingHousing",
+      "WaterRecovery",
+      "SparesLocker"
+    ],
+    "material_slots": [
+      "OD_MAT_AerospaceWhite",
+      "OD_MAT_BrushedAluminum",
+      "OD_MAT_Graphite",
+      "OD_MAT_Gunmetal",
+      "OD_MAT_IonBlue_Emissive"
+    ],
+    "triangles": 11224,
+    "bounds_ue_cm": {
+      "min": [
+        -678.0,
+        -557.5,
+        0.0
+      ],
+      "max": [
+        661.0,
+        424.5,
+        449.901
+      ]
+    },
+    "size_m": {
+      "D_x": 13.39,
+      "W_y": 9.82,
+      "H_z": 4.499
+    },
+    "root_node": "OD_ENG_ServicePlant",
+    "root_translation": [
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,858 @@
+{
+ "name": "OD_MCC_MissionControlChair",
+ "title": "Mission Control Chair",
+ "reference_image": "15_Mission_Control_Chair.png",
+ "description": "Operator chair: four-arm floor base with ion arm lights and an aluminium column, 360 deg swivel assembly carrying a padded seat (0.48 m), reclining backrest with bolsters and headrest, flip-up armrests with control pads (left: selector + buttons; right: mini display + buttons) and a folding footrest with rubber treads.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 0.7,
+  "H_z": 1.2,
+  "D_x": 0.7
+ },
+ "pivot": {
+  "type": "floor",
+  "text": "bottom-centre (floor contact)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    -35.0,
+    -35.0,
+    0
+   ],
+   "max": [
+    35.0,
+    35.0,
+    120
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "Swivel",
+   "role": "movable",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    30.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "range_deg": [
+     -180,
+     180
+    ]
+   },
+   "note": "Everything above the column swivels 360 deg",
+   "children": [
+    "Seat",
+    "Seat_Lights",
+    "Backrest",
+    "Arm_L",
+    "Arm_R",
+    "Footrest"
+   ]
+  },
+  {
+   "name": "Backrest",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -14.0,
+    0.0,
+    39.932
+   ],
+   "triangles": 308,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_Rubber"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     0,
+     22
+    ],
+    "opens_toward_ue": [
+     -1,
+     0,
+     0
+    ],
+    "note": "recline (rest pose = 8 deg)"
+   },
+   "note": "",
+   "children": [
+    "Backrest_Lights"
+   ]
+  },
+  {
+   "name": "Arm_L",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -3.5,
+    26.0,
+    40.0
+   ],
+   "triangles": 220,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "open_deg": 80,
+    "opens_toward_ue": [
+     0,
+     0,
+     1
+    ],
+    "note": "armrest flips up for ingress"
+   },
+   "note": "",
+   "children": [
+    "Arm_L_Controls"
+   ]
+  },
+  {
+   "name": "Arm_L_Controls",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -3.5,
+    26.0,
+    40.0
+   ],
+   "triangles": 964,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Arm control pad (buttons/knob/display)",
+   "children": []
+  },
+  {
+   "name": "Arm_R",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -3.5,
+    -26.0,
+    40.0
+   ],
+   "triangles": 220,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "open_deg": 80,
+    "opens_toward_ue": [
+     0,
+     0,
+     1
+    ],
+    "note": "armrest flips up for ingress"
+   },
+   "note": "",
+   "children": [
+    "Arm_R_Controls",
+    "Arm_R_Display"
+   ]
+  },
+  {
+   "name": "Arm_R_Controls",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -3.5,
+    -26.0,
+    40.0
+   ],
+   "triangles": 332,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_Graphite",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Arm control pad (buttons/knob/display)",
+   "children": []
+  },
+  {
+   "name": "Footrest",
+   "role": "movable",
+   "pivot_cm_ue": [
+    25.0,
+    0.0,
+    36.0
+   ],
+   "triangles": 396,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_Rubber"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     0,
+     75
+    ],
+    "opens_toward_ue": [
+     0,
+     0,
+     1
+    ],
+    "note": "folds up under the seat front"
+   },
+   "note": "",
+   "children": []
+  }
+ ],
+ "static_components": [
+  "Base",
+  "StatusLights",
+  "Seat",
+  "Seat_Lights",
+  "Backrest_Lights",
+  "Arm_R_Display"
+ ],
+ "collision_recommendation": "Custom: base cylinder (r 0.35, h 0.30) + seat box + backrest box (3 UCX). Arms/footrest: none.",
+ "nanite_recommendation": "Nanite optional (~5k tris). Keep Swivel/Backrest/Arms/Footrest as separate components for animation.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 176,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_Amber_Emissive": {
+   "triangles": 88,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 684,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Display": {
+   "triangles": 12,
+   "base_srgb": "#09131C",
+   "metallic": 0.0,
+   "roughness": 0.12,
+   "emissive": false
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 1048,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 984,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 1076,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  },
+  "OD_MAT_Rubber": {
+   "triangles": 616,
+   "base_srgb": "#141618",
+   "metallic": 0.0,
+   "roughness": 0.88,
+   "emissive": false
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Seat_Lights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Backrest_Lights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Arm_L",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Arm_L_Controls",
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Arm_R",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Arm_R_Controls",
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Footrest",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Sit",
+   "socket": "SOCKET_Sit",
+   "text": "Seat anchor; Swivel yaw follows the operator"
+  },
+  {
+   "name": "Left arm pad",
+   "socket": "SOCKET_Interact_ArmL",
+   "text": "Selector and buttons"
+  },
+  {
+   "name": "Right arm pad",
+   "socket": "SOCKET_Interact_ArmR",
+   "text": "Mini display and buttons"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Floor",
+   "socket": "SOCKET_Mount_Floor",
+   "text": "Free-standing on four arms"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_MCC_MissionControlChair",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Base",
+    "StatusLights",
+    "Swivel",
+    "SOCKET_Sit",
+    "SOCKET_Interact_ArmL",
+    "SOCKET_Interact_ArmR",
+    "SOCKET_Mount_Floor"
+   ]
+  },
+  {
+   "name": "Base",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 1016,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_Rubber"
+   ],
+   "motion": null,
+   "note": "Four-arm floor base, hub, column (does not swivel)",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 368,
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Base arm lights and column ring",
+   "children": []
+  },
+  {
+   "name": "Swivel",
+   "role": "movable",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    30.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "range_deg": [
+     -180,
+     180
+    ]
+   },
+   "note": "Everything above the column swivels 360 deg",
+   "children": [
+    "Seat",
+    "Seat_Lights",
+    "Backrest",
+    "Arm_L",
+    "Arm_R",
+    "Footrest"
+   ]
+  },
+  {
+   "name": "Seat",
+   "role": "static",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    30.0
+   ],
+   "triangles": 584,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_Rubber"
+   ],
+   "motion": null,
+   "note": "Seat frame, side covers, cushion",
+   "children": []
+  },
+  {
+   "name": "Seat_Lights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    30.0
+   ],
+   "triangles": 88,
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Backrest",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -14.0,
+    0.0,
+    39.932
+   ],
+   "triangles": 308,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_Rubber"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     0,
+     22
+    ],
+    "opens_toward_ue": [
+     -1,
+     0,
+     0
+    ],
+    "note": "recline (rest pose = 8 deg)"
+   },
+   "note": "",
+   "children": [
+    "Backrest_Lights"
+   ]
+  },
+  {
+   "name": "Backrest_Lights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    -14.0,
+    0.0,
+    39.932
+   ],
+   "triangles": 176,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Arm_L",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -3.5,
+    26.0,
+    40.0
+   ],
+   "triangles": 220,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "open_deg": 80,
+    "opens_toward_ue": [
+     0,
+     0,
+     1
+    ],
+    "note": "armrest flips up for ingress"
+   },
+   "note": "",
+   "children": [
+    "Arm_L_Controls"
+   ]
+  },
+  {
+   "name": "Arm_L_Controls",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -3.5,
+    26.0,
+    40.0
+   ],
+   "triangles": 964,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Arm control pad (buttons/knob/display)",
+   "children": []
+  },
+  {
+   "name": "Arm_R",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -3.5,
+    -26.0,
+    40.0
+   ],
+   "triangles": 220,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "open_deg": 80,
+    "opens_toward_ue": [
+     0,
+     0,
+     1
+    ],
+    "note": "armrest flips up for ingress"
+   },
+   "note": "",
+   "children": [
+    "Arm_R_Controls",
+    "Arm_R_Display"
+   ]
+  },
+  {
+   "name": "Arm_R_Controls",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -3.5,
+    -26.0,
+    40.0
+   ],
+   "triangles": 332,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_Graphite",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Arm control pad (buttons/knob/display)",
+   "children": []
+  },
+  {
+   "name": "Arm_R_Display",
+   "role": "display",
+   "pivot_cm_ue": [
+    -3.5,
+    -26.0,
+    40.0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Footrest",
+   "role": "movable",
+   "pivot_cm_ue": [
+    25.0,
+    0.0,
+    36.0
+   ],
+   "triangles": 396,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_Rubber"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     0,
+     75
+    ],
+    "opens_toward_ue": [
+     0,
+     0,
+     1
+    ],
+    "note": "folds up under the seat front"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Sit",
+   "role": "socket",
+   "pivot_cm_ue": [
+    6.0,
+    0.0,
+    48.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Seated pelvis anchor (seat top)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_ArmL",
+   "role": "socket",
+   "pivot_cm_ue": [
+    12.0,
+    28.0,
+    66.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Left arm control pad",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_ArmR",
+   "role": "socket",
+   "pivot_cm_ue": [
+    12.0,
+    -28.0,
+    66.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Right arm display pad",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Floor",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Floor pivot",
+   "children": []
+  }
+ ],
+ "notes": [],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_MCC_MissionControlChair.glb",
+   "nodes": [
+    "OD_MCC_MissionControlChair",
+    "Base",
+    "StatusLights",
+    "Swivel",
+    "Seat",
+    "Seat_Lights",
+    "Backrest",
+    "Backrest_Lights",
+    "Arm_L",
+    "Arm_L_Controls",
+    "Arm_R",
+    "Arm_R_Controls",
+    "Arm_R_Display",
+    "Footrest",
+    "SOCKET_Sit",
+    "SOCKET_Interact_ArmL",
+    "SOCKET_Interact_ArmR",
+    "SOCKET_Mount_Floor"
+   ],
+   "material_slots": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_Rubber",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_Display"
+   ],
+   "triangles": 4684,
+   "bounds_ue_cm": {
+    "min": [
+     -35.0,
+     -35.0,
+     0.0
+    ],
+    "max": [
+     35.0,
+     35.0,
+     120.0
+    ]
+   },
+   "size_m": {
+    "D_x": 0.7,
+    "W_y": 0.7,
+    "H_z": 1.2
+   },
+   "root_node": "OD_MCC_MissionControlChair",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 84,
+   "hulls": 141,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

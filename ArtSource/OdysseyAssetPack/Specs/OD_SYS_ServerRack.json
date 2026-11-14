@@ -1,0 +1,814 @@
+{
+ "name": "OD_SYS_ServerRack",
+ "title": "Server Equipment Rack",
+ "reference_image": "09_Server_Equipment_Rack.png",
+ "description": "ORION Systems server rack: graphite cabinet framed by white corner pillars with ion light strips, six pull-out server sleds with honeycomb faces, LEDs and amber handles, a central status display module with ID reader, a lower intake grille, amber side cable conduits, corner feet on a recessed base with hazard plate and a hinged rear door.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 0.6,
+  "H_z": 2.1,
+  "D_x": 1.0
+ },
+ "pivot": {
+  "type": "floor",
+  "text": "bottom-centre (floor contact under the feet)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    -50.0,
+    -30.0,
+    0
+   ],
+   "max": [
+    50.0,
+    30.0,
+    210
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "Sled_01",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    177.6
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Sled_02",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    164.2
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Sled_03",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    150.8
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Sled_04",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    95.4
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Sled_05",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    82.0
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Sled_06",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    68.6
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "RearDoor",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -44.0,
+    23.6,
+    15.0
+   ],
+   "triangles": 1316,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 110,
+    "opens_toward_ue": [
+     -1,
+     0,
+     0
+    ]
+   },
+   "note": "Rear service door, hinge on the +Y edge",
+   "children": []
+  }
+ ],
+ "static_components": [
+  "Body",
+  "StatusLights",
+  "Screen_Status"
+ ],
+ "collision_recommendation": "Simple: one box 1.00 x 0.60 x 2.10 (UCX). Sleds: own box when pulled out.",
+ "nanite_recommendation": "Nanite ON for Body; sleds/door/display separate.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 176,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 1200,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Display": {
+   "triangles": 12,
+   "base_srgb": "#09131C",
+   "metallic": 0.0,
+   "roughness": 0.12,
+   "emissive": false
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 1444,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 5680,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_HazardPaint": {
+   "triangles": 1148,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.55,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 1524,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  },
+  "OD_MAT_Rubber": {
+   "triangles": 176,
+   "base_srgb": "#141618",
+   "metallic": 0.0,
+   "roughness": 0.88,
+   "emissive": false
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Sled_01",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Sled_02",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Sled_03",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Sled_04",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Sled_05",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Sled_06",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Status display",
+   "socket": "SOCKET_Interact_Screen",
+   "text": "Rack health UI"
+  },
+  {
+   "name": "ID reader",
+   "socket": "SOCKET_Interact_IDReader",
+   "text": "Badge in"
+  },
+  {
+   "name": "Server sleds",
+   "socket": "SOCKET_Interact_Sled_Top",
+   "text": "Slide out 0.60 m along +X"
+  },
+  {
+   "name": "Rear door",
+   "socket": "SOCKET_Interact_RearDoor",
+   "text": "Opens 110 deg"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Floor",
+   "socket": "SOCKET_Mount_Floor",
+   "text": "Free-standing; keep 0.9 m front and rear clearance"
+  },
+  {
+   "name": "Cable",
+   "socket": "SOCKET_Cable_Top",
+   "text": "Top entry"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_SYS_ServerRack",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Body",
+    "StatusLights",
+    "Sled_01",
+    "Sled_02",
+    "Sled_03",
+    "Sled_04",
+    "Sled_05",
+    "Sled_06",
+    "Screen_Status",
+    "RearDoor",
+    "SOCKET_Interact_Screen",
+    "SOCKET_Interact_IDReader",
+    "SOCKET_Interact_Sled_Top",
+    "SOCKET_Interact_RearDoor",
+    "SOCKET_Mount_Floor",
+    "SOCKET_Cable_Top"
+   ]
+  },
+  {
+   "name": "Body",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 4476,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_Rubber"
+   ],
+   "motion": null,
+   "note": "Frame, pillars, panels, base, modules",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 396,
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Pillar strips, header and base lights",
+   "children": []
+  },
+  {
+   "name": "Sled_01",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    177.6
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Sled_02",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    164.2
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Sled_03",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    150.8
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Sled_04",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    95.4
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Sled_05",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    82.0
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Sled_06",
+   "role": "movable",
+   "pivot_cm_ue": [
+    44.0,
+    0.0,
+    68.6
+   ],
+   "triangles": 860,
+   "materials": [
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 60,
+    "note": "pulls out on rails"
+   },
+   "note": "Server sled (1 of 6)",
+   "children": []
+  },
+  {
+   "name": "Screen_Status",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Rack status display (0..1 UV)",
+   "children": []
+  },
+  {
+   "name": "RearDoor",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -44.0,
+    23.6,
+    15.0
+   ],
+   "triangles": 1316,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 110,
+    "opens_toward_ue": [
+     -1,
+     0,
+     0
+    ]
+   },
+   "note": "Rear service door, hinge on the +Y edge",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Screen",
+   "role": "socket",
+   "pivot_cm_ue": [
+    48.5,
+    4.0,
+    130.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Rack status display",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_IDReader",
+   "role": "socket",
+   "pivot_cm_ue": [
+    48.3,
+    -18.0,
+    131.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Badge / ID reader",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Sled_Top",
+   "role": "socket",
+   "pivot_cm_ue": [
+    49.0,
+    0.0,
+    184.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Top sled handle line (others at 13.4 cm pitch)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_RearDoor",
+   "role": "socket",
+   "pivot_cm_ue": [
+    -50.0,
+    -19.0,
+    110.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Rear door handle",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Floor",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Floor pivot; seismic anchors through feet",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Cable_Top",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    210.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Overhead cable tray drop",
+   "children": []
+  }
+ ],
+ "notes": [],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_SYS_ServerRack.glb",
+   "nodes": [
+    "OD_SYS_ServerRack",
+    "Body",
+    "StatusLights",
+    "Sled_01",
+    "Sled_02",
+    "Sled_03",
+    "Sled_04",
+    "Sled_05",
+    "Sled_06",
+    "Screen_Status",
+    "RearDoor",
+    "SOCKET_Interact_Screen",
+    "SOCKET_Interact_IDReader",
+    "SOCKET_Interact_Sled_Top",
+    "SOCKET_Interact_RearDoor",
+    "SOCKET_Mount_Floor",
+    "SOCKET_Cable_Top"
+   ],
+   "material_slots": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_Rubber",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_Display"
+   ],
+   "triangles": 11360,
+   "bounds_ue_cm": {
+    "min": [
+     -50.0,
+     -30.0,
+     0.0
+    ],
+    "max": [
+     50.0,
+     30.0,
+     210.0
+    ]
+   },
+   "size_m": {
+    "D_x": 1.0,
+    "W_y": 0.6,
+    "H_z": 2.1
+   },
+   "root_node": "OD_SYS_ServerRack",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 388,
+   "hulls": 472,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

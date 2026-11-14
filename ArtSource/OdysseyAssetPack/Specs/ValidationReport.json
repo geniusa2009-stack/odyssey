@@ -1,0 +1,272 @@
+[
+ {
+  "asset": "OD_ENG_PowerConsole",
+  "ok": true,
+  "tris": 16172,
+  "bytes": 1162968,
+  "nodes": 26,
+  "materials": 10,
+  "size_m": {
+   "D_x": 0.9,
+   "W_y": 1.8,
+   "H_z": 1.25
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 1.1
+ },
+ {
+  "asset": "OD_ENG_PowerBusB",
+  "ok": true,
+  "tris": 9160,
+  "bytes": 677164,
+  "nodes": 27,
+  "materials": 9,
+  "size_m": {
+   "D_x": 0.6,
+   "W_y": 1.2,
+   "H_z": 2.2
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.5
+ },
+ {
+  "asset": "OD_TRN_TrainingSimulator",
+  "ok": true,
+  "tris": 13904,
+  "bytes": 1013972,
+  "nodes": 21,
+  "materials": 10,
+  "size_m": {
+   "D_x": 3.8,
+   "W_y": 3.2,
+   "H_z": 2.8
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 1.1
+ },
+ {
+  "asset": "OD_LAB_SampleAnalyzer",
+  "ok": true,
+  "tris": 10148,
+  "bytes": 736844,
+  "nodes": 22,
+  "materials": 11,
+  "size_m": {
+   "D_x": 0.9,
+   "W_y": 1.6,
+   "H_z": 1.7
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.7
+ },
+ {
+  "asset": "OD_MCC_MainConsole",
+  "ok": true,
+  "tris": 19516,
+  "bytes": 1443836,
+  "nodes": 29,
+  "materials": 9,
+  "size_m": {
+   "D_x": 1.6,
+   "W_y": 4.8,
+   "H_z": 1.3
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 6.9
+ },
+ {
+  "asset": "OD_ENV_SlidingDoor",
+  "ok": true,
+  "tris": 7292,
+  "bytes": 552164,
+  "nodes": 20,
+  "materials": 10,
+  "size_m": {
+   "D_x": 0.3,
+   "W_y": 2.4,
+   "H_z": 2.6
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.8
+ },
+ {
+  "asset": "OD_ENV_EmergencyBulkhead",
+  "ok": true,
+  "tris": 9920,
+  "bytes": 723784,
+  "nodes": 21,
+  "materials": 8,
+  "size_m": {
+   "D_x": 0.45,
+   "W_y": 2.4,
+   "H_z": 2.6
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.9
+ },
+ {
+  "asset": "OD_SYS_ORIONTerminal",
+  "ok": true,
+  "tris": 3220,
+  "bytes": 233964,
+  "nodes": 11,
+  "materials": 8,
+  "size_m": {
+   "D_x": 0.6,
+   "W_y": 0.7,
+   "H_z": 1.55
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.4
+ },
+ {
+  "asset": "OD_SYS_ServerRack",
+  "ok": true,
+  "tris": 11360,
+  "bytes": 841440,
+  "nodes": 17,
+  "materials": 8,
+  "size_m": {
+   "D_x": 1.0,
+   "W_y": 0.6,
+   "H_z": 2.1
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 1.0
+ },
+ {
+  "asset": "OD_OBS_WindowFrame",
+  "ok": true,
+  "tris": 6532,
+  "bytes": 474964,
+  "nodes": 10,
+  "materials": 8,
+  "size_m": {
+   "D_x": 0.6,
+   "W_y": 15.0,
+   "H_z": 5.1
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.4
+ },
+ {
+  "asset": "OD_ENV_CeilingLight",
+  "ok": true,
+  "tris": 2564,
+  "bytes": 189032,
+  "nodes": 8,
+  "materials": 6,
+  "size_m": {
+   "D_x": 2.0,
+   "W_y": 0.5,
+   "H_z": 0.14
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.2
+ },
+ {
+  "asset": "OD_ENV_WallUtilityPanel",
+  "ok": true,
+  "tris": 4176,
+  "bytes": 308756,
+  "nodes": 16,
+  "materials": 10,
+  "size_m": {
+   "D_x": 0.18,
+   "W_y": 1.0,
+   "H_z": 1.2
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.2
+ },
+ {
+  "asset": "OD_ENV_VentilationModule",
+  "ok": true,
+  "tris": 4452,
+  "bytes": 328088,
+  "nodes": 17,
+  "materials": 6,
+  "size_m": {
+   "D_x": 0.4,
+   "W_y": 1.4,
+   "H_z": 0.8
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.3
+ },
+ {
+  "asset": "OD_PROP_SupplyCrate",
+  "ok": true,
+  "tris": 3936,
+  "bytes": 302824,
+  "nodes": 15,
+  "materials": 6,
+  "size_m": {
+   "D_x": 0.7,
+   "W_y": 1.0,
+   "H_z": 0.7
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.2
+ },
+ {
+  "asset": "OD_MCC_MissionControlChair",
+  "ok": true,
+  "tris": 4684,
+  "bytes": 371432,
+  "nodes": 18,
+  "materials": 8,
+  "size_m": {
+   "D_x": 0.7,
+   "W_y": 0.7,
+   "H_z": 1.2
+  },
+  "envelope": [],
+  "problems": [],
+  "intersections": [],
+  "floating": [],
+  "seconds": 0.4
+ }
+]

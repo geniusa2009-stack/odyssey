@@ -1,0 +1,910 @@
+{
+ "name": "OD_LAB_SampleAnalyzer",
+ "title": "Laboratory Sample Analyzer",
+ "reference_image": "04_Laboratory_Sample_Analyzer_Ref.png",
+ "description": "Automated sample analyzer: cabinet with vented side pods on corner feet, 0.98 m worktop with mode buttons, selector knob, cartridge tray tunnel and mushroom e-stop; glazed sample chamber with sliding glass door, 10-vial sample rack and an analysis head with ion ring; two toed-in analysis displays; top housing with status strip; rear service column and hinged maintenance panel.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 1.6,
+  "H_z": 1.7,
+  "D_x": 0.9
+ },
+ "pivot": {
+  "type": "floor",
+  "text": "bottom-centre (floor contact)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    -45.0,
+    -80.0,
+    0
+   ],
+   "max": [
+    45.0,
+    80.0,
+    170
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "MaintenancePanel",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -40.0,
+    -49.6,
+    12.0
+   ],
+   "triangles": 780,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     -1,
+     0,
+     0
+    ]
+   },
+   "note": "Rear maintenance access panel",
+   "children": []
+  },
+  {
+   "name": "Control_Buttons",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 484,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     0,
+     0,
+     -1
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "Load off / Load nominal / Diagnostic / mode buttons",
+   "children": []
+  },
+  {
+   "name": "Control_Knob",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    33.0,
+    24.5,
+    98.8
+   ],
+   "triangles": 388,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "range_deg": [
+     -135,
+     135
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_EStop",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    33.0,
+    -61.0,
+    100.02
+   ],
+   "triangles": 312,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     0,
+     0,
+     -1
+    ],
+    "range_cm": [
+     0,
+     0.8
+    ],
+    "note": "emergency stop"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "CartridgeTray",
+   "role": "movable",
+   "pivot_cm_ue": [
+    41.0,
+    0.0,
+    99.0
+   ],
+   "triangles": 220,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 14,
+    "note": "insert / eject"
+   },
+   "note": "Sample cartridge slot tray",
+   "children": []
+  },
+  {
+   "name": "SampleArea",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 936,
+   "materials": [
+    "OD_MAT_Glass",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Sample rack with 10 vials (pickable sample positions)",
+   "children": []
+  },
+  {
+   "name": "ChamberDoor",
+   "role": "movable",
+   "pivot_cm_ue": [
+    16.0,
+    0.0,
+    102.0
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Glass",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     0,
+     0,
+     1
+    ],
+    "travel_cm": 40,
+    "note": "glass door slides up behind the top housing"
+   },
+   "note": "Sliding glass chamber door",
+   "children": []
+  }
+ ],
+ "static_components": [
+  "Body",
+  "StatusLights",
+  "SampleChamber",
+  "SampleChamber_Lights",
+  "Display_L",
+  "Display_R"
+ ],
+ "collision_recommendation": "Custom: cabinet box + worktop box + chamber box + top housing box (4 UCX).",
+ "nanite_recommendation": "Body Nanite ON; glass (chamber, door, vials) translucent - non-Nanite.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 352,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_Amber_Emissive": {
+   "triangles": 132,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 1556,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Display": {
+   "triangles": 24,
+   "base_srgb": "#09131C",
+   "metallic": 0.0,
+   "roughness": 0.12,
+   "emissive": false
+  },
+  "OD_MAT_EmergencyRed_Emissive": {
+   "triangles": 400,
+   "base_srgb": "#B84743",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_Glass": {
+   "triangles": 476,
+   "base_srgb": "#9FB7BF",
+   "metallic": 0.0,
+   "roughness": 0.04,
+   "emissive": false
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 1856,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 3636,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_HazardPaint": {
+   "triangles": 232,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.55,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 1308,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  },
+  "OD_MAT_Rubber": {
+   "triangles": 176,
+   "base_srgb": "#141618",
+   "metallic": 0.0,
+   "roughness": 0.88,
+   "emissive": false
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_Buttons",
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_EStop",
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ]
+  },
+  {
+   "node": "SampleChamber_Lights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "SampleArea",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Sample chamber",
+   "socket": "SOCKET_Interact_Chamber",
+   "text": "Door slides up 0.40 m"
+  },
+  {
+   "name": "Cartridge tray",
+   "socket": "SOCKET_Interact_Cartridge",
+   "text": "Slides out 0.14 m"
+  },
+  {
+   "name": "Emergency stop",
+   "socket": "SOCKET_Interact_EStop",
+   "text": "Immediate isolation"
+  },
+  {
+   "name": "Mode buttons",
+   "socket": "SOCKET_Interact_Controls",
+   "text": "Load off / nominal / diagnostic"
+  },
+  {
+   "name": "Displays",
+   "socket": "SOCKET_Interact_Display_L",
+   "text": "Analysis UI (L and R)"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Floor",
+   "socket": "SOCKET_Mount_Floor",
+   "text": "Free-standing; 0.30 m rear clearance for the maintenance panel"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_LAB_SampleAnalyzer",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Body",
+    "StatusLights",
+    "MaintenancePanel",
+    "Controls",
+    "CartridgeTray",
+    "SampleChamber",
+    "SampleArea",
+    "ChamberDoor",
+    "Display_L",
+    "Display_R",
+    "SOCKET_Interact_Chamber",
+    "SOCKET_Interact_Cartridge",
+    "SOCKET_Interact_EStop",
+    "SOCKET_Interact_Controls",
+    "SOCKET_Interact_Display_L",
+    "SOCKET_Interact_Display_R",
+    "SOCKET_Mount_Floor"
+   ]
+  },
+  {
+   "name": "Body",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 5460,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_Rubber"
+   ],
+   "motion": null,
+   "note": "Base, cabinet, pods, worktop, top housing, rear column",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 840,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Status strips and LEDs",
+   "children": []
+  },
+  {
+   "name": "MaintenancePanel",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -40.0,
+    -49.6,
+    12.0
+   ],
+   "triangles": 780,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     -1,
+     0,
+     0
+    ]
+   },
+   "note": "Rear maintenance access panel",
+   "children": []
+  },
+  {
+   "name": "Controls",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Worktop controls",
+   "children": [
+    "Control_Buttons",
+    "Control_Knob",
+    "Control_EStop"
+   ]
+  },
+  {
+   "name": "Control_Buttons",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 484,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     0,
+     0,
+     -1
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "Load off / Load nominal / Diagnostic / mode buttons",
+   "children": []
+  },
+  {
+   "name": "Control_Knob",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    33.0,
+    24.5,
+    98.8
+   ],
+   "triangles": 388,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "range_deg": [
+     -135,
+     135
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Control_EStop",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    33.0,
+    -61.0,
+    100.02
+   ],
+   "triangles": 312,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     0,
+     0,
+     -1
+    ],
+    "range_cm": [
+     0,
+     0.8
+    ],
+    "note": "emergency stop"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "CartridgeTray",
+   "role": "movable",
+   "pivot_cm_ue": [
+    41.0,
+    0.0,
+    99.0
+   ],
+   "triangles": 220,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "travel_cm": 14,
+    "note": "insert / eject"
+   },
+   "note": "Sample cartridge slot tray",
+   "children": []
+  },
+  {
+   "name": "SampleChamber",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 444,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Glass",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": null,
+   "note": "Chamber frame, side glazing, rear wall, analysis head",
+   "children": [
+    "SampleChamber_Lights"
+   ]
+  },
+  {
+   "name": "SampleChamber_Lights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 192,
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "SampleArea",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 936,
+   "materials": [
+    "OD_MAT_Glass",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Sample rack with 10 vials (pickable sample positions)",
+   "children": []
+  },
+  {
+   "name": "ChamberDoor",
+   "role": "movable",
+   "pivot_cm_ue": [
+    16.0,
+    0.0,
+    102.0
+   ],
+   "triangles": 68,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Glass",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     0,
+     0,
+     1
+    ],
+    "travel_cm": 40,
+    "note": "glass door slides up behind the top housing"
+   },
+   "note": "Sliding glass chamber door",
+   "children": []
+  },
+  {
+   "name": "Display_L",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Analysis display (0..1 UV on OD_MAT_Display)",
+   "children": []
+  },
+  {
+   "name": "Display_R",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Analysis display (0..1 UV on OD_MAT_Display)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Chamber",
+   "role": "socket",
+   "pivot_cm_ue": [
+    20.0,
+    0.0,
+    125.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Chamber door handle / sample access",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Cartridge",
+   "role": "socket",
+   "pivot_cm_ue": [
+    43.0,
+    0.0,
+    100.3
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Cartridge tray pull",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_EStop",
+   "role": "socket",
+   "pivot_cm_ue": [
+    33.0,
+    -61.0,
+    103.62
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Emergency stop",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Controls",
+   "role": "socket",
+   "pivot_cm_ue": [
+    33.0,
+    40.0,
+    100.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Mode buttons (load off / nominal / diagnostic)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Display_L",
+   "role": "socket",
+   "pivot_cm_ue": [
+    6.0,
+    56.0,
+    128.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Left display",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Display_R",
+   "role": "socket",
+   "pivot_cm_ue": [
+    6.0,
+    -56.0,
+    128.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Right display",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Floor",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Floor pivot",
+   "children": []
+  }
+ ],
+ "notes": [
+  "Reference sheet quotes 2.00 x 1.58 x 0.95 m; this follows the prototype contract 1.60 x 1.70 x 0.90 m."
+ ],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_LAB_SampleAnalyzer.glb",
+   "nodes": [
+    "OD_LAB_SampleAnalyzer",
+    "Body",
+    "StatusLights",
+    "MaintenancePanel",
+    "Controls",
+    "Control_Buttons",
+    "Control_Knob",
+    "Control_EStop",
+    "CartridgeTray",
+    "SampleChamber",
+    "SampleChamber_Lights",
+    "SampleArea",
+    "ChamberDoor",
+    "Display_L",
+    "Display_R",
+    "SOCKET_Interact_Chamber",
+    "SOCKET_Interact_Cartridge",
+    "SOCKET_Interact_EStop",
+    "SOCKET_Interact_Controls",
+    "SOCKET_Interact_Display_L",
+    "SOCKET_Interact_Display_R",
+    "SOCKET_Mount_Floor"
+   ],
+   "material_slots": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_Rubber",
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_Glass",
+    "OD_MAT_Display"
+   ],
+   "triangles": 10148,
+   "bounds_ue_cm": {
+    "min": [
+     -45.0,
+     -80.0,
+     0.0
+    ],
+    "max": [
+     45.0,
+     80.0,
+     170.0
+    ]
+   },
+   "size_m": {
+    "D_x": 0.9,
+    "W_y": 1.6,
+    "H_z": 1.7
+   },
+   "root_node": "OD_LAB_SampleAnalyzer",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 269,
+   "hulls": 396,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

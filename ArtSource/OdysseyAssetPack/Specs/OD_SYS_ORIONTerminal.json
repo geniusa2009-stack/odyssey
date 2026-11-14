@@ -1,0 +1,470 @@
+{
+ "name": "OD_SYS_ORIONTerminal",
+ "title": "ORION Physical Terminal",
+ "reference_image": "08B_ORION_Physical_Terminal.png",
+ "description": "Free-standing ORION kiosk: weighted graphite base with aluminium trim, graphite tower leaning back 7 deg, aluminium fascia carrying a portrait touch display and camera pod, speaker / mic / power band, ion status bar, hinged white service panel, aluminium side accents and a vented rear hatch with cable gland.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 0.7,
+  "H_z": 1.55,
+  "D_x": 0.6
+ },
+ "pivot": {
+  "type": "floor",
+  "text": "bottom-centre of the base (floor contact)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    -30.0,
+    -35.0,
+    0
+   ],
+   "max": [
+    30.0,
+    35.0,
+    155
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "ServicePanel",
+   "role": "movable",
+   "pivot_cm_ue": [
+    20.0,
+    -26.0,
+    13.0
+   ],
+   "triangles": 328,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ]
+   },
+   "note": "Lower service panel, hinge on the -Y edge",
+   "children": []
+  },
+  {
+   "name": "Control_PowerButton",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    21.8,
+    -19.5,
+    56.0
+   ],
+   "triangles": 172,
+   "materials": [
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  }
+ ],
+ "static_components": [
+  "Body",
+  "StatusLights",
+  "Screen_Main"
+ ],
+ "collision_recommendation": "Simple: base box + tower convex hull (2 UCX).",
+ "nanite_recommendation": "Nanite ON for Body; display/button/panel separate.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 44,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 1104,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Display": {
+   "triangles": 12,
+   "base_srgb": "#09131C",
+   "metallic": 0.0,
+   "roughness": 0.12,
+   "emissive": false
+  },
+  "OD_MAT_Glass": {
+   "triangles": 60,
+   "base_srgb": "#9FB7BF",
+   "metallic": 0.0,
+   "roughness": 0.04,
+   "emissive": false
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 556,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 972,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 304,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  },
+  "OD_MAT_Rubber": {
+   "triangles": 168,
+   "base_srgb": "#141618",
+   "metallic": 0.0,
+   "roughness": 0.88,
+   "emissive": false
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Control_PowerButton",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Touch display",
+   "socket": "SOCKET_Interact_Screen",
+   "text": "ORION UI render target"
+  },
+  {
+   "name": "Power",
+   "socket": "SOCKET_Interact_Power",
+   "text": "Press"
+  },
+  {
+   "name": "User position",
+   "socket": "SOCKET_User_Stand",
+   "text": "Stand here"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Floor",
+   "socket": "SOCKET_Mount_Floor",
+   "text": "Free-standing / bolted"
+  },
+  {
+   "name": "Cable",
+   "socket": "SOCKET_Cable_Rear",
+   "text": "Rear"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_SYS_ORIONTerminal",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Body",
+    "StatusLights",
+    "ServicePanel",
+    "Control_PowerButton",
+    "Screen_Main",
+    "SOCKET_Interact_Screen",
+    "SOCKET_Interact_Power",
+    "SOCKET_User_Stand",
+    "SOCKET_Mount_Floor",
+    "SOCKET_Cable_Rear"
+   ]
+  },
+  {
+   "name": "Body",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 2532,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Glass",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_Rubber"
+   ],
+   "motion": null,
+   "note": "Base, tower, fascia, bands, rear hatch",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 176,
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Front ion status bar",
+   "children": []
+  },
+  {
+   "name": "ServicePanel",
+   "role": "movable",
+   "pivot_cm_ue": [
+    20.0,
+    -26.0,
+    13.0
+   ],
+   "triangles": 328,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ]
+   },
+   "note": "Lower service panel, hinge on the -Y edge",
+   "children": []
+  },
+  {
+   "name": "Control_PowerButton",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    21.8,
+    -19.5,
+    56.0
+   ],
+   "triangles": 172,
+   "materials": [
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Screen_Main",
+   "role": "display",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Portrait touch display (0..1 UV on OD_MAT_Display)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Screen",
+   "role": "socket",
+   "pivot_cm_ue": [
+    17.966,
+    0.0,
+    106.073
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Touch display centre (look-at / UI widget anchor)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Power",
+   "role": "socket",
+   "pivot_cm_ue": [
+    22.7,
+    -19.5,
+    56.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Power button",
+   "children": []
+  },
+  {
+   "name": "SOCKET_User_Stand",
+   "role": "socket",
+   "pivot_cm_ue": [
+    75.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "User floor position",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Floor",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Floor pivot (anchor bolts through base)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Cable_Rear",
+   "role": "socket",
+   "pivot_cm_ue": [
+    -24.6,
+    0.0,
+    26.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Rear cable gland",
+   "children": []
+  }
+ ],
+ "notes": [],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_SYS_ORIONTerminal.glb",
+   "nodes": [
+    "OD_SYS_ORIONTerminal",
+    "Body",
+    "StatusLights",
+    "ServicePanel",
+    "Control_PowerButton",
+    "Screen_Main",
+    "SOCKET_Interact_Screen",
+    "SOCKET_Interact_Power",
+    "SOCKET_User_Stand",
+    "SOCKET_Mount_Floor",
+    "SOCKET_Cable_Rear"
+   ],
+   "material_slots": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Glass",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_Rubber",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_Display"
+   ],
+   "triangles": 3220,
+   "bounds_ue_cm": {
+    "min": [
+     -30.0,
+     -35.0,
+     0.0
+    ],
+    "max": [
+     30.0,
+     35.0,
+     155.0
+    ]
+   },
+   "size_m": {
+    "D_x": 0.6,
+    "W_y": 0.7,
+    "H_z": 1.55
+   },
+   "root_node": "OD_SYS_ORIONTerminal",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 82,
+   "hulls": 125,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

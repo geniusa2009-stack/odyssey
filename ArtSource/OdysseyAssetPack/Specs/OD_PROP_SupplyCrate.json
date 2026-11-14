@@ -1,0 +1,656 @@
+{
+ "name": "OD_PROP_SupplyCrate",
+ "title": "Supply Crate",
+ "reference_image": "14_Supply_Cargo_Crate.png",
+ "description": "Two-piece hard-shell supply crate: lower shell on fork skids, hinged lid with raised panel, graphite corner bumpers and wrap straps, two over-centre latches spanning the seam, fold-down top handles and side carry handles with intake vents.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 1.0,
+  "H_z": 0.7,
+  "D_x": 0.7
+ },
+ "pivot": {
+  "type": "floor",
+  "text": "bottom-centre (floor contact under the skids)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    -35.0,
+    -50.0,
+    0
+   ],
+   "max": [
+    35.0,
+    50.0,
+    70
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "Lid",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -31.0,
+    0.0,
+    50.0
+   ],
+   "triangles": 872,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     0,
+     0,
+     1
+    ]
+   },
+   "note": "Lid hinges on the rear top edge",
+   "children": [
+    "Handle_Top_R",
+    "Handle_Top_L"
+   ]
+  },
+  {
+   "name": "Handle_Top_R",
+   "role": "movable",
+   "pivot_cm_ue": [
+    0.0,
+    38.0,
+    60.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     1,
+     0,
+     0
+    ],
+    "range_deg": [
+     0,
+     85
+    ],
+    "note": "folds flat"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Handle_Top_L",
+   "role": "movable",
+   "pivot_cm_ue": [
+    0.0,
+    -38.0,
+    60.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     1,
+     0,
+     0
+    ],
+    "range_deg": [
+     0,
+     85
+    ],
+    "note": "folds flat"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Latch_L",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    33.0,
+    22.0,
+    41.0
+   ],
+   "triangles": 52,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     0,
+     70
+    ],
+    "note": "flips down to release"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Latch_R",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    33.0,
+    -22.0,
+    41.0
+   ],
+   "triangles": 52,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     0,
+     70
+    ],
+    "note": "flips down to release"
+   },
+   "note": "",
+   "children": []
+  }
+ ],
+ "static_components": [
+  "Body",
+  "StatusLights"
+ ],
+ "collision_recommendation": "Simple: one box 0.70 x 1.00 x 0.62 (handles excluded). Physics-simulated prop friendly.",
+ "nanite_recommendation": "Nanite optional (6-7k tris). For physics props keep a simple UCX box.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 176,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 1160,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 1008,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 1312,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_HazardPaint": {
+   "triangles": 16,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.55,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 264,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  },
+  {
+   "node": "Lid",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Lid",
+   "socket": "SOCKET_Interact_Lid",
+   "text": "Hinge 100 deg after both latches release"
+  },
+  {
+   "name": "Latches",
+   "socket": "SOCKET_Interact_Latch_L",
+   "text": "Flip down 70 deg"
+  },
+  {
+   "name": "Carry",
+   "socket": "SOCKET_Carry_L",
+   "text": "Two-hand carry / drag"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Floor",
+   "socket": "SOCKET_Mount_Floor",
+   "text": "Rests on skids"
+  },
+  {
+   "name": "Stack",
+   "socket": "SOCKET_Stack_Top",
+   "text": "Stackable"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_PROP_SupplyCrate",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Body",
+    "StatusLights",
+    "Lid",
+    "Latch_L",
+    "Latch_R",
+    "SOCKET_Interact_Lid",
+    "SOCKET_Interact_Latch_L",
+    "SOCKET_Interact_Latch_R",
+    "SOCKET_Carry_L",
+    "SOCKET_Carry_R",
+    "SOCKET_Stack_Top",
+    "SOCKET_Mount_Floor"
+   ]
+  },
+  {
+   "name": "Body",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 2476,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": null,
+   "note": "Lower shell, skids, corner bumpers, straps, side handles",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 220,
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Front ion status strips",
+   "children": []
+  },
+  {
+   "name": "Lid",
+   "role": "movable",
+   "pivot_cm_ue": [
+    -31.0,
+    0.0,
+    50.0
+   ],
+   "triangles": 872,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     0,
+     0,
+     1
+    ]
+   },
+   "note": "Lid hinges on the rear top edge",
+   "children": [
+    "Handle_Top_R",
+    "Handle_Top_L"
+   ]
+  },
+  {
+   "name": "Handle_Top_R",
+   "role": "movable",
+   "pivot_cm_ue": [
+    0.0,
+    38.0,
+    60.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     1,
+     0,
+     0
+    ],
+    "range_deg": [
+     0,
+     85
+    ],
+    "note": "folds flat"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Handle_Top_L",
+   "role": "movable",
+   "pivot_cm_ue": [
+    0.0,
+    -38.0,
+    60.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     1,
+     0,
+     0
+    ],
+    "range_deg": [
+     0,
+     85
+    ],
+    "note": "folds flat"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Latch_L",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    33.0,
+    22.0,
+    41.0
+   ],
+   "triangles": 52,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     0,
+     70
+    ],
+    "note": "flips down to release"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Latch_R",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    33.0,
+    -22.0,
+    41.0
+   ],
+   "triangles": 52,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     0,
+     70
+    ],
+    "note": "flips down to release"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Lid",
+   "role": "socket",
+   "pivot_cm_ue": [
+    31.0,
+    0.0,
+    58.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Open/close lid (latches first)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Latch_L",
+   "role": "socket",
+   "pivot_cm_ue": [
+    34.2,
+    22.0,
+    50.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Latch L",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Latch_R",
+   "role": "socket",
+   "pivot_cm_ue": [
+    34.2,
+    -22.0,
+    50.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Latch R",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Carry_L",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    50.0,
+    34.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Side carry handle (+Y)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Carry_R",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    -50.0,
+    34.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Side carry handle (-Y)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Stack_Top",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    70.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Stacking point (top handles folded: 0.62 m)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Floor",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Floor pivot",
+   "children": []
+  }
+ ],
+ "notes": [],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_PROP_SupplyCrate.glb",
+   "nodes": [
+    "OD_PROP_SupplyCrate",
+    "Body",
+    "StatusLights",
+    "Lid",
+    "Handle_Top_R",
+    "Handle_Top_L",
+    "Latch_L",
+    "Latch_R",
+    "SOCKET_Interact_Lid",
+    "SOCKET_Interact_Latch_L",
+    "SOCKET_Interact_Latch_R",
+    "SOCKET_Carry_L",
+    "SOCKET_Carry_R",
+    "SOCKET_Stack_Top",
+    "SOCKET_Mount_Floor"
+   ],
+   "material_slots": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_HazardPaint"
+   ],
+   "triangles": 3936,
+   "bounds_ue_cm": {
+    "min": [
+     -35.0,
+     -50.0,
+     0.0
+    ],
+    "max": [
+     35.0,
+     50.0,
+     70.0
+    ]
+   },
+   "size_m": {
+    "D_x": 0.7,
+    "W_y": 1.0,
+    "H_z": 0.7
+   },
+   "root_node": "OD_PROP_SupplyCrate",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 93,
+   "hulls": 138,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

@@ -1,0 +1,654 @@
+{
+ "name": "OD_ENV_VentilationModule",
+ "title": "Ventilation Module",
+ "reference_image": "13_Ventilation_Module.png",
+ "description": "Wall ventilation unit: chamfered white housing with a deep louver bay (four adjustable rows across three bays split by gunmetal dividers), recessed filter plenum, gunmetal bay bezel, airflow status strip, side slot vents with graphite corner caps and a drop-down filter hatch.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 1.4,
+  "H_z": 0.8,
+  "D_x": 0.4
+ },
+ "pivot": {
+  "type": "wall",
+  "text": "centre of the rear face (flush to wall)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    0,
+    -70.0,
+    -40.0
+   ],
+   "max": [
+    40,
+    70.0,
+    40.0
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "Louver_Row_01",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    26.0,
+    0.0,
+    -15.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     -35,
+     35
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Louver_Row_02",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    26.0,
+    0.0,
+    -4.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     -35,
+     35
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Louver_Row_03",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    26.0,
+    0.0,
+    7.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     -35,
+     35
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Louver_Row_04",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    26.0,
+    0.0,
+    18.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     -35,
+     35
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "FilterHatch",
+   "role": "movable",
+   "pivot_cm_ue": [
+    34.0,
+    -27.0,
+    -38.0
+   ],
+   "triangles": 624,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "open_deg": 90,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ],
+    "note": "drops down on its bottom edge for filter change"
+   },
+   "note": "",
+   "children": []
+  }
+ ],
+ "static_components": [
+  "Body",
+  "StatusLights"
+ ],
+ "collision_recommendation": "None (wall detail) or one box 0.40 x 1.40 x 0.80.",
+ "nanite_recommendation": "Nanite ON for Body; louver rows and hatch as small separate meshes.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 172,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 932,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 1528,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 1564,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_HazardPaint": {
+   "triangles": 36,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.55,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 220,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Filter hatch",
+   "socket": "SOCKET_Interact_FilterHatch",
+   "text": "Drops 90 deg"
+  },
+  {
+   "name": "Louvers",
+   "socket": "SOCKET_Interact_Louvers",
+   "text": "Rows rotate +-35 deg"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Wall",
+   "socket": "SOCKET_Mount_Wall",
+   "text": "Flush to wall; four anchors"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_ENV_VentilationModule",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Body",
+    "StatusLights",
+    "Louvers",
+    "FilterHatch",
+    "SOCKET_Interact_FilterHatch",
+    "SOCKET_Interact_Louvers",
+    "SOCKET_FX_Airflow",
+    "SOCKET_Mount_Wall",
+    "SOCKET_Mount_Anchor_1",
+    "SOCKET_Mount_Anchor_2",
+    "SOCKET_Mount_Anchor_3",
+    "SOCKET_Mount_Anchor_4"
+   ]
+  },
+  {
+   "name": "Body",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 3080,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": null,
+   "note": "Housing, plenum, bezel, dividers, vents",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 220,
+   "materials": [
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Airflow status strip",
+   "children": []
+  },
+  {
+   "name": "Louvers",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Adjustable louver rows (rotate about Y)",
+   "children": [
+    "Louver_Row_01",
+    "Louver_Row_02",
+    "Louver_Row_03",
+    "Louver_Row_04"
+   ]
+  },
+  {
+   "name": "Louver_Row_01",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    26.0,
+    0.0,
+    -15.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     -35,
+     35
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Louver_Row_02",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    26.0,
+    0.0,
+    -4.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     -35,
+     35
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Louver_Row_03",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    26.0,
+    0.0,
+    7.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     -35,
+     35
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Louver_Row_04",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    26.0,
+    0.0,
+    18.0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "range_deg": [
+     -35,
+     35
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "FilterHatch",
+   "role": "movable",
+   "pivot_cm_ue": [
+    34.0,
+    -27.0,
+    -38.0
+   ],
+   "triangles": 624,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     1,
+     0
+    ],
+    "open_deg": 90,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ],
+    "note": "drops down on its bottom edge for filter change"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_FilterHatch",
+   "role": "socket",
+   "pivot_cm_ue": [
+    36.6,
+    -24.0,
+    -33.5
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Filter hatch pull",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Louvers",
+   "role": "socket",
+   "pivot_cm_ue": [
+    34.0,
+    0.0,
+    1.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Louver adjust / airflow look-at",
+   "children": []
+  },
+  {
+   "name": "SOCKET_FX_Airflow",
+   "role": "socket",
+   "pivot_cm_ue": [
+    40.0,
+    0.0,
+    1.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Air outlet: particle/airflow FX origin, +X",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Wall",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Pivot: centre of rear face, flush to wall",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Anchor_1",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    60,
+    32
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Wall anchor through wall plate",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Anchor_2",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    -60,
+    32
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Wall anchor through wall plate",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Anchor_3",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    60,
+    -32
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Wall anchor through wall plate",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Anchor_4",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    -60,
+    -32
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Wall anchor through wall plate",
+   "children": []
+  }
+ ],
+ "notes": [],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_ENV_VentilationModule.glb",
+   "nodes": [
+    "OD_ENV_VentilationModule",
+    "Body",
+    "StatusLights",
+    "Louvers",
+    "Louver_Row_01",
+    "Louver_Row_02",
+    "Louver_Row_03",
+    "Louver_Row_04",
+    "FilterHatch",
+    "SOCKET_Interact_FilterHatch",
+    "SOCKET_Interact_Louvers",
+    "SOCKET_FX_Airflow",
+    "SOCKET_Mount_Wall",
+    "SOCKET_Mount_Anchor_1",
+    "SOCKET_Mount_Anchor_2",
+    "SOCKET_Mount_Anchor_3",
+    "SOCKET_Mount_Anchor_4"
+   ],
+   "material_slots": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "triangles": 4452,
+   "bounds_ue_cm": {
+    "min": [
+     0.0,
+     -70.0,
+     -40.0
+    ],
+    "max": [
+     40.0,
+     70.0,
+     40.0
+    ]
+   },
+   "size_m": {
+    "D_x": 0.4,
+    "W_y": 1.4,
+    "H_z": 0.8
+   },
+   "root_node": "OD_ENV_VentilationModule",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 187,
+   "hulls": 243,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

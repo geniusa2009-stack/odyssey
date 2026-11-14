@@ -1,0 +1,1008 @@
+{
+ "name": "OD_ENV_EmergencyBulkhead",
+ "title": "Emergency Bulkhead Door",
+ "reference_image": "07_Bulkhead_Emergency_Door.png",
+ "description": "Emergency pressure bulkhead: deep white portal with hazard-striped jambs, bolted jamb covers, red beacon housings and header alarm bar on both faces, seal-status/override panels, hazard threshold; two ribbed gunmetal pressure leaves hinged on the jambs (swing out +X) with amber marker lights, ALU lock bolts throwing into jamb keepers, and an amber manual handwheel.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 2.4,
+  "H_z": 2.6,
+  "D_x": 0.45
+ },
+ "pivot": {
+  "type": "floor",
+  "text": "bottom-centre of the opening, centred in the wall (x = 0)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    -22.5,
+    -120.0,
+    0
+   ],
+   "max": [
+    22.5,
+    120.0,
+    260
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [
+  {
+   "name": "OverridePanel_Front",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Seal status display + override buttons",
+   "children": [
+    "OverridePanel_Front_Button_1",
+    "OverridePanel_Front_Button_2"
+   ]
+  },
+  {
+   "name": "OverridePanel_Front_Button_1",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    19.4,
+    -108.8,
+    127.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_Amber_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "OverridePanel_Front_Button_2",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    19.4,
+    -115.2,
+    127.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "OverridePanel_Back",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Seal status display + override buttons",
+   "children": [
+    "OverridePanel_Back_Button_1",
+    "OverridePanel_Back_Button_2"
+   ]
+  },
+  {
+   "name": "OverridePanel_Back_Button_1",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -19.4,
+    108.8,
+    127.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_Amber_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "OverridePanel_Back_Button_2",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -19.4,
+    115.2,
+    127.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Leaf_L",
+   "role": "movable",
+   "pivot_cm_ue": [
+    7.2,
+    94.8,
+    0.0
+   ],
+   "triangles": 748,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ],
+    "note": "swings out toward +X (active leaf, opens first)"
+   },
+   "note": "Pressure leaf (0.12 m)",
+   "children": [
+    "Leaf_L_Lights",
+    "Leaf_L_LockBolt",
+    "ManualWheel"
+   ]
+  },
+  {
+   "name": "Leaf_L_LockBolt",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    9.25,
+    7.0,
+    222.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     0,
+     0,
+     1
+    ],
+    "travel_cm": 4,
+    "note": "throws up into the header keeper to lock (rest = retracted)"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "ManualWheel",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    8.0,
+    5.2,
+    120.0
+   ],
+   "triangles": 1208,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     1,
+     0,
+     0
+    ],
+    "range_deg": [
+     0,
+     720
+    ],
+    "note": "two turns retract/throw both lock bolts"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Leaf_R",
+   "role": "movable",
+   "pivot_cm_ue": [
+    7.2,
+    -94.8,
+    0.0
+   ],
+   "triangles": 748,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ],
+    "note": "swings out toward +X"
+   },
+   "note": "Pressure leaf (0.12 m)",
+   "children": [
+    "Leaf_R_Lights",
+    "Leaf_R_LockBolt"
+   ]
+  },
+  {
+   "name": "Leaf_R_LockBolt",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    9.25,
+    -7.0,
+    222.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     0,
+     0,
+     1
+    ],
+    "travel_cm": 4,
+    "note": "throws up into the header keeper to lock (rest = retracted)"
+   },
+   "note": "",
+   "children": []
+  }
+ ],
+ "static_components": [
+  "Frame",
+  "WarningLights_Front",
+  "WarningLights_Back",
+  "Leaf_L_Lights",
+  "Leaf_R_Lights"
+ ],
+ "collision_recommendation": "Custom: portal as 3 boxes (jambs + header); each leaf its own box; wheel none.",
+ "nanite_recommendation": "Nanite ON for Frame and leaves; WarningLights/wheel small separate meshes.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 92,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_Amber_Emissive": {
+   "triangles": 792,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 1948,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Display": {
+   "triangles": 24,
+   "base_srgb": "#09131C",
+   "metallic": 0.0,
+   "roughness": 0.12,
+   "emissive": false
+  },
+  "OD_MAT_EmergencyRed_Emissive": {
+   "triangles": 352,
+   "base_srgb": "#B84743",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 1960,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 2272,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_HazardPaint": {
+   "triangles": 2480,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.55,
+   "emissive": false
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "WarningLights_Front",
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ]
+  },
+  {
+   "node": "OverridePanel_Front_Button_1",
+   "materials": [
+    "OD_MAT_Amber_Emissive"
+   ]
+  },
+  {
+   "node": "OverridePanel_Front_Button_2",
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ]
+  },
+  {
+   "node": "WarningLights_Back",
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ]
+  },
+  {
+   "node": "OverridePanel_Back_Button_1",
+   "materials": [
+    "OD_MAT_Amber_Emissive"
+   ]
+  },
+  {
+   "node": "OverridePanel_Back_Button_2",
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ]
+  },
+  {
+   "node": "Leaf_L_Lights",
+   "materials": [
+    "OD_MAT_Amber_Emissive"
+   ]
+  },
+  {
+   "node": "Leaf_R_Lights",
+   "materials": [
+    "OD_MAT_Amber_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "Handwheel",
+   "socket": "SOCKET_Interact_Wheel",
+   "text": "Rotate 2 turns: bolts retract, then Leaf_L swings"
+  },
+  {
+   "name": "Override (front)",
+   "socket": "SOCKET_Interact_Override_Front",
+   "text": "Seal status + override/emergency buttons"
+  },
+  {
+   "name": "Override (back)",
+   "socket": "SOCKET_Interact_Override_Back",
+   "text": "Same on the back face"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Wall opening",
+   "socket": "SOCKET_Mount_Opening",
+   "text": "2.40 x 2.60 cut in a 0.32-0.45 m pressure wall"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_ENV_EmergencyBulkhead",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Frame",
+    "WarningLights_Front",
+    "OverridePanel_Front",
+    "WarningLights_Back",
+    "OverridePanel_Back",
+    "Leaf_L",
+    "Leaf_R",
+    "SOCKET_Interact_Wheel",
+    "SOCKET_Interact_Override_Front",
+    "SOCKET_Interact_Override_Back",
+    "SOCKET_Mount_Opening"
+   ]
+  },
+  {
+   "name": "Frame",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 5960,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": null,
+   "note": "Portal, threshold, hazard jambs, hinges, keepers",
+   "children": []
+  },
+  {
+   "name": "WarningLights_Front",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": null,
+   "note": "Red beacons + header alarm bar (pulse via EmissiveScale)",
+   "children": []
+  },
+  {
+   "name": "OverridePanel_Front",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Seal status display + override buttons",
+   "children": [
+    "OverridePanel_Front_Button_1",
+    "OverridePanel_Front_Button_2"
+   ]
+  },
+  {
+   "name": "OverridePanel_Front_Button_1",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    19.4,
+    -108.8,
+    127.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_Amber_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "OverridePanel_Front_Button_2",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    19.4,
+    -115.2,
+    127.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     -1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "WarningLights_Back",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 132,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": null,
+   "note": "Red beacons + header alarm bar (pulse via EmissiveScale)",
+   "children": []
+  },
+  {
+   "name": "OverridePanel_Back",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Display"
+   ],
+   "motion": null,
+   "note": "Seal status display + override buttons",
+   "children": [
+    "OverridePanel_Back_Button_1",
+    "OverridePanel_Back_Button_2"
+   ]
+  },
+  {
+   "name": "OverridePanel_Back_Button_1",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -19.4,
+    108.8,
+    127.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_Amber_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "OverridePanel_Back_Button_2",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    -19.4,
+    115.2,
+    127.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_EmergencyRed_Emissive"
+   ],
+   "motion": {
+    "type": "press",
+    "dir_ue": [
+     1,
+     0,
+     0
+    ],
+    "range_cm": [
+     0,
+     0.3
+    ]
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Leaf_L",
+   "role": "movable",
+   "pivot_cm_ue": [
+    7.2,
+    94.8,
+    0.0
+   ],
+   "triangles": 748,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ],
+    "note": "swings out toward +X (active leaf, opens first)"
+   },
+   "note": "Pressure leaf (0.12 m)",
+   "children": [
+    "Leaf_L_Lights",
+    "Leaf_L_LockBolt",
+    "ManualWheel"
+   ]
+  },
+  {
+   "name": "Leaf_L_Lights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    7.2,
+    94.8,
+    0.0
+   ],
+   "triangles": 352,
+   "materials": [
+    "OD_MAT_Amber_Emissive"
+   ],
+   "motion": null,
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Leaf_L_LockBolt",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    9.25,
+    7.0,
+    222.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     0,
+     0,
+     1
+    ],
+    "travel_cm": 4,
+    "note": "throws up into the header keeper to lock (rest = retracted)"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "ManualWheel",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    8.0,
+    5.2,
+    120.0
+   ],
+   "triangles": 1208,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": {
+    "type": "rotate",
+    "axis_ue": [
+     1,
+     0,
+     0
+    ],
+    "range_deg": [
+     0,
+     720
+    ],
+    "note": "two turns retract/throw both lock bolts"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Leaf_R",
+   "role": "movable",
+   "pivot_cm_ue": [
+    7.2,
+    -94.8,
+    0.0
+   ],
+   "triangles": 748,
+   "materials": [
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": {
+    "type": "hinge",
+    "axis_ue": [
+     0,
+     0,
+     1
+    ],
+    "open_deg": 100,
+    "opens_toward_ue": [
+     1,
+     0,
+     0
+    ],
+    "note": "swings out toward +X"
+   },
+   "note": "Pressure leaf (0.12 m)",
+   "children": [
+    "Leaf_R_Lights",
+    "Leaf_R_LockBolt"
+   ]
+  },
+  {
+   "name": "Leaf_R_Lights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    7.2,
+    -94.8,
+    0.0
+   ],
+   "triangles": 352,
+   "materials": [
+    "OD_MAT_Amber_Emissive"
+   ],
+   "motion": null,
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "Leaf_R_LockBolt",
+   "role": "interactive",
+   "pivot_cm_ue": [
+    9.25,
+    -7.0,
+    222.0
+   ],
+   "triangles": 44,
+   "materials": [
+    "OD_MAT_BrushedAluminum"
+   ],
+   "motion": {
+    "type": "slide",
+    "dir_ue": [
+     0,
+     0,
+     1
+    ],
+    "travel_cm": 4,
+    "note": "throws up into the header keeper to lock (rest = retracted)"
+   },
+   "note": "",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Wheel",
+   "role": "socket",
+   "pivot_cm_ue": [
+    15.0,
+    5.2,
+    120.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Manual handwheel (front)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Override_Front",
+   "role": "socket",
+   "pivot_cm_ue": [
+    19.0,
+    -112.0,
+    150.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Front override panel",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Interact_Override_Back",
+   "role": "socket",
+   "pivot_cm_ue": [
+    -19.0,
+    112.0,
+    150.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Back override panel",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Opening",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Pivot: bottom-centre of the wall opening",
+   "children": []
+  }
+ ],
+ "notes": [],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_ENV_EmergencyBulkhead.glb",
+   "nodes": [
+    "OD_ENV_EmergencyBulkhead",
+    "Frame",
+    "WarningLights_Front",
+    "OverridePanel_Front",
+    "OverridePanel_Front_Button_1",
+    "OverridePanel_Front_Button_2",
+    "WarningLights_Back",
+    "OverridePanel_Back",
+    "OverridePanel_Back_Button_1",
+    "OverridePanel_Back_Button_2",
+    "Leaf_L",
+    "Leaf_L_Lights",
+    "Leaf_L_LockBolt",
+    "ManualWheel",
+    "Leaf_R",
+    "Leaf_R_Lights",
+    "Leaf_R_LockBolt",
+    "SOCKET_Interact_Wheel",
+    "SOCKET_Interact_Override_Front",
+    "SOCKET_Interact_Override_Back",
+    "SOCKET_Mount_Opening"
+   ],
+   "material_slots": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_EmergencyRed_Emissive",
+    "OD_MAT_Display",
+    "OD_MAT_Amber_Emissive"
+   ],
+   "triangles": 9920,
+   "bounds_ue_cm": {
+    "min": [
+     -22.5,
+     -120.0,
+     0.0
+    ],
+    "max": [
+     22.5,
+     120.0,
+     260.0
+    ]
+   },
+   "size_m": {
+    "D_x": 0.45,
+    "W_y": 2.4,
+    "H_z": 2.6
+   },
+   "root_node": "OD_ENV_EmergencyBulkhead",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 375,
+   "hulls": 477,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>ODYSSEY Contact Sheet</title>
+<style>body{margin:0;background:#16191d;color:#d8d9d5;font:12px system-ui}canvas{max-width:100%}</style></head>
+<body><canvas id="c"></canvas>
+<script type="module">
+// Builds Renders/ContactSheet.png from the per-asset inspection renders (4 views x 15 assets).
+const ASSETS = ['OD_ENG_PowerConsole', 'OD_ENG_PowerBusB', 'OD_TRN_TrainingSimulator', 'OD_LAB_SampleAnalyzer',
+  'OD_MCC_MainConsole', 'OD_ENV_SlidingDoor', 'OD_ENV_EmergencyBulkhead', 'OD_SYS_ORIONTerminal',
+  'OD_SYS_ServerRack', 'OD_OBS_WindowFrame', 'OD_ENV_CeilingLight', 'OD_ENV_WallUtilityPanel',
+  'OD_ENV_VentilationModule', 'OD_PROP_SupplyCrate', 'OD_MCC_MissionControlChair'];
+const views = ['front34', 'rear34', 'side', 'top'];
+const W = 400, H = 300, LBL = 22;
+const c = document.getElementById('c'); c.width = W * 4; c.height = (H + LBL) * ASSETS.length;
+const g = c.getContext('2d');
+g.fillStyle = '#16191d'; g.fillRect(0, 0, c.width, c.height);
+const load = (src) => new Promise((res) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; });
+for (let r = 0; r < ASSETS.length; r++) {
+  g.fillStyle = '#d8d9d5'; g.font = '15px system-ui'; g.fillText(ASSETS[r], 8, r * (H + LBL) + 16);
+  for (let k = 0; k < 4; k++) {
+    const im = await load(`../Renders/${ASSETS[r]}_${views[k]}.png?${Date.now()}`);
+    if (im) g.drawImage(im, k * W, r * (H + LBL) + LBL, W, H);
+  }
+}
+window.saveSheet = async () => {
+  const blob = await new Promise(r => c.toBlob(r, 'image/png'));
+  return (await fetch('/save-render?name=ContactSheet.png', { method: 'POST', body: blob })).status;
+};
+window.sheetReady = true;
+</script></body></html>

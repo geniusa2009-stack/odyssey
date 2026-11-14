@@ -1,0 +1,356 @@
+{
+ "name": "OD_OBS_WindowFrame",
+ "title": "Observation Deck Window Frame",
+ "reference_image": "10_Observation_Deck_Window.png, 10B_Observation_Window_Build_Reference.png",
+ "description": "Modular observation window: 15.0 x 5.1 m chamfered white base frame (0.44 m deep), two diagonal gunmetal supports with white covers splitting a central trapezoid pane from two side panes, glazing beads, deck-side head housing with ion strip and vents, sill modules with hazard plates and ion lights, jamb vents and amber markers; structural ribs on the space side.",
+ "units": "metres in GLB (1 glTF unit = 1 m); centimetres in Unreal (1 uu = 1 cm)",
+ "dimensions_m": {
+  "W_y": 15.0,
+  "H_z": 5.1,
+  "D_x": 0.6
+ },
+ "pivot": {
+  "type": "floor",
+  "text": "bottom-centre of the envelope, in the glazing plane (x = 0)",
+  "expected_bounds_ue_cm": {
+   "min": [
+    -30.0,
+    -750.0,
+    0
+   ],
+   "max": [
+    30.0,
+    750.0,
+    510
+   ]
+  }
+ },
+ "axes": {
+  "unreal": "+X forward (asset front), +Y right, +Z up",
+  "gltf": "gl.x = ue.x/100, gl.y = ue.z/100, gl.z = ue.y/100 (front faces +X in glTF)"
+ },
+ "movable_components": [],
+ "static_components": [
+  "Frame",
+  "StatusLights",
+  "Supports",
+  "Glass_Centre",
+  "Glass_Side_L",
+  "Glass_Side_R"
+ ],
+ "collision_recommendation": "Custom: frame as 4 boxes (sill, head, jambs) + 2 strut boxes; glass: one blocking box per pane.",
+ "nanite_recommendation": "Frame/Supports: Nanite ON. Glass is translucent: not Nanite. Very large asset - split into 3 m modules in-engine if lightmap density is a concern.",
+ "material_groups": {
+  "OD_MAT_AerospaceWhite": {
+   "triangles": 240,
+   "base_srgb": "#D8D9D5",
+   "metallic": 0.0,
+   "roughness": 0.42,
+   "emissive": false
+  },
+  "OD_MAT_Amber_Emissive": {
+   "triangles": 176,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.35,
+   "emissive": true
+  },
+  "OD_MAT_BrushedAluminum": {
+   "triangles": 1200,
+   "base_srgb": "#92989E",
+   "metallic": 1.0,
+   "roughness": 0.3,
+   "emissive": false
+  },
+  "OD_MAT_Glass": {
+   "triangles": 52,
+   "base_srgb": "#9FB7BF",
+   "metallic": 0.0,
+   "roughness": 0.04,
+   "emissive": false
+  },
+  "OD_MAT_Graphite": {
+   "triangles": 640,
+   "base_srgb": "#1C2025",
+   "metallic": 0.0,
+   "roughness": 0.58,
+   "emissive": false
+  },
+  "OD_MAT_Gunmetal": {
+   "triangles": 3208,
+   "base_srgb": "#454B52",
+   "metallic": 0.65,
+   "roughness": 0.45,
+   "emissive": false
+  },
+  "OD_MAT_HazardPaint": {
+   "triangles": 224,
+   "base_srgb": "#D69A35",
+   "metallic": 0.0,
+   "roughness": 0.55,
+   "emissive": false
+  },
+  "OD_MAT_IonBlue_Emissive": {
+   "triangles": 792,
+   "base_srgb": "#61BED2",
+   "metallic": 0.0,
+   "roughness": 0.3,
+   "emissive": true
+  }
+ },
+ "emissive_components": [
+  {
+   "node": "StatusLights",
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ]
+  }
+ ],
+ "interaction_points": [
+  {
+   "name": "View",
+   "socket": "SOCKET_View_Centre",
+   "text": "Observation look-at"
+  }
+ ],
+ "mounting_points": [
+  {
+   "name": "Wall opening",
+   "socket": "SOCKET_Mount_Opening",
+   "text": "Fits a 15.0 x 5.1 m cut; frame 0.44 m deep, ribs to 0.60 m"
+  }
+ ],
+ "nodes": [
+  {
+   "name": "OD_OBS_WindowFrame",
+   "role": "group",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "",
+   "children": [
+    "Frame",
+    "StatusLights",
+    "Supports",
+    "Glass_Centre",
+    "Glass_Side_L",
+    "Glass_Side_R",
+    "SOCKET_View_Centre",
+    "SOCKET_Space_Backdrop",
+    "SOCKET_Mount_Opening"
+   ]
+  },
+  {
+   "name": "Frame",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 5344,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint"
+   ],
+   "motion": null,
+   "note": "Base frame ring, deck-side and space-side details",
+   "children": []
+  },
+  {
+   "name": "StatusLights",
+   "role": "emissive",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 968,
+   "materials": [
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive"
+   ],
+   "motion": null,
+   "note": "Ion/amber accent lights",
+   "children": []
+  },
+  {
+   "name": "Supports",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 168,
+   "materials": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_Gunmetal"
+   ],
+   "motion": null,
+   "note": "Diagonal structural supports",
+   "children": []
+  },
+  {
+   "name": "Glass_Centre",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 12,
+   "materials": [
+    "OD_MAT_Glass"
+   ],
+   "motion": null,
+   "note": "Reinforced multi-layer glazing (OD_MAT_Glass, translucent)",
+   "children": []
+  },
+  {
+   "name": "Glass_Side_L",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 20,
+   "materials": [
+    "OD_MAT_Glass"
+   ],
+   "motion": null,
+   "note": "Reinforced multi-layer glazing (OD_MAT_Glass, translucent)",
+   "children": []
+  },
+  {
+   "name": "Glass_Side_R",
+   "role": "static",
+   "pivot_cm_ue": [
+    0,
+    0,
+    0
+   ],
+   "triangles": 20,
+   "materials": [
+    "OD_MAT_Glass"
+   ],
+   "motion": null,
+   "note": "Reinforced multi-layer glazing (OD_MAT_Glass, translucent)",
+   "children": []
+  },
+  {
+   "name": "SOCKET_View_Centre",
+   "role": "socket",
+   "pivot_cm_ue": [
+    40.0,
+    0.0,
+    255.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Look-out point / camera anchor for the deck view",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Space_Backdrop",
+   "role": "socket",
+   "pivot_cm_ue": [
+    -500.0,
+    0.0,
+    255.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Place the Earth/space backdrop beyond -X",
+   "children": []
+  },
+  {
+   "name": "SOCKET_Mount_Opening",
+   "role": "socket",
+   "pivot_cm_ue": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "triangles": 0,
+   "materials": [],
+   "motion": null,
+   "note": "Pivot: bottom-centre, glazing plane",
+   "children": []
+  }
+ ],
+ "notes": [
+  "Reference sheet example is 6.0 x 2.4 x 0.5 m; this follows the contract 15.0 x 5.10 x 0.60 m with the same build steps."
+ ],
+ "validation": {
+  "glb": {
+   "file": "/Users/ahmedibrahim/Desktop/\u0643\u0644 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639/ODYSSEY/\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629/\u0645\u0635\u0627\u062f\u0631 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u062d\u0644\u064a\u0629/ODYSSEY-GAME/ArtSource/OdysseyAssetPack/GLB/OD_OBS_WindowFrame.glb",
+   "nodes": [
+    "OD_OBS_WindowFrame",
+    "Frame",
+    "StatusLights",
+    "Supports",
+    "Glass_Centre",
+    "Glass_Side_L",
+    "Glass_Side_R",
+    "SOCKET_View_Centre",
+    "SOCKET_Space_Backdrop",
+    "SOCKET_Mount_Opening"
+   ],
+   "material_slots": [
+    "OD_MAT_AerospaceWhite",
+    "OD_MAT_BrushedAluminum",
+    "OD_MAT_Graphite",
+    "OD_MAT_Gunmetal",
+    "OD_MAT_HazardPaint",
+    "OD_MAT_Amber_Emissive",
+    "OD_MAT_IonBlue_Emissive",
+    "OD_MAT_Glass"
+   ],
+   "triangles": 6532,
+   "bounds_ue_cm": {
+    "min": [
+     -30.0,
+     -750.0,
+     0.0
+    ],
+    "max": [
+     30.0,
+     750.0,
+     510.0
+    ]
+   },
+   "size_m": {
+    "D_x": 0.6,
+    "W_y": 15.0,
+    "H_z": 5.1
+   },
+   "root_node": "OD_OBS_WindowFrame",
+   "root_translation": [
+    0,
+    0,
+    0
+   ]
+  },
+  "glb_problems": [],
+  "assembly": {
+   "solids": 264,
+   "hulls": 299,
+   "components": 1,
+   "intersections": [],
+   "floating_groups": []
+  }
+ }
+}
