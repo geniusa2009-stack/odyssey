@@ -170,7 +170,7 @@ int32 UOdysseySpaceHUDWidget::NativePaint(const FPaintArgs& Args, const FGeometr
 			Q.Text(FVector2f(X0 + Shift + S * 0.046f, Y + S * 0.038f), AOdysseySpacePlayerController::MenuDetail(i).ToString(), Body, bSel ? Muted(1.f) : Muted(0.5f), 2);
 			Y += S * 0.082f;
 		}
-		Hints(P, FVector2f(X0, S * 0.9f), {{TEXT("W / S"), TEXT("SELECT")}, {TEXT("ENTER"), TEXT("CONFIRM")}}, S);
+		Hints(P, FVector2f(X0, S * 0.9f), {{TEXT("W / S"), TEXT("SELECT")}, {TEXT("ENTER"), TEXT("CONFIRM")}, {TEXT("Q"), FString(TEXT("QUALITY  ")) + PC->GetQualityName()}}, S);
 		if (Cur)
 		{
 			P.TextAligned(FVector2f(Screen.X - S * 0.05f, S * 0.93f), FVector2f(1.f, 0.f),

@@ -34,6 +34,8 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Odyssey|Logo") float GetSceneReveal() const;
 	// Before Play(): paint solid black (used while shaders warm up so the scene never pops in).
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Odyssey|Logo") bool bHoldBlack = true;
+	// Preparation screen shown before Play(): real remaining shader jobs and elapsed time.
+	void SetPreparing(int32 InRemainingShaderJobs, float InElapsed) { RemainingJobs = InRemainingShaderJobs; PrepElapsed = InElapsed; }
 
 protected:
 	virtual int32 NativePaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect,
@@ -44,4 +46,7 @@ private:
 	double StartTime = 0.0;
 	double TimeOffset = 0.0;
 	bool bPlayed = false;
+	int32 RemainingJobs = 0;
+	float PrepElapsed = 0.f;
+	void PaintPreparing(const struct FGeometry& Geo, class FSlateWindowElementList& List, int32 Layer) const;
 };

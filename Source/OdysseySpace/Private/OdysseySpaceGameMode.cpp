@@ -2,6 +2,10 @@
 
 #include "Blueprint/UserWidget.h"
 #include "Components/InputComponent.h"
+#include "GameFramework/GameUserSettings.h"
+#include "HAL/PlatformMemory.h"
+#include "Misc/App.h"
+#include "RHI.h"
 #include "EngineUtils.h"
 #include "HAL/FileManager.h"
 #include "InputCoreTypes.h"
@@ -88,7 +92,8 @@ void AOdysseySpacePlayerController::BeginPlay()
 	ConsoleCommand(TEXT("Odyssey.Debug.Overlay 0"));
 
 	bCapture = FParse::Param(FCommandLine::Get(), TEXT("OdysseyCapture"));
-	bSkipIntroRequested = FParse::Param(FCommandLine::Get(), TEXT("OdysseySkipIntro"));
+	// -OdysseySkipIntro, or ?SkipIntro when returning from Earth Command
+	bSkipIntroRequested = FParse::Param(FCommandLine::Get(), TEXT("OdysseySkipIntro")) || GetWorld()->URL.HasOption(TEXT("SkipIntro"));
 	SetFlow(EOdysseySpaceFlow::Intro);  // black hold until shaders are ready, then the logo plays
 	if (bCapture)
 	{
@@ -128,6 +133,8 @@ void AOdysseySpacePlayerController::SetupInputComponent()
 	InputComponent->BindKey(EKeys::C, IE_Pressed, this, &AOdysseySpacePlayerController::CycleCamera);
 	InputComponent->BindKey(EKeys::Gamepad_FaceButton_Top, IE_Pressed, this, &AOdysseySpacePlayerController::CycleCamera);
 	InputComponent->BindKey(EKeys::E, IE_Pressed, this, &AOdysseySpacePlayerController::Descend);
+	InputComponent->BindKey(EKeys::Q, IE_Pressed, this, &AOdysseySpacePlayerController::CycleQuality);
+	InputComponent->BindKey(EKeys::Gamepad_Special_Left, IE_Pressed, this, &AOdysseySpacePlayerController::CycleQuality);
 	InputComponent->BindKey(EKeys::Gamepad_FaceButton_Left, IE_Pressed, this, &AOdysseySpacePlayerController::Descend);
 }
 
@@ -150,8 +157,13 @@ void AOdysseySpacePlayerController::PlayerTick(float DeltaTime)
 	if (bAwaitingShaders)
 	{
 		// first launch compiles shaders on demand: keep the screen black until compilation settles
-		const bool bCompiling = GShaderCompilingManager && GShaderCompilingManager->GetNumRemainingJobs() > 0;
+		const int32 Jobs = GShaderCompilingManager ? GShaderCompilingManager->GetNumRemainingJobs() : 0;
+		const bool bCompiling = Jobs > 0;
 		ShaderWait += DeltaTime;
+		if (Logo)
+		{
+			Logo->SetPreparing(Jobs, ShaderWait);
+		}
 		ShaderQuiet = bCompiling ? 0.f : ShaderQuiet + DeltaTime;
 		if (ShaderQuiet > 1.0f || ShaderWait > 180.f)
 		{
@@ -341,6 +353,40 @@ void AOdysseySpacePlayerController::HandleArrived(int32 BodyIndex)
 	}
 }
 
+void AOdysseySpacePlayerController::LogPerf(const FString& Tag) const
+{
+	const double GpuMs = FPlatformTime::ToMilliseconds(RHIGetGPUFrameCycles(0));
+	const FPlatformMemoryStats Mem = FPlatformMemory::GetStats();
+	UE_LOG(LogOdysseySpace, Log, TEXT("perf %s: frame %.2f ms, gpu %.2f ms, process memory %.0f MB, quality %s"),
+		*Tag, FApp::GetDeltaTime() * 1000.0, GpuMs, Mem.UsedPhysical / (1024.0 * 1024.0), *GetQualityName());
+}
+
+void AOdysseySpacePlayerController::CycleQuality()
+{
+	if (UGameUserSettings* S = GEngine ? GEngine->GetGameUserSettings() : nullptr)
+	{
+		const int32 Level = (S->GetOverallScalabilityLevel() + 1 + 4) % 4;
+		S->SetOverallScalabilityLevel(Level);
+		S->ApplySettings(false);
+		S->SaveSettings();
+		UE_LOG(LogOdysseySpace, Log, TEXT("quality -> %s"), *GetQualityName());
+	}
+}
+
+FString AOdysseySpacePlayerController::GetQualityName() const
+{
+	const UGameUserSettings* S = GEngine ? GEngine->GetGameUserSettings() : nullptr;
+	const int32 L = S ? S->GetOverallScalabilityLevel() : -1;
+	switch (L)
+	{
+	case 0: return TEXT("LOW");
+	case 1: return TEXT("MEDIUM");
+	case 2: return TEXT("HIGH");
+	case 3: return TEXT("EPIC");
+	default: return TEXT("CUSTOM");
+	}
+}
+
 void AOdysseySpacePlayerController::BuildCaptureTour()
 {
 	auto After = [this](float Seconds) { return [this, Seconds]() { return StepClock >= Seconds; }; };
@@ -373,6 +419,7 @@ void AOdysseySpacePlayerController::BuildCaptureTour()
 	Capture.Add({After(4.5f), Nothing, TEXT("SPACE_15_mars_planet_view")});
 	Capture.Add({After(2.0f), [this]() {
 		UE_LOG(LogOdysseySpace, Log, TEXT("capture tour complete (%.1f s)"), CaptureClock);
+		ConsoleCommand(TEXT("StopFPSChart"));
 		UKismetSystemLibrary::QuitGame(this, this, EQuitPreference::Quit, false);
 	}, FString()});
 }
@@ -400,8 +447,13 @@ void AOdysseySpacePlayerController::TickCapture(float Dt)
 	{
 		S.Act();
 	}
+	if (CaptureStep == 0)
+	{
+		ConsoleCommand(TEXT("StartFPSChart"));
+	}
 	if (!S.Shot.IsEmpty())
 	{
+		LogPerf(S.Shot);
 		const FString File = CaptureDir / (S.Shot + TEXT(".png"));
 		FScreenshotRequest::RequestScreenshot(File, true, false);
 		UE_LOG(LogOdysseySpace, Log, TEXT("capture %s (flow %s, t=%.1f)"), *File, *UEnum::GetValueAsString(Flow), CaptureClock);

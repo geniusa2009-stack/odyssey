@@ -71,6 +71,10 @@ public:
 	// Exec: "OdysseyTravel 2" launches a transfer to body 2.
 	UFUNCTION(Exec) void OdysseyTravel(int32 Index);
 
+	// Scalability preset (0 low .. 3 epic), cycled with Q in the menu / navigation.
+	UFUNCTION(BlueprintCallable, Category = "Odyssey|Space") void CycleQuality();
+	FString GetQualityName() const;
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
@@ -121,4 +125,5 @@ private:
 	float ShaderQuiet = 0.f;
 	float ShaderWait = 0.f;
 	bool bSkipIntroRequested = false;
+	void LogPerf(const FString& Tag) const;
 };

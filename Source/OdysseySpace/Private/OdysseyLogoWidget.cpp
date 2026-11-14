@@ -76,6 +76,65 @@ float UOdysseyLogoWidget::GetSceneReveal() const
 	return Ramp(GetElapsed(), L.Bg0, L.Bg1);
 }
 
+void UOdysseyLogoWidget::PaintPreparing(const FGeometry& Geo, FSlateWindowElementList& List, int32 Layer) const
+{
+	using namespace OdysseyBrand;
+	FPainter P{List, Geo, Layer};
+	const FVector2f Screen = FVector2f(Geo.GetLocalSize());
+	const float S = Screen.Y;
+	const float T = (float)FPlatformTime::Seconds();
+	P.Box(FVector2f(0, 0), Screen, FLinearColor(0.006f, 0.008f, 0.011f, 1.f));
+	// faint engineering grid
+	for (int32 i = 1; i < 16; ++i)
+	{
+		const float X = Screen.X * i / 16.f;
+		P.Box(FVector2f(X, 0), FVector2f(1.f, Screen.Y), White(0.018f), 1);
+	}
+	for (int32 j = 1; j < 9; ++j)
+	{
+		P.Box(FVector2f(0, Screen.Y * j / 9.f), FVector2f(Screen.X, 1.f), White(0.018f), 1);
+	}
+	// compact lockup with a breathing mark
+	const float H = S * 0.04f;
+	const float Breath = 0.75f + 0.25f * FMath::Sin(T * 2.2f);
+	const float LockW = H * 1.32f + H * 0.62f + WordmarkWidth(H, 0.2f);
+	const FVector2f C(Screen.X * 0.5f, S * 0.4f);
+	OdysseyBrand::Mark(P, FVector2f(C.X - LockW * 0.5f + H * 0.66f, C.Y), H * 1.32f, 1.f, Breath, Ion(1.f), FMath::Max(1.5f, H * 0.09f));
+	Wordmark(P, FVector2f(C.X - LockW * 0.5f + H * 1.94f, C.Y - H * 0.5f), H, 0.2f, 1.f, White(0.95f), FMath::Max(1.5f, H * 0.105f));
+
+	// system initialisation list (real states only: shader jobs come from the shader compiler)
+	const FSlateFontInfo Mono = Font(TEXT("Mono"), FMath::Max(8.f, S * 0.0115f), 220);
+	const float X0 = C.X - S * 0.32f, X1 = C.X + S * 0.32f;
+	float Y = S * 0.53f;
+	P.Text(FVector2f(X0, Y - S * 0.035f), TEXT("SYSTEM INITIALISATION"), Mono, Ion(0.9f), 2);
+	const bool bShaders = RemainingJobs > 0;
+	const TArray<TPair<FString, FString>> Rows = {
+		{TEXT("RENDERING PIPELINE"), bShaders ? FString::Printf(TEXT("COMPILING SHADERS  %d REMAINING"), RemainingJobs) : FString(TEXT("READY"))},
+		{TEXT("CELESTIAL EPHEMERIS"), TEXT("EARTH  /  LUNA  /  MARS  LOADED")},
+		{TEXT("OTV-1 MERIDIAN"), TEXT("SYSTEMS NOMINAL")},
+		{TEXT("NAVIGATION"), bShaders ? FString(TEXT("STANDING BY")) : FString(TEXT("READY"))}};
+	for (const TPair<FString, FString>& R : Rows)
+	{
+		P.Text(FVector2f(X0, Y), R.Key, Mono, Muted(1.f), 2);
+		const bool bBusy = R.Value.Contains(TEXT("REMAINING")) || R.Value.Contains(TEXT("STANDING"));
+		P.TextAligned(FVector2f(X1, Y), FVector2f(1.f, 0.f), R.Value, Mono, bBusy ? Amber(0.6f + 0.4f * FMath::Sin(T * 5.f)) : White(0.9f), 2);
+		Y += S * 0.03f;
+	}
+	// indeterminate progress: a sweeping segment (no invented percentage)
+	const float BarY = Y + S * 0.02f, BW = X1 - X0;
+	P.Box(FVector2f(X0, BarY), FVector2f(BW, 2.f), White(0.12f), 2);
+	const float Seg = BW * 0.18f;
+	const float Pos = FMath::Fmod(T * 0.45f, 1.f) * (BW + Seg) - Seg;
+	const float A = FMath::Max(X0, X0 + Pos), B = FMath::Min(X1, X0 + Pos + Seg);
+	if (B > A)
+	{
+		P.Box(FVector2f(A, BarY), FVector2f(B - A, 2.f), Ion(1.f), 3);
+	}
+	const int32 Sec = FMath::FloorToInt(PrepElapsed);
+	P.TextAligned(FVector2f(X1, BarY + S * 0.02f), FVector2f(1.f, 0.f), FString::Printf(TEXT("T+ %02d:%02d"), Sec / 60, Sec % 60), Mono, Muted(0.8f), 2);
+	P.TextAligned(FVector2f(C.X, S * 0.92f), FVector2f(0.5f, 0.f), TEXT("FIRST LAUNCH PREPARES GPU PROGRAMS ONCE  -  LATER LAUNCHES START IMMEDIATELY"), Font(TEXT("Mono"), FMath::Max(8.f, S * 0.009f), 200), Muted(0.6f), 2);
+}
+
 int32 UOdysseyLogoWidget::NativePaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect,
 	FSlateWindowElementList& OutDrawElements, int32 LayerId, const FWidgetStyle& InWidgetStyle, bool bParentEnabled) const
 {
@@ -84,9 +143,8 @@ int32 UOdysseyLogoWidget::NativePaint(const FPaintArgs& Args, const FGeometry& A
 	{
 		if (bHoldBlack)
 		{
-			OdysseyBrand::FPainter Hold{OutDrawElements, AllottedGeometry, Layer + 1};
-			Hold.Box(FVector2f(0, 0), FVector2f(AllottedGeometry.GetLocalSize()), FLinearColor(0.004f, 0.006f, 0.009f, 1.f));
-			return Layer + 2;
+			PaintPreparing(AllottedGeometry, OutDrawElements, Layer + 1);
+			return Layer + 12;
 		}
 		return Layer;
 	}
