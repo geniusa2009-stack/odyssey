@@ -59,7 +59,7 @@ TEXTURES = {
     "T_Earth_Albedo": ("color", None), "T_Earth_Normal": ("normal", None), "T_Earth_Masks": ("masks", None),
     "T_Earth_Clouds": ("gray", None), "T_Moon_Albedo": ("color", None), "T_Moon_Normal": ("normal", None),
     "T_Mars_Albedo": ("color", None), "T_Mars_Normal": ("normal", None), "T_Space_Starfield": ("color", "bc7"),
-    "T_Space_BlackLinear": ("masks", None),
+    "T_Space_BlackLinear": ("masks", None), "T_OTV_Marking": ("color", None),
 }
 
 
@@ -365,7 +365,15 @@ def build_materials(tex):
         "NavRed": instance("MI_OTV_NavRed", nav, {"Intensity": 60.0}, {"Color": lc(srgb("#B84743"))}),
         "NavIon": instance("MI_OTV_NavIon", nav, {"Intensity": 60.0}, {"Color": lc(srgb("#61BED2"))}),
     }
+    # printed hull marking (lit) + gold multi-layer insulation
+    pm = material("M_ODY_HullPrint", None, None)
+    pt = texparam(pm, "Print", "/Game/Space/Textures/T_OTV_Marking", unreal.MaterialSamplerType.SAMPLERTYPE_COLOR, -700, 0)
+    pr = scalar(pm, "Roughness", 0.42, -700, 300)
+    mel.connect_material_property(pt, "RGB", unreal.MaterialProperty.MP_BASE_COLOR)
+    mel.connect_material_property(pr, "", unreal.MaterialProperty.MP_ROUGHNESS)
+    mi["Marking"] = finish(pm)
     hull = {
+        "Foil": ("#B8913E", 1.0, 0.3, None),
         "White": ("#D8D9D5", 0.0, 0.42, None), "Graphite": ("#1C2025", 0.0, 0.6, None), "Gunmetal": ("#454B52", 0.85, 0.36, None),
         "Alu": ("#92989E", 1.0, 0.28, None), "Window": ("#09131C", 0.0, 0.08, ("#61BED2", 0.35)), "Ion": ("#61BED2", 0.0, 0.4, ("#61BED2", 4.0)),
     }
@@ -385,12 +393,13 @@ def _ret0(r):
     return r[0] if isinstance(r, tuple) else r
 
 
-def build_tri_mesh(name, mesh, materials):
-    path = f"{MESH_DIR}/{name}"
+def build_tri_mesh(name, mesh, materials, folder=None):
+    folder = folder or MESH_DIR
+    path = f"{folder}/{name}"
     if eal.does_asset_exist(path):
         sm = unreal.load_asset(path)
     else:
-        sm = asset_tools.duplicate_asset(name, MESH_DIR, unreal.load_asset("/Engine/BasicShapes/Cube.Cube"))
+        sm = asset_tools.duplicate_asset(name, folder, unreal.load_asset("/Engine/BasicShapes/Cube.Cube"))
     slots = sorted(mesh.sections)
     sm.set_editor_property("static_materials", [])
     slot_name = {k: str(sm.add_material(materials[k])) for k in slots}
@@ -621,4 +630,5 @@ def main():
     log("build_space_experience: done")
 
 
-main()
+if __name__ == "__main__":
+    main()

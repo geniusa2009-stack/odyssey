@@ -36,8 +36,22 @@ public:
 	// Minimal HUD widget class (WBP_OdysseyHUD, child of UOdysseyHUDWidget).
 	UPROPERTY(EditDefaultsOnly, Category = "Odyssey|UI") TSubclassOf<class UOdysseyHUDWidget> HUDClass;
 
+	// F10 / gamepad Start: back to orbit (the space front end, intro skipped). Unreal-only navigation.
+	UPROPERTY(EditDefaultsOnly, Category = "Odyssey|Flow") FString OrbitMap = TEXT("/Game/Space/Maps/L_Odyssey_SolarTransit");
+	UFUNCTION(BlueprintCallable, Category = "Odyssey|Flow") void ReturnToOrbit();
+
 protected:
 	virtual void BeginPlay() override;
+	virtual void SetupInputComponent() override;
+	virtual void PlayerTick(float DeltaTime) override;
+
+	// -OdysseyStationTour: validation photo tour of the station rooms (hologram states, doors), then quit.
+	void TickStationTour(float Dt);
+	int32 TourStep = -1;
+	float TourClock = 0.f;
+	float TourWait = 0.f;
+	FString TourDir;
+	UPROPERTY() TObjectPtr<class ACameraActor> TourCamera;
 
 private:
 	UPROPERTY() TObjectPtr<class UOdysseyHUDWidget> HUD;
