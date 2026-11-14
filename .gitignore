@@ -48,3 +48,14 @@ Thumbs.db
 
 # ---- macOS verification runner output (Tools/Mac)
 Logs/
+
+# Android signing, generated packages and local SDK overrides
+*.keystore
+*.jks
+*.apk
+*.aab
+*.obb
+local.properties
+key.properties
+Config/Android/*Local*.ini
+Artifacts/

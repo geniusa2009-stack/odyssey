@@ -16,6 +16,7 @@
 	],
 	"Plugins": [
 		{ "Name": "OdysseyAPI", "Enabled": true },
+		{ "Name": "AndroidFileServer", "Enabled": true, "PlatformDenyList": [ "Android" ] },
 		{ "Name": "EnhancedInput", "Enabled": true },
 		{ "Name": "StateTree", "Enabled": true },
 		{ "Name": "GameplayStateTree", "Enabled": true },
@@ -25,5 +26,5 @@
 		{ "Name": "PythonScriptPlugin", "Enabled": true, "TargetAllowList": [ "Editor" ] },
 		{ "Name": "EditorScriptingUtilities", "Enabled": true, "TargetAllowList": [ "Editor" ] }
 	],
-	"TargetPlatforms": [ "Mac", "Windows" ]
+	"TargetPlatforms": [ "Mac", "Windows", "Android" ]
 }
