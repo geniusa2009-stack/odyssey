@@ -6,6 +6,7 @@
 #include "HAL/PlatformMemory.h"
 #include "Misc/App.h"
 #include "RHI.h"
+#include "PipelineStateCache.h"
 #include "EngineUtils.h"
 #include "HAL/FileManager.h"
 #include "InputCoreTypes.h"
@@ -169,7 +170,15 @@ void AOdysseySpacePlayerController::PlayerTick(float DeltaTime)
 	if (bAwaitingShaders)
 	{
 		// first launch compiles shaders on demand: keep the screen black until compilation settles
-		const int32 Jobs = GShaderCompilingManager ? GShaderCompilingManager->GetNumRemainingJobs() : 0;
+		// cooked builds (phones) compile pipeline states, not shaders: also hold for pending PSO precache
+		// requests (boosted while the screen is black; capped at 20 s so streaming requests never block)
+		const int32 ShaderJobs = GShaderCompilingManager ? GShaderCompilingManager->GetNumRemainingJobs() : 0;
+		const bool bWaitPso = PLATFORM_ANDROID && PipelineStateCache::IsPSOPrecachingEnabled() && ShaderWait < 20.f;  // Android only: desktop unchanged
+		if (bWaitPso && ShaderWait == 0.f)
+		{
+			PipelineStateCache::PrecachePSOsBoostToHighestPriority(true);
+		}
+		const int32 Jobs = ShaderJobs + (bWaitPso ? (int32)PipelineStateCache::NumActivePrecacheRequests() : 0);
 		const bool bCompiling = Jobs > 0;
 		ShaderWait += DeltaTime;
 		if (Logo)
@@ -180,6 +189,7 @@ void AOdysseySpacePlayerController::PlayerTick(float DeltaTime)
 		if (ShaderQuiet > 1.0f || ShaderWait > 180.f)
 		{
 			bAwaitingShaders = false;
+			if (PLATFORM_ANDROID) PipelineStateCache::PrecachePSOsBoostToHighestPriority(false);
 			UE_LOG(LogOdysseySpace, Log, TEXT("scene ready after %.1f s"), ShaderWait);
 			if (bSkipIntroRequested || !Logo)
 			{
